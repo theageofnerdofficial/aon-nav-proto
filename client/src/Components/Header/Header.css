@@ -25,11 +25,22 @@ a.nav-link {
   .navbar-btn {
     height: 55px;
   }
+  .navbar-logo-wrapper {
+    width: 160px !important;
+  }
+  .navbar-custom {
+    padding: 0 !important;
+  }
 }
 
 .x2 {
   z-index: 10;
   margin-top: 3px;
+}
+
+.xy {
+  font-size: 14px;
+  letter-spacing: -1px;
 }
 
 .navbar-logo-wrapper {
@@ -56,7 +67,7 @@ a.nav-link {
 }
 
 .nav-btn-active {
-  color: red !important;
+  color: #000 !important;
   text-decoration: underline;
 }
 
