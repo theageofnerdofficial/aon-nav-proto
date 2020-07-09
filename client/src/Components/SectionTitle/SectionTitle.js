@@ -7,8 +7,8 @@ class SectionTitle extends Component {
       border-bottom: 1px solid #0f0f0f;
       display: block;
       font-size: 1.6em;
-      font-weight: 800;
       line-height: 1.3;
+      letter-spacing: -0.5px;
       margin-bottom: 1rem;
       padding-bottom: 1rem;
       position: relative;
@@ -25,7 +25,9 @@ class SectionTitle extends Component {
     `;
     return (
       <Title>
-        <h2>{this.props.title}</h2>
+        <h2 style={{ fontWeight: 300, textTransform: 'uppercase' }}>
+          {this.props.title}
+        </h2>
       </Title>
     );
   }

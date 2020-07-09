@@ -16,7 +16,7 @@ class Navbar extends Component {
                 <button
                   onClick={(e) => this.props.setActiveItem(e)}
                   name={page.toLowerCase()}
-                  className={`navbar-btn p-0 font-weight-bold rounded-0 border btn btn-light text-muted text-center form-control text-uppercase xy ${
+                  className={`navbar-btn p-0 rounded-0 btn btn-light text-muted text-center form-control text-uppercase ${
                     this.props.activeItem === page.toLowerCase()
                       ? 'nav-btn-active'
                       : ''
