@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Route, NavLink, HashRouter } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Home from './Home';
 import TV from './TV';

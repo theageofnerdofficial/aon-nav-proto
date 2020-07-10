@@ -11,7 +11,11 @@ class KonamiCode extends React.Component {
     return (
       <Konami action={this.easterEgg} timeout={5000}>
         <div className="konami-window">
-          <img src="https://thumbs.gfycat.com/DeadlyPlushCowrie-small.gif" />
+          <img
+            alt="Konami start screen gif — easter egg"
+            src="https://thumbs.gfycat.com/DeadlyPlushCowrie-small.gif"
+            style={{ borderRadius: '20px' }}
+          />
         </div>
       </Konami>
     );

@@ -8,6 +8,7 @@ class Header extends Component {
     super(props);
     this.state = {
       activeItem: 'home',
+      navItems: ['Home', 'TV', 'Film', 'Comics', 'Gaming', 'Misc'],
     };
     this.setActiveItem = this.setActiveItem.bind(this);
   }
@@ -21,6 +22,7 @@ class Header extends Component {
           <Hero />
           <Navbar
             activeItem={this.state.activeItem}
+            navItems={this.state.navItems}
             setActiveItem={this.setActiveItem}
           />
         </div>
