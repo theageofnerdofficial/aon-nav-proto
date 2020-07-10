@@ -19,9 +19,14 @@ a.nav-link {
   background: none !important;
 }
 
-.hero-links-wrapper {
-  margin-top: 3px;
-  z-index: 10;
+.hero-bg-img {
+  filter: blur(6px);
+  height: 100px;
+  opacity: 0.5;
+  transform: scale(1.2);
+  -webkit-filter: blur(6px);
+  width: 100%;
+  z-index: -10 !important;
 }
 
 .hero-links-general-wrapper {
@@ -38,13 +43,24 @@ a.nav-link {
   width: 100px;
 }
 
+.hero-links-wrapper {
+  margin-top: 3px;
+  z-index: 10;
+}
+
+.header-sub-wrapper {
+  height: 120px;
+  width: 100%;
+}
+
 .navbar-brand {
   font-weight: 800;
   text-transform: uppercase !important;
 }
 
 .navbar-btn {
-  font-weight: 400 !important;
+  font-weight: 300 !important;
+  letter-spacing: -1.5px !important;
 }
 
 .navbar-logo-wrapper {
@@ -58,21 +74,6 @@ a.nav-link {
   text-align: center;
   width: 300px;
   z-index: 10;
-}
-
-.header-sub-wrapper {
-  height: 120px;
-  width: 100%;
-}
-
-.hero-bg-img {
-  filter: blur(6px);
-  height: 100px;
-  opacity: 0.5;
-  transform: scale(1.2);
-  -webkit-filter: blur(6px);
-  width: 100%;
-  z-index: -10 !important;
 }
 
 .nav-btn-active {
