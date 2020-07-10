@@ -17,6 +17,7 @@ a.nav-link {
 
 .btn-nav-link {
   background: none !important;
+  font-weight: 300;
 }
 
 .hero-bg-img {
