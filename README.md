@@ -1,4 +1,4 @@
-# jQuiz
+# The Age of Nerds
 
 This project was made using React, Redux, and Express. React-Router is used for routing.
 

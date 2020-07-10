@@ -16,6 +16,11 @@ import KonamiCode from './Components/KonamiCode/KonamiCode';
 import './Main.css';
 
 class Main extends Component {
+  componentDidMount() {
+    fetch('/api/getList')
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
   render() {
     return (
       <HashRouter>

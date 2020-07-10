@@ -1,7 +1,7 @@
 {
-  "name": "jQuiz",
+  "name": "AON",
   "version": "1.0.0",
-  "description": "jQuiz is a progressive website centered around quizzes on a range of subjects",
+  "description": "The Age of Nerd is a one-stop end-all tech site for nerds",
   "main": "index.js",
   "author": "John",
   "scripts": {
@@ -9,8 +9,10 @@
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [
-    "quiz",
-    "knowledge"
+    "tv",
+    "film",
+    "gaming",
+    "comics"
   ],
   "license": "ISC",
   "dependencies": {
