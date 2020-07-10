@@ -7,8 +7,8 @@ class Film extends Component {
     return (
       <div>
         <SectionTitle
-          title="Film"
           tabColour={settings.ui.style.sectionTab.film}
+          title="Film"
         />
       </div>
     );

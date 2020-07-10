@@ -7,8 +7,8 @@ class Gaming extends Component {
     return (
       <div>
         <SectionTitle
-          title="Gaming"
           tabColour={settings.ui.style.sectionTab.gaming.modern}
+          title="Gaming"
         />
       </div>
     );

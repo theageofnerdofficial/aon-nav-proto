@@ -6,7 +6,7 @@ class TV extends Component {
   render() {
     return (
       <div>
-        <SectionTitle title="TV" tabColour={settings.ui.style.sectionTab.tv} />
+        <SectionTitle tabColour={settings.ui.style.sectionTab.tv} title="TV" />
       </div>
     );
   }

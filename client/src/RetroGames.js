@@ -7,8 +7,8 @@ class RetroGames extends Component {
     return (
       <div>
         <SectionTitle
-          title="Retro Gaming"
           tabColour={settings.ui.style.sectionTab.gaming.retro}
+          title="Retro Gaming"
         />
         <p>Rise from yaw gwaveee</p>
       </div>

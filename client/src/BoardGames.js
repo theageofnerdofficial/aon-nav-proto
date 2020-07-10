@@ -7,8 +7,8 @@ class BoardGames extends Component {
     return (
       <div>
         <SectionTitle
-          title="Board Gaming"
           tabColour={settings.ui.style.sectionTab.gaming.board}
+          title="Board Gaming"
         />
         <p>Roll the dice, Bertha...</p>
       </div>

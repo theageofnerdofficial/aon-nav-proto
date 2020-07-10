@@ -7,8 +7,8 @@ class ModernGames extends Component {
     return (
       <div>
         <SectionTitle
-          title="Modern Gaming"
           tabColour={settings.ui.style.sectionTab.gaming.modern}
+          title="Modern Gaming"
         />
         <p>Breath of the Wild 2 will be quite the barn burner!</p>
       </div>

@@ -12,7 +12,7 @@ import BoardGames from './BoardGames';
 import Comics from './Comics';
 import Contact from './Contact';
 import Footer from './Components/Footer/Footer';
-
+import KonamiCode from './Components/KonamiCode/KonamiCode';
 import './Main.css';
 
 class Main extends Component {
@@ -21,6 +21,7 @@ class Main extends Component {
       <HashRouter>
         <div>
           <Header />
+          <KonamiCode />
           <main
             className="flex-shrink-0"
             role="main"

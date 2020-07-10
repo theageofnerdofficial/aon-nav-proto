@@ -12,8 +12,8 @@ class Home extends Component {
     return (
       <div>
         <SectionTitle
-          title="Featured"
           tabColour={settings.ui.style.sectionTab.featured}
+          title="Featured"
         />
       </div>
     );

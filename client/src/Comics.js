@@ -7,8 +7,8 @@ class Comics extends Component {
     return (
       <div>
         <SectionTitle
-          title="Comics"
           tabColour={settings.ui.style.sectionTab.comics}
+          title="Comics"
         />
       </div>
     );

@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import '../../Header.css';
+import FontIcon from '../../../FontIcon/FontIcon';
 
 class HeroLinksGeneral extends Component {
   render() {
     return (
-      <div
-        className="x2"
-        style={{
-          width: '100px',
-          height: '110px',
-          left: '0 !important',
-          position: 'absolute',
-        }}
-      >
-        <button className="btn btn-sm form-control">Settings</button>
-        <button className="btn btn-sm form-control">-</button>
-        <button className="btn btn-sm form-control">-</button>
+      <div className="hero-links-wrapper hero-links-general-wrapper">
+        <button className="btn btn-nav-link btn-sm form-control text-right">
+          {FontIcon('faCog')} Settings
+        </button>
+        <button className="btn btn-nav-link btn-sm form-control text-right"></button>
+        <button className="btn btn-nav-link btn-sm form-control text-right"></button>
       </div>
     );
   }

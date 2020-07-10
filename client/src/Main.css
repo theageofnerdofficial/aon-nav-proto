@@ -23,25 +23,25 @@
 }
 
 .section-title {
+  border-bottom: 1px solid var(--col-darkest);
   display: block;
-  position: relative;
-  font-weight: 800;
   font-size: 1.6em;
+  font-weight: 800;
   line-height: 1.3;
-  border-bottom: 1px solid #0f0f0f;
-  padding-bottom: 1rem;
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
 }
 
 .section-title:before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: block;
-  width: 25px;
-  height: 5px;
   background: #c61327;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 5px;
+  left: 0;
+  position: absolute;
+  width: 25px;
 }
 
 .dropdown-item.active,
@@ -54,4 +54,30 @@ a.nav-link:hover {
 }
 a.nav-link:active {
   text-decoration: none;
+}
+
+.konami-window {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10000 !important;
+}
+
+.konami-window img {
+  width: 260px;
+  z-index: 100000 !important;
+}
+
+.vertical-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
