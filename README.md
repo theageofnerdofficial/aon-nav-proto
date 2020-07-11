@@ -1,4 +1,4 @@
-# The Age of Nerds
+# The Age of Nerd
 
 This project was made using React, Redux, and Express. React-Router is used for routing.
 
