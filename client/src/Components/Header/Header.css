@@ -8,7 +8,7 @@ a.nav-link {
 }
 
 .bg-custom-2 {
-  background-color: var(--col-blue-brand-light);
+  background-color: #0048a1;
 }
 
 .border {
@@ -18,14 +18,15 @@ a.nav-link {
 .btn-nav-link {
   background: none !important;
   font-weight: 300;
+  color: #fff;
 }
 
 .hero-bg-img {
   filter: blur(6px);
   height: 100px;
-  opacity: 0.5;
+  opacity: 0.4;
   transform: scale(1.2);
-  -webkit-filter: blur(6px);
+  -webkit-filter: blur(3px);
   width: 100%;
   z-index: -10 !important;
 }

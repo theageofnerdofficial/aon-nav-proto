@@ -1,6 +1,6 @@
 :root {
   --col-blue-brand: #1565c0;
-  --col-blue-brand-light: rgb(0, 195, 255);
+  --col-blue-brand-light: #006ca1;
   --col-red-brand: #c61327;
   --col-darkest: #0f0f0f;
   --col-lightest: #fff;
@@ -72,7 +72,7 @@ a.nav-link:active {
 }
 
 .konami-window img {
-  width: 220px;
+  width: 20px;
   z-index: 100000 !important;
 }
 
