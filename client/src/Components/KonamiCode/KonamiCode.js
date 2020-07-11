@@ -14,7 +14,7 @@ class KonamiCode extends React.Component {
           <img
             alt="Konami start screen gif — easter egg"
             src="https://thumbs.gfycat.com/DeadlyPlushCowrie-small.gif"
-            style={{ borderRadius: '20px' }}
+            style={{ borderRadius: '10px' }}
           />
         </div>
       </Konami>
