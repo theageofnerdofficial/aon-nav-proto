@@ -20,11 +20,11 @@ let navbarTopInit;
 class Main extends Component {
   handleScroll() {
     const navbar = document.getElementById('navbar-custom');
-    if (window.scrollY <= navbarTopInit) {
+    if (window.pageYOffset <= navbarTopInit) {
       if (navbar.classList.contains('fixed-top')) {
         navbar.classList.remove('fixed-top');
       }
-    } else if (window.scrollY > navbarTopInit) {
+    } else if (window.pageYOffset > navbarTopInit) {
       if (!navbar.classList.contains('fixed-top')) {
         navbar.classList.add('fixed-top');
       }
@@ -33,7 +33,7 @@ class Main extends Component {
   componentDidMount() {
     const navbar = document.getElementById('navbar-custom');
     if (!navbarTopInit) {
-      navbarTopInit = navbar.getBoundingClientRect().top + window.scrollY;
+      navbarTopInit = navbar.getBoundingClientRect().top + window.pageYOffset;
     }
     window.addEventListener('scroll', this.handleScroll, { passive: true });
     fetch('/api/getList')
