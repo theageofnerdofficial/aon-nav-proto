@@ -16,13 +16,17 @@ class Navbar extends Component {
       return 'col-2';
     };
     return (
-      <div className="bg-custom col-12 m-0 navbar-custom row">
+      <div
+        id="navbar-custom"
+        className="bg-custom col-12 m-0 navbar-custom row"
+      >
         {this.props.navItems.map((page) => {
           return (
             <div
               className={`bg-light ${resizeByPageName(
                 page
               )} col-md-2 m-0 p-0 rounded-0`}
+              key={'nav-' + page}
             >
               <a
                 href={`/#/${

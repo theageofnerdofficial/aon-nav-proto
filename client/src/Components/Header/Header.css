@@ -53,6 +53,11 @@ a.nav-link {
 .header-sub-wrapper {
   height: 120px;
   width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
 }
 
 .navbar-brand {

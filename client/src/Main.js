@@ -15,8 +15,27 @@ import Footer from './Components/Footer/Footer';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
 import './Main.css';
 
+let navbarTopInit;
+
 class Main extends Component {
+  handleScroll() {
+    const navbar = document.getElementById('navbar-custom');
+    if (window.scrollY <= navbarTopInit) {
+      if (navbar.classList.contains('fixed-top')) {
+        navbar.classList.remove('fixed-top');
+      }
+    } else if (window.scrollY > navbarTopInit) {
+      if (!navbar.classList.contains('fixed-top')) {
+        navbar.classList.add('fixed-top');
+      }
+    }
+  }
   componentDidMount() {
+    const navbar = document.getElementById('navbar-custom');
+    if (!navbarTopInit) {
+      navbarTopInit = navbar.getBoundingClientRect().top + window.scrollY;
+    }
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
     fetch('/api/getList')
       .then((response) => response.json())
       .then((data) => console.log(data));

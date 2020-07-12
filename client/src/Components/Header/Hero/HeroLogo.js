@@ -4,9 +4,8 @@ import '../Header.css';
 class HeroLogo extends Component {
   render() {
     return (
-      <div className=" navbar-logo-wrapper text-dark vertical-center pr-4">
-        <img src="img/aonlogo6.svg" width="165px" />
-        {/*<h1 className="p-0 m-0">LOGO HERE</h1>*/}
+      <div className="navbar-logo-wrapper pr-4 text-dark vertical-center">
+        <img alt="AON Logo" src="img/logo.svg" width="165px" />
       </div>
     );
   }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 class SectionTitle extends Component {
   render() {
-    const Title = styled.h1`
+    const Title = styled.div`
       border-bottom: 1px solid #0f0f0f;
       display: block;
       font-size: 1.6em;

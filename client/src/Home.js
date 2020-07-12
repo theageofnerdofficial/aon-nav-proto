@@ -15,6 +15,16 @@ class Home extends Component {
           tabColour={settings.ui.style.sectionTab.featured}
           title="Featured"
         />
+        {Array(200)
+          .fill()
+          .map((e, index) => (
+            <p
+              key={'test-' + index + 1}
+              style={{ fontSize: 18, fontWeight: 300 }}
+            >
+              Scroll-Testing Content {index + 1}
+            </p>
+          ))}
       </div>
     );
   }

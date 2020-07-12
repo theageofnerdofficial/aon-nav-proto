@@ -18,7 +18,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="fixed-top bg-custom-2 header-sub-wrapper">
+        <div className="bg-custom-2 header-sub-wrapper">
           <Hero />
           <Navbar
             activeItem={this.state.activeItem}
