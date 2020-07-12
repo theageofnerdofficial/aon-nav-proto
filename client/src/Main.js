@@ -15,9 +15,25 @@ import Footer from './Components/Footer/Footer';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
 import './Main.css';
 
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './themeProvider/theme';
+import { GlobalStyles } from './themeProvider/global';
+
 let navbarTopInit;
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lightsOff: false,
+    };
+    this.toggleLights = this.toggleLights.bind(this);
+  }
+
+  toggleLights() {
+    console.log('skjd');
+    this.setState({ lightsOff: !this.state.lightsOff });
+  }
   /* Dynamic navbar: fix the navbar top the top when user scrolls
      but "re-dock" it when they back up and the hero reappears:
    *****************************************************************/
@@ -58,30 +74,36 @@ class Main extends Component {
   render() {
     return (
       <HashRouter>
-        <div>
-          <Header />
-          <KonamiCode />
-          <main
-            className="flex-shrink-0"
-            role="main"
-            style={{ marginTop: 100 }}
-          >
-            <div className="container">
-              <div className="content">
-                <Route exact path="/" component={Home} />
-                <Route path="/tv" component={TV} />
-                <Route path="/film" component={Film} />
-                <Route path="/gaming" component={Gaming} />
-                <Route path="/retrogaming" component={RetroGames} />
-                <Route path="/moderngaming" component={ModernGames} />
-                <Route path="/boardgaming" component={BoardGames} />
-                <Route path="/comics" component={Comics} />
-                <Route path="/contact" component={Contact} />
+        <ThemeProvider theme={this.state.lightsOff ? darkTheme : lightTheme}>
+          <GlobalStyles />
+          <div>
+            <Header
+              lightsOff={this.state.lightsOff}
+              toggleLights={this.toggleLights}
+            />
+            <KonamiCode />
+            <main
+              className="flex-shrink-0"
+              role="main"
+              style={{ marginTop: 100 }}
+            >
+              <div className="container">
+                <div className="content">
+                  <Route exact path="/" component={Home} />
+                  <Route path="/tv" component={TV} />
+                  <Route path="/film" component={Film} />
+                  <Route path="/gaming" component={Gaming} />
+                  <Route path="/retrogaming" component={RetroGames} />
+                  <Route path="/moderngaming" component={ModernGames} />
+                  <Route path="/boardgaming" component={BoardGames} />
+                  <Route path="/comics" component={Comics} />
+                  <Route path="/contact" component={Contact} />
+                </div>
               </div>
-            </div>
-          </main>
-          <Footer />
-        </div>
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </HashRouter>
     );
   }

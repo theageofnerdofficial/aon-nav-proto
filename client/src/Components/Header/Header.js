@@ -19,7 +19,10 @@ class Header extends Component {
     return (
       <header>
         <div className="bg-custom-2 header-sub-wrapper">
-          <Hero />
+          <Hero
+            lightsOff={this.props.lightsOff}
+            toggleLights={this.props.toggleLights}
+          />
           <Navbar
             activeItem={this.state.activeItem}
             navItems={this.state.navItems}

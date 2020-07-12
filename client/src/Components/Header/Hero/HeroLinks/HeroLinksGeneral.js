@@ -9,8 +9,16 @@ class HeroLinksGeneral extends Component {
         <button className="btn btn-nav-link btn-sm form-control text-left">
           {FontIcon('faCog')} Settings
         </button>
-        <button className="btn btn-nav-link btn-sm form-control text-right"></button>
-        <button className="btn btn-nav-link btn-sm form-control text-right"></button>
+        <button
+          className="btn btn-nav-link btn-sm form-control text-left"
+          onClick={(e) => this.props.toggleLights()}
+        >
+          {this.props.lightsOff ? FontIcon('faSun') : FontIcon('faMoon')}
+          &nbsp;
+          {this.props.lightsOff ? 'Lighten' : 'Darken'}
+        </button>
+
+        <button className="btn btn-nav-link btn-sm form-control text-left"></button>
       </div>
     );
   }

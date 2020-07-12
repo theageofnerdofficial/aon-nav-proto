@@ -3,7 +3,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Solid SVG icons:
-import { faArchway, faCog } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArchway,
+  faCog,
+  faMoon,
+  faSun,
+} from '@fortawesome/free-solid-svg-icons';
 
 // Brand SVG icons:
 import {
@@ -15,6 +20,12 @@ import {
 const FontIcon = (icon) => {
   let faIcon;
   switch (icon) {
+    case 'faMoon':
+      faIcon = faMoon;
+      break;
+    case 'faSun':
+      faIcon = faSun;
+      break;
     case 'faArchway':
       faIcon = faArchway;
       break;
