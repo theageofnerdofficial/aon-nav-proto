@@ -18,6 +18,8 @@ import './Main.css';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeProvider/theme';
 import { GlobalStyles } from './themeProvider/global';
+import LoginBtn from './Components/LoginBtn/LoginBtn';
+import Modal from './Components/Modal/Modal';
 
 let navbarTopInit;
 
@@ -82,6 +84,8 @@ class Main extends Component {
               toggleLights={this.toggleLights}
             />
             <KonamiCode />
+            <Modal />
+            <LoginBtn />
             <main
               className="flex-shrink-0"
               role="main"
