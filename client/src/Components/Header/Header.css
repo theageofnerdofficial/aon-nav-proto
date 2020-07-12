@@ -52,11 +52,11 @@ a.nav-link {
 
 .header-sub-wrapper {
   height: 120px;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
   left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
   z-index: 1030;
 }
 
@@ -66,6 +66,7 @@ a.nav-link {
 }
 
 .navbar-btn {
+  font-size: 1.2em;
   font-weight: 300 !important;
   letter-spacing: -1.5px !important;
 }
@@ -97,6 +98,7 @@ a.nav-link {
 /* Small Devices, Tablets */
 @media only screen and (max-width: 768px) {
   .navbar-btn {
+    font-size: 1em;
     height: 55px;
   }
   .navbar-custom {

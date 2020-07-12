@@ -18,24 +18,39 @@ import './Main.css';
 let navbarTopInit;
 
 class Main extends Component {
-  handleScroll() {
-    const navbar = document.getElementById('navbar-custom');
-    if (window.pageYOffset <= navbarTopInit) {
-      if (navbar.classList.contains('fixed-top')) {
+  /* Dynamic navbar: fix the navbar top the top when user scrolls
+     but "re-dock" it when they back up and the hero reappears:
+   *****************************************************************/
+  dynamicNavbar = {
+    handleScroll() {
+      const navbar = document.getElementById('navbar-custom');
+      const navbarHasFixed = navbar.classList.contains('fixed-top');
+      const y = window.pageYOffset;
+      if (y <= navbarTopInit && navbarHasFixed) {
         navbar.classList.remove('fixed-top');
-      }
-    } else if (window.pageYOffset > navbarTopInit) {
-      if (!navbar.classList.contains('fixed-top')) {
+      } else if (y > navbarTopInit && !navbarHasFixed) {
         navbar.classList.add('fixed-top');
       }
-    }
-  }
+    },
+    // Cache the initial position of navbar:
+    cache: {
+      top() {
+        const navbar = document.getElementById('navbar-custom');
+        if (!navbarTopInit) {
+          navbarTopInit =
+            navbar.getBoundingClientRect().top + window.pageYOffset;
+        }
+      },
+    },
+  };
+
   componentDidMount() {
-    const navbar = document.getElementById('navbar-custom');
-    if (!navbarTopInit) {
-      navbarTopInit = navbar.getBoundingClientRect().top + window.pageYOffset;
-    }
-    window.addEventListener('scroll', this.handleScroll, { passive: true });
+    this.dynamicNavbar.cache.top();
+    window.addEventListener('scroll', this.dynamicNavbar.handleScroll, {
+      passive: true,
+    });
+
+    // Server fetch test:
     fetch('/api/getList')
       .then((response) => response.json())
       .then((data) => console.log(data));
