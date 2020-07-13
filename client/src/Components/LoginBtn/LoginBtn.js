@@ -9,12 +9,12 @@ class LoginBtn extends Component {
         data-target="#exampleModalLong"
         style={{
           border: 0,
-          right: 15,
-          top: 185,
-          position: 'absolute',
-          width: 145,
           fontWeight: 300,
           letterSpacing: -1,
+          position: 'absolute',
+          right: 15,
+          top: 185,
+          width: 145,
         }}
       >
         Login/Register

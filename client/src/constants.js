@@ -1,0 +1,1 @@
+const USER_SET_TEST = 'USER_SET_TEST';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import { Route, HashRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import Header from './Components/Header/Header';
 import Home from './Home';
 import TV from './TV';
@@ -21,6 +22,25 @@ import { GlobalStyles } from './themeProvider/global';
 import LoginBtn from './Components/LoginBtn/LoginBtn';
 import Modal from './Components/Modal/Modal';
 
+import { userSetTest } from './actions';
+import settings from './config/settings';
+
+// Parameter state comes from index.js provider store state (rootReducers).
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
+};
+
+// Dispatch DOM changes to call an action.
+// Note: mapStateToProps returns object, mapDispatchToProps returns function.
+// Function returns an object then uses connect to change data from reducers.
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userSetTest: () => dispatch(userSetTest()),
+  };
+};
+
 let navbarTopInit;
 
 class Main extends Component {
@@ -28,12 +48,19 @@ class Main extends Component {
     super(props);
     this.state = {
       lightsOff: false,
+      statuses: [],
     };
     this.toggleLights = this.toggleLights.bind(this);
+    this.getTweetData = this.getTweetData.bind(this);
+  }
+
+  getTweetData() {
+    return fetch('/api/getList')
+      .then((response) => response.json())
+      .then((data) => data);
   }
 
   toggleLights() {
-    console.log('skjd');
     this.setState({ lightsOff: !this.state.lightsOff });
   }
   /* Dynamic navbar: fix the navbar top the top when user scrolls
@@ -71,7 +98,7 @@ class Main extends Component {
     // Server fetch test:
     fetch('/api/getList')
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => this.setState({ statuses: data }));
   }
   render() {
     return (
@@ -93,7 +120,17 @@ class Main extends Component {
             >
               <div className="container">
                 <div className="content">
-                  <Route exact path="/" component={Home} />
+                  <Route
+                    exact
+                    path="/"
+                    render={(props) => (
+                      <Home
+                        x={'Prop passed test'}
+                        statuses={this.state.statuses}
+                        {...props}
+                      />
+                    )}
+                  />
                   <Route path="/tv" component={TV} />
                   <Route path="/film" component={Film} />
                   <Route path="/gaming" component={Gaming} />
@@ -113,4 +150,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
