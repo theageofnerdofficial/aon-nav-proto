@@ -48,7 +48,7 @@ class Main extends Component {
     super(props);
     this.state = {
       lightsOff: false,
-      statuses: [],
+      twitterData: [],
     };
     this.toggleLights = this.toggleLights.bind(this);
     this.getTweetData = this.getTweetData.bind(this);
@@ -98,7 +98,10 @@ class Main extends Component {
     // Server fetch test:
     fetch('/api/getList')
       .then((response) => response.json())
-      .then((data) => this.setState({ statuses: data }));
+      .then((data) => {
+        console.log(data);
+        this.setState({ twitterData: data.statuses });
+      });
   }
   render() {
     return (
@@ -126,7 +129,7 @@ class Main extends Component {
                     render={(props) => (
                       <Home
                         x={'Prop passed test'}
-                        statuses={this.state.statuses}
+                        twitterData={this.state.twitterData}
                         {...props}
                       />
                     )}

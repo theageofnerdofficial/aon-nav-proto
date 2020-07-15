@@ -28,13 +28,57 @@ app.use(bodyParser.json());
 
 app.get('/api/getList', (req, res, next) => {
   console.log('got here');
+
+  /*
+
+  Twitter API has
+
+  Notes:
+
+  Operators:
+  https://developer.twitter.com/en/docs/tweets/search/guides/standard-operators
+
+  */
   return T.get(
     'search/tweets',
     {
-      q: 'zelda since:2019-07-11',
+      //q: 'zelda since:2019-07-11',
+      from: 'nintendouk',
       count: 100,
+      tweet_mode: 'extended',
     },
-    (err, data, response) => res.json(data)
+
+    (err, data, response) => {
+      //if (data.retweeted_status)
+      if (!data.statuses) return false; // something went wrong
+      data.statuses.map((status) => {
+        // status.full_text
+        // check if retweet.. if so do retweeted_status.full_text
+        console.log(status.entities.media);
+        if (status.entities.media) {
+          status.entities.media.map((media) => {
+            console.log(media.media_url);
+          });
+        }
+        if (status.extended_entities) {
+          if (status.extended_entities.media) {
+            //console.log(status.extended_entities.media);
+          }
+          if (status.extended_entities.media) {
+            if (status.extended_entities.media[0]) {
+              if (status.extended_entities.media[0].video_info) {
+                var x = status.extended_entities.media[0].video_info;
+                x.variants.map((variant) => {
+                  console.log(variant);
+                });
+              }
+            }
+          }
+        }
+      });
+      //console.log(data);
+      return res.json(data);
+    }
   );
 });
 // Handles any requests that don't match the ones above
