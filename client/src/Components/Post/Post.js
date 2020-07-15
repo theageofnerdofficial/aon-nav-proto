@@ -44,10 +44,10 @@ class Post extends Component {
       <div className="bg-light shadow rounded col-12 row p-0 m-0 mb-2">
         <div className=" col-2 text-center p-0 m-0">
           <span
-            className="text-primary"
+            className="text-secondary"
             style={{
-              border: '0px solid red',
-              fontSize: 40,
+              fontSize: 30,
+              opacity: '0.5',
               textAlign: 'center',
               width: '100%',
             }}
@@ -58,7 +58,9 @@ class Post extends Component {
         <div className="col-10 py-2">
           <h6 style={{ fontWeight: 300 }}>{this.props.text}</h6>
           <p>{getEmbeddedImages()}</p>
-          <small className="text-muted">{this.props.created_at}</small>
+          <small style={{ fontWeight: 300 }} className="text-muted">
+            {this.props.created_at}
+          </small>
         </div>
       </div>
     );
