@@ -41,8 +41,8 @@ class Post extends Component {
       }
     };
     return (
-      <div className="bg-light shadow rounded col-12 row p-0 m-0 mb-2">
-        <div className=" col-2 text-center p-0 m-0">
+      <div className="bg-light shadow-sm rounded col-12 row p-0 py-2 m-0 mb-2">
+        <div className="col-2 text-center p-0 m-0">
           <span
             className="text-secondary"
             style={{

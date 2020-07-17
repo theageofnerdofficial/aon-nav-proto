@@ -11,10 +11,17 @@ class Navbar extends Component {
     */
     const resizeByPageName = (page) => {
       page = page.toLowerCase();
-      if (page === 'tv') return 'col-1';
-      if (page === 'gaming') return 'col-3';
+      if (page === '+') return 'col-1';
+      if (page === 'my nerd') return 'col-3';
       return 'col-2';
     };
+    const formatLink = (link) => {
+      var lowerCaseLink = link.toLowerCase();
+      var slashlessLink = lowerCaseLink.replace(/\//g, '');
+      var spacelessLink = slashlessLink.replace(/\s/g, '');
+      return spacelessLink;
+    };
+
     return (
       <div
         id="navbar-custom"
@@ -30,7 +37,7 @@ class Navbar extends Component {
             >
               <a
                 href={`/#/${
-                  page.toLowerCase() === 'home' ? '' : page.toLowerCase()
+                  page.toLowerCase() === 'home' ? '' : formatLink(page)
                 }`}
               >
                 <button

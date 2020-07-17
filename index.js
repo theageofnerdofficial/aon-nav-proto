@@ -13,6 +13,8 @@ dotenv.config();
  ***************************************************/
 const { DB_TWITTER_CONSUMER_KEY, DB_TWITTER_CONSUMER_SECRET } = process.env;
 
+/* Twit (Twitter API package):
+ ***************************************************/
 const T = new Twit({
   consumer_key: DB_TWITTER_CONSUMER_KEY.toString(),
   consumer_secret: DB_TWITTER_CONSUMER_SECRET.toString(),
@@ -25,20 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // An api endpoint that returns a short list of items
-
 app.get('/api/getList', (req, res, next) => {
-  console.log('got here');
-
-  /*
-
-  Twitter API has
-
-  Notes:
-
-  Operators:
-  https://developer.twitter.com/en/docs/tweets/search/guides/standard-operators
-
-  */
   return T.get(
     'search/tweets',
     {
@@ -52,18 +41,7 @@ app.get('/api/getList', (req, res, next) => {
       //if (data.retweeted_status)
       if (!data.statuses) return false; // something went wrong
       data.statuses.map((status) => {
-        // status.full_text
-        // check if retweet.. if so do retweeted_status.full_text
-        console.log(status.entities.media);
-        if (status.entities.media) {
-          status.entities.media.map((media) => {
-            console.log(media.media_url);
-          });
-        }
         if (status.extended_entities) {
-          if (status.extended_entities.media) {
-            //console.log(status.extended_entities.media);
-          }
           if (status.extended_entities.media) {
             if (status.extended_entities.media[0]) {
               if (status.extended_entities.media[0].video_info) {
@@ -76,7 +54,6 @@ app.get('/api/getList', (req, res, next) => {
           }
         }
       });
-      //console.log(data);
       return res.json(data);
     }
   );

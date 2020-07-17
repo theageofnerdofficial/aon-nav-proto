@@ -11,8 +11,8 @@ const settings = {
     style: {
       sectionTab: {
         featured: '#f44336',
-        tv: '#8bc34a',
-        film: '#009688',
+        mynerd: '#8bc34a',
+        tvfilm: '#009688',
         gaming: {
           retro: '#cddc39',
           modern: '#795548',

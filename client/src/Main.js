@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from './Components/Header/Header';
 import Home from './Home';
-import TV from './TV';
-import Film from './Film';
+import MyNerd from './MyNerd';
+import TVFilm from './TVFilm';
 import Gaming from './Gaming';
 import RetroGames from './RetroGames';
 import ModernGames from './ModernGames';
@@ -13,17 +12,16 @@ import BoardGames from './BoardGames';
 import Comics from './Comics';
 import Contact from './Contact';
 import Footer from './Components/Footer/Footer';
+import Header from './Components/Header/Header';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
-import './Main.css';
-
-import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from './themeProvider/theme';
-import { GlobalStyles } from './themeProvider/global';
 import LoginBtn from './Components/LoginBtn/LoginBtn';
 import Modal from './Components/Modal/Modal';
+import './Main.css';
 
+import { lightTheme, darkTheme } from './themeProvider/theme';
 import { userSetTest } from './actions';
-import settings from './config/settings';
+import { GlobalStyles } from './themeProvider/global';
+import { ThemeProvider } from 'styled-components';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -127,15 +125,11 @@ class Main extends Component {
                     exact
                     path="/"
                     render={(props) => (
-                      <Home
-                        x={'Prop passed test'}
-                        twitterData={this.state.twitterData}
-                        {...props}
-                      />
+                      <Home twitterData={this.state.twitterData} {...props} />
                     )}
                   />
-                  <Route path="/tv" component={TV} />
-                  <Route path="/film" component={Film} />
+                  <Route path="/mynerd" component={MyNerd} />
+                  <Route path="/tvfilm" component={TVFilm} />
                   <Route path="/gaming" component={Gaming} />
                   <Route path="/retrogaming" component={RetroGames} />
                   <Route path="/moderngaming" component={ModernGames} />

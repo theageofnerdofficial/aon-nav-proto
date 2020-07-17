@@ -8,7 +8,7 @@ class Header extends Component {
     super(props);
     this.state = {
       activeItem: 'home',
-      navItems: ['Home', 'TV', 'Film', 'Comics', 'Gaming', 'Misc'],
+      navItems: ['Home', 'My Nerd', 'TV/Film', 'Comics', 'Gaming', '+'],
     };
     this.setActiveItem = this.setActiveItem.bind(this);
   }
