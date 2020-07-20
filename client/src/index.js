@@ -7,14 +7,14 @@ import { createLogger } from 'redux-logger';
 import Main from './Main';
 
 // Reducer imports:
-import { userReducer } from './reducers';
+import { dataReducer } from './reducers';
 
 // Redux logger provides useful console logs concerning state:
 const logger = createLogger();
 
 // Root reducers are combined using combineReducers() from Redux library:
 const rootReducers = combineReducers({
-  userReducer,
+  dataReducer,
 });
 
 // A store is created from root reducers with Redux logger and Think.

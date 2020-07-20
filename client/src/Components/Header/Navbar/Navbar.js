@@ -35,10 +35,8 @@ class Navbar extends Component {
               )} col-md-2 m-0 p-0 rounded-0`}
               key={'nav-' + page}
             >
-              <a
-                href={`/#/${
-                  page.toLowerCase() === 'home' ? '' : formatLink(page)
-                }`}
+              <this.props.Link
+                to={`/${page.toLowerCase() === 'home' ? '' : formatLink(page)}`}
               >
                 <button
                   className={`btn btn-light form-control navbar-btn p-0 rounded-0  text-center text-muted text-uppercase ${
@@ -51,7 +49,7 @@ class Navbar extends Component {
                 >
                   {page}
                 </button>
-              </a>
+              </this.props.Link>
             </div>
           );
         })}

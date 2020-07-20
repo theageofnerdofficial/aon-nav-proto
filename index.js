@@ -1,19 +1,31 @@
+/* Imports:
+ ***************************************************/
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('./config/db');
 const app = express();
 const Twit = require('twit');
+const snoowrap = require('snoowrap');
 const dotenv = require('dotenv');
 
-// Config
+// For env variables:
 dotenv.config();
 
 /* Database URI and options:
  ***************************************************/
 const { DB_TWITTER_CONSUMER_KEY, DB_TWITTER_CONSUMER_SECRET } = process.env;
 
-/* Twit (Twitter API package):
+/* Snoowrap (Reddit API package) — oAuth credentials:
+ ***************************************************/
+const r = new snoowrap({
+  userAgent: 'theageofnerdjm',
+  clientId: 'IHlM5CoVokkoEQ',
+  clientSecret: 'P168jsB6Kx5ZaZ7zT7jjxY2ikqM',
+  refreshToken: '572960930002-AvFDeoFnSEN05wbyZzFLq2gQT3I', // expires in hour
+});
+
+/* Twit (Twitter API package) — oAuth credentials:
  ***************************************************/
 const T = new Twit({
   consumer_key: DB_TWITTER_CONSUMER_KEY.toString(),
@@ -26,39 +38,36 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// An api endpoint that returns a short list of items
-app.get('/api/getList', (req, res, next) => {
-  return T.get(
-    'search/tweets',
-    {
-      //q: 'zelda since:2019-07-11',
-      from: 'nintendouk',
-      count: 100,
-      tweet_mode: 'extended',
-    },
-
-    (err, data, response) => {
-      //if (data.retweeted_status)
-      if (!data.statuses) return false; // something went wrong
-      data.statuses.map((status) => {
-        if (status.extended_entities) {
-          if (status.extended_entities.media) {
-            if (status.extended_entities.media[0]) {
-              if (status.extended_entities.media[0].video_info) {
-                var x = status.extended_entities.media[0].video_info;
-                x.variants.map((variant) => {
-                  console.log(variant);
-                });
-              }
-            }
-          }
-        }
-      });
-      return res.json(data);
-    }
-  );
+/* :
+ *****************************************************************/
+app.get('/api/getreddit', (req, res, next) => {
+  //
+  return r
+    .getHot()
+    .map((post) => post.title)
+    .then((data) => res.json(data));
 });
-// Handles any requests that don't match the ones above
+
+/* Description: Twitter — search Tweets
+   Permission: Unprotected GET
+ *****************************************************************/
+app.get(
+  '/api/request_data_twitter/:endpoint/:user/:q/:count',
+  (req, res, next) => {
+    const { count, endpoint, user } = req.params;
+    const parameters = {
+      count: count,
+      from: user,
+      tweet_mode: 'extended',
+      //q:
+    };
+    return T.get(endpoint, parameters, (err, data, response) => res.json(data));
+  }
+);
+
+/* Description: Handle additional request: direct to index.html
+   Permission: Unprotected GET
+ *****************************************************************/
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });

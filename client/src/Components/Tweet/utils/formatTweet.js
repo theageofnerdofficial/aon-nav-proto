@@ -1,51 +1,25 @@
 import React, { Component } from 'react';
+
 const formatTweet = {
-  //
-
-  entities: {
-    video: {
-      getArr(status, mp4only = true) {
-        const { extended_entities } = status;
-        const hasVideoMedia = extended_entities && extended_entities.media;
-        const isMp4 = (v) => (v.toString().indexOf('.mp4') >= 0 ? v : false);
-
-        //
-        if (hasVideoMedia) {
-          return extended_entities.media.map((vidElement) => {
-            const { video_info } = vidElement;
-            if (video_info && video_info.variants) {
-              return video_info.variants.map((variant) =>
-                mp4only ? isMp4(variant.url) : variant.url
-              );
-            }
-          });
-        } else {
-          return [];
-        }
-      },
-      getPlayer(srcs) {
-        // If video arr is undefined or empty, return:
-        if (srcs.includes(undefined) || srcs.length <= 0) return;
-
-        // Reverse video arr so highres sources take priority:
-        const xx = srcs.reverse();
-        const isSrc = (v) =>
-          typeof v === 'string' && v !== undefined ? v : false;
-
-        return (
-          <video width="320" height="240" controls>
-            {xx.map((src) =>
-              src.map((u) => {
-                if (isSrc(u)) {
-                  return <source src={u} type="video/mp4"></source>;
-                }
-              })
-            )}
-          </video>
-        );
-      },
-    },
+  formatTweetData(tweet) {
+    return {
+      id: tweet.id,
+      source: 'twitter',
+      user: tweet.user,
+      text: tweet.retweeted_status
+        ? tweet.retweeted_status.full_text
+        : tweet.full_text,
+      created_at: tweet.created_at,
+      lang: tweet.lang,
+      retweet_count: tweet.retweet_count,
+      favorite_count: tweet.favorite_count,
+      entities_media: tweet.entities ? tweet.entities.media : null,
+      extended_entities_media: tweet.extended_entities
+        ? tweet.extended_entities.media
+        : null,
+    };
   },
+
   status: {
     format: {
       removeLinkSuffix(status) {

@@ -25,6 +25,7 @@ class Header extends Component {
           />
           <Navbar
             activeItem={this.state.activeItem}
+            Link={this.props.Link}
             navItems={this.state.navItems}
             setActiveItem={this.setActiveItem}
           />
