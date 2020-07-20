@@ -14,6 +14,7 @@ import {
 import {
   faFacebook,
   faInstagramSquare,
+  faRedditAlien,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 
@@ -34,6 +35,9 @@ const FontIcon = (icon) => {
       break;
     case 'faFacebook':
       faIcon = faFacebook;
+      break;
+    case 'faRedditAlien':
+      faIcon = faRedditAlien;
       break;
     case 'faInstagramSquare':
       faIcon = faInstagramSquare;

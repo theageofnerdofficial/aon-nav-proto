@@ -2,20 +2,25 @@ import React, { Component } from 'react';
 import Loader from './Components/Loader/Loader';
 import Post from './Components/Post/Post';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
-import formatTweet from './Components/Tweet/utils/formatTweet';
+import formatTweet from './Components/Utils/utils/formatTweet';
+import formatReddit from './Components/Utils/utils/formatReddit';
 import settings from './config/settings';
 
 let formattedTweets = false;
+let formattedReddit = false;
 
 class Home extends Component {
   componentDidMount() {
-    this.requestDataTwitter();
-    // this.requestDataReddit();
+    // this.requestDataTwitter();
+    this.requestDataReddit();
   }
 
   componentDidUpdate() {
     let formattedTweetData = [];
-    const { tweetDataRaw } = this.props.dataReducer;
+    let formattedRedditData = [];
+    const { tweetDataRaw, redditDataRaw } = this.props.dataReducer;
+
+    //
     if (tweetDataRaw && tweetDataRaw.statuses && !formattedTweets) {
       formattedTweets = true;
       tweetDataRaw.statuses.forEach((t) => {
@@ -23,6 +28,20 @@ class Home extends Component {
       });
       this.props.dataTweetsFormat(formattedTweetData);
     }
+
+    //
+    if (redditDataRaw && redditDataRaw.length > 0 && !formattedReddit) {
+      formattedReddit = true;
+      redditDataRaw.forEach((r) => {
+        formattedRedditData.push(this.formatRedditData(r));
+      });
+      //console.log(formattedRedditData);
+      this.props.dataRedditFormat(formattedRedditData);
+    }
+  }
+
+  formatRedditData(reddit) {
+    return formatReddit.formatRedditData(reddit);
   }
 
   formatTweetData(tweet) {
@@ -31,16 +50,16 @@ class Home extends Component {
 
   requestDataReddit() {
     this.props.dataRequest({
-      count: 100,
-      endpoint: '',
+      count: 15,
+      endpoint: 'hot',
       src: 'reddit',
-      user: '',
+      user: 'nintendo',
     });
   }
 
   requestDataTwitter() {
     this.props.dataRequest({
-      count: 100,
+      count: 15,
       endpoint: 'search%2Ftweets',
       src: 'twitter',
       user: 'nintendouk',
@@ -65,12 +84,16 @@ class Home extends Component {
           allData.map((d) => {
             return (
               <Post
-                created_at={d.created_at}
-                entities_media={d.entities_media}
-                extended_entities_media={d.extended_entities_media}
                 id={d.id}
+                preview_img_arr={d.preview_img_arr ? d.preview_img_arr : null}
+                created_at={d.created_at}
+                entities_media={d.entities_media ? d.entities_media : null}
+                extended_entities_media={
+                  d.extended_entities_media ? d.extended_entities_media : null
+                }
                 source={d.source}
                 text={d.text}
+                description={d.description ? d.description : null}
                 userData={d.user}
               />
             );

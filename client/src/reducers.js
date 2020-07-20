@@ -1,6 +1,7 @@
 /* Imports:
  *********************************************************/
 import {
+  DATA_REDDIT_FORMAT,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
@@ -30,6 +31,8 @@ const data = {
   allData: [],
   tweetDataFormatted: [],
   tweetDataRaw: [],
+  redditDataFormatted: [],
+  redditDataRaw: [],
 };
 
 // .... switch isn't working... just does first
@@ -44,8 +47,12 @@ export const dataReducer = (state = data, action = {}) => {
       console.log('Data pending');
       return Object.assign({}, state, { dataPending: true });
 
+    case DATA_REDDIT_FORMAT:
+      return Object.assign({}, state, {
+        redditDataFormatted: action.payload,
+        allData: [...action.payload],
+      });
     case DATA_TWEETS_FORMAT:
-      console.log('Reducer: formatting tweets');
       return Object.assign({}, state, {
         tweetDataFormatted: action.payload,
         allData: [...action.payload],
@@ -53,10 +60,16 @@ export const dataReducer = (state = data, action = {}) => {
 
     case DATA_REQUEST_SUCCESS:
       console.log('Success');
-      return Object.assign({}, state, {
-        dataPending: false,
-        tweetDataRaw: action.payload,
-      });
+      let newState = { dataPending: false };
+      if (action.source === 'twitter') {
+        newState.tweetDataRaw = action.payload;
+      } else if (action.source === 'reddit') {
+        newState.redditDataRaw = action.payload.data.children.slice(
+          0,
+          action.count
+        );
+      }
+      return Object.assign({}, state, newState);
 
     default:
       return state;

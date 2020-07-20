@@ -25,7 +25,7 @@ import Modal from './Components/Modal/Modal';
 import './Main.css';
 
 import { lightTheme, darkTheme } from './themeProvider/theme';
-import { dataRequest, dataTweetsFormat, userSetTest } from './actions';
+import { dataRedditFormat, dataRequest, dataTweetsFormat } from './actions';
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
 
@@ -42,6 +42,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     dataRequest: (o) => dispatch(dataRequest(o)),
+    dataRedditFormat: (o) => dispatch(dataRedditFormat(o)),
     dataTweetsFormat: (o) => dispatch(dataTweetsFormat(o)),
   };
 };
@@ -95,7 +96,12 @@ class Main extends Component {
   }
 
   render() {
-    const { dataReducer, dataRequest, dataTweetsFormat } = this.props;
+    const {
+      dataRedditFormat,
+      dataReducer,
+      dataRequest,
+      dataTweetsFormat,
+    } = this.props;
     return (
       <Router>
         <Switch>
@@ -122,6 +128,7 @@ class Main extends Component {
                       path="/"
                       render={(props) => (
                         <Home
+                          dataRedditFormat={dataRedditFormat}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
                           dataTweetsFormat={dataTweetsFormat}

@@ -1,4 +1,3 @@
-
 const utils = {
   urlify(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -6,6 +5,11 @@ const utils = {
       urlRegex,
       (url) => `<a target="_blank" href="${url}">${url}</a>`
     );
+  },
+  time: {
+    convertTo() {
+      //
+    },
   },
   removeLinkSuffix(link, urlBeginning = 'https://t.co', charactersToRemove) {
     if (

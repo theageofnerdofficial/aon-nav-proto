@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import FontIcon from '../FontIcon/FontIcon';
 import ReactHtmlParser from 'react-html-parser';
-import utils from '../Tweet/utils/utils';
+import utils from '../Utils/utils/utils';
 
 class Post extends Component {
   render() {
@@ -73,29 +73,55 @@ class Post extends Component {
       }
     };
 
+    const getProfileImgSrc = () => {
+      const { profile_image_url } = this.props.userData;
+      let src, style;
+      if (this.props.source === 'tweet') {
+        style = { borderRadius: '100px', width: '40px' };
+        if (profile_image_url) {
+          src = profile_image_url;
+        } else {
+          // return some placeholder image in public folder
+        }
+      } else if (this.props.source === 'reddit') {
+        style = { borderRadius: '10px', width: '40px', height: '60px' };
+        if (this.props.preview_img_arr && this.props.preview_img_arr[0]) {
+          src = new DOMParser().parseFromString(
+            this.props.preview_img_arr[0].source.url,
+            'text/html'
+          ).body.textContent;
+        }
+      }
+      return <img style={style} src={src} />;
+    };
+
+    const getIcon = () => {
+      if (this.props.source === 'twitter') {
+        return 'faTwitter';
+      } else if (this.props.source === 'reddit') {
+        return 'faReddit';
+      }
+    };
     return (
       <div className="bg-light shadow-sm rounded col-12 row p-0 py-2 m-0 mb-2">
         <div className="col-2 text-center p-0 m-0">
-          <img
-            style={{ borderRadius: '100px', width: '40px' }}
-            src={this.props.userData.profile_image_url}
-          />
+          {getProfileImgSrc()}
           <br />
-          <span
-            className="text-secondary"
-            style={{
-              fontSize: 30,
-              opacity: '0.5',
-              textAlign: 'center',
-              width: '100%',
-            }}
-          >
-            {FontIcon('faTwitter')}
-          </span>
         </div>
         <div className="col-10 py-2">
           <h6 className="font-weight-normal">
-            {this.props.userData.screen_name}
+            {this.props.userData.screen_name}{' '}
+            <span
+              className="text-secondary"
+              style={{
+                fontSize: 25,
+                opacity: '0.3',
+                textAlign: 'right',
+                float: 'right',
+              }}
+            >
+              {FontIcon(getIcon())}
+            </span>
           </h6>
           <h6 className="font-weight-light">
             {ReactHtmlParser(utils.urlify(this.props.text))}
