@@ -76,7 +76,7 @@ class Post extends Component {
     const getProfileImgSrc = () => {
       const { profile_image_url } = this.props.userData;
       let src, style;
-      if (this.props.source === 'tweet') {
+      if (this.props.source === 'twitter') {
         style = { borderRadius: '100px', width: '40px' };
         if (profile_image_url) {
           src = profile_image_url;

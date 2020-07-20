@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import Loader from './Components/Loader/Loader';
+import LoaderCentered from './Components/Loader/LoaderCentered';
 import Post from './Components/Post/Post';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import formatTweet from './Components/Utils/utils/formatTweet';
 import formatReddit from './Components/Utils/utils/formatReddit';
 import settings from './config/settings';
+import LazyLoad from 'react-lazyload';
 
 let formattedTweets = false;
 let formattedReddit = false;
 
 class Home extends Component {
   componentDidMount() {
-    // this.requestDataTwitter();
-    this.requestDataReddit();
+    this.requestDataTwitter();
+    //this.requestDataReddit();
   }
 
   componentDidUpdate() {
@@ -81,30 +83,32 @@ class Home extends Component {
           NintendoUK ({dataGetLength()})
         </h4>
         {dataHasLength() ? (
-          allData.map((d) => {
+          allData.map((d, index) => {
             return (
-              <Post
-                id={d.id}
-                preview_img_arr={d.preview_img_arr ? d.preview_img_arr : null}
-                created_at={d.created_at}
-                entities_media={d.entities_media ? d.entities_media : null}
-                extended_entities_media={
-                  d.extended_entities_media ? d.extended_entities_media : null
-                }
-                source={d.source}
-                text={d.text}
-                description={d.description ? d.description : null}
-                userData={d.user}
-              />
+              <LazyLoad
+                height={300}
+                offset={[-100, 100]}
+                key={`ll-post-${index}`}
+                placeholder={<LoaderCentered />}
+              >
+                <Post
+                  id={d.id}
+                  preview_img_arr={d.preview_img_arr ? d.preview_img_arr : null}
+                  created_at={d.created_at}
+                  entities_media={d.entities_media ? d.entities_media : null}
+                  extended_entities_media={
+                    d.extended_entities_media ? d.extended_entities_media : null
+                  }
+                  source={d.source}
+                  text={d.text}
+                  description={d.description ? d.description : null}
+                  userData={d.user}
+                />
+              </LazyLoad>
             );
           })
         ) : (
-          <div
-            className="border-0 form-control p-4 text-center"
-            style={{ opacity: 0.7 }}
-          >
-            <Loader />
-          </div>
+          <LoaderCentered />
         )}
       </div>
     );
