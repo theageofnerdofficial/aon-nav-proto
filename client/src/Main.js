@@ -22,12 +22,16 @@ import Header from './Components/Header/Header';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
 import LoginBtn from './Components/LoginBtn/LoginBtn';
 import Modal from './Components/Modal/Modal';
-import './Main.css';
-
-import { lightTheme, darkTheme } from './themeProvider/theme';
-import { dataRedditFormat, dataRequest, dataTweetsFormat } from './actions';
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from './themeProvider/theme';
+import {
+  dataCombine,
+  dataFormatReddit,
+  dataRequest,
+  dataFormatTweets,
+} from './actions';
+import './Main.css';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -41,9 +45,10 @@ const mapStateToProps = (state) => {
 // Function returns an object then uses connect to change data from reducers.
 const mapDispatchToProps = (dispatch) => {
   return {
+    dataCombine: () => dispatch(dataCombine()),
     dataRequest: (o) => dispatch(dataRequest(o)),
-    dataRedditFormat: (o) => dispatch(dataRedditFormat(o)),
-    dataTweetsFormat: (o) => dispatch(dataTweetsFormat(o)),
+    dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
+    dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
   };
 };
 
@@ -97,10 +102,11 @@ class Main extends Component {
 
   render() {
     const {
-      dataRedditFormat,
+      dataCombine,
+      dataFormatReddit,
       dataReducer,
       dataRequest,
-      dataTweetsFormat,
+      dataFormatTweets,
     } = this.props;
     return (
       <Router>
@@ -128,10 +134,11 @@ class Main extends Component {
                       path="/"
                       render={(props) => (
                         <Home
-                          dataRedditFormat={dataRedditFormat}
+                          dataCombine={dataCombine}
+                          dataFormatReddit={dataFormatReddit}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
-                          dataTweetsFormat={dataTweetsFormat}
+                          dataFormatTweets={dataFormatTweets}
                           {...props}
                         />
                       )}

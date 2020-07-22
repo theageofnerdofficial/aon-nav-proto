@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
+  body, html {
     background: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text};
   }
@@ -69,5 +69,10 @@ export const GlobalStyles = createGlobalStyle`
   .navbar-btn {
     background: ${({ theme }) => theme.navBtnBg};
     border-color: ${({ theme }) => theme.navBtnBorder};
+  }
+
+  .post-wrapper {
+    background: ${({ theme }) => theme.navBtnBg};
+    color: ${({ theme }) => theme.text};
   }
   `;

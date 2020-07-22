@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import { SOURCE_REDDIT } from '../../../constants';
+import utils from './utils';
 
 const formatReddit = {
-  formatRedditData(reddit) {
-    const { data } = reddit;
+  formatRedditData(data) {
+    console.log(data);
     return {
       id: data.id,
       created_at: new Date(data.created_utc * 1000),
-      source: 'reddit',
-      stickied: data.stickied,
-      user: data.subreddit,
+      source: SOURCE_REDDIT,
+      stickied: data.stickied ? true : false,
+      user: `${utils.str.makeTitleCase(data.subreddit)} (r/${data.subreddit})`,
       preview_img_arr: data.preview ? data.preview.images : [],
       text: data.title,
       description: data.selftext,

@@ -1,76 +1,79 @@
 /* Imports:
  *********************************************************/
 import {
-  DATA_REDDIT_FORMAT,
+  DATA_COMBINE,
+  DATA_FORMAT_REDDIT,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
-  DATA_TWEETS_FORMAT,
+  DATA_FORMAT_TWEETS,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  UI_TOGGLE_LIGHTS,
 } from './constants';
+
+import utils from './Components/Utils/utils/utils';
 
 /* Visuals — e.g. lights on/off for dark & light mode:
  *********************************************************/
-const visuals = {
+const ui = {
   lightsOff: false,
 };
 
-/*
-export const visualsReducer = (state = visuals, action = {}) => {
+export const uiReducer = (state = ui, action = {}) => {
   switch (action.type) {
-    case TOGGLE_LIGHTS:
+    case UI_TOGGLE_LIGHTS:
       return Object.assign({}, state, { lightsOff: !this.state.lightsOff });
     default:
       return state;
   }
-};*/
+};
 
 /* Data — setting the state for info obtained from APIs:
  *********************************************************/
 const data = {
-  dataPending: false,
   allData: [],
-  tweetDataFormatted: [],
-  tweetDataRaw: [],
+  dataPending: false,
   redditDataFormatted: [],
   redditDataRaw: [],
+  tweetDataFormatted: [],
+  tweetDataRaw: [],
 };
 
-// .... switch isn't working... just does first
 export const dataReducer = (state = data, action = {}) => {
-  console.log(action.type);
   switch (action.type) {
+    case DATA_COMBINE:
+      let newAllData = state.redditDataFormatted.concat(
+        state.tweetDataFormatted
+      );
+      newAllData = utils.arr.randomize(newAllData);
+      return Object.assign({}, state, { allData: newAllData });
     case DATA_REQUEST_FAILURE:
-      console.log('Data failure');
+      console.log('Data request failure');
       return Object.assign({}, state, { dataPending: false });
-
     case DATA_REQUEST_PENDING:
-      console.log('Data pending');
+      console.log('Data request pending');
       return Object.assign({}, state, { dataPending: true });
-
-    case DATA_REDDIT_FORMAT:
-      return Object.assign({}, state, {
-        redditDataFormatted: action.payload,
-        allData: [...action.payload],
-      });
-    case DATA_TWEETS_FORMAT:
-      return Object.assign({}, state, {
-        tweetDataFormatted: action.payload,
-        allData: [...action.payload],
-      });
-
     case DATA_REQUEST_SUCCESS:
-      console.log('Success');
+      console.log('Data request success');
       let newState = { dataPending: false };
-      if (action.source === 'twitter') {
+      if (action.source === SOURCE_TWITTER) {
         newState.tweetDataRaw = action.payload;
-      } else if (action.source === 'reddit') {
+      } else if (action.source === SOURCE_REDDIT) {
         newState.redditDataRaw = action.payload.data.children.slice(
           0,
           action.count
         );
       }
       return Object.assign({}, state, newState);
-
+    case DATA_FORMAT_REDDIT:
+      return Object.assign({}, state, {
+        redditDataFormatted: action.payload,
+      });
+    case DATA_FORMAT_TWEETS:
+      return Object.assign({}, state, {
+        tweetDataFormatted: action.payload,
+      });
     default:
       return state;
   }

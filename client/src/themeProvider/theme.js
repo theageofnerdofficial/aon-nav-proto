@@ -1,20 +1,22 @@
+import themeDefault from './theme_default';
+
 export const lightTheme = {
-  body: '#FFF',
-  heroBgImgOpacity: 0.5,
-  heroBgCol: '#0048a1',
-  modalBody: '#fff',
-  navBtnBg: '#f8f9fa',
-  navBtnBorder: '#f8f9fa',
-  text: '#000',
+  body: themeDefault.light.bg.primary,
+  heroBgImgOpacity: themeDefault.light.hero.opacity,
+  heroBgCol: themeDefault.light.hero.bgCol,
+  modalBody: themeDefault.light.bg.primary,
+  navBtnBg: themeDefault.light.bg.secondary,
+  navBtnBorder: themeDefault.light.bg.accent,
+  text: themeDefault.light.text.primary,
 };
 
 export const darkTheme = {
-  body: '#191a1b',
-  heroBgCol: '#000',
-  heroBgImgOpacity: 0.1,
-  modalBody: '#191a1b',
-  navBtnBg: '#282829',
-  navBtnBorder: '#000',
-  navBtnColActive: '#fff',
-  text: '#FAFAFA',
+  body: themeDefault.dark.bg.primary,
+  heroBgCol: themeDefault.dark.hero.bgCol,
+  heroBgImgOpacity: themeDefault.dark.hero.opacity,
+  modalBody: themeDefault.dark.bg.primary,
+  navBtnBg: themeDefault.dark.bg.secondary,
+  navBtnBorder: themeDefault.dark.bg.accent,
+  navBtnColActive: themeDefault.dark.text.primary,
+  text: themeDefault.dark.text.primary,
 };

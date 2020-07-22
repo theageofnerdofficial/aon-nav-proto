@@ -1,9 +1,10 @@
-/* :
+/* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import FontIcon from '../FontIcon/FontIcon';
 import ReactHtmlParser from 'react-html-parser';
+import FontIcon from '../FontIcon/FontIcon';
 import utils from '../Utils/utils/utils';
+import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
 
 class Post extends Component {
   render() {
@@ -34,7 +35,6 @@ class Post extends Component {
         return false;
       }
     };
-
     /* :
      ***************************************************************/
     const getEmbeddedImages = () => {
@@ -50,7 +50,8 @@ class Post extends Component {
         });
       }
     };
-
+    /* :
+     ***************************************************************/
     const getEmbeddedMedia = () => {
       const embeddedVideos = getEmbeddedVideos();
       if (embeddedVideos) {
@@ -72,52 +73,63 @@ class Post extends Component {
         );
       }
     };
-
+    const getUsername = () => {
+      if (this.props.source === SOURCE_TWITTER && this.props.userData) {
+        return this.props.userData.screen_name;
+      } else if (this.props.source === SOURCE_REDDIT && this.props.userData) {
+        return this.props.userData;
+      }
+    };
+    /* :
+     ***************************************************************/
     const getProfileImgSrc = () => {
-      const { profile_image_url } = this.props.userData;
       let src, style;
-      if (this.props.source === 'twitter') {
+
+      if (this.props.source === SOURCE_TWITTER) {
         style = { borderRadius: '100px', width: '40px' };
-        if (profile_image_url) {
-          src = profile_image_url;
+        if (this.props.userData && this.props.userData.profile_image_url) {
+          src = this.props.userData.profile_image_url;
         } else {
           // return some placeholder image in public folder
         }
-      } else if (this.props.source === 'reddit') {
-        style = { borderRadius: '10px', width: '40px', height: '60px' };
+      } else if (this.props.source === SOURCE_REDDIT) {
+        style = { borderRadius: '100px', height: '40px', width: '40px' };
         if (this.props.preview_img_arr && this.props.preview_img_arr[0]) {
           src = new DOMParser().parseFromString(
             this.props.preview_img_arr[0].source.url,
             'text/html'
           ).body.textContent;
+        } else {
+          src = './img/reddit-nintendo.svg';
         }
       }
-      return <img style={style} src={src} />;
+      return <img src={src} style={style} />;
     };
-
+    /* :
+     ***************************************************************/
     const getIcon = () => {
-      if (this.props.source === 'twitter') {
+      if (this.props.source === SOURCE_TWITTER) {
         return 'faTwitter';
-      } else if (this.props.source === 'reddit') {
-        return 'faReddit';
+      } else if (this.props.source === SOURCE_REDDIT) {
+        return 'faRedditAlien';
       }
     };
     return (
-      <div className="bg-light shadow-sm rounded col-12 row p-0 py-2 m-0 mb-2">
+      <div className="col-12 m-0 mb-2 p-0 py-2 post-wrapper rounded row shadow-sm">
         <div className="col-2 text-center p-0 m-0">
           {getProfileImgSrc()}
           <br />
         </div>
         <div className="col-10 py-2">
           <h6 className="font-weight-normal">
-            {this.props.userData.screen_name}{' '}
+            {getUsername()}{' '}
             <span
               className="text-secondary"
               style={{
+                float: 'right',
                 fontSize: 25,
                 opacity: '0.3',
                 textAlign: 'right',
-                float: 'right',
               }}
             >
               {FontIcon(getIcon())}
@@ -126,12 +138,11 @@ class Post extends Component {
           <h6 className="font-weight-light">
             {ReactHtmlParser(utils.urlify(this.props.text))}
           </h6>
-
           {/* <small style={{ fontWeight: 300 }} className="text-muted">
             {this.props.created_at}
           </small>*/}
         </div>
-        <div className="col-12 row m-0 p-2">{getEmbeddedMedia()}</div>
+        <div className="col-12 m-0 p-2 row">{getEmbeddedMedia()}</div>
       </div>
     );
   }

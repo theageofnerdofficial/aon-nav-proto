@@ -1,10 +1,36 @@
 const utils = {
+  arr: {
+    randomize(arr) {
+      let currentIndex = arr.length,
+        temporaryValue,
+        randomIndex;
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = arr[currentIndex];
+        arr[currentIndex] = arr[randomIndex];
+        arr[randomIndex] = temporaryValue;
+      }
+      return arr;
+    },
+  },
+  str: {
+    makeTitleCase(str) {
+      return str.replace(
+        /\w\S*/g,
+        (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+      );
+    },
+  },
   urlify(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.replace(
-      urlRegex,
-      (url) => `<a target="_blank" href="${url}">${url}</a>`
-    );
+    const hasRegex = urlRegex.test(text);
+    return hasRegex
+      ? text.replace(
+          urlRegex,
+          (url) => `<a target="_blank" href="${url}">${url}</a>`
+        )
+      : text;
   },
   time: {
     convertTo() {

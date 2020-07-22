@@ -1,13 +1,15 @@
+// Imports:
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Main from './Main';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import Main from './Main';
+import thunkMiddleware from 'redux-thunk';
 
 // Reducer imports:
-import { dataReducer } from './reducers';
+import { dataReducer, uiReducer } from './reducers';
 
 // Redux logger provides useful console logs concerning state:
 const logger = createLogger();
@@ -15,6 +17,7 @@ const logger = createLogger();
 // Root reducers are combined using combineReducers() from Redux library:
 const rootReducers = combineReducers({
   dataReducer,
+  uiReducer,
 });
 
 // A store is created from root reducers with Redux logger and Think.

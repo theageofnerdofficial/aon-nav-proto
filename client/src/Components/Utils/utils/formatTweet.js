@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import { SOURCE_TWITTER } from '../../../constants';
 
 const formatTweet = {
   formatTweetData(tweet) {
     return {
       id: tweet.id,
-      source: 'twitter',
+      source: SOURCE_TWITTER,
       user: tweet.user,
       text: tweet.retweeted_status
         ? tweet.retweeted_status.full_text

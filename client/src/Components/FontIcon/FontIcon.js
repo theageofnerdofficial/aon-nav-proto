@@ -21,12 +21,6 @@ import {
 const FontIcon = (icon) => {
   let faIcon;
   switch (icon) {
-    case 'faMoon':
-      faIcon = faMoon;
-      break;
-    case 'faSun':
-      faIcon = faSun;
-      break;
     case 'faArchway':
       faIcon = faArchway;
       break;
@@ -36,11 +30,17 @@ const FontIcon = (icon) => {
     case 'faFacebook':
       faIcon = faFacebook;
       break;
+    case 'faInstagramSquare':
+      faIcon = faInstagramSquare;
+      break;
+    case 'faMoon':
+      faIcon = faMoon;
+      break;
     case 'faRedditAlien':
       faIcon = faRedditAlien;
       break;
-    case 'faInstagramSquare':
-      faIcon = faInstagramSquare;
+    case 'faSun':
+      faIcon = faSun;
       break;
     case 'faTwitter':
       faIcon = faTwitter;

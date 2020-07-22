@@ -1,115 +1,109 @@
+// Imports:
 import React, { Component } from 'react';
-import Loader from './Components/Loader/Loader';
-import LoaderCentered from './Components/Loader/LoaderCentered';
-import Post from './Components/Post/Post';
+import Posts from './Components/Post/Posts';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
+import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
 import formatTweet from './Components/Utils/utils/formatTweet';
 import formatReddit from './Components/Utils/utils/formatReddit';
 import settings from './config/settings';
-import LazyLoad from 'react-lazyload';
+import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 
-let formattedTweets = false;
+let hasDataCombined = false;
 let formattedReddit = false;
+let formattedTweets = false;
 
 class Home extends Component {
   componentDidMount() {
-    this.requestDataTwitter();
-    //this.requestDataReddit();
+    this.data.request.getRedditRaw();
+    this.data.request.getTwitterRaw();
   }
 
   componentDidUpdate() {
-    let formattedTweetData = [];
-    let formattedRedditData = [];
-    const { tweetDataRaw, redditDataRaw } = this.props.dataReducer;
-
-    //
-    if (tweetDataRaw && tweetDataRaw.statuses && !formattedTweets) {
-      formattedTweets = true;
-      tweetDataRaw.statuses.forEach((t) => {
-        formattedTweetData.push(this.formatTweetData(t));
-      });
-      this.props.dataTweetsFormat(formattedTweetData);
-    }
-
-    //
-    if (redditDataRaw && redditDataRaw.length > 0 && !formattedReddit) {
-      formattedReddit = true;
-      redditDataRaw.forEach((r) => {
-        formattedRedditData.push(this.formatRedditData(r));
-      });
-      //console.log(formattedRedditData);
-      this.props.dataRedditFormat(formattedRedditData);
-    }
+    this.data.format.setRedditFormatted();
+    this.data.format.setTwitterFormatted();
+    this.data.combine();
   }
 
-  formatRedditData(reddit) {
-    return formatReddit.formatRedditData(reddit);
-  }
+  data = {
+    combine: () => {
+      //
+      const {
+        redditDataFormatted,
+        tweetDataFormatted,
+      } = this.props.dataReducer;
+      //
+      const hasRedditFormatted =
+        redditDataFormatted && redditDataFormatted.length > 0;
+      const hasTweetFormatted =
+        tweetDataFormatted && tweetDataFormatted.length > 0;
+      //
+      if (hasRedditFormatted && hasTweetFormatted && !hasDataCombined) {
+        hasDataCombined = true;
+        this.props.dataCombine();
+      }
+    },
+    format: {
+      setRedditFormatted: () => {
+        let formattedRedditData = [];
+        const { redditDataRaw } = this.props.dataReducer;
+        const hasRedditRaw = redditDataRaw && redditDataRaw.length > 0;
+        // If we have Reddit raw data but it's not formatted, format it:
+        if (hasRedditRaw && !formattedReddit) {
+          formattedReddit = true;
 
-  formatTweetData(tweet) {
-    return formatTweet.formatTweetData(tweet);
-  }
+          redditDataRaw.forEach((r) => {
+            formattedRedditData.push(formatReddit.formatRedditData(r.data));
+          });
 
-  requestDataReddit() {
-    this.props.dataRequest({
-      count: 15,
-      endpoint: 'hot',
-      src: 'reddit',
-      user: 'nintendo',
-    });
-  }
-
-  requestDataTwitter() {
-    this.props.dataRequest({
-      count: 15,
-      endpoint: 'search%2Ftweets',
-      src: 'twitter',
-      user: 'nintendouk',
-      // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
-    });
-  }
-
+          this.props.dataFormatReddit(formattedRedditData);
+        }
+      },
+      setTwitterFormatted: () => {
+        let formattedTweetData = [];
+        const { tweetDataRaw } = this.props.dataReducer;
+        const hasTweetsRaw = tweetDataRaw && tweetDataRaw.statuses;
+        // If we have Twitter raw data but it's not formatted, format it:
+        if (hasTweetsRaw && !formattedTweets) {
+          formattedTweets = true;
+          tweetDataRaw.statuses.forEach((t) => {
+            formattedTweetData.push(formatTweet.formatTweetData(t));
+          });
+          console.log(formattedTweetData);
+          this.props.dataFormatTweets(formattedTweetData);
+        }
+      },
+    },
+    request: {
+      getRedditRaw: () => {
+        this.props.dataRequest({
+          count: 15,
+          endpoint: 'hot',
+          src: SOURCE_REDDIT,
+          user: 'nintendo',
+        });
+      },
+      getTwitterRaw: () => {
+        this.props.dataRequest({
+          count: 15,
+          endpoint: 'search%2Ftweets',
+          src: SOURCE_TWITTER,
+          user: 'nintendouk',
+          // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
+        });
+      },
+    },
+  };
   render() {
     const { allData } = this.props.dataReducer;
-    const dataGetLength = () => (allData ? allData.length : 0);
-    const dataHasLength = () => allData && allData.length > 0;
+    const sectionTitle = `NintendoUK (${allData ? allData.length : 0})`;
     return (
       <div>
         <SectionTitle
           tabColour={settings.ui.style.sectionTab.featured}
           title="Featured"
         />
-        <h4 className="font-weight-light my-3 text-muted">
-          NintendoUK ({dataGetLength()})
-        </h4>
-        {dataHasLength() ? (
-          allData.map((d, index) => {
-            return (
-              <LazyLoad
-                height={300}
-                offset={[-100, 100]}
-                key={`ll-post-${index}`}
-                placeholder={<LoaderCentered />}
-              >
-                <Post
-                  id={d.id}
-                  preview_img_arr={d.preview_img_arr ? d.preview_img_arr : null}
-                  created_at={d.created_at}
-                  entities_media={d.entities_media ? d.entities_media : null}
-                  extended_entities_media={
-                    d.extended_entities_media ? d.extended_entities_media : null
-                  }
-                  source={d.source}
-                  text={d.text}
-                  description={d.description ? d.description : null}
-                  userData={d.user}
-                />
-              </LazyLoad>
-            );
-          })
-        ) : (
-          <LoaderCentered />
-        )}
+        <SectionTitlePostsTitle text={sectionTitle} />
+        <Posts allData={allData} />
       </div>
     );
   }

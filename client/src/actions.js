@@ -1,35 +1,43 @@
 /* Imports:
  ******************************************************/
 import {
+  DATA_COMBINE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
-  DATA_REDDIT_FORMAT,
-  DATA_TWEETS_FORMAT,
+  DATA_FORMAT_REDDIT,
+  DATA_FORMAT_TWEETS,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  UI_TOGGLE_LIGHTS,
 } from './constants';
 
 /* Data actions:
  ******************************************************/
+//
+export const dataCombine = () => ({
+  type: DATA_COMBINE,
+});
 
-/* 
- fetch('https://www.reddit.com/r/nintendo/hot.json')
-  .then(function(res) {
-    return res.json();   // Convert the data into JSON
-  })
-  .then(function(data) {
-    console.log(data);   // Logs the data to the console
-  })
-  .catch(function(err) {
-    console.log(err);   // Log error if any
-  });
-  */
+//
+export const dataFormatReddit = (o) => ({
+  type: DATA_FORMAT_REDDIT,
+  payload: o,
+});
+
+//
+export const dataFormatTweets = (o) => ({
+  type: DATA_FORMAT_TWEETS,
+  payload: o,
+});
+
+//
 export const dataRequest = (o) => (dispatch) => {
   dispatch({ type: DATA_REQUEST_PENDING });
-
   const url = () => {
-    if (o.src === 'twitter') {
-      return `/api/request_data_${o.src}/${o.endpoint}/${o.user}/${o.q}/${o.count}`;
-    } else if (o.src === 'reddit') {
+    if (o.src === SOURCE_TWITTER) {
+      return `/api/request_data_twitter/${o.endpoint}/${o.user}/${o.q}/${o.count}`;
+    } else if (o.src === SOURCE_REDDIT) {
       return `https://www.reddit.com/r/${o.user}/${o.endpoint}.json`;
     }
   };
@@ -39,22 +47,19 @@ export const dataRequest = (o) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       dispatch({
-        type: DATA_REQUEST_SUCCESS,
+        count: o.count,
         payload: data,
         source: o.src,
-        count: o.count,
+        type: DATA_REQUEST_SUCCESS,
       });
     })
     .catch((error) => dispatch({ type: DATA_REQUEST_FAILURE, payload: error }));
 };
 
-export const dataRedditFormat = (o) => ({
-  type: DATA_REDDIT_FORMAT,
-  payload: o,
-});
-
+/* UI actions:
+ ******************************************************/
 //
-export const dataTweetsFormat = (o) => ({
-  type: DATA_TWEETS_FORMAT,
+export const uiToggleLights = (o) => ({
+  type: UI_TOGGLE_LIGHTS,
   payload: o,
 });
