@@ -8,6 +8,15 @@ const settings = {
     },
   },
   ui: {
+    defaultPostThumbs: {
+      general: './img/thumbnails/aon-default.svg',
+      reddit: {
+        gaming: './img/thumbnails/gaming-reddit-2.svg',
+      },
+      twitter: {
+        gaming: './img/thumbnails/gaming-twitter-2.svg',
+      },
+    },
     style: {
       sectionTab: {
         featured: '#f44336',

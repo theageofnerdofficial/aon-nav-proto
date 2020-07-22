@@ -9,7 +9,9 @@ const formatReddit = {
       created_at: new Date(data.created_utc * 1000),
       source: SOURCE_REDDIT,
       stickied: data.stickied ? true : false,
-      user: `${utils.str.makeTitleCase(data.subreddit)} (r/${data.subreddit})`,
+      user: `${utils.str.makeTitleCase(data.subreddit)} - Reddit (r/${
+        data.subreddit
+      })`,
       preview_img_arr: data.preview ? data.preview.images : [],
       text: data.title,
       description: data.selftext,

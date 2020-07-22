@@ -5,6 +5,8 @@ import ReactHtmlParser from 'react-html-parser';
 import FontIcon from '../FontIcon/FontIcon';
 import utils from '../Utils/utils/utils';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
+import postElem from './PostElemBySource/PostElem';
+import settings from '../../config/settings';
 
 class Post extends Component {
   render() {
@@ -75,36 +77,12 @@ class Post extends Component {
     };
     const getUsername = () => {
       if (this.props.source === SOURCE_TWITTER && this.props.userData) {
-        return this.props.userData.screen_name;
+        return this.props.userData.screen_name + ' - Twitter (Official)';
       } else if (this.props.source === SOURCE_REDDIT && this.props.userData) {
         return this.props.userData;
       }
     };
-    /* :
-     ***************************************************************/
-    const getProfileImgSrc = () => {
-      let src, style;
 
-      if (this.props.source === SOURCE_TWITTER) {
-        style = { borderRadius: '100px', width: '40px' };
-        if (this.props.userData && this.props.userData.profile_image_url) {
-          src = this.props.userData.profile_image_url;
-        } else {
-          // return some placeholder image in public folder
-        }
-      } else if (this.props.source === SOURCE_REDDIT) {
-        style = { borderRadius: '100px', height: '40px', width: '40px' };
-        if (this.props.preview_img_arr && this.props.preview_img_arr[0]) {
-          src = new DOMParser().parseFromString(
-            this.props.preview_img_arr[0].source.url,
-            'text/html'
-          ).body.textContent;
-        } else {
-          src = './img/reddit-nintendo.svg';
-        }
-      }
-      return <img src={src} style={style} />;
-    };
     /* :
      ***************************************************************/
     const getIcon = () => {
@@ -114,26 +92,19 @@ class Post extends Component {
         return 'faRedditAlien';
       }
     };
+    //
+    const { source, userData } = this.props;
+    /* :
+     ***************************************************************/
     return (
       <div className="col-12 m-0 mb-2 p-0 py-2 post-wrapper rounded row shadow-sm">
         <div className="col-2 text-center p-0 m-0">
-          {getProfileImgSrc()}
+          {postElem.thumbnail.get({ source, userData }, settings)}
           <br />
         </div>
         <div className="col-10 py-2">
           <h6 className="font-weight-normal">
-            {getUsername()}{' '}
-            <span
-              className="text-secondary"
-              style={{
-                float: 'right',
-                fontSize: 25,
-                opacity: '0.3',
-                textAlign: 'right',
-              }}
-            >
-              {FontIcon(getIcon())}
-            </span>
+            {getUsername({ source, userData })}
           </h6>
           <h6 className="font-weight-light">
             {ReactHtmlParser(utils.urlify(this.props.text))}
