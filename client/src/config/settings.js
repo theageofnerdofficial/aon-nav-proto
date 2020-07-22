@@ -8,7 +8,9 @@ const settings = {
     },
   },
   ui: {
+    defaultUsername: '???',
     defaultPostThumbs: {
+      useDefaultPostThumbs: true,
       general: './img/thumbnails/aon-default.svg',
       reddit: {
         gaming: './img/thumbnails/gaming-reddit-2.svg',

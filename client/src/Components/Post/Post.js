@@ -75,25 +75,9 @@ class Post extends Component {
         );
       }
     };
-    const getUsername = () => {
-      if (this.props.source === SOURCE_TWITTER && this.props.userData) {
-        return this.props.userData.screen_name + ' - Twitter (Official)';
-      } else if (this.props.source === SOURCE_REDDIT && this.props.userData) {
-        return this.props.userData;
-      }
-    };
 
-    /* :
-     ***************************************************************/
-    const getIcon = () => {
-      if (this.props.source === SOURCE_TWITTER) {
-        return 'faTwitter';
-      } else if (this.props.source === SOURCE_REDDIT) {
-        return 'faRedditAlien';
-      }
-    };
     //
-    const { source, userData } = this.props;
+    const { source, text, userData } = this.props;
     /* :
      ***************************************************************/
     return (
@@ -104,11 +88,39 @@ class Post extends Component {
         </div>
         <div className="col-10 py-2">
           <h6 className="font-weight-normal">
-            {getUsername({ source, userData })}
+            {postElem.user.get({ source, userData })}
           </h6>
           <h6 className="font-weight-light">
-            {ReactHtmlParser(utils.urlify(this.props.text))}
+            {postElem.text.get(
+              { source, text, userData },
+              utils,
+              ReactHtmlParser
+            )}
           </h6>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <a
+                  data-toggle="collapse"
+                  data-parent="#accordion"
+                  href={`#collapse${this.props.id}`}
+                >
+                  More
+                </a>
+              </h4>
+            </div>
+            <div
+              id={`collapse${this.props.id}`}
+              className="panel-collapse collapse in"
+            >
+              <div className="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </div>
+            </div>
+          </div>
           {/* <small style={{ fontWeight: 300 }} className="text-muted">
             {this.props.created_at}
           </small>*/}
