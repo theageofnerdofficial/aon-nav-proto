@@ -19,6 +19,12 @@ const settings = {
         gaming: './img/thumbnails/gaming-twitter-2.svg',
       },
     },
+    labels: {
+      panel: {
+        contract: 'Less [-]',
+        expand: 'More [+]',
+      },
+    },
     style: {
       sectionTab: {
         featured: '#f44336',
