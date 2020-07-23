@@ -1,13 +1,13 @@
+// Imports:
 import React, { Component } from 'react';
 import {
-  Route,
   BrowserRouter as Router,
-  withRouter,
-  Switch,
   Link,
+  Route,
+  Switch,
+  withRouter,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import Home from './Home';
 import MyNerd from './MyNerd';
 import TVFilm from './TVFilm';
@@ -30,6 +30,7 @@ import {
   dataFormatReddit,
   dataRequest,
   dataFormatTweets,
+  uiToggleLights,
 } from './actions';
 import './Main.css';
 
@@ -37,6 +38,7 @@ import './Main.css';
 const mapStateToProps = (state) => {
   return {
     dataReducer: state.dataReducer,
+    uiReducer: state.uiReducer,
   };
 };
 
@@ -46,27 +48,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     dataCombine: () => dispatch(dataCombine()),
-    dataRequest: (o) => dispatch(dataRequest(o)),
     dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
+    dataRequest: (o) => dispatch(dataRequest(o)),
+    uiToggleLights: () => dispatch(uiToggleLights()),
   };
 };
 
 let navbarTopInit;
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lightsOff: false,
-      twitterData: [],
-    };
-    this.toggleLights = this.toggleLights.bind(this);
-  }
-
-  toggleLights() {
-    this.setState({ lightsOff: !this.state.lightsOff });
-  }
   /* Dynamic navbar: fix the navbar top to the top when user scrolls
      but "re-dock" it when they scroll back up & the hero reappears:
    *****************************************************************/
@@ -107,17 +98,19 @@ class Main extends Component {
       dataReducer,
       dataRequest,
       dataFormatTweets,
+      uiReducer,
+      uiToggleLights,
     } = this.props;
     return (
       <Router>
         <Switch>
-          <ThemeProvider theme={this.state.lightsOff ? darkTheme : lightTheme}>
+          <ThemeProvider theme={uiReducer.lightsOff ? darkTheme : lightTheme}>
             <GlobalStyles />
             <div>
               <Header
-                lightsOff={this.state.lightsOff}
+                lightsOff={uiReducer.lightsOff}
                 Link={Link}
-                toggleLights={this.toggleLights}
+                toggleLights={uiToggleLights}
               />
               <KonamiCode />
               <Modal />
@@ -136,9 +129,9 @@ class Main extends Component {
                         <Home
                           dataCombine={dataCombine}
                           dataFormatReddit={dataFormatReddit}
+                          dataFormatTweets={dataFormatTweets}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
-                          dataFormatTweets={dataFormatTweets}
                           {...props}
                         />
                       )}

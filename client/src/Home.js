@@ -8,9 +8,14 @@ import formatReddit from './Components/Utils/utils/formatReddit';
 import settings from './config/settings';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 
-let hasDataCombined = false;
-let formattedReddit = false;
-let formattedTweets = false;
+// Prevents repeated requests:
+let dataPosts = {
+  hasCombined: false,
+  hasFormatted: {
+    reddit: false,
+    twitter: false,
+  },
+};
 
 class Home extends Component {
   componentDidMount() {
@@ -26,19 +31,18 @@ class Home extends Component {
 
   data = {
     combine: () => {
-      //
       const {
         redditDataFormatted,
         tweetDataFormatted,
       } = this.props.dataReducer;
-      //
+      // Ensure we've at least one formatted post from each source:
       const hasRedditFormatted =
         redditDataFormatted && redditDataFormatted.length > 0;
       const hasTweetFormatted =
         tweetDataFormatted && tweetDataFormatted.length > 0;
-      //
-      if (hasRedditFormatted && hasTweetFormatted && !hasDataCombined) {
-        hasDataCombined = true;
+      // Combine formatted post/data:
+      if (hasRedditFormatted && hasTweetFormatted && !dataPosts.hasCombined) {
+        dataPosts.hasCombined = true;
         this.props.dataCombine();
       }
     },
@@ -48,13 +52,11 @@ class Home extends Component {
         const { redditDataRaw } = this.props.dataReducer;
         const hasRedditRaw = redditDataRaw && redditDataRaw.length > 0;
         // If we have Reddit raw data but it's not formatted, format it:
-        if (hasRedditRaw && !formattedReddit) {
-          formattedReddit = true;
-
+        if (hasRedditRaw && !dataPosts.hasFormatted.reddit) {
+          dataPosts.hasFormatted.reddit = true;
           redditDataRaw.forEach((r) => {
             formattedRedditData.push(formatReddit.formatRedditData(r.data));
           });
-
           this.props.dataFormatReddit(formattedRedditData);
         }
       },
@@ -63,12 +65,11 @@ class Home extends Component {
         const { tweetDataRaw } = this.props.dataReducer;
         const hasTweetsRaw = tweetDataRaw && tweetDataRaw.statuses;
         // If we have Twitter raw data but it's not formatted, format it:
-        if (hasTweetsRaw && !formattedTweets) {
-          formattedTweets = true;
+        if (hasTweetsRaw && !dataPosts.hasFormatted.twitter) {
+          dataPosts.hasFormatted.twitter = true;
           tweetDataRaw.statuses.forEach((t) => {
             formattedTweetData.push(formatTweet.formatTweetData(t));
           });
-          console.log(formattedTweetData);
           this.props.dataFormatTweets(formattedTweetData);
         }
       },

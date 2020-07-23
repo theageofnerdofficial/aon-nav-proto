@@ -6,14 +6,8 @@ import LoaderCentered from '../Loader/LoaderCentered';
 import Post from './Post';
 
 class Posts extends Component {
-  componentDidMount() {
-    const { allData } = this.props;
-    console.log('GET HERE?');
-    console.log(allData);
-  }
   render() {
     const { allData } = this.props;
-
     const dataHasLength = () => allData && allData.length > 0;
     {
       return dataHasLength() ? (

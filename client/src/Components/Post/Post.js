@@ -2,11 +2,10 @@
  ***************************************************************/
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import FontIcon from '../FontIcon/FontIcon';
-import utils from '../Utils/utils/utils';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
 import postElem from './PostElemBySource/PostElem';
 import settings from '../../config/settings';
+import utils from '../Utils/utils/utils';
+import FontIcon from '../FontIcon/FontIcon';
 
 class Post extends Component {
   render() {
@@ -21,7 +20,6 @@ class Post extends Component {
           }
         });
       }
-      //
       if (variants.length > 0) {
         const sources = variants.filter((v) => {
           if (v.content_type === 'video/mp4') return v;
@@ -69,65 +67,31 @@ class Post extends Component {
         );
       } else {
         return (
-          <div className="col-12 p-1" style={{ alignSelf: 'flex-start' }}>
+          <div className="col-12 p-0" style={{ alignSelf: 'flex-start' }}>
             {getEmbeddedImages()}
           </div>
         );
       }
     };
 
-    const getAccordion = () => {
-      return (
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <a
-              data-toggle="collapse"
-              data-parent="#accordion"
-              href={`#collapse${this.props.id}`}
-            >
-              <button
-                className="btn-link font-weight-light form-control panel-title"
-                onClick={(e) => {
-                  e.target.innerHTML =
-                    e.target.innerHTML === settings.ui.labels.panel.expand
-                      ? settings.ui.labels.panel.contract
-                      : settings.ui.labels.panel.expand;
-                }}
-              >
-                {settings.ui.labels.panel.expand}
-              </button>
-            </a>
-          </div>
-          <div
-            id={`collapse${this.props.id}`}
-            className="panel-collapse collapse in"
-          >
-            <br />
-            <div className="panel-body font-weight-light font-italic">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    //
-    const { source, text, userData } = this.props;
     /* :
      ***************************************************************/
+    const { id, source, text, userData } = this.props;
+
     return (
-      <div className="col-12 m-0 mb-2 p-0 py-2 post-wrapper rounded row shadow-sm">
+      <div className="col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm">
         <div className="col-2 text-center p-0 m-0">
           {postElem.thumbnail.get({ source, userData }, settings)}
-          <br />
         </div>
         <div className="col-10">
           <h6 className="font-weight-normal">
             {postElem.user.get({ source, userData })}
           </h6>
+          <span style={{ position: 'absolute', right: 0, top: '0' }}>
+            <button className="btn btn-sm text-muted" style={{ opacity: 0.8 }}>
+              {FontIcon('faEllipsisV')}
+            </button>
+          </span>
           <h6 className="font-weight-light">
             {postElem.text.get(
               { source, text, userData },
@@ -135,12 +99,12 @@ class Post extends Component {
               ReactHtmlParser
             )}
           </h6>
-          {getAccordion()}
+          {postElem.accordion.get({ id, source, userData }, settings)}
         </div>
         <div className="col-12 m-0 p-2 row">{getEmbeddedMedia()}</div>
         <small
-          style={{ fontWeight: 300, opacity: 0.7 }}
-          className="text-muted font-italic py-2"
+          style={{ fontWeight: 300, opacity: 0.5 }}
+          className="text-muted font-italic px-2 pt-1"
         >
           2 hours ago
         </small>

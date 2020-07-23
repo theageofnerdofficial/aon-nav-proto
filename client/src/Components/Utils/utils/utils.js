@@ -14,6 +14,17 @@ const utils = {
       return arr;
     },
   },
+
+  removeLinkSuffix(link, urlBeginning = 'https://t.co', charactersToRemove) {
+    if (
+      link.substring(link.length - charactersToRemove).indexOf(urlBeginning) >=
+      0
+    ) {
+      return link.substring(0, link.length - charactersToRemove);
+    }
+    return link;
+  },
+
   str: {
     makeTitleCase(str) {
       return str.replace(
@@ -22,6 +33,13 @@ const utils = {
       );
     },
   },
+
+  time: {
+    convertTo() {
+      //
+    },
+  },
+
   urlify(text) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const hasRegex = urlRegex.test(text);
@@ -31,20 +49,6 @@ const utils = {
           (url) => `<a target="_blank" href="${url}">${url}</a>`
         )
       : text;
-  },
-  time: {
-    convertTo() {
-      //
-    },
-  },
-  removeLinkSuffix(link, urlBeginning = 'https://t.co', charactersToRemove) {
-    if (
-      link.substring(link.length - charactersToRemove).indexOf(urlBeginning) >=
-      0
-    ) {
-      return link.substring(0, link.length - charactersToRemove);
-    }
-    return link;
   },
 };
 

@@ -23,7 +23,8 @@ const ui = {
 export const uiReducer = (state = ui, action = {}) => {
   switch (action.type) {
     case UI_TOGGLE_LIGHTS:
-      return Object.assign({}, state, { lightsOff: !this.state.lightsOff });
+      console.log(state.lightsOff);
+      return Object.assign({}, state, { lightsOff: !state.lightsOff });
     default:
       return state;
   }

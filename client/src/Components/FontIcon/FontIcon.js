@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArchway,
   faCog,
+  faEllipsisV,
   faMoon,
   faSun,
 } from '@fortawesome/free-solid-svg-icons';
@@ -26,6 +27,9 @@ const FontIcon = (icon) => {
       break;
     case 'faCog':
       faIcon = faCog;
+      break;
+    case 'faEllipsisV':
+      faIcon = faEllipsisV;
       break;
     case 'faFacebook':
       faIcon = faFacebook;

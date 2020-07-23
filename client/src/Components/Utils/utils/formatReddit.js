@@ -3,15 +3,12 @@ import utils from './utils';
 
 const formatReddit = {
   formatRedditData(data) {
-    console.log(data);
     return {
       id: data.id,
       created_at: new Date(data.created_utc * 1000),
       source: SOURCE_REDDIT,
       stickied: data.stickied ? true : false,
-      user: `${utils.str.makeTitleCase(data.subreddit)} - Reddit (r/${
-        data.subreddit
-      })`,
+      user: `${utils.str.makeTitleCase(data.subreddit)}`,
       preview_img_arr: data.preview ? data.preview.images : [],
       text: data.title,
       description: data.selftext,
