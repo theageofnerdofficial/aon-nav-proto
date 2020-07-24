@@ -14,6 +14,7 @@ class MyNerd extends Component {
           Some day you will need to be logged in to see this page
         </p>
         <img
+          alt="Funny cat"
           style={{ width: '300px' }}
           src="https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif"
         />

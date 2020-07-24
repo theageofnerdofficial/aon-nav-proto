@@ -39,10 +39,13 @@ class Post extends Component {
      ***************************************************************/
     const getEmbeddedImages = () => {
       if (this.props.entities_media) {
-        return this.props.entities_media.map((m) => {
+        return this.props.entities_media.map((m, index) => {
           if (m.media_url) {
             return (
-              <div style={{ maxHeight: 200, overflow: 'scroll' }}>
+              <div
+                key={`embedded-img-${index}`}
+                style={{ maxHeight: 200, overflow: 'scroll' }}
+              >
                 <img className="rounded" width="100%" src={m.media_url} />
               </div>
             );
