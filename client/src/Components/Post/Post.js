@@ -87,8 +87,55 @@ class Post extends Component {
           <h6 className="font-weight-normal">
             {postElem.user.get({ source, userData })}
           </h6>
+
+          {/* */}
+          <div
+            className="rounded shadow"
+            id={'panel-' + id}
+            style={{
+              background: 'white',
+              display: 'none',
+              height: 120,
+              padding: 5,
+              position: 'absolute',
+              right: 10,
+              top: 15,
+              transform: 'scale(0.92)',
+              width: 150,
+              zIndex: 100,
+            }}
+          >
+            <button
+              className="btn-sm form-control font-weight-light"
+              style={{ letterSpacing: '-1' }}
+            >
+              Option 1
+            </button>
+            <button
+              className="btn-sm form-control font-weight-light"
+              style={{ letterSpacing: '-1' }}
+            >
+              Option 1
+            </button>
+            <button
+              className="btn-sm form-control font-weight-light"
+              style={{ letterSpacing: '-1' }}
+            >
+              Option 1
+            </button>
+          </div>
+          {/* */}
           <span style={{ position: 'absolute', right: 0, top: '0' }}>
-            <button className="btn btn-sm text-muted" style={{ opacity: 0.8 }}>
+            <button
+              className="btn btn-sm text-muted"
+              style={{ marginTop: '-15px', opacity: 0.8 }}
+              onClick={() => {
+                console.log('Click');
+                const panel = document.getElementById(`panel-${id}`);
+                panel.style.display =
+                  panel.style.display == 'none' ? 'block' : 'none';
+              }}
+            >
               {FontIcon('faEllipsisV')}
             </button>
           </span>
