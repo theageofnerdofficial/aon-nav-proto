@@ -8,6 +8,16 @@ const app = express();
 const Twit = require('twit');
 const snoowrap = require('snoowrap');
 const dotenv = require('dotenv');
+const cors = require('cors');
+
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
+
+// Controllers:
+const userController = require('./controllers/UserController');
 
 // For env variables:
 dotenv.config();
@@ -32,11 +42,6 @@ const T = new Twit({
   consumer_secret: DB_TWITTER_CONSUMER_SECRET.toString(),
   app_only_auth: true,
 });
-
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 /* :
  *****************************************************************/
@@ -64,6 +69,16 @@ app.get(
     return T.get(endpoint, parameters, (err, data, response) => res.json(data));
   }
 );
+
+/* User:
+ *****************************************************************/
+app.post('/user/create', (req, res, next) =>
+  userController.create(req, res, next)
+);
+
+/* Users:
+ *****************************************************************/
+app.get('/users/list', (req, res, next) => userController.list(req, res, next));
 
 /* Description: Handle additional request: direct to index.html
    Permission: Unprotected GET

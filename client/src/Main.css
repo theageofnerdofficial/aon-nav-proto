@@ -92,3 +92,10 @@ a.nav-link:active {
   display: flex;
   justify-content: center;
 }
+
+.table td {
+  font-weight: 300;
+}
+.table th {
+  font-weight: 500 !important;
+}

@@ -28,7 +28,7 @@ class LoginForm extends Component {
           className="text-center form-control border-0"
           style={{ background: 'none', fontSize: '0.8em', fontWeight: 300 }}
         >
-          Don't have an account? <a href="#">Sign Up</a>
+          Don't have an account? <a href="/signup">Sign Up</a>
         </div>
       </div>
     );

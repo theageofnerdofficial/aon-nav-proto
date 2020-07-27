@@ -10,6 +10,9 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
+  USERS_GET_FAILURE,
+  USERS_GET_PENDING,
+  USERS_GET_SUCCESS,
 } from './constants';
 
 import utils from './Components/Utils/utils/utils';
@@ -74,6 +77,33 @@ export const dataReducer = (state = data, action = {}) => {
     case DATA_FORMAT_TWEETS:
       return Object.assign({}, state, {
         tweetDataFormatted: action.payload,
+      });
+    default:
+      return state;
+  }
+};
+
+/* Users:
+ *********************************************************/
+const users = {
+  list: [],
+  usersPending: false,
+};
+
+export const usersReducer = (state = users, action = {}) => {
+  switch (action.type) {
+    case USERS_GET_PENDING:
+      return Object.assign({}, state, {
+        usersPending: true,
+      });
+    case USERS_GET_FAILURE:
+      return Object.assign({}, state, {
+        usersPending: false,
+      });
+    case USERS_GET_SUCCESS:
+      return Object.assign({}, state, {
+        list: action.payload,
+        usersPending: false,
       });
     default:
       return state;

@@ -16,6 +16,7 @@ class Hero extends Component {
         <HeroLogo />
         <HeroLinksGeneral
           lightsOff={this.props.lightsOff}
+          Link={this.props.Link}
           toggleLights={this.props.toggleLights}
         />
         <HeroLinksSocial />

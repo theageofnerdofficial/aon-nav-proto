@@ -15,3 +15,13 @@ export const SOURCE_TWITTER = 'SOURCE_TWITTER';
 /* UI constants:
  *****************************************************/
 export const UI_TOGGLE_LIGHTS = 'UI_TOGGLE_LIGHTS';
+
+/* User constants:
+ *****************************************************/
+export const USER_SIGNUP_FAILURE = 'USER_SIGNUP_FAILURE';
+export const USER_SIGNUP_PENDING = 'USER_SIGNUP_PENDING';
+export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
+
+export const USERS_GET_FAILURE = 'USERS_GET_FAILURE';
+export const USERS_GET_PENDING = 'USERS_GET_PENDING';
+export const USERS_GET_SUCCESS = 'USERS_GET_SUCCESS';

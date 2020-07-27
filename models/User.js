@@ -33,6 +33,12 @@ const UserSchema = new Schema({
     required: true,
   },
 
+  location: {
+    type: String,
+    maxlength: 100,
+    required: true,
+  },
+
   accessLevel: {
     type: Number,
     default: 1,
@@ -62,11 +68,7 @@ const UserSchema = new Schema({
     type: Array,
   },
 
-  quizResults: {
-    type: Array,
-  },
-
-  quizSubmissions: {
+  submissions: {
     type: Array,
   },
 

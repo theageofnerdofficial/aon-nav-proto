@@ -22,6 +22,10 @@ import Header from './Components/Header/Header';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
 import LoginBtn from './Components/LoginBtn/LoginBtn';
 import Modal from './Components/Modal/Modal';
+import Sources from './Sources';
+import SignUp from './SignUp';
+import UserList from './Admin/UserList';
+
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeProvider/theme';
@@ -31,6 +35,8 @@ import {
   dataRequest,
   dataFormatTweets,
   uiToggleLights,
+  usersGetList,
+  userSignup,
 } from './actions';
 import './Main.css';
 
@@ -39,6 +45,7 @@ const mapStateToProps = (state) => {
   return {
     dataReducer: state.dataReducer,
     uiReducer: state.uiReducer,
+    usersReducer: state.usersReducer,
   };
 };
 
@@ -52,6 +59,8 @@ const mapDispatchToProps = (dispatch) => {
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
+    usersGetList: () => dispatch(usersGetList()),
+    userSignup: (o) => dispatch(userSignup(o)),
   };
 };
 
@@ -100,6 +109,9 @@ class Main extends Component {
       dataFormatTweets,
       uiReducer,
       uiToggleLights,
+      usersGetList,
+      usersReducer,
+      userSignup,
     } = this.props;
     return (
       <Router>
@@ -144,6 +156,25 @@ class Main extends Component {
                     <Route path="/boardgaming" component={BoardGames} />
                     <Route path="/comics" component={Comics} />
                     <Route path="/contact" component={Contact} />
+                    <Route path="/sources" component={Sources} />
+                    <Route
+                      exact
+                      path="/signup"
+                      render={(props) => (
+                        <SignUp userSignup={userSignup} {...props} />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/admin/userlist"
+                      render={(props) => (
+                        <UserList
+                          usersGetList={usersGetList}
+                          usersReducer={usersReducer}
+                          {...props}
+                        />
+                      )}
+                    />
                   </div>
                 </div>
               </main>

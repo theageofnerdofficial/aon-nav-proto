@@ -21,6 +21,7 @@ class Header extends Component {
         <div className="bg-custom-2 header-sub-wrapper">
           <Hero
             lightsOff={this.props.lightsOff}
+            Link={this.props.Link}
             toggleLights={this.props.toggleLights}
           />
           <Navbar

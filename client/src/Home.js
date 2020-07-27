@@ -82,6 +82,20 @@ class Home extends Component {
           src: SOURCE_REDDIT,
           user: 'nintendo',
         });
+        /*
+        this.props.dataRequest({
+          count: 15,
+          endpoint: 'hot',
+          src: SOURCE_REDDIT,
+          user: 'xbox',
+        });
+
+        this.props.dataRequest({
+          count: 15,
+          endpoint: 'hot',
+          src: SOURCE_REDDIT,
+          user: 'playstation',
+        });*/
       },
       getTwitterRaw: () => {
         this.props.dataRequest({
@@ -89,6 +103,15 @@ class Home extends Component {
           endpoint: 'search%2Ftweets',
           src: SOURCE_TWITTER,
           user: 'nintendouk',
+          // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
+        });
+        //
+        //
+        this.props.dataRequest({
+          count: 15,
+          endpoint: 'search%2Ftweets',
+          src: SOURCE_TWITTER,
+          user: 'playstation',
           // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
         });
       },

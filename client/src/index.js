@@ -8,7 +8,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 // Reducer imports:
-import { dataReducer, uiReducer } from './reducers';
+import { dataReducer, uiReducer, usersReducer } from './reducers';
 
 // Redux logger provides useful console logs concerning state:
 const logger = createLogger();
@@ -17,6 +17,7 @@ const logger = createLogger();
 const rootReducers = combineReducers({
   dataReducer,
   uiReducer,
+  usersReducer,
 });
 
 // A store is created from root reducers with Redux logger and Think.

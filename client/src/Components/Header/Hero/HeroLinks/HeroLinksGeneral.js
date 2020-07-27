@@ -18,7 +18,11 @@ class HeroLinksGeneral extends Component {
           {this.props.lightsOff ? 'Lighten' : 'Darken'}
         </button>
 
-        <button className="btn btn-nav-link btn-sm form-control text-left"></button>
+        <this.props.Link to={`/admin/userlist`}>
+          <button className="btn btn-nav-link btn-sm form-control text-left">
+            userslist
+          </button>
+        </this.props.Link>
       </div>
     );
   }
