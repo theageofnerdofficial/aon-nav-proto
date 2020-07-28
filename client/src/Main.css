@@ -24,6 +24,16 @@ body {
   overflow-x: hidden;
 }
 
+a,
+.btn-link {
+  color: var(--col-blue-brand);
+}
+
+a:hover,
+.btn-link:hover {
+  color: var(--col-blue-brand);
+}
+
 .footer {
   background-color: var(--col-lighter);
   bottom: 0;

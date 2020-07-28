@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import LoginForm from '../LoginForm/LoginForm';
+import { MODAL_LOGIN_FORM } from '../../constants';
 
 class Modal extends Component {
   render() {
+    const getContent = {
+      title(mode) {
+        if (mode === MODAL_LOGIN_FORM) {
+          return 'Login';
+        }
+      },
+      body(mode, user) {
+        console.log('body-..');
+        console.log(user);
+        if (mode === MODAL_LOGIN_FORM) {
+          return <LoginForm userLogin={user} />;
+        }
+      },
+    };
     return (
       <div
         className="modal fade"
@@ -24,7 +39,7 @@ class Modal extends Component {
                   letterSpacing: '-1px',
                 }}
               >
-                Login
+                {getContent.title(this.props.modalReducer.mode)}
               </h5>
               <button
                 type="button"
@@ -36,7 +51,10 @@ class Modal extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <LoginForm />
+              {getContent.body(
+                this.props.modalReducer.mode,
+                this.props.userLogin
+              )}
             </div>
             <div className="modal-footer">
               <button

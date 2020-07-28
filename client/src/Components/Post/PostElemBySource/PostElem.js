@@ -89,7 +89,13 @@ const postElem = {
         default:
           src = settings.ui.defaultPostThumbs.general;
       }
-      return <img src={src} style={{ borderRadius: '100px', width: '40px' }} />;
+      return (
+        <img
+          alt={`Thumbnail for ${source} post`}
+          src={src}
+          style={{ borderRadius: '100px', width: '40px' }}
+        />
+      );
     },
   },
 

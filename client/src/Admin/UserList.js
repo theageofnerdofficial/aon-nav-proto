@@ -3,6 +3,8 @@ import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
 import countries from '../config/countries';
 import formatAccess from '../Components/Utils/utils/formatAccess';
+import FontIcon from '../Components/FontIcon/FontIcon';
+import ModifyBtn from '../Components/Button/ModifyBtn';
 
 class UserList extends Component {
   componentDidMount() {
@@ -16,29 +18,80 @@ class UserList extends Component {
     return (
       <div>
         <SectionTitle title="User List" />
-        <SectionTitlePostsTitle text="Table of users" />
+        <SectionTitlePostsTitle
+          text={`
+           Registered Users (${
+             this.props.usersReducer.list
+               ? this.props.usersReducer.list.length
+               : 0
+           })`}
+        />
         <table className="table table-striped">
           <tr>
-            <td>Username</td>
-            <td>Email</td>
-            <td>Location</td>
-            <td>Created</td>
+            <td>User</td>
             <td>Access Level</td>
+            <td className="text-center" width="150px">
+              Modify
+            </td>
           </tr>
 
           {this.props.usersReducer
             ? this.props.usersReducer.list.map((l) => {
                 return (
                   <tr>
-                    <td>{l.username}</td>
-                    <td>{l.email}</td>
                     <td>
-                      {l.location} {countries[this.getFlag(l.location)].flag}
+                      <ul className="p-0 m-0" style={{ listStyleType: 'none' }}>
+                        <li>
+                          <span className="text-muted">
+                            {FontIcon('faUser')}
+                          </span>
+                          &nbsp;
+                          {l.username}
+                        </li>
+                        <li>
+                          <span className="text-muted">{FontIcon('faAt')}</span>
+                          &nbsp;{l.email}
+                        </li>
+                        <li>
+                          {countries[this.getFlag(l.location)].flag}&nbsp;
+                          {l.location}{' '}
+                        </li>
+                        <li>
+                          <small className="font-italic font-weight-light">
+                            Joined:&nbsp;
+                            {new Date(l.createdOn)
+                              .toLocaleDateString('en-UK')
+                              .toString()}
+                          </small>
+                        </li>
+                      </ul>
+                      <br />
                     </td>
-                    <td>{l.createdOn}</td>
+
                     <td>
                       {l.accessLevel} (
-                      {formatAccess.accessLabel.get(l.accessLevel)})
+                      {formatAccess.accessLabel.get(l.accessLevel)})&nbsp;
+                      <span className="text-muted">
+                        {l.accessLevel >= 2 ? FontIcon('faWrench') : ''}
+                      </span>
+                    </td>
+                    <td>
+                      <ModifyBtn
+                        fontIcon="faCaretUp"
+                        color="success"
+                        label="Promote"
+                      />
+                      <ModifyBtn
+                        fontIcon="faCaretDown"
+                        color="danger"
+                        label="Demote"
+                      />
+
+                      <ModifyBtn
+                        fontIcon="faBan"
+                        color="danger"
+                        label="Ban User"
+                      />
                     </td>
                   </tr>
                 );

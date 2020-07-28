@@ -35,15 +35,18 @@ import {
   dataRequest,
   dataFormatTweets,
   uiToggleLights,
+  userLogin,
   usersGetList,
   userSignup,
 } from './actions';
 import './Main.css';
+import Admin from './Admin/Admin';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
   return {
     dataReducer: state.dataReducer,
+    modalReducer: state.modalReducer,
     uiReducer: state.uiReducer,
     usersReducer: state.usersReducer,
   };
@@ -59,6 +62,7 @@ const mapDispatchToProps = (dispatch) => {
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
+    userLogin: (o) => dispatch(userLogin(o)),
     usersGetList: () => dispatch(usersGetList()),
     userSignup: (o) => dispatch(userSignup(o)),
   };
@@ -107,8 +111,10 @@ class Main extends Component {
       dataReducer,
       dataRequest,
       dataFormatTweets,
+      modalReducer,
       uiReducer,
       uiToggleLights,
+      userLogin,
       usersGetList,
       usersReducer,
       userSignup,
@@ -125,12 +131,12 @@ class Main extends Component {
                 toggleLights={uiToggleLights}
               />
               <KonamiCode />
-              <Modal />
-              <LoginBtn />
+              <Modal userLogin={userLogin} modalReducer={modalReducer} />
+              <LoginBtn usersReducer={usersReducer} />
               <main
                 className="flex-shrink-0"
                 role="main"
-                style={{ marginTop: 100 }}
+                style={{ marginTop: 130 }}
               >
                 <div className="container">
                   <div className="content">
@@ -150,19 +156,33 @@ class Main extends Component {
                     />
                     <Route path="/mynerd" component={withRouter(MyNerd)} />
                     <Route path="/tvfilm" component={withRouter(TVFilm)} />
-                    <Route path="/gaming" component={Gaming} />
-                    <Route path="/retrogaming" component={RetroGames} />
-                    <Route path="/moderngaming" component={ModernGames} />
-                    <Route path="/boardgaming" component={BoardGames} />
-                    <Route path="/comics" component={Comics} />
-                    <Route path="/contact" component={Contact} />
-                    <Route path="/sources" component={Sources} />
+                    <Route path="/gaming" component={withRouter(Gaming)} />
+                    <Route
+                      path="/retrogaming"
+                      component={withRouter(RetroGames)}
+                    />
+                    <Route
+                      path="/moderngaming"
+                      component={withRouter(ModernGames)}
+                    />
+                    <Route
+                      path="/boardgaming"
+                      component={withRouter(BoardGames)}
+                    />
+                    <Route path="/comics" component={withRouter(Comics)} />
+                    <Route path="/contact" component={withRouter(Contact)} />
+                    <Route path="/sources" component={withRouter(Sources)} />
                     <Route
                       exact
                       path="/signup"
                       render={(props) => (
                         <SignUp userSignup={userSignup} {...props} />
                       )}
+                    />
+                    <Route
+                      exact
+                      path="/admin"
+                      render={(props) => <Admin Link={Link} {...props} />}
                     />
                     <Route
                       exact

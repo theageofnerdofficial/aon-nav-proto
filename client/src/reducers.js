@@ -7,15 +7,22 @@ import {
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
   DATA_FORMAT_TWEETS,
+  MODAL_LOGIN_FORM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
+  USER_LOGIN_FAILURE,
+  USER_LOGIN_PENDING,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
   USERS_GET_FAILURE,
   USERS_GET_PENDING,
   USERS_GET_SUCCESS,
 } from './constants';
 
 import utils from './Components/Utils/utils/utils';
+import loginCreds from './config/loginCreds';
+import settings from './config/settings';
 
 /* Visuals — e.g. lights on/off for dark & light mode:
  *********************************************************/
@@ -83,15 +90,54 @@ export const dataReducer = (state = data, action = {}) => {
   }
 };
 
+/* Data — setting the state for info obtained from APIs:
+ *********************************************************/
+const modal = {
+  mode: MODAL_LOGIN_FORM,
+};
+
+export const modalReducer = (state = modal, action = {}) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
 /* Users:
  *********************************************************/
 const users = {
   list: [],
+  userAuth: {},
+  userLoginPending: false,
   usersPending: false,
 };
 
 export const usersReducer = (state = users, action = {}) => {
   switch (action.type) {
+    case USER_LOGOUT:
+      // delete all local storage token stuff
+      return Object.assign({}, state, {
+        userAuth: {},
+      });
+    case USER_LOGIN_FAILURE:
+      return Object.assign({}, state, {
+        userLoginPending: false,
+      });
+    case USER_LOGIN_PENDING:
+      return Object.assign({}, state, {
+        userLoginPending: true,
+      });
+
+    case USER_LOGIN_SUCCESS:
+      localStorage.setItem(settings.localStorage.token, action.payload.token);
+      loginCreds.storageItem.set({
+        id: action.payload.id,
+        username: action.payload.username,
+      });
+      return Object.assign({}, state, {
+        userAuth: action.payload,
+        userLoginPending: false,
+      });
     case USERS_GET_PENDING:
       return Object.assign({}, state, {
         usersPending: true,

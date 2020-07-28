@@ -123,7 +123,14 @@ exports.login = (req, res) => {
     const token = jwt.sign({ id: user._id }, settings.token.key, {
       expiresIn: settings.token.expiresIn,
     });
-    res.status(200).send({ auth: true, id: user._id, token: token });
+    res
+      .status(200)
+      .send({
+        auth: true,
+        id: user._id,
+        username: req.body.username,
+        token: token,
+      });
   });
 };
 

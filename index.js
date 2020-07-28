@@ -72,8 +72,17 @@ app.get(
 
 /* User:
  *****************************************************************/
+// add verifyToken middleware
+app.get('/user/authenticate', (req, res, next) =>
+  userController.authenticate(req, res, next)
+);
+
 app.post('/user/create', (req, res, next) =>
   userController.create(req, res, next)
+);
+
+app.post('/user/login', (req, res, next) =>
+  userController.login(req, res, next)
 );
 
 /* Users:

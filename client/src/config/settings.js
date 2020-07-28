@@ -1,4 +1,11 @@
 const settings = {
+  localStorage: {
+    token: 'aon_token',
+    login: {
+      id: 'aon_user_id',
+      username: 'aon_user_username',
+    },
+  },
   network: {
     headers: {
       'Content-Type': 'application/json',

@@ -10,6 +10,12 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
+  USER_AUTH_FAILURE,
+  USER_AUTH_PENDING,
+  USER_AUTH_SUCCESS,
+  USER_LOGIN_FAILURE,
+  USER_LOGIN_PENDING,
+  USER_LOGIN_SUCCESS,
   USER_SIGNUP_FAILURE,
   USER_SIGNUP_PENDING,
   USER_SIGNUP_SUCCESS,
@@ -75,6 +81,48 @@ export const uiToggleLights = (o) => ({
 
 /* User actions:
  ******************************************************/
+// Authenticate a user by checking their browser for access token:
+export const userAuthenticate = (o) => (dispatch) => {
+  const headersCp = settings.network.headers;
+  headersCp['x-access-token'] = localStorage.getItem(
+    settings.localStorage.token
+  );
+  dispatch({ type: USER_AUTH_PENDING });
+  fetch(`${settings.network.server.url}/user/authenticate`, {
+    method: 'GET',
+    headers: headersCp,
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error('Cannot authenticate');
+      }
+    })
+    .then((data) => {
+      return dispatch({ type: USER_AUTH_SUCCESS, payload: data });
+    })
+    .catch((error) => dispatch({ type: USER_AUTH_FAILURE, payload: error }));
+};
+
+// Log in a user by submitting login/signin form:
+export const userLogin = (o) => (dispatch) => {
+  dispatch({ type: USER_LOGIN_PENDING });
+  fetch('/user/login', {
+    body: JSON.stringify(o),
+    headers: settings.network.headers,
+    method: 'POST',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: USER_LOGIN_SUCCESS,
+      });
+    })
+    .catch((error) => dispatch({ type: USER_LOGIN_FAILURE, payload: error }));
+};
+
 export const userSignup = (o) => (dispatch) => {
   dispatch({ type: USER_SIGNUP_PENDING });
   fetch('/user/create', {

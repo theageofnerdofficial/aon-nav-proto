@@ -133,10 +133,9 @@ class Post extends Component {
               className="btn btn-sm text-muted"
               style={{ marginTop: '-15px', opacity: 0.8 }}
               onClick={() => {
-                console.log('Click');
                 const panel = document.getElementById(`panel-${id}`);
                 panel.style.display =
-                  panel.style.display == 'none' ? 'block' : 'none';
+                  panel.style.display === 'none' ? 'block' : 'none';
               }}
             >
               {FontIcon('faEllipsisV')}

@@ -8,7 +8,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 // Reducer imports:
-import { dataReducer, uiReducer, usersReducer } from './reducers';
+import { dataReducer, modalReducer, uiReducer, usersReducer } from './reducers';
 
 // Redux logger provides useful console logs concerning state:
 const logger = createLogger();
@@ -16,6 +16,7 @@ const logger = createLogger();
 // Root reducers are combined using combineReducers() from Redux library:
 const rootReducers = combineReducers({
   dataReducer,
+  modalReducer,
   uiReducer,
   usersReducer,
 });

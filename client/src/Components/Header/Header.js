@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Breadcrumbs from './Breadcrumbs';
 import Hero from './Hero/Hero';
 import Navbar from './Navbar/Navbar';
 import './Header.css';
@@ -30,6 +31,7 @@ class Header extends Component {
             navItems={this.state.navItems}
             setActiveItem={this.setActiveItem}
           />
+          <Breadcrumbs />
         </div>
       </header>
     );

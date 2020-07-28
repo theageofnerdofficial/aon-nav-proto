@@ -7,7 +7,7 @@ const formatAccess = {
           accessLevel = 'Banned';
           break;
         case 1:
-          accessLevel = 'Standard user';
+          accessLevel = 'Standard User';
           break;
         case 2:
           accessLevel = 'Moderator';
