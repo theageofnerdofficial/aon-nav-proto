@@ -22,6 +22,7 @@ import {
   USERS_GET_FAILURE,
   USERS_GET_PENDING,
   USERS_GET_SUCCESS,
+  USER_LOGOUT,
 } from './constants';
 
 // :
@@ -88,7 +89,7 @@ export const userAuthenticate = (o) => (dispatch) => {
     settings.localStorage.token
   );
   dispatch({ type: USER_AUTH_PENDING });
-  fetch(`${settings.network.server.url}/user/authenticate`, {
+  fetch('/user/authenticate', {
     method: 'GET',
     headers: headersCp,
   })
@@ -122,6 +123,11 @@ export const userLogin = (o) => (dispatch) => {
     })
     .catch((error) => dispatch({ type: USER_LOGIN_FAILURE, payload: error }));
 };
+
+export const userLogout = (o) => ({
+  type: USER_LOGOUT,
+  payload: o,
+});
 
 export const userSignup = (o) => (dispatch) => {
   dispatch({ type: USER_SIGNUP_PENDING });

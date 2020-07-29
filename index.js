@@ -10,6 +10,8 @@ const snoowrap = require('snoowrap');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
+const verifyToken = require('./common/verifyToken');
+
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -73,7 +75,7 @@ app.get(
 /* User:
  *****************************************************************/
 // add verifyToken middleware
-app.get('/user/authenticate', (req, res, next) =>
+app.get('/user/authenticate', verifyToken, (req, res, next) =>
   userController.authenticate(req, res, next)
 );
 

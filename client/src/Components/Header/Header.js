@@ -31,7 +31,7 @@ class Header extends Component {
             navItems={this.state.navItems}
             setActiveItem={this.setActiveItem}
           />
-          <Breadcrumbs />
+          <Breadcrumbs Link={this.props.Link} />
         </div>
       </header>
     );

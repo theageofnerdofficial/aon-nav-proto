@@ -11,6 +11,9 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
+  USER_AUTH_FAILURE,
+  USER_AUTH_PENDING,
+  USER_AUTH_SUCCESS,
   USER_LOGIN_FAILURE,
   USER_LOGIN_PENDING,
   USER_LOGIN_SUCCESS,
@@ -23,6 +26,9 @@ import {
 import utils from './Components/Utils/utils/utils';
 import loginCreds from './config/loginCreds';
 import settings from './config/settings';
+
+//
+let stateCp;
 
 /* Visuals — e.g. lights on/off for dark & light mode:
  *********************************************************/
@@ -106,16 +112,48 @@ export const modalReducer = (state = modal, action = {}) => {
 /* Users:
  *********************************************************/
 const users = {
+  username: String,
+  password: String,
+  email: String,
+  loggedIn: false,
+  accessLevel: 0,
   list: [],
   userAuth: {},
   userLoginPending: false,
   usersPending: false,
+  authenticationPending: false,
+  authenticationSuccess: false,
+  authenticationFailure: false,
 };
 
 export const usersReducer = (state = users, action = {}) => {
   switch (action.type) {
+    case USER_AUTH_FAILURE:
+      stateCp = state;
+      stateCp.authenticationPending = false;
+      stateCp.authenticationSuccess = false;
+      return Object.assign({}, state, stateCp);
+    case USER_AUTH_PENDING:
+      return Object.assign({}, state, { authenticationPending: true });
+    case USER_AUTH_SUCCESS:
+      stateCp = state;
+      stateCp.authenticationPending = false;
+      stateCp.authenticationSuccess = true;
+      stateCp.id = action.payload._id;
+      stateCp.email = action.payload.email;
+      stateCp.username = action.payload.username;
+      stateCp.accessLevel = action.payload.accessLevel;
+      stateCp.likes = action.payload.likes;
+      stateCp.dislikes = action.payload.dislikes;
+      stateCp.submissions = action.payload.quizSubmissions;
+      stateCp.loggedIn = action.payload.auth === false ? false : true;
+      return Object.assign({}, state, stateCp);
     case USER_LOGOUT:
       // delete all local storage token stuff
+      localStorage.removeItem(settings.localStorage.token);
+      localStorage.removeItem(settings.localStorage.login.id);
+      localStorage.removeItem(settings.localStorage.login.username);
+      window.location.href = '/';
       return Object.assign({}, state, {
         userAuth: {},
       });
@@ -130,10 +168,18 @@ export const usersReducer = (state = users, action = {}) => {
 
     case USER_LOGIN_SUCCESS:
       localStorage.setItem(settings.localStorage.token, action.payload.token);
+
+      window.location.href = '/';
+
+      // do not redirect ...
+      //
+      /*
+      localStorage.setItem(settings.localStorage.token, action.payload.token);
       loginCreds.storageItem.set({
         id: action.payload.id,
         username: action.payload.username,
       });
+      */
       return Object.assign({}, state, {
         userAuth: action.payload,
         userLoginPending: false,

@@ -25,6 +25,7 @@ import Modal from './Components/Modal/Modal';
 import Sources from './Sources';
 import SignUp from './SignUp';
 import UserList from './Admin/UserList';
+import Admin from './Admin/Admin';
 
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
@@ -35,12 +36,13 @@ import {
   dataRequest,
   dataFormatTweets,
   uiToggleLights,
+  userAuthenticate,
   userLogin,
+  userLogout,
   usersGetList,
   userSignup,
 } from './actions';
 import './Main.css';
-import Admin from './Admin/Admin';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -62,7 +64,9 @@ const mapDispatchToProps = (dispatch) => {
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
+    userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
+    userLogout: () => dispatch(userLogout()),
     usersGetList: () => dispatch(usersGetList()),
     userSignup: (o) => dispatch(userSignup(o)),
   };
@@ -114,7 +118,9 @@ class Main extends Component {
       modalReducer,
       uiReducer,
       uiToggleLights,
+      userAuthenticate,
       userLogin,
+      userLogout,
       usersGetList,
       usersReducer,
       userSignup,
@@ -132,7 +138,11 @@ class Main extends Component {
               />
               <KonamiCode />
               <Modal userLogin={userLogin} modalReducer={modalReducer} />
-              <LoginBtn usersReducer={usersReducer} />
+              <LoginBtn
+                userAuthenticate={userAuthenticate}
+                userLogout={userLogout}
+                usersReducer={usersReducer}
+              />
               <main
                 className="flex-shrink-0"
                 role="main"
