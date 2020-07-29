@@ -10,7 +10,12 @@ class SignUp extends Component {
         <SectionTitle title="Sign Up" />
         <SectionTitlePostsTitle text="Witty-nerdy-cool remark here" />
         <div className="col-12 col-md-6 offset-md-3">
-          <SignupForm userSignup={this.props.userSignup} />
+          <SignupForm
+            userLogin={this.props.userLogin}
+            usersGetList={this.props.usersGetList}
+            userSignup={this.props.userSignup}
+            usersReducer={this.props.usersReducer}
+          />
         </div>
       </React.Fragment>
     );

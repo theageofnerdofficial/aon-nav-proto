@@ -39,7 +39,7 @@ class Breadcrumbs extends Component {
     return (
       <div style={{ width: 220 }}>
         <ul
-          className="breadcrumb m-1 border font-weight-light"
+          className="breadcrumb m-1 font-weight-light"
           style={{ background: 'none' }}
         >
           {/* Return crumbs as list items — wrapped in hyperlinks if need-be */}

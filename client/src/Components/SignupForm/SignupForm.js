@@ -2,11 +2,58 @@ import React, { Component } from 'react';
 import countries from '../../config/countries';
 
 class SignupForm extends Component {
-  componentDidMount() {
-    // get usernames and emails arrs
-    // onchange check if value matches these arrs
-  }
   render() {
+    const hasPasswordMatch = (signupForm) =>
+      signupForm.password !== signupForm.password2;
+
+    const validateForm = (signupForm) => {
+      let usernames = [];
+      let emails = [];
+      console.log(signupForm.hasConfirmed);
+      if (!signupForm.hasConfirmed) {
+        window.alert('You must agree to terms blah blah');
+      } else {
+        if (hasPasswordMatch(signupForm)) {
+          window.alert('Passwords do not match');
+          return false;
+        }
+        fetch('/users/list')
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            } else {
+              return response.json();
+            }
+          })
+          .then((res) => {
+            res.map((r) => {
+              usernames.push(r.username.toLowerCase());
+              emails.push(r.email.toLowerCase());
+            });
+          })
+          .then(() => {
+            if (usernames.includes(signupForm.username)) {
+              alert('That username has already been taken');
+            } else {
+              if (emails.includes(signupForm.email)) {
+                alert('That email address already belongs to an account');
+              } else {
+                alert('Signup successful. Redirecting in 2 seconds...');
+                this.props.userSignup(signupForm);
+                // this.props.signIn
+                const loginForm = {
+                  username: signupForm.username,
+                  password: signupForm.password,
+                };
+                this.props.userLogin(loginForm);
+              }
+            }
+          })
+          .catch((e) => {
+            alert('There has been a problem with your signup: ' + e.message);
+          });
+      }
+    };
     return (
       <div>
         <form
@@ -21,18 +68,7 @@ class SignupForm extends Component {
               location: elements['location'].value,
               hasConfirmed: elements['checkagree'].checked,
             };
-            if (signupForm.password !== signupForm.password2) {
-              window.alert('Passwords do not match');
-            }
-            if (!signupForm.hasConfirmed) {
-              window.alert('You must agree to terms blah blah');
-            } else {
-              window.alert(
-                'Okay, you are signed up Chris... click the users list button at the top left to see yourself hopefully.... automatic redirect to MyNerd coming soon'
-              );
-            }
-            this.props.userSignup(signupForm);
-            // redirect
+            validateForm(signupForm);
           }}
         >
           <input

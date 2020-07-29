@@ -186,7 +186,13 @@ class Main extends Component {
                       exact
                       path="/signup"
                       render={(props) => (
-                        <SignUp userSignup={userSignup} {...props} />
+                        <SignUp
+                          userLogin={userLogin}
+                          usersGetList={usersGetList}
+                          userSignup={userSignup}
+                          usersReducer={usersReducer}
+                          {...props}
+                        />
                       )}
                     />
                     <Route
