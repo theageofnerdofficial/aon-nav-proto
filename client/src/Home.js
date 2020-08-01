@@ -82,7 +82,7 @@ class Home extends Component {
           src: SOURCE_REDDIT,
           user: 'nintendo',
         });
-        /*
+
         this.props.dataRequest({
           count: 15,
           endpoint: 'hot',
@@ -95,7 +95,7 @@ class Home extends Component {
           endpoint: 'hot',
           src: SOURCE_REDDIT,
           user: 'playstation',
-        });*/
+        });
       },
       getTwitterRaw: () => {
         this.props.dataRequest({

@@ -28,7 +28,6 @@ import UserList from './Admin/UserList';
 import Admin from './Admin/Admin';
 import AddApiSource from './Admin/Sources/AddSource';
 import GetSources from './Admin/Sources/GetSources/GetSources';
-
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeProvider/theme';
@@ -42,7 +41,10 @@ import {
   sourceAddFormCategoryGaming,
   sourceAddFormFilter,
   sourceAddFormSelect,
+  sourcesReset,
+  sourcesCombine,
   sourcesGetReddit,
+  sourcesGetTwitter,
   uiToggleLights,
   userAuthenticate,
   userLogin,
@@ -78,7 +80,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(sourceAddFormCategoryGaming(cat)),
     sourceAddFormFilter: (filter) => dispatch(sourceAddFormFilter(filter)),
     sourceAddFormSelect: (source) => dispatch(sourceAddFormSelect(source)),
+    sourcesCombine: () => dispatch(sourcesCombine()),
+    sourcesReset: () => dispatch(sourcesReset()),
     sourcesGetReddit: () => dispatch(sourcesGetReddit()),
+    sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
     uiToggleLights: () => dispatch(uiToggleLights()),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
@@ -136,9 +141,12 @@ class Main extends Component {
       sourceAddFormCategory,
       sourceAddFormCategoryGaming,
       sourceAddFormFilter,
+      sourcesCombine,
       sourceReducer,
+      sourcesReset,
       sourceAddFormSelect,
       sourcesGetReddit,
+      sourcesGetTwitter,
       uiReducer,
       uiToggleLights,
       userAuthenticate,
@@ -246,6 +254,7 @@ class Main extends Component {
                           }
                           sourceAddFormFilter={sourceAddFormFilter}
                           sourceReducer={sourceReducer}
+                          sourcesReset={sourcesReset}
                           sourceAddFormSelect={sourceAddFormSelect}
                           {...props}
                         />
@@ -258,7 +267,10 @@ class Main extends Component {
                       render={(props) => (
                         <GetSources
                           sourceReducer={sourceReducer}
+                          sourcesCombine={sourcesCombine}
                           sourcesGetReddit={sourcesGetReddit}
+                          sourcesGetTwitter={sourcesGetTwitter}
+                          sourcesReset={sourcesReset}
                           {...props}
                         />
                       )}

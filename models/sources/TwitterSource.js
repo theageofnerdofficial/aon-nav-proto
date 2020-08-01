@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 // Schema:
-const RedditSourceSchema = new Schema({
+const TwitterSourceSchema = new Schema({
   category: {
     type: String,
     lowercase: true,
@@ -18,10 +18,10 @@ const RedditSourceSchema = new Schema({
     trim: true,
   },
 
-  subreddit: {
+  twitterUser: {
     type: String,
     maxlength: 100,
-    minlength: 3, // Subreddits have a minimum of 3 characters
+    minlength: 3,
     required: true,
     unique: true,
   },
@@ -43,7 +43,12 @@ const RedditSourceSchema = new Schema({
     required: true,
   },
 
-  period: {
+  queryKeyword: {
+    type: String,
+    maxlength: 100,
+  },
+
+  queryDate: {
     type: String,
     maxlength: 100,
   },
@@ -65,4 +70,4 @@ const RedditSourceSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('RedditSources', RedditSourceSchema);
+module.exports = mongoose.model('TwitterSources', TwitterSourceSchema);

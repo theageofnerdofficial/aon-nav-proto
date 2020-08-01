@@ -5,7 +5,10 @@ class SelectTweetQuery extends Component {
     return (
       <React.Fragment>
         <br />
-        <p className="font-weight-light font-italic">
+        <p
+          className="font-italic font-weight-light"
+          style={{ fontSize: '0.85em' }}
+        >
           OPTIONAL: this is a query for refining Tweets by keyword & date. "q:
           'banana since:2011-07-11'":
         </p>
@@ -24,7 +27,7 @@ class SelectTweetQuery extends Component {
           <div className="col-4 p-0">
             <input
               className="form-control font-weight-light"
-              name="subreddit"
+              name="query-keyword"
               placeholder="Keyword"
               style={{
                 borderBottomLeftRadius: 0,
@@ -36,8 +39,7 @@ class SelectTweetQuery extends Component {
             <input
               type="date"
               className="form-control font-weight-light"
-              name="subreddit"
-              placeholder="Keyword"
+              name="query-date"
               style={{
                 borderBottomLeftRadius: 0,
                 borderTopLeftRadius: 0,

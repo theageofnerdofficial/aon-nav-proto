@@ -14,9 +14,73 @@ import SelectNumberOfTweets from './AddSource/SelectNumberOfTweets';
 import SelectTwitterUser from './AddSource/SelectTwitterUser';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
 import SelectTweetQuery from './AddSource/SelectTweetQuery';
+import SelectTweetFilter from './AddSource/SelectTweetFilter';
 
 class AddApiSource extends Component {
+  componentDidMount() {
+    // Load a fresh form by resetting state:
+    this.props.sourcesReset();
+  }
+
   render() {
+    const source = {
+      reddit: {
+        getFormatted(elements) {
+          return {
+            category: elements['category'].value,
+            categoryGaming: elements['category-gaming']
+              ? elements['category-gaming'].value
+              : null,
+            service: elements['service'].value,
+            subreddit: elements['subreddit']
+              ? elements['subreddit'].value
+              : null,
+            postsNumber: elements['posts'] ? elements['posts'].value : null,
+            filter: elements['subreddit-filter']
+              ? elements['subreddit-filter'].value
+              : null,
+            service: SOURCE_REDDIT,
+            period: elements['subreddit-period']
+              ? elements['subreddit-period'].value
+              : null,
+            createdBy: localStorage.getItem('aon_user_id'),
+            isOfficial: elements['is-official-source']
+              ? elements['is-official-source'].checked
+              : false,
+          };
+        },
+      },
+      twitter: {
+        getFormatted(elements) {
+          return {
+            category: elements['category'].value,
+            categoryGaming: elements['category-gaming']
+              ? elements['category-gaming'].value
+              : null,
+            service: elements['service'].value,
+            twitterUser: elements['twitter-user']
+              ? elements['twitter-user'].value
+              : null,
+            postsNumber: elements['posts'] ? elements['posts'].value : null,
+            filter: elements['tweet-filter']
+              ? elements['tweet-filter'].value
+              : null,
+            service: SOURCE_TWITTER,
+            queryKeyword: elements['query-keyword']
+              ? elements['query-keyword'].value
+              : null,
+            queryDate: elements['query-date']
+              ? elements['query-date'].value
+              : null,
+            createdBy: localStorage.getItem('aon_user_id'),
+            isOfficial: elements['is-official-source']
+              ? elements['is-official-source'].checked
+              : false,
+          };
+        },
+      },
+    };
+
     const getPlaceholder = (form) => {
       if (form) {
         if (form.category === 'tv/film') {
@@ -73,6 +137,7 @@ class AddApiSource extends Component {
               sourceReducer={this.props.sourceReducer}
             />
             <SelectNumberOfTweets />
+            <SelectTweetFilter />
             <SelectTweetQuery />
           </React.Fragment>
         );
@@ -90,33 +155,13 @@ class AddApiSource extends Component {
               onSubmit={(e) => {
                 e.preventDefault();
                 const { elements } = e.target;
-                if (elements['service'].value === SOURCE_TWITTER) {
-                  window.alert('no twitter yet...');
-                  return;
+                let formattedSource;
+                if (elements['service'].value === 'reddit') {
+                  formattedSource = source.reddit.getFormatted(elements);
+                } else if (elements['service'].value === 'twitter') {
+                  formattedSource = source.twitter.getFormatted(elements);
                 }
-                const addSourceForm = {
-                  category: elements['category'].value,
-                  categoryGaming: elements['category-gaming'].value,
-                  service: elements['service'].value,
-                  subreddit: elements['subreddit']
-                    ? elements['subreddit'].value
-                    : null,
-                  postsNumber: elements['posts']
-                    ? elements['posts'].value
-                    : null,
-                  filter: elements['subreddit-filter']
-                    ? elements['subreddit-filter'].value
-                    : null,
-                  service: SOURCE_REDDIT,
-                  period: elements['subreddit-period']
-                    ? elements['subreddit-period'].value
-                    : null,
-                  createdBy: localStorage.getItem('aon_user_id'),
-                  isOfficial: elements['is-official-source']
-                    ? elements['is-official-source'].checked
-                    : false,
-                };
-                this.props.sourceAdd(addSourceForm);
+                this.props.sourceAdd(formattedSource);
               }}
             >
               <SelectCategory

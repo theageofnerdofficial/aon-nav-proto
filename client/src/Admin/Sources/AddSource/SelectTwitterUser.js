@@ -18,7 +18,7 @@ class SelectTwitterUser extends Component {
         <div className="col-10 p-0">
           <input
             className="form-control font-weight-light"
-            name="subreddit"
+            name="twitter-user"
             placeholder={`e.g. ${this.props.getPlaceholder(
               this.props.sourceReducer
             )}`}

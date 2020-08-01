@@ -15,10 +15,15 @@ import {
   SOURCE_ADD_FORM_CATEGORY_GAMING,
   SOURCE_ADD_FORM_FILTER,
   SOURCE_ADD_FORM_SELECT,
+  SOURCES_RESET_FORM,
   SOURCE_REDDIT,
+  SOURCES_COMBINE,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
+  SOURCES_TWITTER_GET_FAILURE,
+  SOURCES_TWITTER_GET_PENDING,
+  SOURCES_TWITTER_GET_SUCCESS,
   SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
   USER_AUTH_FAILURE,
@@ -40,29 +45,6 @@ import loginCreds from './config/loginCreds';
 //
 let stateCp;
 
-/* Visuals — e.g. lights on/off for dark & light mode.
-   Here we use localStorage item so on page refresh when
-   stage is lost we can persist the user's preference:
- *********************************************************/
-const ui = {
-  lightsOff:
-    loginCreds.storageItem.getDarkmode() !== null
-      ? loginCreds.storageItem.getDarkmode() === 'false'
-        ? false
-        : true
-      : false,
-};
-
-export const uiReducer = (state = ui, action = {}) => {
-  switch (action.type) {
-    case UI_TOGGLE_LIGHTS:
-      localStorage.setItem(settings.localStorage.darkmode, !state.lightsOff);
-      return Object.assign({}, state, { lightsOff: !state.lightsOff });
-    default:
-      return state;
-  }
-};
-
 /* Data — setting the state for info obtained from APIs:
  *********************************************************/
 const data = {
@@ -77,11 +59,12 @@ const data = {
 export const dataReducer = (state = data, action = {}) => {
   switch (action.type) {
     case DATA_COMBINE:
-      let newAllData = state.redditDataFormatted.concat(
-        state.tweetDataFormatted
-      );
-      newAllData = utils.arr.randomize(newAllData);
-      return Object.assign({}, state, { allData: newAllData });
+      return Object.assign({}, state, {
+        allData: utils.arr.randomize([
+          ...state.redditDataFormatted,
+          ...state.tweetDataFormatted,
+        ]),
+      });
     case DATA_REQUEST_FAILURE:
       console.log('Data request failure');
       return Object.assign({}, state, { dataPending: false });
@@ -225,12 +208,51 @@ const sourceAddForm = {
   filter: String,
   sourceAddPending: false,
   sourceRedditGetPending: false,
-  sourcesRedditData: [],
+  sourceTwitterGetPending: false,
+  sourcesCombined: null,
+  sourcesRedditData: null,
+  sourcesTwitterData: null,
   showRedditPeriod: true,
 };
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
+    case SOURCES_COMBINE:
+      //return Object.assign({}, state);
+
+      return Object.assign({}, state, {
+        sourcesCombined: [
+          ...state.sourcesRedditData,
+          ...state.sourcesTwitterData,
+        ],
+      });
+    case SOURCES_RESET_FORM:
+      return Object.assign({}, state, {
+        category: null,
+        categoryGaming: null,
+        source: String,
+        filter: String,
+        sourceAddPending: false,
+        sourceRedditGetPending: false,
+        sourceTwitterGetPending: false,
+        sourcesCombined: null,
+        sourcesRedditData: null,
+        sourcesTwitterData: null,
+        showRedditPeriod: true,
+      });
+    case SOURCES_TWITTER_GET_FAILURE:
+      return Object.assign({}, state, {
+        sourceTwitterGetPending: false,
+      });
+    case SOURCES_TWITTER_GET_PENDING:
+      return Object.assign({}, state, {
+        sourceTwitterGetPending: true,
+      });
+    case SOURCES_TWITTER_GET_SUCCESS:
+      return Object.assign({}, state, {
+        sourcesTwitterData: action.payload,
+        sourceTwitterGetPending: false,
+      });
     case SOURCES_REDDIT_GET_FAILURE:
       return Object.assign({}, state, {
         sourceRedditGetPending: false,
@@ -244,7 +266,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         sourcesRedditData: action.payload,
         sourceRedditGetPending: false,
       });
-
     case SOURCE_ADD_FAILURE:
       return Object.assign({}, state, {
         sourceAddPending: false,
@@ -254,7 +275,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         sourceAddPending: true,
       });
     case SOURCE_ADD_SUCCESS:
-      console.log(action.payload);
       return Object.assign({}, state, {
         sourceAddPending: false,
       });
@@ -274,7 +294,29 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         source: action.payload,
       });
+    default:
+      return state;
+  }
+};
 
+/* Visuals — e.g. lights on/off for dark & light mode.
+   Here we use localStorage item so on page refresh when
+   stage is lost we can persist the user's preference:
+ *********************************************************/
+const ui = {
+  lightsOff:
+    loginCreds.storageItem.getDarkmode() !== null
+      ? loginCreds.storageItem.getDarkmode() === 'false'
+        ? false
+        : true
+      : false,
+};
+
+export const uiReducer = (state = ui, action = {}) => {
+  switch (action.type) {
+    case UI_TOGGLE_LIGHTS:
+      localStorage.setItem(settings.localStorage.darkmode, !state.lightsOff);
+      return Object.assign({}, state, { lightsOff: !state.lightsOff });
     default:
       return state;
   }
