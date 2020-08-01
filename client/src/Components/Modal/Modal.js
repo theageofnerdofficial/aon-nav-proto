@@ -11,8 +11,6 @@ class Modal extends Component {
         }
       },
       body(mode, user) {
-        console.log('body-..');
-        console.log(user);
         if (mode === MODAL_LOGIN_FORM) {
           return <LoginForm userLogin={user} />;
         }

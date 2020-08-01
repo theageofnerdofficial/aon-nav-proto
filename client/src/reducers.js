@@ -8,7 +8,17 @@ import {
   DATA_REQUEST_SUCCESS,
   DATA_FORMAT_TWEETS,
   MODAL_LOGIN_FORM,
+  SOURCE_ADD_FAILURE,
+  SOURCE_ADD_PENDING,
+  SOURCE_ADD_SUCCESS,
+  SOURCE_ADD_FORM_CATEGORY,
+  SOURCE_ADD_FORM_CATEGORY_GAMING,
+  SOURCE_ADD_FORM_FILTER,
+  SOURCE_ADD_FORM_SELECT,
   SOURCE_REDDIT,
+  SOURCES_REDDIT_GET_FAILURE,
+  SOURCES_REDDIT_GET_PENDING,
+  SOURCES_REDDIT_GET_SUCCESS,
   SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
   USER_AUTH_FAILURE,
@@ -24,22 +34,29 @@ import {
 } from './constants';
 
 import utils from './Components/Utils/utils/utils';
-import loginCreds from './config/loginCreds';
 import settings from './config/settings';
+import loginCreds from './config/loginCreds';
 
 //
 let stateCp;
 
-/* Visuals — e.g. lights on/off for dark & light mode:
+/* Visuals — e.g. lights on/off for dark & light mode.
+   Here we use localStorage item so on page refresh when
+   stage is lost we can persist the user's preference:
  *********************************************************/
 const ui = {
-  lightsOff: false,
+  lightsOff:
+    loginCreds.storageItem.getDarkmode() !== null
+      ? loginCreds.storageItem.getDarkmode() === 'false'
+        ? false
+        : true
+      : false,
 };
 
 export const uiReducer = (state = ui, action = {}) => {
   switch (action.type) {
     case UI_TOGGLE_LIGHTS:
-      console.log(state.lightsOff);
+      localStorage.setItem(settings.localStorage.darkmode, !state.lightsOff);
       return Object.assign({}, state, { lightsOff: !state.lightsOff });
     default:
       return state;
@@ -115,9 +132,9 @@ const users = {
   username: String,
   password: String,
   email: String,
-  loggedIn: false,
   accessLevel: 0,
   list: [],
+  loggedIn: false,
   userAuth: {},
   userLoginPending: false,
   usersPending: false,
@@ -168,10 +185,7 @@ export const usersReducer = (state = users, action = {}) => {
 
     case USER_LOGIN_SUCCESS:
       localStorage.setItem(settings.localStorage.token, action.payload.token);
-
       window.location.href = '/';
-
-      // do not redirect ...
       //
       /*
       localStorage.setItem(settings.localStorage.token, action.payload.token);
@@ -197,6 +211,70 @@ export const usersReducer = (state = users, action = {}) => {
         list: action.payload,
         usersPending: false,
       });
+    default:
+      return state;
+  }
+};
+
+/* Source form:
+ *********************************************************/
+const sourceAddForm = {
+  category: null,
+  categoryGaming: null,
+  source: String,
+  filter: String,
+  sourceAddPending: false,
+  sourceRedditGetPending: false,
+  sourcesRedditData: [],
+  showRedditPeriod: true,
+};
+
+export const sourceReducer = (state = sourceAddForm, action = {}) => {
+  switch (action.type) {
+    case SOURCES_REDDIT_GET_FAILURE:
+      return Object.assign({}, state, {
+        sourceRedditGetPending: false,
+      });
+    case SOURCES_REDDIT_GET_PENDING:
+      return Object.assign({}, state, {
+        sourceRedditGetPending: true,
+      });
+    case SOURCES_REDDIT_GET_SUCCESS:
+      return Object.assign({}, state, {
+        sourcesRedditData: action.payload,
+        sourceRedditGetPending: false,
+      });
+
+    case SOURCE_ADD_FAILURE:
+      return Object.assign({}, state, {
+        sourceAddPending: false,
+      });
+    case SOURCE_ADD_PENDING:
+      return Object.assign({}, state, {
+        sourceAddPending: true,
+      });
+    case SOURCE_ADD_SUCCESS:
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        sourceAddPending: false,
+      });
+    case SOURCE_ADD_FORM_CATEGORY:
+      return Object.assign({}, state, {
+        category: action.payload,
+      });
+    case SOURCE_ADD_FORM_CATEGORY_GAMING:
+      return Object.assign({}, state, {
+        categoryGaming: action.payload,
+      });
+    case SOURCE_ADD_FORM_FILTER:
+      return Object.assign({}, state, {
+        filter: action.payload,
+      });
+    case SOURCE_ADD_FORM_SELECT:
+      return Object.assign({}, state, {
+        source: action.payload,
+      });
+
     default:
       return state;
   }

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
+import AdminThumb from './AdminThumb';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
-
-import AdminThumb from './AdminThumb';
-
 class Admin extends Component {
   render() {
     return (
@@ -30,7 +28,7 @@ class Admin extends Component {
             <AdminThumb
               fontIcon="faTasks"
               label="Sources List"
-              link="/admin/userlist"
+              link="/admin/getsources"
               Link={this.props.Link}
             />
             <AdminThumb
@@ -41,8 +39,8 @@ class Admin extends Component {
             />
             <AdminThumb
               fontIcon="faPlus"
-              label="Add Source"
-              link="/admin/userlist"
+              label="Add source"
+              link="/admin/addsource"
               Link={this.props.Link}
             />
           </div>

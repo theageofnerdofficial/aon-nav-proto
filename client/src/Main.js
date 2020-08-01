@@ -26,6 +26,8 @@ import Sources from './Sources';
 import SignUp from './SignUp';
 import UserList from './Admin/UserList';
 import Admin from './Admin/Admin';
+import AddApiSource from './Admin/Sources/AddSource';
+import GetSources from './Admin/Sources/GetSources/GetSources';
 
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
@@ -35,6 +37,12 @@ import {
   dataFormatReddit,
   dataRequest,
   dataFormatTweets,
+  sourceAdd,
+  sourceAddFormCategory,
+  sourceAddFormCategoryGaming,
+  sourceAddFormFilter,
+  sourceAddFormSelect,
+  sourcesGetReddit,
   uiToggleLights,
   userAuthenticate,
   userLogin,
@@ -49,6 +57,7 @@ const mapStateToProps = (state) => {
   return {
     dataReducer: state.dataReducer,
     modalReducer: state.modalReducer,
+    sourceReducer: state.sourceReducer,
     uiReducer: state.uiReducer,
     usersReducer: state.usersReducer,
   };
@@ -63,6 +72,13 @@ const mapDispatchToProps = (dispatch) => {
     dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
+    sourceAdd: (sourceForm) => dispatch(sourceAdd(sourceForm)),
+    sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
+    sourceAddFormCategoryGaming: (cat) =>
+      dispatch(sourceAddFormCategoryGaming(cat)),
+    sourceAddFormFilter: (filter) => dispatch(sourceAddFormFilter(filter)),
+    sourceAddFormSelect: (source) => dispatch(sourceAddFormSelect(source)),
+    sourcesGetReddit: () => dispatch(sourcesGetReddit()),
     uiToggleLights: () => dispatch(uiToggleLights()),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
@@ -116,6 +132,13 @@ class Main extends Component {
       dataRequest,
       dataFormatTweets,
       modalReducer,
+      sourceAdd,
+      sourceAddFormCategory,
+      sourceAddFormCategoryGaming,
+      sourceAddFormFilter,
+      sourceReducer,
+      sourceAddFormSelect,
+      sourcesGetReddit,
       uiReducer,
       uiToggleLights,
       userAuthenticate,
@@ -207,6 +230,35 @@ class Main extends Component {
                         <UserList
                           usersGetList={usersGetList}
                           usersReducer={usersReducer}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/admin/addsource"
+                      render={(props) => (
+                        <AddApiSource
+                          sourceAdd={sourceAdd}
+                          sourceAddFormCategory={sourceAddFormCategory}
+                          sourceAddFormCategoryGaming={
+                            sourceAddFormCategoryGaming
+                          }
+                          sourceAddFormFilter={sourceAddFormFilter}
+                          sourceReducer={sourceReducer}
+                          sourceAddFormSelect={sourceAddFormSelect}
+                          {...props}
+                        />
+                      )}
+                    />
+
+                    <Route
+                      exact
+                      path="/admin/getsources"
+                      render={(props) => (
+                        <GetSources
+                          sourceReducer={sourceReducer}
+                          sourcesGetReddit={sourcesGetReddit}
                           {...props}
                         />
                       )}

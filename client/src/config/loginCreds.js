@@ -16,6 +16,9 @@ const loginCreds = {
     getUsername() {
       return localStorage.getItem(settings.localStorage.login.username);
     },
+    getDarkmode() {
+      return localStorage.getItem(settings.localStorage.darkmode);
+    },
   },
 };
 

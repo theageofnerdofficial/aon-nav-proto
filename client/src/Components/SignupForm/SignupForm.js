@@ -5,13 +5,12 @@ class SignupForm extends Component {
   render() {
     const hasPasswordMatch = (signupForm) =>
       signupForm.password !== signupForm.password2;
-
     const validateForm = (signupForm) => {
       let usernames = [];
       let emails = [];
       console.log(signupForm.hasConfirmed);
       if (!signupForm.hasConfirmed) {
-        window.alert('You must agree to terms blah blah');
+        window.alert('You must agree to terms and conditions');
       } else {
         if (hasPasswordMatch(signupForm)) {
           window.alert('Passwords do not match');
@@ -40,7 +39,6 @@ class SignupForm extends Component {
               } else {
                 alert('Signup successful. Redirecting in 2 seconds...');
                 this.props.userSignup(signupForm);
-                // this.props.signIn
                 const loginForm = {
                   username: signupForm.username,
                   password: signupForm.password,

@@ -1,5 +1,6 @@
 const settings = {
   localStorage: {
+    darkmode: 'aon_darkmode',
     token: 'aon_token',
     login: {
       id: 'aon_user_id',

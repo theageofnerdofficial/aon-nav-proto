@@ -23,6 +23,16 @@ import {
   USERS_GET_PENDING,
   USERS_GET_SUCCESS,
   USER_LOGOUT,
+  SOURCE_ADD_FAILURE,
+  SOURCE_ADD_PENDING,
+  SOURCE_ADD_SUCCESS,
+  SOURCE_ADD_FORM_CATEGORY,
+  SOURCE_ADD_FORM_CATEGORY_GAMING,
+  SOURCE_ADD_FORM_FILTER,
+  SOURCE_ADD_FORM_SELECT,
+  SOURCES_REDDIT_GET_FAILURE,
+  SOURCES_REDDIT_GET_PENDING,
+  SOURCES_REDDIT_GET_SUCCESS,
 } from './constants';
 
 // :
@@ -161,3 +171,61 @@ export const usersGetList = () => (dispatch) => {
     })
     .catch((error) => dispatch({ type: USERS_GET_FAILURE, payload: error }));
 };
+
+/* Source add form actions:
+ ******************************************************/
+//
+export const sourcesGetReddit = () => (dispatch) => {
+  dispatch({ type: SOURCES_REDDIT_GET_PENDING });
+  fetch('/sources/reddit/get', {
+    headers: settings.network.headers,
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: SOURCES_REDDIT_GET_SUCCESS,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCES_REDDIT_GET_FAILURE, payload: error })
+    );
+};
+//
+export const sourceAdd = (source) => (dispatch) => {
+  dispatch({ type: SOURCE_ADD_PENDING });
+  fetch('/source/reddit/add', {
+    body: JSON.stringify(source),
+    headers: settings.network.headers,
+    method: 'POST',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: SOURCE_ADD_SUCCESS,
+      });
+    })
+    .catch((error) => dispatch({ type: SOURCE_ADD_FAILURE, payload: error }));
+};
+
+export const sourceAddFormCategory = (category) => ({
+  type: SOURCE_ADD_FORM_CATEGORY,
+  payload: category,
+});
+
+export const sourceAddFormCategoryGaming = (category) => ({
+  type: SOURCE_ADD_FORM_CATEGORY_GAMING,
+  payload: category,
+});
+
+export const sourceAddFormSelect = (source) => ({
+  type: SOURCE_ADD_FORM_SELECT,
+  payload: source,
+});
+
+export const sourceAddFormFilter = (filter) => ({
+  type: SOURCE_ADD_FORM_FILTER,
+  payload: filter,
+});

@@ -28,11 +28,11 @@ class UserList extends Component {
         />
         <table className="table table-striped">
           <tr>
-            <td>User</td>
-            <td>Access Level</td>
-            <td className="text-center" width="150px">
+            <th>User</th>
+            <th>Access Level</th>
+            <th className="text-center" width="150px">
               Modify
-            </td>
+            </th>
           </tr>
 
           {this.props.usersReducer

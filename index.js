@@ -20,7 +20,7 @@ app.use(cors());
 
 // Controllers:
 const userController = require('./controllers/UserController');
-
+const redditSourceController = require('./controllers/sources/RedditSourceController');
 // For env variables:
 dotenv.config();
 
@@ -90,6 +90,16 @@ app.post('/user/login', (req, res, next) =>
 /* Users:
  *****************************************************************/
 app.get('/users/list', (req, res, next) => userController.list(req, res, next));
+
+/* Sources:
+ *****************************************************************/
+app.post('/source/reddit/add', (req, res, next) =>
+  redditSourceController.create(req, res, next)
+);
+
+app.get('/sources/reddit/get', (req, res, next) =>
+  redditSourceController.list(req, res, next)
+);
 
 /* Description: Handle additional request: direct to index.html
    Permission: Unprotected GET
