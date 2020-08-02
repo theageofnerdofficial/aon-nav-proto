@@ -31,7 +31,6 @@ class AddApiSource extends Component {
             categoryGaming: elements['category-gaming']
               ? elements['category-gaming'].value
               : null,
-            service: elements['service'].value,
             subreddit: elements['subreddit']
               ? elements['subreddit'].value
               : null,
@@ -57,7 +56,6 @@ class AddApiSource extends Component {
             categoryGaming: elements['category-gaming']
               ? elements['category-gaming'].value
               : null,
-            service: elements['service'].value,
             twitterUser: elements['twitter-user']
               ? elements['twitter-user'].value
               : null,

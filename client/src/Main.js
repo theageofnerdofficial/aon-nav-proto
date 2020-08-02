@@ -177,7 +177,7 @@ class Main extends Component {
               <main
                 className="flex-shrink-0"
                 role="main"
-                style={{ marginTop: 130 }}
+                style={{ marginTop: 110 }}
               >
                 <div className="container">
                   <div className="content">

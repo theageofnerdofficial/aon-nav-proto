@@ -84,6 +84,10 @@ a.nav-link {
   z-index: 10;
 }
 
+.navbar-logo-wrapper > img {
+  width: 185px;
+}
+
 .nav-btn-active {
   color: var(--col-darkest) !important;
   text-decoration: underline;
@@ -106,5 +110,8 @@ a.nav-link {
   }
   .navbar-logo-wrapper {
     width: 160px !important;
+  }
+  .navbar-logo-wrapper > img {
+    width: 165px;
   }
 }

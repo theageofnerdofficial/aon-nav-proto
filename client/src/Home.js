@@ -121,13 +121,22 @@ class Home extends Component {
     const { allData } = this.props.dataReducer;
     const sectionTitle = `NintendoUK (${allData ? allData.length : 0})`;
     return (
-      <div>
-        <SectionTitle
-          tabColour={settings.ui.style.sectionTab.featured}
-          title="Featured"
-        />
-        <SectionTitlePostsTitle text={sectionTitle} />
-        <Posts allData={allData} />
+      <div className="col-md-12 m-0 p-0 row">
+        <div className=" col-md-8 m-0 p-0 pr-3">
+          <SectionTitle
+            tabColour={settings.ui.style.sectionTab.featured}
+            title="Featured"
+          />
+          <SectionTitlePostsTitle text={sectionTitle} />
+          <Posts allData={allData} />
+        </div>
+        <div className=" col-md-4 m-0 pl-3">
+          <SectionTitle title="Trending" />
+          <div
+            className="shadow-sm rounded bg-light"
+            style={{ width: '100%', height: 500 }}
+          ></div>
+        </div>
       </div>
     );
   }

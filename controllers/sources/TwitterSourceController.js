@@ -20,7 +20,6 @@ exports.create = (req, res, next) => {
 /* List sources:
  ******************************************************************/
 exports.list = (req, res) => {
-  console.log('list');
   TwitterSource.find({}, (err, source) => {
     if (err) {
       res.status(500).send(err);
