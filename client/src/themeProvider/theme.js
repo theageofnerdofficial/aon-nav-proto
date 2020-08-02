@@ -5,8 +5,11 @@ export const lightTheme = {
   heroBgImgOpacity: themeDefault.light.hero.opacity,
   heroBgCol: themeDefault.light.hero.bgCol,
   modalBody: themeDefault.light.bg.primary,
-  navBtnBg: themeDefault.light.bg.secondary,
-  navBtnBorder: themeDefault.light.bg.accent,
+  navBtnBg: themeDefault.light.navBtn.bgGradient,
+  navBtnBorder: themeDefault.light.navBtn.borderCol,
+  navBtnCol: themeDefault.light.navBtn.text,
+  navBtnColActive: themeDefault.light.navBtn.textActive,
+  loginBtn: themeDefault.light.bg.secondary,
   text: themeDefault.light.text.primary,
 };
 
@@ -15,8 +18,9 @@ export const darkTheme = {
   heroBgCol: themeDefault.dark.hero.bgCol,
   heroBgImgOpacity: themeDefault.dark.hero.opacity,
   modalBody: themeDefault.dark.bg.primary,
-  navBtnBg: themeDefault.dark.bg.secondary,
+  navBtnBg: themeDefault.dark.navBtn.bgGradient,
   navBtnBorder: themeDefault.dark.bg.accent,
   navBtnColActive: themeDefault.dark.text.primary,
+  loginBtn: themeDefault.dark.bg.secondary,
   text: themeDefault.dark.text.primary,
 };

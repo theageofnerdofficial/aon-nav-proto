@@ -140,6 +140,7 @@ export const usersReducer = (state = users, action = {}) => {
       stateCp.authenticationPending = false;
       stateCp.authenticationSuccess = true;
       stateCp.id = action.payload._id;
+      stateCp.location = action.payload.location;
       stateCp.email = action.payload.email;
       stateCp.username = action.payload.username;
       stateCp.accessLevel = action.payload.accessLevel;

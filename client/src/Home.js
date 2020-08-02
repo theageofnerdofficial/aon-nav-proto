@@ -119,23 +119,113 @@ class Home extends Component {
   };
   render() {
     const { allData } = this.props.dataReducer;
-    const sectionTitle = `NintendoUK (${allData ? allData.length : 0})`;
+    const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
-      <div className="col-md-12 m-0 p-0 row">
-        <div className=" col-md-8 m-0 p-0 pr-3">
-          <SectionTitle
-            tabColour={settings.ui.style.sectionTab.featured}
-            title="Featured"
-          />
-          <SectionTitlePostsTitle text={sectionTitle} />
-          <Posts allData={allData} />
-        </div>
-        <div className=" col-md-4 m-0 pl-3">
-          <SectionTitle title="Trending" />
-          <div
-            className="shadow-sm rounded bg-light"
-            style={{ width: '100%', height: 500 }}
-          ></div>
+      <div>
+        <div className=" col-md-12 m-0 p-0 row">
+          <div className="col-md-7 m-0 p-0 pr-3">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Featured"
+            />
+            <div>
+              <div
+                id="carouselExampleIndicators"
+                className="carousel slide"
+                data-ride="carousel"
+              >
+                <ol className="carousel-indicators">
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="0"
+                    className="active"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="1"
+                  ></li>
+                  <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to="2"
+                  ></li>
+                </ol>
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img
+                      className="d-block w-100"
+                      src="..."
+                      alt="First slide"
+                    />
+                  </div>
+                  <div className="carousel-item">
+                    <img
+                      className="d-block w-100"
+                      src="..."
+                      alt="Second slide"
+                    />
+                  </div>
+                  <div className="carousel-item">
+                    <img
+                      className="d-block w-100"
+                      src="..."
+                      alt="Third slide"
+                    />
+                  </div>
+                </div>
+                <a
+                  className="carousel-control-prev"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    className="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="sr-only">Previous</span>
+                </a>
+                <a
+                  className="carousel-control-next"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    className="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="More stuff"
+            />
+          </div>
+          <div className=" col-md-5 m-0 p-0">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Nerd Feed"
+            />
+            <SectionTitlePostsTitle text={sectionTitle} />
+            <Posts allData={allData} />
+          </div>
+          <div className=" col-md-4 m-0 pl-3">
+            <SectionTitle title="Trending" />
+            <div
+              className="shadow-sm rounded bg-custom-panel"
+              style={{
+                width: '100%',
+                height: 500,
+              }}
+            >
+              <img
+                style={{ width: '100%' }}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-N6U3fMPOy2jNApLFqOPJFpxuuamBIi1GZA&usqp=CAU"
+              />
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -1,5 +1,14 @@
 {
   "dark": {
+    "navBtn": {
+      "bgGradient": {
+        "old": "rgb(47,47,47)",
+        "ff3to15": "-moz-linear-gradient(top, rgba(47,47,47,1) 0%, rgba(30,30,30,1) 50%, rgba(3,3,3,1) 51%, rgba(20,20,20,1) 100%)",
+        "chromeAndSafari": "-webkit-linear-gradient(top, rgba(47,47,47,1) 0%,rgba(30,30,30,1) 50%,rgba(3,3,3,1) 51%,rgba(20,20,20,1) 100%)",
+        "modern": "linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(30,30,30,1) 50%,rgba(3,3,3,1) 51%,rgba(20,20,20,1) 100%);",
+        "ie": "progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f2f2f', endColorstr='#141414',GradientType=0 )"
+      }
+    },
     "bg": {
       "primary": "#191a1b",
       "secondary": "#282829",
@@ -15,6 +24,18 @@
   },
 
   "light": {
+    "navBtn": {
+      "bgGradient": {
+        "old": "rgb(109,179,242)",
+        "ff3to15": "-moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 51%, rgba(30,105,222,1) 100%)",
+        "chromeAndSafari": "-webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 51%,rgba(30,105,222,1) 100%)",
+        "modern": "linear-gradient(to bottom, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 51%,rgba(30,105,222,1) 100%);",
+        "ie": "progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 )"
+      },
+      "borderCol": "#1565c0",
+      "text": "#fff",
+      "textActive": "#FFF"
+    },
     "bg": {
       "primary": "#FFF",
       "secondary": "#f8f9fa",
@@ -25,7 +46,7 @@
     },
     "hero": {
       "bgCol": "#0048a1",
-      "opacity": "0.5"
+      "opacity": "0.35"
     }
   }
 }

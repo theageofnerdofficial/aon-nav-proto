@@ -39,7 +39,7 @@ class Navbar extends Component {
                 to={`/${page.toLowerCase() === 'home' ? '' : formatLink(page)}`}
               >
                 <button
-                  className={`btn btn-light form-control navbar-btn p-0 rounded-0  text-center text-muted text-uppercase ${
+                  className={`btn btn-light form-control navbar-btn p-0 rounded-0  text-center text-uppercase ${
                     this.props.activeItem === page.toLowerCase()
                       ? 'nav-btn-active'
                       : ''

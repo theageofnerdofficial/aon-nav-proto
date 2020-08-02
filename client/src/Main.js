@@ -195,7 +195,18 @@ class Main extends Component {
                         />
                       )}
                     />
-                    <Route path="/mynerd" component={withRouter(MyNerd)} />
+                    <Route
+                      exact
+                      path="/mynerd"
+                      render={(props) => (
+                        <MyNerd
+                          userAuthenticate={userAuthenticate}
+                          usersReducer={usersReducer}
+                          {...props}
+                        />
+                      )}
+                    />
+
                     <Route path="/tvfilm" component={withRouter(TVFilm)} />
                     <Route path="/gaming" component={withRouter(Gaming)} />
                     <Route

@@ -24,7 +24,7 @@ a.nav-link {
 .hero-bg-img {
   filter: blur(6px);
   height: 100px;
-  opacity: 0.4;
+  opacity: 0.3;
   transform: scaleY(1.2);
   -webkit-filter: blur(3px);
   width: 100%;

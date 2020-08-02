@@ -25,10 +25,20 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.navBtnCol};
   }
 
-  .btn-login {
-    border: 0 !important;
+  .btn-light {
+    background-color: ${({ theme }) => theme.navBtnBg} !important;
+    color: ${({ theme }) => theme.text};
   }
 
+
+  .btn-login {
+    border: 0 !important;
+    background: ${({ theme }) => theme.loginBtn};
+  }
+
+  .bg-custom-panel {
+    background: ${({ theme }) => theme.loginBtn} !important;
+  }
   button.close {
     text-shadow: 0;
     color: ${({ theme }) => theme.text};
@@ -67,8 +77,13 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .navbar-btn {
-    background: ${({ theme }) => theme.navBtnBg};
+    background: ${({ theme }) => theme.navBtnBg.old};
+    background: ${({ theme }) => theme.navBtnBg.ff3to15};
+    background: ${({ theme }) => theme.navBtnBg.chromeAndSafari};
+    background: ${({ theme }) => theme.navBtnBg.modern};
+    filter: ${({ theme }) => theme.navBtnBg.ie};
     border-color: ${({ theme }) => theme.navBtnBorder};
+
   }
 
   .post-wrapper {
