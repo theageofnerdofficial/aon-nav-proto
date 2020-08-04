@@ -19,6 +19,8 @@ class SelectNumberOfPosts extends Component {
           <input
             className="form-control font-weight-light"
             defaultValue="10"
+            min="1"
+            max="100"
             name="posts"
             style={{
               borderBottomLeftRadius: 0,

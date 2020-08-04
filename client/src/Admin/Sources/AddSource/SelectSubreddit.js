@@ -26,6 +26,7 @@ class SelectSubreddit extends Component {
               borderBottomLeftRadius: 0,
               borderTopLeftRadius: 0,
             }}
+            required
           />
         </div>
       </div>

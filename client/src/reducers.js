@@ -3,20 +3,24 @@
 import {
   DATA_COMBINE,
   DATA_FORMAT_REDDIT,
+  DATA_FORMAT_TWEETS,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
-  DATA_FORMAT_TWEETS,
+  FLASH_MSG_HIDE,
+  FLASH_MSG_SHOW,
+  FLASH_MSG_UPDATE,
   MODAL_LOGIN_FORM,
   SOURCE_ADD_FAILURE,
-  SOURCE_ADD_PENDING,
-  SOURCE_ADD_SUCCESS,
   SOURCE_ADD_FORM_CATEGORY,
   SOURCE_ADD_FORM_CATEGORY_GAMING,
   SOURCE_ADD_FORM_FILTER,
   SOURCE_ADD_FORM_SELECT,
-  SOURCES_RESET_FORM,
+  SOURCE_ADD_PENDING,
+  SOURCE_ADD_SUCCESS,
   SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  SOURCES_RESET_FORM,
   SOURCES_COMBINE,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
@@ -24,7 +28,6 @@ import {
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
-  SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
   USER_AUTH_FAILURE,
   USER_AUTH_PENDING,
@@ -109,6 +112,30 @@ export const modalReducer = (state = modal, action = {}) => {
   }
 };
 
+/* Data — setting the state for info obtained from APIs:
+ *********************************************************/
+const flashMsg = {
+  msg: String,
+  showFlashMsg: false,
+  style: 'success',
+};
+
+export const flashMsgReducer = (state = flashMsg, action = {}) => {
+  switch (action.type) {
+    case FLASH_MSG_SHOW:
+      return Object.assign({}, state, { showFlashMsg: true });
+    case FLASH_MSG_HIDE:
+      return Object.assign({}, state, { showFlashMsg: false });
+    case FLASH_MSG_UPDATE:
+      return Object.assign({}, state, {
+        msg: action.payload.msg,
+        style: action.payload.style,
+      });
+    default:
+      return state;
+  }
+};
+
 /* Users:
  *********************************************************/
 const users = {
@@ -170,14 +197,6 @@ export const usersReducer = (state = users, action = {}) => {
     case USER_LOGIN_SUCCESS:
       localStorage.setItem(settings.localStorage.token, action.payload.token);
       window.location.href = '/';
-      //
-      /*
-      localStorage.setItem(settings.localStorage.token, action.payload.token);
-      loginCreds.storageItem.set({
-        id: action.payload.id,
-        username: action.payload.username,
-      });
-      */
       return Object.assign({}, state, {
         userAuth: action.payload,
         userLoginPending: false,
@@ -220,7 +239,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
     case SOURCES_COMBINE:
       //return Object.assign({}, state);
-
       return Object.assign({}, state, {
         sourcesCombined: [
           ...state.sourcesRedditData,

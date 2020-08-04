@@ -32,15 +32,15 @@ class Admin extends Component {
               Link={this.props.Link}
             />
             <AdminThumb
-              fontIcon="faTwitter"
-              label="List/Modify APIs"
-              link="/admin/userlist"
-              Link={this.props.Link}
-            />
-            <AdminThumb
               fontIcon="faPlus"
               label="Add source"
               link="/admin/addsource"
+              Link={this.props.Link}
+            />
+            <AdminThumb
+              fontIcon="faTwitter"
+              label="List/Modify APIs"
+              link="/admin/apis"
               Link={this.props.Link}
             />
           </div>

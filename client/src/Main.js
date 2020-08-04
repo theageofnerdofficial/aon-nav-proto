@@ -28,6 +28,7 @@ import UserList from './Admin/UserList';
 import Admin from './Admin/Admin';
 import AddApiSource from './Admin/Sources/AddSource';
 import GetSources from './Admin/Sources/GetSources/GetSources';
+import FlashMsg from './Components/FlashMsg/FlashMsg';
 import { GlobalStyles } from './themeProvider/global';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeProvider/theme';
@@ -36,6 +37,8 @@ import {
   dataFormatReddit,
   dataRequest,
   dataFormatTweets,
+  flashMsgFlash,
+  flashMsgUpdate,
   sourceAdd,
   sourceAddFormCategory,
   sourceAddFormCategoryGaming,
@@ -58,6 +61,7 @@ import './Main.css';
 const mapStateToProps = (state) => {
   return {
     dataReducer: state.dataReducer,
+    flashMsgReducer: state.flashMsgReducer,
     modalReducer: state.modalReducer,
     sourceReducer: state.sourceReducer,
     uiReducer: state.uiReducer,
@@ -74,6 +78,8 @@ const mapDispatchToProps = (dispatch) => {
     dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
+    flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
+    flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
     sourceAdd: (sourceForm) => dispatch(sourceAdd(sourceForm)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
     sourceAddFormCategoryGaming: (cat) =>
@@ -136,6 +142,9 @@ class Main extends Component {
       dataReducer,
       dataRequest,
       dataFormatTweets,
+      flashMsgFlash,
+      flashMsgReducer,
+      flashMsgUpdate,
       modalReducer,
       sourceAdd,
       sourceAddFormCategory,
@@ -162,6 +171,10 @@ class Main extends Component {
           <ThemeProvider theme={uiReducer.lightsOff ? darkTheme : lightTheme}>
             <GlobalStyles />
             <div>
+              <FlashMsg
+                flashMsgFlash={flashMsgFlash}
+                flashMsgReducer={flashMsgReducer}
+              />
               <Header
                 lightsOff={uiReducer.lightsOff}
                 Link={Link}
@@ -206,7 +219,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route path="/tvfilm" component={withRouter(TVFilm)} />
                     <Route path="/gaming" component={withRouter(Gaming)} />
                     <Route
@@ -258,6 +270,8 @@ class Main extends Component {
                       path="/admin/addsource"
                       render={(props) => (
                         <AddApiSource
+                          flashMsgFlash={flashMsgFlash}
+                          flashMsgUpdate={flashMsgUpdate}
                           sourceAdd={sourceAdd}
                           sourceAddFormCategory={sourceAddFormCategory}
                           sourceAddFormCategoryGaming={
@@ -271,7 +285,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/admin/getsources"

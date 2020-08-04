@@ -1,5 +1,6 @@
 // Imports:
 import React, { Component } from 'react';
+import labels from '../../config/labels';
 import settings from '../../config/settings';
 import CheckIsOfficial from './AddSource/CheckIsOfficial';
 import SectionTitle from '../../Components/SectionTitle/SectionTitle';
@@ -12,17 +13,19 @@ import SelectSubredditFilter from './AddSource/SelectSubredditFilter';
 import SelectSubredditPeriod from './AddSource/SelectSubredditPeriod';
 import SelectNumberOfTweets from './AddSource/SelectNumberOfTweets';
 import SelectTwitterUser from './AddSource/SelectTwitterUser';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
 import SelectTweetQuery from './AddSource/SelectTweetQuery';
 import SelectTweetFilter from './AddSource/SelectTweetFilter';
+import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
+import { fetchConstructor } from '../../actions';
 
 class AddApiSource extends Component {
   componentDidMount() {
-    // Load a fresh form by resetting state:
+    // Load fresh form by resetting state:
     this.props.sourcesReset();
   }
 
   render() {
+    // Make sources match model schemas before posting to database:
     const source = {
       reddit: {
         getFormatted(elements) {
@@ -79,6 +82,7 @@ class AddApiSource extends Component {
       },
     };
 
+    // Change placeholder according to selected category:
     const getPlaceholder = (form) => {
       if (form) {
         if (form.category === 'tv/film') {
@@ -92,10 +96,27 @@ class AddApiSource extends Component {
             return 'Nintendo';
           }
         }
-        return 'Nintendo';
       }
     };
 
+    // Get formatted data and URL by service:
+    const getFormSubmission = (elements) => {
+      let formData;
+      if (elements['service'].value === 'reddit') {
+        formData = {
+          src: source.reddit.getFormatted(elements),
+          url: '/source/reddit/add',
+        };
+      } else if (elements['service'].value === 'twitter') {
+        formData = {
+          src: source.twitter.getFormatted(elements),
+          url: '/source/twitter/add',
+        };
+      }
+      return formData;
+    };
+
+    // Display or hide fields by service:
     const fieldsByService = {
       get: (form) => {
         // If we've a source & that source is Reddit, display Reddit form fields:
@@ -107,7 +128,6 @@ class AddApiSource extends Component {
           }
         }
       },
-
       reddit: () => {
         const { sourceAddFormFilter, sourceReducer } = this.props;
         return (
@@ -148,18 +168,61 @@ class AddApiSource extends Component {
           title="Add Source"
         />
         <div className="col-12 row p-0 m-0">
-          <div className="col-md-4">
+          <div className="col-md-5">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 const { elements } = e.target;
-                let formattedSource;
-                if (elements['service'].value === 'reddit') {
-                  formattedSource = source.reddit.getFormatted(elements);
-                } else if (elements['service'].value === 'twitter') {
-                  formattedSource = source.twitter.getFormatted(elements);
+                const { props } = this;
+                if (!elements['service'] || !elements['source']) {
+                  return false;
                 }
-                this.props.sourceAdd(formattedSource);
+                let formData = getFormSubmission(elements);
+                fetchConstructor(
+                  {
+                    url: formData.url,
+                    body: JSON.stringify(formData.src),
+                    method: 'POST',
+                    func: {
+                      checkDuplicate: (res) => {
+                        if (res.name === 'MongoError' && res.code === 11000) {
+                          props.flashMsgUpdate({
+                            msg: `${labels.response.error}: duplicate — this source already exists.`,
+                            style: 'danger',
+                          });
+                          props.flashMsgFlash();
+                          return false;
+                        }
+                      },
+                      checkErrors: (res) => {
+                        if (res.errors) {
+                          const warnings = res.message;
+                          props.flashMsgUpdate({
+                            msg: warnings.split(',')[0],
+                            style: 'danger',
+                          });
+                          props.flashMsgFlash();
+                          return false;
+                        } else {
+                          props.flashMsgUpdate({
+                            msg: `${labels.response.success}: this source was successfully added.`,
+                            style: 'success',
+                          });
+                          props.flashMsgFlash();
+                          props.sourcesReset();
+                        }
+                      },
+                      checkCatch: (e) => {
+                        props.flashMsgUpdate({
+                          msg: e.message,
+                          style: 'danger',
+                        });
+                        props.flashMsgFlash();
+                      },
+                    },
+                  },
+                  this.props
+                );
               }}
             >
               <SelectCategory

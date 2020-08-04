@@ -22,6 +22,7 @@ class SelectTwitterUser extends Component {
             placeholder={`e.g. ${this.props.getPlaceholder(
               this.props.sourceReducer
             )}`}
+            required
             style={{
               borderBottomLeftRadius: 0,
               borderTopLeftRadius: 0,

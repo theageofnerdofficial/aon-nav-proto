@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 // Reducer imports:
 import {
   dataReducer,
+  flashMsgReducer,
   modalReducer,
   sourceReducer,
   uiReducer,
@@ -22,6 +23,7 @@ const logger = createLogger();
 // Root reducers are combined using combineReducers() from Redux library:
 const rootReducers = combineReducers({
   dataReducer,
+  flashMsgReducer,
   modalReducer,
   sourceReducer,
   uiReducer,

@@ -9,6 +9,7 @@ class SelectGamingCategory extends Component {
         onChange={(e) => {
           this.props.sourceAddFormCategoryGaming(e.target.value);
         }}
+        required
       >
         <option disabled selected value>
           -- Select gaming category --

@@ -9,6 +9,7 @@ class SelectCategory extends Component {
         onChange={(e) => {
           this.props.sourceAddFormCategory(e.target.value);
         }}
+        required
       >
         <option disabled selected value>
           -- Select category --

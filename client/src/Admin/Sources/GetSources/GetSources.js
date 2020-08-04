@@ -37,27 +37,30 @@ class GetSources extends Component {
       this.props.sourceReducer.sourcesCombined
         ? this.props.sourceReducer.sourcesCombined.length
         : '0';
-
     return (
       <React.Fragment>
         <SectionTitle title="Sources" />
         <SectionTitlePostsTitle text={`Sources (${countSources()})`} />
-        <div>
+        <div style={{ overflow: 'scroll' }}>
           <table className="table table-striped">
-            <tr>
-              <th>Category</th>
-              <th>Service</th>
-              <th>Source</th>
-              <th>Posts</th>
-              <th>Filter</th>
-              <th>Period</th>
-            </tr>
-
-            {this.props.sourceReducer.sourcesCombined
-              ? this.props.sourceReducer.sourcesCombined.map((s) => {
-                  return <Source src={s} />;
-                })
-              : ''}
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Service</th>
+                <th>Source</th>
+                <th>Posts</th>
+                <th>Filter</th>
+                <th>Period</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.sourceReducer.sourcesCombined
+                ? this.props.sourceReducer.sourcesCombined.map((s, index) => {
+                    return <Source src={s} key={'source-' + index} />;
+                  })
+                : ''}
+            </tbody>
           </table>
         </div>
       </React.Fragment>

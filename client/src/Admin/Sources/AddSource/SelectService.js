@@ -16,6 +16,7 @@ class SelectService extends Component {
           }
           this.props.sourceAddFormSelect(service);
         }}
+        required
       >
         <option disabled selected value>
           -- Select service --

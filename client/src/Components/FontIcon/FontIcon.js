@@ -10,14 +10,18 @@ import {
   faCaretDown,
   faCaretUp,
   faCog,
+  faCheckCircle,
   faDownload,
+  faEdit,
   faEllipsisV,
+  faExclamationTriangle,
   faFileAlt,
   faMoon,
   faPlus,
-  faWrench,
+  faTrashAlt,
   faSun,
   faTasks,
+  faWrench,
   faUser,
   faUserAlt,
 } from '@fortawesome/free-solid-svg-icons';
@@ -48,14 +52,23 @@ const FontIcon = (icon) => {
     case 'faCaretUp':
       faIcon = faCaretUp;
       break;
+    case 'faCheckCircle':
+      faIcon = faCheckCircle;
+      break;
     case 'faCog':
       faIcon = faCog;
+      break;
+    case 'faExclamationTriangle':
+      faIcon = faExclamationTriangle;
       break;
     case 'faEllipsisV':
       faIcon = faEllipsisV;
       break;
     case 'faDownload':
       faIcon = faDownload;
+      break;
+    case 'faEdit':
+      faIcon = faEdit;
       break;
     case 'faFacebook':
       faIcon = faFacebook;
@@ -80,6 +93,9 @@ const FontIcon = (icon) => {
       break;
     case 'faTasks':
       faIcon = faTasks;
+      break;
+    case 'faTrashAlt':
+      faIcon = faTrashAlt;
       break;
     case 'faTwitter':
       faIcon = faTwitter;

@@ -7,6 +7,9 @@ import {
   DATA_REQUEST_SUCCESS,
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
+  FLASH_MSG_HIDE,
+  FLASH_MSG_SHOW,
+  FLASH_MSG_UPDATE,
   SOURCE_ADD_FAILURE,
   SOURCE_ADD_PENDING,
   SOURCE_ADD_SUCCESS,
@@ -83,9 +86,26 @@ export const dataRequest = (o) => (dispatch) => {
     .catch((error) => dispatch({ type: DATA_REQUEST_FAILURE, payload: error }));
 };
 
+/* Flash msg actions:
+ ******************************************************/
+export const flashMsgFlash = (o) => (dispatch) => {
+  dispatch({ type: FLASH_MSG_SHOW });
+  setTimeout(() => {
+    dispatch({ type: FLASH_MSG_HIDE });
+  }, 5000);
+};
+
+export const flashMsgUpdate = (o) => ({
+  type: FLASH_MSG_UPDATE,
+  payload: {
+    msg: o.msg,
+    style: o.style,
+  },
+});
+
 /* Source add form actions:
  ******************************************************/
-export const sourceAdd = (source) => (dispatch) => {
+export const sourceAdd = (source) => (dispatch, getState) => {
   let url;
   switch (source.service) {
     case SOURCE_REDDIT:
@@ -110,7 +130,9 @@ export const sourceAdd = (source) => (dispatch) => {
         type: SOURCE_ADD_SUCCESS,
       });
     })
-    .catch((error) => dispatch({ type: SOURCE_ADD_FAILURE, payload: error }));
+    .catch((error) => {
+      dispatch({ type: SOURCE_ADD_FAILURE, payload: error });
+    });
 };
 
 export const sourceAddFormCategory = (category) => ({
@@ -263,4 +285,25 @@ export const usersGetList = () => (dispatch) => {
       });
     })
     .catch((error) => dispatch({ type: USERS_GET_FAILURE, payload: error }));
+};
+
+/* Misc actions:
+ ******************************************************/
+export const fetchConstructor = (o, props) => {
+  fetch(o.url, {
+    body: o.body,
+    headers: settings.network.headers,
+    method: o.method,
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((res) => {
+      if (o.func.checkDuplicate) o.func.checkDuplicate(res);
+      if (o.func.checkErrors) o.func.checkErrors(res);
+    })
+    .catch((e) => {
+      console.log(this);
+      if (o.func.checkCatch) o.func.checkCatch(e);
+    });
 };

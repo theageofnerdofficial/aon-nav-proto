@@ -7,6 +7,12 @@ export const DATA_REQUEST_PENDING = 'DATA_REQUEST_PENDING';
 export const DATA_REQUEST_SUCCESS = 'DATA_REQUEST_SUCCESS';
 export const DATA_FORMAT_TWEETS = 'DATA_FORMAT_TWEETS';
 
+/* Flash msg constants:
+ *****************************************************/
+export const FLASH_MSG_HIDE = 'FLASH_MSG_HIDE';
+export const FLASH_MSG_SHOW = 'FLASH_MSG_SHOW';
+export const FLASH_MSG_UPDATE = 'FLASH_MSG_UPDATE';
+
 /* Modal constants:
  *****************************************************/
 export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';

@@ -33,7 +33,11 @@ class Breadcrumbs extends Component {
         </li>
       );
     };
-    return pathArr.map((pathItem) => generateLinks(pathItem));
+    return pathArr.map((pathItem, index) => (
+      <React.Fragment key={'path-' + index}>
+        {generateLinks(pathItem)}
+      </React.Fragment>
+    ));
   }
   render() {
     return (

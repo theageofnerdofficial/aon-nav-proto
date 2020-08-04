@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import settings from './config/settings';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
-import utils from './Components/Utils/utils/utils';
 import countries from './config/countries';
 
 class MyNerd extends Component {
   componentDidMount() {
-    // if (usersReducer. username... )
     this.props.userAuthenticate();
   }
   getFlag(country) {
