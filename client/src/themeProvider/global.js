@@ -83,6 +83,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navBtnBg.modern};
     filter: ${({ theme }) => theme.navBtnBg.ie};
     border-color: ${({ theme }) => theme.navBtnBorder};
+    color: #fff !important;
 
   }
 

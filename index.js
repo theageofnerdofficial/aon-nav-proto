@@ -95,22 +95,45 @@ app.get('/users/list', (req, res, next) => userController.list(req, res, next));
 
 /* Sources:
  *****************************************************************/
-app.post('/source/reddit/add', (req, res, next) =>
-  redditSourceController.create(req, res, next)
+app.delete('/source/reddit', (req, res, next) =>
+  redditSourceController.delete(req, res, next)
 );
 
-app.post('/source/twitter/add', (req, res, next) =>
-  twitterSourceController.create(req, res, next)
-);
-
-app.get('/sources/reddit/get', (req, res, next) =>
+app.get('/sources/reddit', (req, res, next) =>
   redditSourceController.list(req, res, next)
 );
 
-app.get('/sources/twitter/get', (req, res, next) => {
-  console.log('get to index');
-  return twitterSourceController.list(req, res, next);
-});
+app.get('/source/getRedditSourceById/:id', (req, res, next) =>
+  redditSourceController.get(req, res, next)
+);
+
+app.post('/source/reddit/', (req, res, next) =>
+  redditSourceController.create(req, res, next)
+);
+
+app.put('/source/reddit/', (req, res, next) =>
+  redditSourceController.update(req, res, next)
+);
+
+app.delete('/source/twitter', (req, res, next) =>
+  twitterSourceController.deleteSource(req, res, next)
+);
+
+app.get('/source/twitter/', (req, res, next) =>
+  twitterSourceController.list(req, res, next)
+);
+
+app.post('/source/twitter', (req, res, next) =>
+  twitterSourceController.create(req, res, next)
+);
+
+app.put('/source/twitter/', (req, res, next) =>
+  twitterSourceController.update(req, res, next)
+);
+
+app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
+  twitterSourceController.getSource(req, res, next)
+);
 
 /* Description: Handle additional request: direct to index.html
    Permission: Unprotected GET

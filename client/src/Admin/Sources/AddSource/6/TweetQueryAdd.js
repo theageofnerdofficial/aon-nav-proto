@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectTweetQuery extends Component {
+class TweetQueryAdd extends Component {
   render() {
     return (
       <React.Fragment>
@@ -52,4 +52,4 @@ class SelectTweetQuery extends Component {
   }
 }
 
-export default SelectTweetQuery;
+export default TweetQueryAdd;

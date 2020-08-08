@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectSubredditFilter extends Component {
+class SubredditFilterAdd extends Component {
   render() {
     return (
       <div className="col-12 row p-0 m-0">
@@ -36,4 +36,4 @@ class SelectSubredditFilter extends Component {
   }
 }
 
-export default SelectSubredditFilter;
+export default SubredditFilterAdd;

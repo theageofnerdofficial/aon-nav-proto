@@ -18,7 +18,11 @@ import {
   SOURCE_ADD_FORM_SELECT,
   SOURCE_ADD_PENDING,
   SOURCE_ADD_SUCCESS,
+  SOURCE_GETBYID_FAILURE,
+  SOURCE_GETBYID_PENDING,
+  SOURCE_GETBYID_SUCCESS,
   SOURCE_REDDIT,
+  SOURCE_REMOVE,
   SOURCE_TWITTER,
   SOURCES_RESET_FORM,
   SOURCES_COMBINE,
@@ -224,7 +228,7 @@ export const usersReducer = (state = users, action = {}) => {
 const sourceAddForm = {
   category: null,
   categoryGaming: null,
-  source: String,
+  service: String,
   filter: String,
   sourceAddPending: false,
   sourceRedditGetPending: false,
@@ -233,6 +237,8 @@ const sourceAddForm = {
   sourcesRedditData: null,
   sourcesTwitterData: null,
   showRedditPeriod: true,
+  sourceByIdPending: false,
+  sourceById: {},
 };
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
@@ -249,7 +255,7 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         category: null,
         categoryGaming: null,
-        source: String,
+        service: String,
         filter: String,
         sourceAddPending: false,
         sourceRedditGetPending: false,
@@ -258,6 +264,8 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         sourcesRedditData: null,
         sourcesTwitterData: null,
         showRedditPeriod: true,
+        sourceByIdPending: false,
+        sourceById: {},
       });
     case SOURCES_TWITTER_GET_FAILURE:
       return Object.assign({}, state, {
@@ -311,7 +319,28 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       });
     case SOURCE_ADD_FORM_SELECT:
       return Object.assign({}, state, {
-        source: action.payload,
+        service: action.payload,
+      });
+    case SOURCE_REMOVE:
+      const { sourceId } = action.payload;
+      const sourcesCombinedCp = state.sourcesCombined.filter((source) => {
+        return source._id !== sourceId;
+      });
+      return Object.assign({}, state, {
+        sourcesCombined: sourcesCombinedCp,
+      });
+    case SOURCE_GETBYID_FAILURE:
+      return Object.assign({}, state, {
+        sourceByIdPending: false,
+      });
+    case SOURCE_GETBYID_PENDING:
+      return Object.assign({}, state, {
+        sourceByIdPending: true,
+      });
+    case SOURCE_GETBYID_SUCCESS:
+      return Object.assign({}, state, {
+        sourceById: action.payload,
+        sourceByIdPending: false,
       });
     default:
       return state;

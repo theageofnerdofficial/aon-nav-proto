@@ -17,6 +17,10 @@ import {
   SOURCE_ADD_FORM_CATEGORY_GAMING,
   SOURCE_ADD_FORM_FILTER,
   SOURCE_ADD_FORM_SELECT,
+  SOURCE_REMOVE,
+  SOURCE_GETBYID_FAILURE,
+  SOURCE_GETBYID_PENDING,
+  SOURCE_GETBYID_SUCCESS,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   SOURCES_REDDIT_GET_FAILURE,
@@ -109,10 +113,10 @@ export const sourceAdd = (source) => (dispatch, getState) => {
   let url;
   switch (source.service) {
     case SOURCE_REDDIT:
-      url = '/source/reddit/add';
+      url = '/source/reddit/';
       break;
     case SOURCE_TWITTER:
-      url = '/source/twitter/add';
+      url = '/source/twitter';
       break;
     default:
       url = '/source/add';
@@ -135,6 +139,11 @@ export const sourceAdd = (source) => (dispatch, getState) => {
     });
 };
 
+export const sourceRemove = (o) => ({
+  type: SOURCE_REMOVE,
+  payload: o,
+});
+
 export const sourceAddFormCategory = (category) => ({
   type: SOURCE_ADD_FORM_CATEGORY,
   payload: category,
@@ -150,10 +159,37 @@ export const sourceAddFormFilter = (filter) => ({
   payload: filter,
 });
 
-export const sourceAddFormSelect = (source) => ({
+export const sourceAddService = (source) => ({
   type: SOURCE_ADD_FORM_SELECT,
   payload: source,
 });
+
+//sourceGetById
+export const sourceGetById = (o) => (dispatch) => {
+  const url = () => {
+    if (o.service === 'reddit') {
+      return `/source/getRedditSourceById/${o.id}`;
+    } else if (o.service === 'twitter') {
+      return `/source/getTwitterSourceById/${o.id}`;
+    }
+  };
+  dispatch({ type: SOURCE_GETBYID_PENDING });
+  fetch(url(), {
+    headers: settings.network.headers,
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: SOURCE_GETBYID_SUCCESS,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCE_GETBYID_FAILURE, payload: error })
+    );
+};
+//
 
 export const sourcesCombine = () => ({
   type: SOURCES_COMBINE,
@@ -162,7 +198,7 @@ export const sourcesCombine = () => ({
 //
 export const sourcesGetReddit = () => (dispatch) => {
   dispatch({ type: SOURCES_REDDIT_GET_PENDING });
-  fetch('/sources/reddit/get', {
+  fetch('/sources/reddit', {
     headers: settings.network.headers,
     method: 'GET',
   })
@@ -180,7 +216,7 @@ export const sourcesGetReddit = () => (dispatch) => {
 
 export const sourcesGetTwitter = () => (dispatch) => {
   dispatch({ type: SOURCES_TWITTER_GET_PENDING });
-  fetch('/sources/twitter/get', {
+  fetch('/source/twitter/', {
     headers: settings.network.headers,
     method: 'GET',
   })

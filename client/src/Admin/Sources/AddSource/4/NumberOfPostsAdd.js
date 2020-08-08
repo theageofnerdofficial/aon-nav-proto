@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class SelectSubredditPeriod extends Component {
+class NumberOfPostsAdd extends Component {
   render() {
     return (
-      <div className="col-12 row p-0 m-0 mb-3">
+      <div className="col-12 row p-0 m-0 my-3">
         <div className="col-2 p-0">
           <button
             className="btn btn-light form-control font-weight-light"
@@ -12,25 +12,26 @@ class SelectSubredditPeriod extends Component {
               borderTopRightRadius: 0,
             }}
           >
-            From
+            Posts
           </button>
         </div>
         <div className="col-10 p-0">
-          <select
+          <input
             className="form-control font-weight-light"
-            name="subreddit-period"
-          >
-            <option>Past hour</option>
-            <option>Past 24 hours</option>
-            <option>Past week</option>
-            <option>Past month</option>
-            <option>Past year</option>
-            <option>All time</option>
-          </select>
+            defaultValue="10"
+            max="100"
+            min="1"
+            name="posts"
+            style={{
+              borderBottomLeftRadius: 0,
+              borderTopLeftRadius: 0,
+            }}
+            type="number"
+          />
         </div>
       </div>
     );
   }
 }
 
-export default SelectSubredditPeriod;
+export default NumberOfPostsAdd;

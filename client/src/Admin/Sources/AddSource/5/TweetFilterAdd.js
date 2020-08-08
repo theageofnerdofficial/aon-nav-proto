@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectTweetFilter extends Component {
+class TweetFilterAdd extends Component {
   render() {
     return (
       <React.Fragment>
@@ -32,9 +32,9 @@ class SelectTweetFilter extends Component {
                 this.props.sourceAddFormFilter(e.target.value);
               }}
             >
-              <option value="hot">Mixed</option>
-              <option value="new">Recent</option>
-              <option value="rising">Popular</option>
+              <option value="mixed">Mixed</option>
+              <option value="recent">Recent</option>
+              <option value="popular">Popular</option>
             </select>
           </div>
         </div>
@@ -43,4 +43,4 @@ class SelectTweetFilter extends Component {
   }
 }
 
-export default SelectTweetFilter;
+export default TweetFilterAdd;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectSubreddit extends Component {
+class SubredditAdd extends Component {
   render() {
     return (
       <div className="col-12 row p-0 m-0 my-3">
@@ -27,6 +27,11 @@ class SelectSubreddit extends Component {
               borderTopLeftRadius: 0,
             }}
             required
+            value={
+              this.props.sourceReducer.sourceById
+                ? this.props.sourceReducer.sourceById.subreddit
+                : ''
+            }
           />
         </div>
       </div>
@@ -34,4 +39,4 @@ class SelectSubreddit extends Component {
   }
 }
 
-export default SelectSubreddit;
+export default SubredditAdd;

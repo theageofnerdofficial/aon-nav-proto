@@ -2,128 +2,35 @@
 import React, { Component } from 'react';
 import labels from '../../config/labels';
 import settings from '../../config/settings';
-import CheckIsOfficial from './AddSource/CheckIsOfficial';
+import FormatSource from './FormatSource';
 import SectionTitle from '../../Components/SectionTitle/SectionTitle';
-import SelectCategory from './AddSource/SelectCategory';
-import SelectGamingCategory from './AddSource/SelectGamingCategory';
-import SelectNumberOfPosts from './AddSource/SelectNumberOfPosts';
-import SelectService from './AddSource/SelectService';
-import SelectSubreddit from './AddSource/SelectSubreddit';
-import SelectSubredditFilter from './AddSource/SelectSubredditFilter';
-import SelectSubredditPeriod from './AddSource/SelectSubredditPeriod';
-import SelectNumberOfTweets from './AddSource/SelectNumberOfTweets';
-import SelectTwitterUser from './AddSource/SelectTwitterUser';
-import SelectTweetQuery from './AddSource/SelectTweetQuery';
-import SelectTweetFilter from './AddSource/SelectTweetFilter';
+import CategoryAdd from './AddSource/1/CategoryAdd';
+import CategoryGamingAdd from './AddSource/1.5/CategoryGamingAdd';
+import SelectService from './AddSource/2/ServiceAdd';
+import SubredditAdd from './AddSource/3/SubredditAdd';
+import TwitterUserAdd from './AddSource/3/TwitterUserAdd';
+import NumberOfPostsAdd from './AddSource/4/NumberOfPostsAdd';
+import NumberOfTweetsAdd from './AddSource/4/NumberOfTweetsAdd';
+import SubredditFilterAdd from './AddSource/5/SubredditFilterAdd';
+import TweetFilterAdd from './AddSource/5/TweetFilterAdd';
+import SubredditPeriodAdd from './AddSource/6/SubredditPeriodAdd';
+import TweetQueryAdd from './AddSource/6/TweetQueryAdd';
+import IsOfficialCheckAdd from './AddSource/7/IsOfficialCheckAdd';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
 import { fetchConstructor } from '../../actions';
 
-class AddApiSource extends Component {
+class AddSource extends Component {
   componentDidMount() {
-    // Load fresh form by resetting state:
     this.props.sourcesReset();
   }
-
   render() {
-    // Make sources match model schemas before posting to database:
-    const source = {
-      reddit: {
-        getFormatted(elements) {
-          return {
-            category: elements['category'].value,
-            categoryGaming: elements['category-gaming']
-              ? elements['category-gaming'].value
-              : null,
-            subreddit: elements['subreddit']
-              ? elements['subreddit'].value
-              : null,
-            postsNumber: elements['posts'] ? elements['posts'].value : null,
-            filter: elements['subreddit-filter']
-              ? elements['subreddit-filter'].value
-              : null,
-            service: SOURCE_REDDIT,
-            period: elements['subreddit-period']
-              ? elements['subreddit-period'].value
-              : null,
-            createdBy: localStorage.getItem('aon_user_id'),
-            isOfficial: elements['is-official-source']
-              ? elements['is-official-source'].checked
-              : false,
-          };
-        },
-      },
-      twitter: {
-        getFormatted(elements) {
-          return {
-            category: elements['category'].value,
-            categoryGaming: elements['category-gaming']
-              ? elements['category-gaming'].value
-              : null,
-            twitterUser: elements['twitter-user']
-              ? elements['twitter-user'].value
-              : null,
-            postsNumber: elements['posts'] ? elements['posts'].value : null,
-            filter: elements['tweet-filter']
-              ? elements['tweet-filter'].value
-              : null,
-            service: SOURCE_TWITTER,
-            queryKeyword: elements['query-keyword']
-              ? elements['query-keyword'].value
-              : null,
-            queryDate: elements['query-date']
-              ? elements['query-date'].value
-              : null,
-            createdBy: localStorage.getItem('aon_user_id'),
-            isOfficial: elements['is-official-source']
-              ? elements['is-official-source'].checked
-              : false,
-          };
-        },
-      },
-    };
-
-    // Change placeholder according to selected category:
-    const getPlaceholder = (form) => {
-      if (form) {
-        if (form.category === 'tv/film') {
-          return 'IMDB';
-        } else if (form.category === 'comics') {
-          return 'Marvel';
-        } else if (form.category === 'gaming') {
-          if (form.categoryGaming === 'boardgames') {
-            return 'Hasbro';
-          } else {
-            return 'Nintendo';
-          }
-        }
-      }
-    };
-
-    // Get formatted data and URL by service:
-    const getFormSubmission = (elements) => {
-      let formData;
-      if (elements['service'].value === 'reddit') {
-        formData = {
-          src: source.reddit.getFormatted(elements),
-          url: '/source/reddit/add',
-        };
-      } else if (elements['service'].value === 'twitter') {
-        formData = {
-          src: source.twitter.getFormatted(elements),
-          url: '/source/twitter/add',
-        };
-      }
-      return formData;
-    };
-
     // Display or hide fields by service:
     const fieldsByService = {
       get: (form) => {
-        // If we've a source & that source is Reddit, display Reddit form fields:
-        if (form.source) {
-          if (form.source === SOURCE_REDDIT) {
+        if (form.service) {
+          if (form.service === SOURCE_REDDIT) {
             return fieldsByService.reddit();
-          } else if (form.source === SOURCE_TWITTER) {
+          } else if (form.service === SOURCE_TWITTER) {
             return fieldsByService.twitter();
           }
         }
@@ -132,31 +39,31 @@ class AddApiSource extends Component {
         const { sourceAddFormFilter, sourceReducer } = this.props;
         return (
           <React.Fragment>
-            <SelectSubreddit
-              getPlaceholder={getPlaceholder}
+            <SubredditAdd
+              getPlaceholder={FormatSource.form.getPlaceholder}
               sourceReducer={this.props.sourceReducer}
             />
-            <SelectNumberOfPosts />
-            <SelectSubredditFilter sourceAddFormFilter={sourceAddFormFilter} />
+            <NumberOfPostsAdd />
+            <SubredditFilterAdd sourceAddFormFilter={sourceAddFormFilter} />
             {(sourceReducer && sourceReducer.filter === 'controversial') ||
             sourceReducer.filter === 'top' ? (
-              <SelectSubredditPeriod />
-            ) : (
-              ''
-            )}
+              <SubredditPeriodAdd />
+            ) : null}
           </React.Fragment>
         );
       },
       twitter: () => {
         return (
           <React.Fragment>
-            <SelectTwitterUser
-              getPlaceholder={getPlaceholder}
+            <TwitterUserAdd
+              getPlaceholder={FormatSource.form.getPlaceholder}
               sourceReducer={this.props.sourceReducer}
             />
-            <SelectNumberOfTweets />
-            <SelectTweetFilter />
-            <SelectTweetQuery />
+            <NumberOfTweetsAdd />
+            <TweetFilterAdd
+              sourceAddFormFilter={this.props.sourceAddFormFilter}
+            />
+            <TweetQueryAdd />
           </React.Fragment>
         );
       },
@@ -174,10 +81,10 @@ class AddApiSource extends Component {
                 e.preventDefault();
                 const { elements } = e.target;
                 const { props } = this;
-                if (!elements['service'] || !elements['source']) {
+                if (!elements['service']) {
                   return false;
                 }
-                let formData = getFormSubmission(elements);
+                let formData = FormatSource.form.getSubmissionData(elements);
                 fetchConstructor(
                   {
                     url: formData.url,
@@ -225,29 +132,23 @@ class AddApiSource extends Component {
                 );
               }}
             >
-              <SelectCategory
+              <CategoryAdd
+                settings={settings}
                 sourceAddFormCategory={this.props.sourceAddFormCategory}
               />
               {this.props.sourceReducer.category === 'gaming' ? (
-                <SelectGamingCategory
+                <CategoryGamingAdd
                   sourceAddFormCategoryGaming={
                     this.props.sourceAddFormCategoryGaming
                   }
                 />
-              ) : (
-                ''
-              )}
+              ) : null}
               {this.props.sourceReducer.category ? (
-                <SelectService
-                  sourceAddFormSelect={this.props.sourceAddFormSelect}
-                />
-              ) : (
-                ''
-              )}
-
+                <SelectService sourceAddService={this.props.sourceAddService} />
+              ) : null}
               {fieldsByService.get(this.props.sourceReducer)}
               <br />
-              <CheckIsOfficial />
+              <IsOfficialCheckAdd />
               <br />
               <button className="btn btn-primary form-control mb-4">
                 Add source
@@ -260,4 +161,4 @@ class AddApiSource extends Component {
   }
 }
 
-export default AddApiSource;
+export default AddSource;

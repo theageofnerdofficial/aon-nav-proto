@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectNumberOfTweets extends Component {
+class NumberOfPostsEdit extends Component {
   render() {
     return (
       <div className="col-12 row p-0 m-0 my-3">
@@ -18,7 +18,11 @@ class SelectNumberOfTweets extends Component {
         <div className="col-10 p-0">
           <input
             className="form-control font-weight-light"
-            defaultValue="10"
+            defaultValue={
+              this.props.sourceById ? this.props.sourceById.postsNumber : 10
+            }
+            max="100"
+            min="1"
             name="posts"
             style={{
               borderBottomLeftRadius: 0,
@@ -32,4 +36,4 @@ class SelectNumberOfTweets extends Component {
   }
 }
 
-export default SelectNumberOfTweets;
+export default NumberOfPostsEdit;

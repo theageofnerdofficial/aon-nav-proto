@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectTwitterUser extends Component {
+class NumberOfTweetsEdit extends Component {
   render() {
     return (
       <div className="col-12 row p-0 m-0 my-3">
@@ -12,21 +12,21 @@ class SelectTwitterUser extends Component {
               borderTopRightRadius: 0,
             }}
           >
-            @
+            Posts
           </button>
         </div>
         <div className="col-10 p-0">
           <input
             className="form-control font-weight-light"
-            name="twitter-user"
-            placeholder={`e.g. ${this.props.getPlaceholder(
-              this.props.sourceReducer
-            )}`}
-            required
+            defaultValue={
+              this.props.sourceById ? this.props.sourceById.postsNumber : 10
+            }
+            name="posts"
             style={{
               borderBottomLeftRadius: 0,
               borderTopLeftRadius: 0,
             }}
+            type="number"
           />
         </div>
       </div>
@@ -34,4 +34,4 @@ class SelectTwitterUser extends Component {
   }
 }
 
-export default SelectTwitterUser;
+export default NumberOfTweetsEdit;

@@ -26,7 +26,8 @@ import Sources from './Sources';
 import SignUp from './SignUp';
 import UserList from './Admin/UserList';
 import Admin from './Admin/Admin';
-import AddApiSource from './Admin/Sources/AddSource';
+import AddSource from './Admin/Sources/AddSource';
+import EditSource from './Admin/Sources/EditSource';
 import GetSources from './Admin/Sources/GetSources/GetSources';
 import FlashMsg from './Components/FlashMsg/FlashMsg';
 import { GlobalStyles } from './themeProvider/global';
@@ -43,11 +44,13 @@ import {
   sourceAddFormCategory,
   sourceAddFormCategoryGaming,
   sourceAddFormFilter,
-  sourceAddFormSelect,
+  sourceAddService,
   sourcesReset,
   sourcesCombine,
   sourcesGetReddit,
   sourcesGetTwitter,
+  sourceGetById,
+  sourceRemove,
   uiToggleLights,
   userAuthenticate,
   userLogin,
@@ -80,13 +83,15 @@ const mapDispatchToProps = (dispatch) => {
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
-    sourceAdd: (sourceForm) => dispatch(sourceAdd(sourceForm)),
+    sourceAdd: (source) => dispatch(sourceAdd(source)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
     sourceAddFormCategoryGaming: (cat) =>
       dispatch(sourceAddFormCategoryGaming(cat)),
     sourceAddFormFilter: (filter) => dispatch(sourceAddFormFilter(filter)),
-    sourceAddFormSelect: (source) => dispatch(sourceAddFormSelect(source)),
+    sourceAddService: (source) => dispatch(sourceAddService(source)),
+    sourceRemove: (source) => dispatch(sourceRemove(source)),
     sourcesCombine: () => dispatch(sourcesCombine()),
+    sourceGetById: (o) => dispatch(sourceGetById(o)),
     sourcesReset: () => dispatch(sourcesReset()),
     sourcesGetReddit: () => dispatch(sourcesGetReddit()),
     sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
@@ -151,9 +156,11 @@ class Main extends Component {
       sourceAddFormCategoryGaming,
       sourceAddFormFilter,
       sourcesCombine,
+      sourceGetById,
       sourceReducer,
+      sourceRemove,
       sourcesReset,
-      sourceAddFormSelect,
+      sourceAddService,
       sourcesGetReddit,
       sourcesGetTwitter,
       uiReducer,
@@ -269,7 +276,7 @@ class Main extends Component {
                       exact
                       path="/admin/addsource"
                       render={(props) => (
-                        <AddApiSource
+                        <AddSource
                           flashMsgFlash={flashMsgFlash}
                           flashMsgUpdate={flashMsgUpdate}
                           sourceAdd={sourceAdd}
@@ -280,7 +287,29 @@ class Main extends Component {
                           sourceAddFormFilter={sourceAddFormFilter}
                           sourceReducer={sourceReducer}
                           sourcesReset={sourcesReset}
-                          sourceAddFormSelect={sourceAddFormSelect}
+                          sourceAddService={sourceAddService}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/admin/editsource/:id/:service"
+                      render={(props) => (
+                        <EditSource
+                          flashMsgFlash={flashMsgFlash}
+                          flashMsgUpdate={flashMsgUpdate}
+                          Link={Link}
+                          sourceAdd={sourceAdd}
+                          sourceAddFormCategory={sourceAddFormCategory}
+                          sourceAddFormCategoryGaming={
+                            sourceAddFormCategoryGaming
+                          }
+                          sourceAddFormFilter={sourceAddFormFilter}
+                          sourceGetById={sourceGetById}
+                          sourceReducer={sourceReducer}
+                          sourcesReset={sourcesReset}
+                          sourceAddService={sourceAddService}
                           {...props}
                         />
                       )}
@@ -290,10 +319,14 @@ class Main extends Component {
                       path="/admin/getsources"
                       render={(props) => (
                         <GetSources
+                          flashMsgFlash={flashMsgFlash}
+                          flashMsgUpdate={flashMsgUpdate}
+                          Link={Link}
                           sourceReducer={sourceReducer}
                           sourcesCombine={sourcesCombine}
                           sourcesGetReddit={sourcesGetReddit}
                           sourcesGetTwitter={sourcesGetTwitter}
+                          sourceRemove={sourceRemove}
                           sourcesReset={sourcesReset}
                           {...props}
                         />

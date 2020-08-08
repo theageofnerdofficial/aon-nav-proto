@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CheckIsOfficial extends Component {
+class IsOfficialCheckAdd extends Component {
   render() {
     return (
       <div className="col-12 row p-0 m-0">
@@ -21,4 +21,4 @@ class CheckIsOfficial extends Component {
   }
 }
 
-export default CheckIsOfficial;
+export default IsOfficialCheckAdd;
