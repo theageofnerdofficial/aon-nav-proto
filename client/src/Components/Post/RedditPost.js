@@ -2,7 +2,6 @@
  ***************************************************************/
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import postElem from './PostElemBySource/PostElem';
 import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
 import FontIcon from '../FontIcon/FontIcon';
