@@ -99,7 +99,7 @@ app.delete('/source/reddit', (req, res, next) =>
   redditSourceController.delete(req, res, next)
 );
 
-app.get('/sources/reddit', (req, res, next) =>
+app.get('/source/reddit/:category', (req, res, next) =>
   redditSourceController.list(req, res, next)
 );
 

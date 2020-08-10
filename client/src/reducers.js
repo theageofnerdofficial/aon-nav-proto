@@ -18,6 +18,9 @@ import {
   SOURCE_ADD_FORM_SELECT,
   SOURCE_ADD_PENDING,
   SOURCE_ADD_SUCCESS,
+  SOURCE_GET_REDDIT_POSTS_FAILURE,
+  SOURCE_GET_REDDIT_POSTS_PENDING,
+  SOURCE_GET_REDDIT_POSTS_SUCCESS,
   SOURCE_GETBYID_FAILURE,
   SOURCE_GETBYID_PENDING,
   SOURCE_GETBYID_SUCCESS,
@@ -232,9 +235,11 @@ const sourceAddForm = {
   filter: String,
   sourceAddPending: false,
   sourceRedditGetPending: false,
+  sourceRedditPostsPending: false,
   sourceTwitterGetPending: false,
   sourcesCombined: null,
   sourcesRedditData: null,
+  sourcesRedditPosts: null,
   sourcesTwitterData: null,
   showRedditPeriod: true,
   sourceByIdPending: false,
@@ -243,6 +248,32 @@ const sourceAddForm = {
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
+    case SOURCE_GET_REDDIT_POSTS_PENDING:
+      //return Object.assign({}, state);
+      return Object.assign({}, state, { sourceRedditPostsPending: true });
+
+    case SOURCE_GET_REDDIT_POSTS_FAILURE:
+      //return Object.assign({}, state);
+      return Object.assign({}, state, { sourceRedditPostsPending: false });
+
+    case SOURCE_GET_REDDIT_POSTS_SUCCESS:
+      //state.sourcesRedditPosts.length >= 1 ?
+
+      let sourcesRedditPostsCp = state.sourcesRedditPosts;
+
+      if (sourcesRedditPostsCp && sourcesRedditPostsCp.length >= 1) {
+        action.payload.data.children.forEach((d) => {
+          sourcesRedditPostsCp.push(d);
+        });
+      } else {
+        sourcesRedditPostsCp = action.payload.data.children;
+      }
+
+      return Object.assign({}, state, {
+        sourceRedditPostsPending: false,
+        sourcesRedditPosts: sourcesRedditPostsCp,
+      });
+
     case SOURCES_COMBINE:
       //return Object.assign({}, state);
       return Object.assign({}, state, {

@@ -20,7 +20,13 @@ exports.create = (req, res, next) => {
 /* List sources:
  ******************************************************************/
 exports.list = (req, res) => {
-  RedditSource.find({}, (err, source) => {
+  let conditionObj = {};
+  ['TV/Film', 'Comics', 'Gaming'].forEach((category) => {
+    if (category.toLowerCase() === req.params.category) {
+      conditionObj.category = category.toLowerCase();
+    }
+  });
+  RedditSource.find(conditionObj, (err, source) => {
     if (err) {
       res.status(500).send(err);
     }

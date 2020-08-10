@@ -8,21 +8,6 @@ class Admin extends Component {
       <div>
         <SectionTitle title="Admin" />
         <div style={{ transform: 'scale(1)' }}>
-          <SectionTitlePostsTitle text="Users" />
-          <div className="col-12 row p-0 m-0">
-            <AdminThumb
-              fontIcon="faTasks"
-              label="User List"
-              link="/admin/userlist"
-              Link={this.props.Link}
-            />
-            <AdminThumb
-              fontIcon="faFileAlt"
-              label="Review User Submissions"
-              link="/admin/usersubmissions"
-              Link={this.props.Link}
-            />
-          </div>
           <SectionTitlePostsTitle text="Sources" />
           <div className="col-12 row p-0 m-0">
             <AdminThumb
@@ -39,8 +24,24 @@ class Admin extends Component {
             />
             <AdminThumb
               fontIcon="faTwitter"
-              label="List/Modify APIs"
+              label="Services"
               link="/admin/apis"
+              Link={this.props.Link}
+            />
+          </div>
+          <br />
+          <SectionTitlePostsTitle text="Users" />
+          <div className="col-12 row p-0 m-0">
+            <AdminThumb
+              fontIcon="faTasks"
+              label="User List"
+              link="/admin/userlist"
+              Link={this.props.Link}
+            />
+            <AdminThumb
+              fontIcon="faFileAlt"
+              label="Review User Submissions"
+              link="/admin/usersubmissions"
               Link={this.props.Link}
             />
           </div>

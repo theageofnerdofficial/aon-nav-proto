@@ -17,6 +17,9 @@ import {
   SOURCE_ADD_FORM_CATEGORY_GAMING,
   SOURCE_ADD_FORM_FILTER,
   SOURCE_ADD_FORM_SELECT,
+  SOURCE_GET_REDDIT_POSTS_FAILURE,
+  SOURCE_GET_REDDIT_POSTS_PENDING,
+  SOURCE_GET_REDDIT_POSTS_SUCCESS,
   SOURCE_REMOVE,
   SOURCE_GETBYID_FAILURE,
   SOURCE_GETBYID_PENDING,
@@ -49,6 +52,7 @@ import {
 
 // :
 import settings from './config/settings';
+import format from './config/format';
 
 /* Data actions:
  ******************************************************/
@@ -66,6 +70,7 @@ export const dataFormatTweets = (o) => ({
   payload: o,
 });
 
+// replace???
 export const dataRequest = (o) => (dispatch) => {
   dispatch({ type: DATA_REQUEST_PENDING });
   const url = () => {
@@ -189,16 +194,53 @@ export const sourceGetById = (o) => (dispatch) => {
       dispatch({ type: SOURCE_GETBYID_FAILURE, payload: error })
     );
 };
+
 //
 
+export const sourceGetRedditPosts = (o) => (dispatch) => {
+  let redditUrl = `https://www.reddit.com/r/${o.subreddit}/${o.filter}.json?`;
+  let params = [];
+  //
+  if (o.period) {
+    if (o.period !== 'All time') {
+      o.period = format.reddit.source.filter(o);
+    }
+    params.push(`t=${o.period}`);
+  }
+  //
+  if (o.postsNumber) params.push(`limit=${o.postsNumber}`);
+  //
+  params = params.join('&');
+  redditUrl = redditUrl + params;
+
+  dispatch({ type: SOURCE_GET_REDDIT_POSTS_PENDING });
+
+  fetch(redditUrl, {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: SOURCE_GET_REDDIT_POSTS_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCE_GET_REDDIT_POSTS_FAILURE, payload: error })
+    );
+};
+
+//
 export const sourcesCombine = () => ({
   type: SOURCES_COMBINE,
 });
 
 //
-export const sourcesGetReddit = () => (dispatch) => {
+export const sourcesGetReddit = (cat) => (dispatch) => {
+  const category = cat ? '/' + cat : '/all';
+  console.log(category);
   dispatch({ type: SOURCES_REDDIT_GET_PENDING });
-  fetch('/sources/reddit', {
+  fetch('/source/reddit' + category, {
     headers: settings.network.headers,
     method: 'GET',
   })

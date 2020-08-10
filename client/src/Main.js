@@ -45,6 +45,7 @@ import {
   sourceAddFormCategoryGaming,
   sourceAddFormFilter,
   sourceAddService,
+  sourceGetRedditPosts,
   sourcesReset,
   sourcesCombine,
   sourcesGetReddit,
@@ -89,11 +90,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(sourceAddFormCategoryGaming(cat)),
     sourceAddFormFilter: (filter) => dispatch(sourceAddFormFilter(filter)),
     sourceAddService: (source) => dispatch(sourceAddService(source)),
+    sourceGetRedditPosts: (o) => dispatch(sourceGetRedditPosts(o)),
     sourceRemove: (source) => dispatch(sourceRemove(source)),
     sourcesCombine: () => dispatch(sourcesCombine()),
     sourceGetById: (o) => dispatch(sourceGetById(o)),
     sourcesReset: () => dispatch(sourcesReset()),
-    sourcesGetReddit: () => dispatch(sourcesGetReddit()),
+    sourcesGetReddit: (cat) => dispatch(sourcesGetReddit(cat)),
     sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
     uiToggleLights: () => dispatch(uiToggleLights()),
     userAuthenticate: () => dispatch(userAuthenticate()),
@@ -157,6 +159,7 @@ class Main extends Component {
       sourceAddFormFilter,
       sourcesCombine,
       sourceGetById,
+      sourceGetRedditPosts,
       sourceReducer,
       sourceRemove,
       sourcesReset,
@@ -227,7 +230,19 @@ class Main extends Component {
                       )}
                     />
                     <Route path="/tvfilm" component={withRouter(TVFilm)} />
-                    <Route path="/gaming" component={withRouter(Gaming)} />
+                    <Route
+                      exact
+                      path="/gaming"
+                      render={(props) => (
+                        <Gaming
+                          sourceReducer={sourceReducer}
+                          sourceGetRedditPosts={sourceGetRedditPosts}
+                          sourcesGetReddit={sourcesGetReddit}
+                          sourcesReset={sourcesReset}
+                          {...props}
+                        />
+                      )}
+                    />
                     <Route
                       path="/retrogaming"
                       component={withRouter(RetroGames)}
