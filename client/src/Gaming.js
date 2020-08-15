@@ -4,6 +4,8 @@ import settings from './config/settings';
 import RedditPost from './Components/Post/RedditPost';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
 import utils from './Components/Utils/utils/utils';
+import FontIcon from './Components/FontIcon/FontIcon';
+import FilterBtn from './Components/UI/FilterBtn';
 
 let gotRedditSources = false;
 class Gaming extends Component {
@@ -57,13 +59,12 @@ class Gaming extends Component {
         <p>
           {this.props.sourceReducer &&
           this.props.sourceReducer.sourcesRedditData
-            ? this.props.sourceReducer.sourcesRedditData.map((redditSource) => {
-                return (
-                  <span className="badge badge-primary">
-                    {utils.str.makeTitleCase(redditSource.subreddit)}
-                  </span>
-                );
-              })
+            ? this.props.sourceReducer.sourcesRedditData.map((redditSource) => (
+                <FilterBtn
+                  brandColor={redditSource.brandColor}
+                  source={utils.str.makeTitleCase(redditSource.subreddit)}
+                />
+              ))
             : null}
         </p>
 

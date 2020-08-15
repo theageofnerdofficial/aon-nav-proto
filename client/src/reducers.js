@@ -11,6 +11,7 @@ import {
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
   MODAL_LOGIN_FORM,
+  NERD_UPDATE_CHECK,
   SOURCE_ADD_FAILURE,
   SOURCE_ADD_FORM_CATEGORY,
   SOURCE_ADD_FORM_CATEGORY_GAMING,
@@ -51,6 +52,8 @@ import {
 import utils from './Components/Utils/utils/utils';
 import settings from './config/settings';
 import loginCreds from './config/loginCreds';
+import levels from './MyNerd/levels/levels';
+import mynerd from './helpers/myNerd';
 
 //
 let stateCp;
@@ -76,13 +79,10 @@ export const dataReducer = (state = data, action = {}) => {
         ]),
       });
     case DATA_REQUEST_FAILURE:
-      console.log('Data request failure');
       return Object.assign({}, state, { dataPending: false });
     case DATA_REQUEST_PENDING:
-      console.log('Data request pending');
       return Object.assign({}, state, { dataPending: true });
     case DATA_REQUEST_SUCCESS:
-      console.log('Data request success');
       let newState = { dataPending: false };
       if (action.source === SOURCE_TWITTER) {
         newState.tweetDataRaw = action.payload;
@@ -116,6 +116,20 @@ export const modalReducer = (state = modal, action = {}) => {
   switch (action.type) {
     default:
       return state;
+  }
+};
+
+/* Nerd:
+ *********************************************************/
+const nerd = {};
+
+export const nerdReducer = (state = levels, action = {}) => {
+  switch (action.type) {
+    case NERD_UPDATE_CHECK:
+      const nerdCatCp = mynerd.checkSystem.update(state, action);
+      return Object.assign({}, state, { category: nerdCatCp });
+    default:
+      return Object.assign({}, state);
   }
 };
 
@@ -200,7 +214,6 @@ export const usersReducer = (state = users, action = {}) => {
       return Object.assign({}, state, {
         userLoginPending: true,
       });
-
     case USER_LOGIN_SUCCESS:
       localStorage.setItem(settings.localStorage.token, action.payload.token);
       window.location.href = '/';
@@ -251,16 +264,11 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
     case SOURCE_GET_REDDIT_POSTS_PENDING:
       //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: true });
-
     case SOURCE_GET_REDDIT_POSTS_FAILURE:
       //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: false });
-
     case SOURCE_GET_REDDIT_POSTS_SUCCESS:
-      //state.sourcesRedditPosts.length >= 1 ?
-
       let sourcesRedditPostsCp = state.sourcesRedditPosts;
-
       if (sourcesRedditPostsCp && sourcesRedditPostsCp.length >= 1) {
         action.payload.data.children.forEach((d) => {
           sourcesRedditPostsCp.push(d);
@@ -268,7 +276,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       } else {
         sourcesRedditPostsCp = action.payload.data.children;
       }
-
       return Object.assign({}, state, {
         sourceRedditPostsPending: false,
         sourcesRedditPosts: sourcesRedditPostsCp,
@@ -290,9 +297,11 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         filter: String,
         sourceAddPending: false,
         sourceRedditGetPending: false,
+        sourceRedditPostsPending: false,
         sourceTwitterGetPending: false,
         sourcesCombined: null,
         sourcesRedditData: null,
+        sourcesRedditPosts: null,
         sourcesTwitterData: null,
         showRedditPeriod: true,
         sourceByIdPending: false,

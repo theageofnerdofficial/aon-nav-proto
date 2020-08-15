@@ -71,6 +71,7 @@ class GetSources extends Component {
           <table className="table table-striped">
             <thead>
               <tr>
+                <th></th>
                 <th>Category</th>
                 <th>Service</th>
                 <th>Source</th>

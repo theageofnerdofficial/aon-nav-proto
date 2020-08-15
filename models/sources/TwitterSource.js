@@ -68,6 +68,11 @@ const TwitterSourceSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+
+  brandColor: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('TwitterSources', TwitterSourceSchema);

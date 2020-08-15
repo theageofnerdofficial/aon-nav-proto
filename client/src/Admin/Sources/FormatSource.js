@@ -56,6 +56,9 @@ const FormatSource = {
           ? el['category-gaming'].value
           : null,
         subreddit: el['subreddit'] ? el['subreddit'].value : null,
+        brandColor: el['reddit-brand-color']
+          ? el['reddit-brand-color'].value
+          : null,
         postsNumber: el['posts'] ? el['posts'].value : null,
         filter: el['subreddit-filter'] ? el['subreddit-filter'].value : null,
         service: SOURCE_REDDIT,
@@ -71,12 +74,16 @@ const FormatSource = {
   //
   twitter: {
     schemify: (el) => {
+      console.log(el['twitter-brand-color'].value);
       return {
         category: el['category'].value,
         categoryGaming: el['category-gaming']
           ? el['category-gaming'].value
           : null,
         twitterUser: el['twitter-user'] ? el['twitter-user'].value : null,
+        brandColor: el['twitter-brand-color']
+          ? el['twitter-brand-color'].value
+          : null,
         postsNumber: el['posts'] ? el['posts'].value : null,
         filter: el['tweet-filter'] ? el['tweet-filter'].value : null,
         service: SOURCE_TWITTER,

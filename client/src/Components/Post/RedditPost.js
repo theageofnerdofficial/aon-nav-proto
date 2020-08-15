@@ -1,15 +1,28 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
+import FontIcon from '../FontIcon/FontIcon';
 import ReactHtmlParser from 'react-html-parser';
+import format from '../../config/format';
 import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
-import FontIcon from '../FontIcon/FontIcon';
-import format from '../../config/format';
 
 class RedditPost extends Component {
   render() {
-    const getMore = (index) => {
+    const getImgs = (data) => {
+      if (data.preview) {
+        return data.preview.images.map((d) => {
+          return (
+            <img
+              src={d.source.url.replace(/&amp;/g, '&')}
+              className="rounded shadow"
+              style={{ height: 200 }}
+            />
+          );
+        });
+      }
+    };
+    const getMore = (data, index) => {
       return (
         <div className="panel panel-default">
           <div className="panel-heading">
@@ -34,17 +47,17 @@ class RedditPost extends Component {
           </div>
           <div id={`collapse${index}`} className="collapse in panel-collapse">
             <div className="pt-1 font-italic font-weight-light panel-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              {getImgs(data)}
+              <br />
+              {data.selftext}
+              <br />
+              <button className="btn btn-sm btn-light">View Full thread</button>
             </div>
           </div>
         </div>
       );
     };
     /* :
-
      ***************************************************************/
     const { index } = this.props;
 
@@ -54,13 +67,12 @@ class RedditPost extends Component {
           <img
             className="mb-2"
             src={format.reddit.source.thumbnail(this.props.data.subreddit)}
-            style={{ borderRadius: '100%' }}
-            width="53px"
+            width="65px"
           />
           <br />
           <small
-            style={{ fontWeight: 300, opacity: 0.5 }}
             className="text-muted font-italic px-2 pt-1"
+            style={{ fontWeight: 300, opacity: 0.5 }}
           >
             {format.time.from(
               new Date(format.time.uetToHumanReadable(this.props.data.created))
@@ -110,18 +122,18 @@ class RedditPost extends Component {
           <span style={{ position: 'absolute', right: 0, top: '0' }}>
             <button
               className="btn btn-sm text-muted"
-              style={{ marginTop: '-15px', opacity: 0.8 }}
               onClick={() => {
                 const panel = document.getElementById(`panel-${index}`);
                 panel.style.display =
                   panel.style.display === 'none' ? 'block' : 'none';
               }}
+              style={{ marginTop: '-15px', opacity: 0.8 }}
             >
               {FontIcon('faEllipsisV')}
             </button>
           </span>
           <h6 className="font-weight-light">{this.props.data.title}</h6>
-          {getMore(this.props.index)}
+          {getMore(this.props.data, this.props.index)}
         </div>
       </div>
     );

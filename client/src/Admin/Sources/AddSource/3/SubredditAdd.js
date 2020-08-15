@@ -34,6 +34,47 @@ class SubredditAdd extends Component {
             }
           />
         </div>
+        <div className="col-12 row p-0 m-0 my-3">
+          <div className="col-2 p-0">
+            {' '}
+            <button
+              className="btn btn-light form-control font-weight-light"
+              style={{
+                height: '100%',
+                borderBottomRightRadius: 0,
+                borderTopRightRadius: 0,
+              }}
+            >
+              Brand colour
+            </button>
+          </div>
+          <div className="col-10 p-0">
+            <div className="col-12 m-0 p-0 row" style={{ height: '100%' }}>
+              <div className="col-2 p-0 ">
+                {' '}
+                <input
+                  style={{ height: '100%' }}
+                  type="color"
+                  name="reddit-brand-color"
+                  defaultValue="#e4000f"
+                ></input>
+              </div>
+              <div className="col-10 p-0 ">
+                <p
+                  className="font-italic font-weight-light mt-2"
+                  style={{ fontSize: '0.85em' }}
+                >
+                  NOTE: try for official trademark colours. Nintendo use #e4000f
+                  for example. Try{' '}
+                  <a href="https://encycolorpedia.com/" target="_blank">
+                    Encycolorpedia
+                  </a>
+                  ?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

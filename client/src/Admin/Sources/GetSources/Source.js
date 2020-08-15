@@ -5,6 +5,8 @@ import labels from '../../../config/labels';
 import utils from '../../../Components/Utils/utils/utils';
 import { fetchConstructor } from '../../../actions';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../constants';
+import LabelBtn from '../../../Components/UI/LabelBtn';
+import format from '../../../config/format';
 
 class Source extends Component {
   render() {
@@ -95,11 +97,24 @@ class Source extends Component {
       }
     };
 
+    const getLogo = (src) => {
+      if (src.service === SOURCE_REDDIT) {
+        {
+          console.log(format.reddit.source.thumbnail(src.subreddit));
+          return format.reddit.source.thumbnail(src.subreddit);
+        }
+      }
+    };
+
     // Get table cells by service — different services have differently formatted URLs, for example:
     const getTableCellsByService = (src) => {
       if (src.service === SOURCE_REDDIT) {
         return (
-          <a href={`https://www.reddit.com/r/${src.subreddit}`} target="_blank">
+          <a
+            href={`https://www.reddit.com/r/${src.subreddit}`}
+            style={{ color: '#fff' }}
+            target="_blank"
+          >
             {utils.str.makeTitleCase(src.subreddit)}
           </a>
         );
@@ -118,6 +133,9 @@ class Source extends Component {
       <React.Fragment>
         <tr>
           <td>
+            <img src={getLogo(this.props.src)} style={{ width: '65px' }} />
+          </td>
+          <td>
             {utils.str.makeTitleCase(this.props.src.category)}
             <br />
             <small className="font-weight-light">
@@ -128,7 +146,10 @@ class Source extends Component {
           </td>
           <td>{getSource(this.props.src)}</td>
           <td>
-            {getTableCellsByService(this.props.src)}{' '}
+            <LabelBtn
+              brandColor={this.props.src.brandColor}
+              source={getTableCellsByService(this.props.src)}
+            />
             {getOfficial(this.props.src)}
           </td>
           <td>{this.props.src.postsNumber}</td>

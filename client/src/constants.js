@@ -17,6 +17,10 @@ export const FLASH_MSG_UPDATE = 'FLASH_MSG_UPDATE';
  *****************************************************/
 export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';
 
+/* Nerd constants:
+ *****************************************************/
+export const NERD_UPDATE_CHECK = 'NERD_UPDATE_CHECK';
+
 /* Source constants:
  *****************************************************/
 export const SOURCE_ADD_FAILURE = 'SOURCE_ADD_FAILURE';

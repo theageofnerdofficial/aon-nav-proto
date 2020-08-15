@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Home from './Home';
-import MyNerd from './MyNerd';
+import MyNerd from './MyNerd/MyNerd';
 import TVFilm from './TVFilm';
 import Gaming from './Gaming';
 import RetroGames from './RetroGames';
@@ -40,6 +40,7 @@ import {
   dataFormatTweets,
   flashMsgFlash,
   flashMsgUpdate,
+  nerdUpdateCheck,
   sourceAdd,
   sourceAddFormCategory,
   sourceAddFormCategoryGaming,
@@ -67,6 +68,7 @@ const mapStateToProps = (state) => {
     dataReducer: state.dataReducer,
     flashMsgReducer: state.flashMsgReducer,
     modalReducer: state.modalReducer,
+    nerdReducer: state.nerdReducer,
     sourceReducer: state.sourceReducer,
     uiReducer: state.uiReducer,
     usersReducer: state.usersReducer,
@@ -84,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
+    nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
     sourceAddFormCategoryGaming: (cat) =>
@@ -153,6 +156,8 @@ class Main extends Component {
       flashMsgReducer,
       flashMsgUpdate,
       modalReducer,
+      nerdReducer,
+      nerdUpdateCheck,
       sourceAdd,
       sourceAddFormCategory,
       sourceAddFormCategoryGaming,
@@ -223,6 +228,8 @@ class Main extends Component {
                       path="/mynerd"
                       render={(props) => (
                         <MyNerd
+                          nerdReducer={nerdReducer}
+                          nerdUpdateCheck={nerdUpdateCheck}
                           userAuthenticate={userAuthenticate}
                           usersReducer={usersReducer}
                           {...props}

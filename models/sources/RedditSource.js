@@ -63,6 +63,11 @@ const RedditSourceSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+
+  brandColor: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('RedditSources', RedditSourceSchema);

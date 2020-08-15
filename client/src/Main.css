@@ -78,6 +78,28 @@ a.nav-link:active {
   width: 100%;
 }
 
+.mynerd-wrapper {
+  border: 0px solid red;
+}
+
+.nerd-label {
+  letter-spacing: -1px !important;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+}
+
+.mynerd-wrapper > ul li {
+  font-weight: 200 !important;
+  letter-spacing: -1 !important;
+  list-style-type: none;
+  font-size: 1.6em;
+  color: #000;
+  text-transform: uppercase;
+}
+
 .konami-window {
   align-items: center;
   display: flex;
@@ -125,6 +147,15 @@ a.nav-link:active {
 }
 .table th {
   font-weight: 400 !important;
+}
+
+.thumbnail-select {
+  border: 2px solid black;
+  filter: opacity(30%);
+}
+
+.thumbnail-unselect {
+  border: 2px solid lime;
 }
 
 .vertical-center {

@@ -11,6 +11,8 @@ import {
   faCaretUp,
   faCog,
   faCheckCircle,
+  faChevronDown,
+  faChevronUp,
   faDownload,
   faEdit,
   faEllipsisV,
@@ -21,6 +23,7 @@ import {
   faTrashAlt,
   faSun,
   faTasks,
+  faTimes,
   faWrench,
   faUser,
   faUserAlt,
@@ -54,6 +57,12 @@ const FontIcon = (icon) => {
       break;
     case 'faCheckCircle':
       faIcon = faCheckCircle;
+      break;
+    case 'faChevronDown':
+      faIcon = faChevronDown;
+      break;
+    case 'faChevronUp':
+      faIcon = faChevronUp;
       break;
     case 'faCog':
       faIcon = faCog;
@@ -93,6 +102,9 @@ const FontIcon = (icon) => {
       break;
     case 'faTasks':
       faIcon = faTasks;
+      break;
+    case 'faTimes':
+      faIcon = faTimes;
       break;
     case 'faTrashAlt':
       faIcon = faTrashAlt;
