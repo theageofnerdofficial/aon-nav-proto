@@ -20,6 +20,7 @@ export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';
 /* Nerd constants:
  *****************************************************/
 export const NERD_UPDATE_CHECK = 'NERD_UPDATE_CHECK';
+export const NERD_SETUP_UPDATE_PHASE = 'NERD_SETUP_UPDATE_PHASE';
 
 /* Source constants:
  *****************************************************/

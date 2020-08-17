@@ -8,7 +8,7 @@ class Gaming extends Component {
   render() {
     const { nerdUpdateCheck, nerdReducer } = this.props;
     return (
-      <ul className="p-0">
+      <ul className="p-0" style={{}}>
         <GamingParent
           nerdReducer={nerdReducer}
           nerdUpdateCheck={nerdUpdateCheck}

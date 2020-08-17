@@ -1,11 +1,10 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import FontIcon from '../FontIcon/FontIcon';
-import ReactHtmlParser from 'react-html-parser';
 import format from '../../config/format';
 import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
+import FontIcon from '../FontIcon/FontIcon';
 
 class RedditPost extends Component {
   render() {
@@ -14,6 +13,7 @@ class RedditPost extends Component {
         return data.preview.images.map((d) => {
           return (
             <img
+              alt="Reddit media preview"
               src={d.source.url.replace(/&amp;/g, '&')}
               className="rounded shadow"
               style={{ height: 200 }}
@@ -65,6 +65,7 @@ class RedditPost extends Component {
       <div className="col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm">
         <div className=" col-2 text-center p-0 m-0">
           <img
+            alt="Reddit source thumbnail"
             className="mb-2"
             src={format.reddit.source.thumbnail(this.props.data.subreddit)}
             width="65px"

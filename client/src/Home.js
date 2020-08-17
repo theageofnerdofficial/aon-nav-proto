@@ -216,11 +216,12 @@ class Home extends Component {
             <div
               className="shadow-sm rounded bg-custom-panel"
               style={{
-                width: '100%',
                 height: 500,
+                width: '100%',
               }}
             >
               <img
+                alt="Test"
                 style={{ width: '100%' }}
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-N6U3fMPOy2jNApLFqOPJFpxuuamBIi1GZA&usqp=CAU"
               />

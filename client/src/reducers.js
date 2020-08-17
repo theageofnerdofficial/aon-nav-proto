@@ -11,6 +11,7 @@ import {
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
   MODAL_LOGIN_FORM,
+  NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   SOURCE_ADD_FAILURE,
   SOURCE_ADD_FORM_CATEGORY,
@@ -121,13 +122,24 @@ export const modalReducer = (state = modal, action = {}) => {
 
 /* Nerd:
  *********************************************************/
-const nerd = {};
-
 export const nerdReducer = (state = levels, action = {}) => {
   switch (action.type) {
     case NERD_UPDATE_CHECK:
       const nerdCatCp = mynerd.checkSystem.update(state, action);
       return Object.assign({}, state, { category: nerdCatCp });
+    default:
+      return Object.assign({}, state);
+  }
+};
+
+const nerdSetup = {
+  phase: 0,
+};
+
+export const nerdSetupReducer = (state = nerdSetup, action = {}) => {
+  switch (action.type) {
+    case NERD_SETUP_UPDATE_PHASE:
+      return Object.assign({}, state, { phase: action.payload.phase });
     default:
       return Object.assign({}, state);
   }

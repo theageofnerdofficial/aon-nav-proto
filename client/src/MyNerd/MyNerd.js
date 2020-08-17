@@ -1,26 +1,70 @@
 import React, { Component } from 'react';
-import countries from '../config/countries';
-import settings from '../config/settings';
-import SectionTitle from '../Components/SectionTitle/SectionTitle';
-import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
+import CompletedArea from './CompletedArea';
+import Intro from './Intro';
+import ProfileArea from './ProfileArea';
 import SelectionArea from './SelectionArea';
+import './MyNerd.css';
 
 class MyNerd extends Component {
-  getFlag = (country) => countries.map((e) => e.name).indexOf(country);
+  componentDidMount() {
+    this.props.nerdSetupUpdatePhase({ phase: 0 });
+  }
 
+  getPhase = () => {
+    let phaseContent;
+    switch (this.props.nerdSetupReducer.phase) {
+      case 0:
+        phaseContent = (
+          <Intro
+            nerdSetupReducer={this.props.nerdSetupReducer}
+            nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
+          />
+        );
+        break;
+      case 1:
+        phaseContent = (
+          <SelectionArea
+            nerdReducer={this.props.nerdReducer}
+            nerdSetupReducer={this.props.nerdSetupReducer}
+            nerdUpdateCheck={this.props.nerdUpdateCheck}
+            nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
+          />
+        );
+        break;
+      case 2:
+        phaseContent = (
+          <ProfileArea
+            nerdReducer={this.props.nerdReducer}
+            nerdSetupReducer={this.props.nerdSetupReducer}
+            nerdUpdateCheck={this.props.nerdUpdateCheck}
+            nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
+            usersReducer={this.props.usersReducer}
+          />
+        );
+        break;
+      case 3:
+        phaseContent = (
+          <CompletedArea
+            nerdReducer={this.props.nerdReducer}
+            nerdSetupReducer={this.props.nerdSetupReducer}
+            nerdUpdateCheck={this.props.nerdUpdateCheck}
+            nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
+            usersReducer={this.props.usersReducer}
+          />
+        );
+        break;
+      default:
+        phaseContent = (
+          <Intro
+            nerdSetupReducer={this.props.nerdSetupReducer}
+            nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
+          />
+        );
+    }
+    return phaseContent;
+  };
   render() {
-    return (
-      <div>
-        <SectionTitle
-          tabColour={settings.ui.style.sectionTab.mynerd}
-          title="My Nerd"
-        />
-        <SelectionArea
-          nerdReducer={this.props.nerdReducer}
-          nerdUpdateCheck={this.props.nerdUpdateCheck}
-        />
-      </div>
-    );
+    return <div>{this.getPhase()}</div>;
   }
 }
 

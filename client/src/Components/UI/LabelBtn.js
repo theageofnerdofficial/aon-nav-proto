@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontIcon from '../FontIcon/FontIcon';
 
 class LabelBtn extends Component {
   render() {

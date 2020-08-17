@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import SectionTitle from './Components/SectionTitle/SectionTitle';
 import settings from './config/settings';
-import RedditPost from './Components/Post/RedditPost';
-import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
 import utils from './Components/Utils/utils/utils';
-import FontIcon from './Components/FontIcon/FontIcon';
 import FilterBtn from './Components/UI/FilterBtn';
+import RedditPost from './Components/Post/RedditPost';
+import SectionTitle from './Components/SectionTitle/SectionTitle';
+import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
 
 let gotRedditSources = false;
 class Gaming extends Component {
@@ -20,7 +19,6 @@ class Gaming extends Component {
     gotRedditSources = false;
     this.props.sourcesReset();
     this.props.sourcesGetReddit('gaming');
-
     // get posts from sources
     //
     //

@@ -12,6 +12,8 @@ import {
   faCog,
   faCheckCircle,
   faChevronDown,
+  faChevronLeft,
+  faChevronRight,
   faChevronUp,
   faDownload,
   faEdit,
@@ -60,6 +62,12 @@ const FontIcon = (icon) => {
       break;
     case 'faChevronDown':
       faIcon = faChevronDown;
+      break;
+    case 'faChevronLeft':
+      faIcon = faChevronLeft;
+      break;
+    case 'faChevronRight':
+      faIcon = faChevronRight;
       break;
     case 'faChevronUp':
       faIcon = faChevronUp;

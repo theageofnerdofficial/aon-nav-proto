@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../../constants';
 
 class ServiceEdit extends Component {
   render() {

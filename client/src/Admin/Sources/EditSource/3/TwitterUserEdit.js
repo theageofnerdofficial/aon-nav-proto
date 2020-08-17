@@ -72,7 +72,11 @@ class TwitterUserEdit extends Component {
                 >
                   NOTE: try for official trademark colours. Nintendo use #e4000f
                   for example. Try{' '}
-                  <a href="https://encycolorpedia.com/" target="_blank">
+                  <a
+                    href="https://encycolorpedia.com/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     Encycolorpedia
                   </a>
                   ?

@@ -82,6 +82,46 @@ a.nav-link:active {
   border: 0px solid red;
 }
 
+.tooltip-main {
+  background: #f3f3f3;
+  border: 1px solid #737373;
+  border-radius: 50%;
+  color: #737373;
+  float: right;
+  height: 10px;
+  margin: 4px 121px 0 5px;
+  text-align: left !important;
+  width: 15px;
+}
+
+.tooltip-qm {
+  float: left;
+  margin: -2px 0px 3px 4px;
+}
+
+.tooltip-inner {
+  background: #ffffff;
+  border: 1px solid #737373;
+  color: rgb(0, 0, 0, 0.7);
+  font-size: 1.15em;
+  font-weight: 300;
+  height: 75px;
+  line-height: 1.15em;
+  max-width: 236px !important;
+  padding: 10px 15px 10px 20px;
+  text-align: left;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.bs-tooltip-auto[x-placement^='bottom'] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  border-bottom-color: #f00;
+  /* Red */
+}
+
 .nerd-label {
   letter-spacing: -1px !important;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
@@ -97,7 +137,6 @@ a.nav-link:active {
   list-style-type: none;
   font-size: 1.6em;
   color: #000;
-  text-transform: uppercase;
 }
 
 .konami-window {

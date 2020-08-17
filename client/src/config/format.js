@@ -47,6 +47,8 @@ const format = {
           case 'Past year':
             period = 'year';
             break;
+          default:
+            period = 'n/a';
         }
         return period;
       },

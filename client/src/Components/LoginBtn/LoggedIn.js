@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import loginCreds from '../../config/loginCreds';
-import Avatar from '../Avatar/Avatar';
+// import loginCreds from '../../config/loginCreds';
+// import Avatar from '../Avatar/Avatar';
 
 class LoggedIn extends Component {
   render() {

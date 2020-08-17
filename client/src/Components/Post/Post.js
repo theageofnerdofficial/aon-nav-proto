@@ -46,7 +46,12 @@ class Post extends Component {
                 key={`embedded-img-${index}`}
                 style={{ maxHeight: 200, overflow: 'scroll' }}
               >
-                <img className="rounded" width="100%" src={m.media_url} />
+                <img
+                  alt="Embedded media"
+                  className="rounded"
+                  width="100%"
+                  src={m.media_url}
+                />
               </div>
             );
           }

@@ -44,23 +44,33 @@ class Selector extends Component {
           style={{ height: '100%' }}
         >
           {this.props.expanded
-            ? FontIcon('faChevronUp')
-            : FontIcon('faChevronDown')}
+            ? FontIcon('faChevronDown')
+            : FontIcon('faChevronRight')}
         </button>
       );
     };
     return (
-      <div className="col-8 row m-0 p-0">
-        <div className="col-1 m-0 p-0 pr-2 my-1">{getIcon()}</div>
-        <div className="col-9 m-0 p-0 nerd-label pl-1">
+      <div className="col-12 row m-0 p-0">
+        <div className="col-2 m-0 p-0 pr-2 my-1 text-right">{getIcon()}</div>
+        <div className="col-7 m-0 p-0 nerd-label pl-1">
           <div
-            className={enumDescendants('hasEnabled') ? 'text-success' : null}
-            style={{ height: '100%' }}
+            className={` ${
+              enumDescendants('hasEnabled') ? 'text-success' : null
+            } vertical-center`}
+            style={{ float: 'left', height: '100%', lineHeight: '22px' }}
           >
-            {this.props.label} {enumDescendants('count')}
+            <span
+              data-toggle="tooltip"
+              data-placement="top"
+              data-html="true"
+              title="Brief description will go here"
+            >
+              {this.props.label}&nbsp;
+              {enumDescendants('count')}{' '}
+            </span>
           </div>
         </div>
-        <div className="col-2 m-0 p-0 row">
+        <div className="col-3 m-0 p-0 row">
           <div className="col-12 m-0 p-0 row">
             <div className="col-6 m-0 p-0 my-1">
               <input
@@ -78,8 +88,8 @@ class Selector extends Component {
                 type="checkbox"
               />
             </div>
-            <div className="col-6 border m-0 p-0 my-1">
-              <button className="btn btn-sm form-control btn-light font-weight-light text-uppercase">
+            <div className="col-6 m-0 p-0 my-1">
+              <button className="btn btn-sm form-control btn-light font-weight-light text-uppercase nav-add-btn">
                 nav+
               </button>
             </div>

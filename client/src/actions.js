@@ -10,6 +10,7 @@ import {
   FLASH_MSG_HIDE,
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
+  NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   SOURCE_ADD_FAILURE,
   SOURCE_ADD_PENDING,
@@ -117,6 +118,11 @@ export const flashMsgUpdate = (o) => ({
  ******************************************************/
 export const nerdUpdateCheck = (o) => ({
   type: NERD_UPDATE_CHECK,
+  payload: o,
+});
+
+export const nerdSetupUpdatePhase = (o) => ({
+  type: NERD_SETUP_UPDATE_PHASE,
   payload: o,
 });
 

@@ -1,17 +1,16 @@
 // Imports:
 import React, { Component } from 'react';
-import FontIcon from '../../../Components/FontIcon/FontIcon';
+import format from '../../../config/format';
 import labels from '../../../config/labels';
 import utils from '../../../Components/Utils/utils/utils';
+import FontIcon from '../../../Components/FontIcon/FontIcon';
+import LabelBtn from '../../../Components/UI/LabelBtn';
 import { fetchConstructor } from '../../../actions';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../constants';
-import LabelBtn from '../../../Components/UI/LabelBtn';
-import format from '../../../config/format';
 
 class Source extends Component {
   render() {
     const { props } = this;
-
     // Delete a source using fetch constructor to connect to DB:
     const deleteSource = (source) => {
       let url;
@@ -99,10 +98,7 @@ class Source extends Component {
 
     const getLogo = (src) => {
       if (src.service === SOURCE_REDDIT) {
-        {
-          console.log(format.reddit.source.thumbnail(src.subreddit));
-          return format.reddit.source.thumbnail(src.subreddit);
-        }
+        return format.reddit.source.thumbnail(src.subreddit);
       }
     };
 
@@ -112,6 +108,7 @@ class Source extends Component {
         return (
           <a
             href={`https://www.reddit.com/r/${src.subreddit}`}
+            rel="noopener noreferrer"
             style={{ color: '#fff' }}
             target="_blank"
           >
@@ -122,6 +119,7 @@ class Source extends Component {
         return (
           <a
             href={`https://www.twitter.com/${src.twitterUser}`}
+            rel="noopener noreferrer"
             target="_blank"
           >
             {utils.str.makeTitleCase(src.twitterUser)}
@@ -133,7 +131,11 @@ class Source extends Component {
       <React.Fragment>
         <tr>
           <td>
-            <img src={getLogo(this.props.src)} style={{ width: '65px' }} />
+            <img
+              alt="Source logo"
+              src={getLogo(this.props.src)}
+              style={{ width: '65px' }}
+            />
           </td>
           <td>
             {utils.str.makeTitleCase(this.props.src.category)}

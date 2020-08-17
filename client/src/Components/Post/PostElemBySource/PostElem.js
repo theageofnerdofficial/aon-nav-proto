@@ -7,7 +7,7 @@ const postElem = {
    ****************************************/
   accordion: {
     get(o, settings) {
-      const { id, source, userData } = o;
+      const { id } = o;
       return (
         <div className="panel panel-default">
           <div className="panel-heading">
@@ -60,7 +60,7 @@ const postElem = {
    ****************************************/
   text: {
     get(o, utils, ReactHtmlParser) {
-      const { source, text, userData } = o;
+      const { text } = o;
       return ReactHtmlParser(utils.urlify(text));
     },
   },

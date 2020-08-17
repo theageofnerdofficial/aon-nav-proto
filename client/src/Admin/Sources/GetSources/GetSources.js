@@ -1,9 +1,9 @@
 // Imports:
 import React, { Component } from 'react';
+import LoaderCentered from '../../../Components/Loader/LoaderCentered';
 import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../../../Components/SectionTitle/SectionTitlePostsTitle';
 import Source from './Source';
-import LoaderCentered from '../../../Components/Loader/LoaderCentered';
 
 // Stop update loop:
 let combined = false;
@@ -49,6 +49,7 @@ class GetSources extends Component {
           <td colSpan="7" className="text-center py-4">
             <br />
             <img
+              alt="Source thumbnail"
               className="rounded"
               src="/img/nosources.gif"
               style={{ height: 150, width: 200 }}

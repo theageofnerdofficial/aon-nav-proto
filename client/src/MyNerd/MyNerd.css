@@ -1,0 +1,32 @@
+.nav-add-btn {
+}
+
+ul {
+  padding: 0 !important;
+  padding-left: 15px !important;
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+  .nav-add-btn {
+    color: #000 !important;
+    font-size: 0.45em;
+    letter-spacing: -1px;
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
+}

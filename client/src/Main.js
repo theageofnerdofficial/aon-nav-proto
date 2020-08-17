@@ -40,6 +40,7 @@ import {
   dataFormatTweets,
   flashMsgFlash,
   flashMsgUpdate,
+  nerdSetupUpdatePhase,
   nerdUpdateCheck,
   sourceAdd,
   sourceAddFormCategory,
@@ -69,6 +70,7 @@ const mapStateToProps = (state) => {
     flashMsgReducer: state.flashMsgReducer,
     modalReducer: state.modalReducer,
     nerdReducer: state.nerdReducer,
+    nerdSetupReducer: state.nerdSetupReducer,
     sourceReducer: state.sourceReducer,
     uiReducer: state.uiReducer,
     usersReducer: state.usersReducer,
@@ -86,6 +88,7 @@ const mapDispatchToProps = (dispatch) => {
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
+    nerdSetupUpdatePhase: (o) => dispatch(nerdSetupUpdatePhase(o)),
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
@@ -157,6 +160,8 @@ class Main extends Component {
       flashMsgUpdate,
       modalReducer,
       nerdReducer,
+      nerdSetupUpdatePhase,
+      nerdSetupReducer,
       nerdUpdateCheck,
       sourceAdd,
       sourceAddFormCategory,
@@ -229,6 +234,8 @@ class Main extends Component {
                       render={(props) => (
                         <MyNerd
                           nerdReducer={nerdReducer}
+                          nerdSetupReducer={nerdSetupReducer}
+                          nerdSetupUpdatePhase={nerdSetupUpdatePhase}
                           nerdUpdateCheck={nerdUpdateCheck}
                           userAuthenticate={userAuthenticate}
                           usersReducer={usersReducer}
