@@ -153,21 +153,22 @@ class Home extends Component {
                   <div className="carousel-item active">
                     <img
                       className="d-block w-100"
-                      src="..."
+                      src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                      // src="..."
                       alt="First slide"
                     />
                   </div>
                   <div className="carousel-item">
                     <img
                       className="d-block w-100"
-                      src="..."
+                      src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                       alt="Second slide"
                     />
                   </div>
                   <div className="carousel-item">
                     <img
                       className="d-block w-100"
-                      src="..."
+                      src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                       alt="Third slide"
                     />
                   </div>

@@ -2,32 +2,17 @@
  ******************************************************/
 import {
   DATA_COMBINE,
+  DATA_FORMAT_REDDIT,
+  DATA_FORMAT_TWEETS,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
-  DATA_FORMAT_REDDIT,
-  DATA_FORMAT_TWEETS,
   FLASH_MSG_HIDE,
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
-  SOURCE_ADD_FAILURE,
-  SOURCE_ADD_PENDING,
-  SOURCE_ADD_SUCCESS,
-  SOURCE_ADD_FORM_CATEGORY,
-  SOURCE_ADD_FORM_CATEGORY_GAMING,
-  SOURCE_ADD_FORM_FILTER,
-  SOURCE_ADD_FORM_SELECT,
-  SOURCE_GET_REDDIT_POSTS_FAILURE,
-  SOURCE_GET_REDDIT_POSTS_PENDING,
-  SOURCE_GET_REDDIT_POSTS_SUCCESS,
-  SOURCE_GETBYID_FAILURE,
-  SOURCE_GETBYID_PENDING,
-  SOURCE_GETBYID_SUCCESS,
-  SOURCE_REDDIT,
-  SOURCE_REMOVE,
-  SOURCE_TWITTER,
+  SOURCES_COMBINE,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
@@ -35,7 +20,26 @@ import {
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
+  SOURCE_ADD_FAILURE,
+  SOURCE_ADD_FORM_CAT,
+  SOURCE_ADD_FORM_CAT_GM,
+  SOURCE_ADD_FORM_FILTER,
+  SOURCE_ADD_FORM_SELECT,
+  SOURCE_ADD_PENDING,
+  SOURCE_ADD_SUCCESS,
+  SOURCE_GETBYID_FAILURE,
+  SOURCE_GETBYID_PENDING,
+  SOURCE_GETBYID_SUCCESS,
+  SOURCE_GET_REDDITS_FAILURE,
+  SOURCE_GET_REDDITS_PENDING,
+  SOURCE_GET_REDDITS_SUCCESS,
+  SOURCE_REDDIT,
+  SOURCE_REMOVE,
+  SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
+  USERS_GET_FAILURE,
+  USERS_GET_PENDING,
+  USERS_GET_SUCCESS,
   USER_AUTH_FAILURE,
   USER_AUTH_PENDING,
   USER_AUTH_SUCCESS,
@@ -46,15 +50,11 @@ import {
   USER_SIGNUP_FAILURE,
   USER_SIGNUP_PENDING,
   USER_SIGNUP_SUCCESS,
-  USERS_GET_FAILURE,
-  USERS_GET_PENDING,
-  USERS_GET_SUCCESS,
-  SOURCES_COMBINE,
 } from './constants';
 
 // :
-import settings from './config/settings';
 import format from './config/format';
+import settings from './config/settings';
 
 /* Data actions:
  ******************************************************/
@@ -164,12 +164,12 @@ export const sourceRemove = (o) => ({
 });
 
 export const sourceAddFormCategory = (category) => ({
-  type: SOURCE_ADD_FORM_CATEGORY,
+  type: SOURCE_ADD_FORM_CAT,
   payload: category,
 });
 
 export const sourceAddFormCategoryGaming = (category) => ({
-  type: SOURCE_ADD_FORM_CATEGORY_GAMING,
+  type: SOURCE_ADD_FORM_CAT_GM,
   payload: category,
 });
 
@@ -183,7 +183,6 @@ export const sourceAddService = (source) => ({
   payload: source,
 });
 
-//sourceGetById
 export const sourceGetById = (o) => (dispatch) => {
   const url = () => {
     if (o.service === 'reddit') {
@@ -209,8 +208,6 @@ export const sourceGetById = (o) => (dispatch) => {
     );
 };
 
-//
-
 export const sourceGetRedditPosts = (o) => (dispatch) => {
   let redditUrl = `https://www.reddit.com/r/${o.subreddit}/${o.filter}.json?`;
   let params = [];
@@ -227,7 +224,7 @@ export const sourceGetRedditPosts = (o) => (dispatch) => {
   params = params.join('&');
   redditUrl = redditUrl + params;
 
-  dispatch({ type: SOURCE_GET_REDDIT_POSTS_PENDING });
+  dispatch({ type: SOURCE_GET_REDDITS_PENDING });
 
   fetch(redditUrl, {
     method: 'GET',
@@ -235,21 +232,19 @@ export const sourceGetRedditPosts = (o) => (dispatch) => {
     .then((res) => res.json())
     .then((data) => {
       dispatch({
-        type: SOURCE_GET_REDDIT_POSTS_SUCCESS,
+        type: SOURCE_GET_REDDITS_SUCCESS,
         payload: data,
       });
     })
     .catch((error) =>
-      dispatch({ type: SOURCE_GET_REDDIT_POSTS_FAILURE, payload: error })
+      dispatch({ type: SOURCE_GET_REDDITS_FAILURE, payload: error })
     );
 };
 
-//
 export const sourcesCombine = () => ({
   type: SOURCES_COMBINE,
 });
 
-//
 export const sourcesGetReddit = (cat) => (dispatch) => {
   const category = cat ? '/' + cat : '/all';
   console.log(category);

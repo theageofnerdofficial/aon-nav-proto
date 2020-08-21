@@ -22,14 +22,17 @@ class LoginBtn extends Component {
           : o.notLoggedIn;
       }
     };
+
     return (
       <React.Fragment>
-        {this.props.usersReducer
-          ? checkLoggedIn({
-              loggedIn: <LoggedIn userLogout={this.props.userLogout} />,
-              notLoggedIn: <NotLoggedIn />,
-            })
-          : ''}
+        <div id="ui-login-btn-wrapper">
+          {this.props.usersReducer
+            ? checkLoggedIn({
+                loggedIn: <LoggedIn userLogout={this.props.userLogout} />,
+                notLoggedIn: <NotLoggedIn />,
+              })
+            : ''}
+        </div>
       </React.Fragment>
     );
   }

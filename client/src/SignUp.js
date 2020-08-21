@@ -7,9 +7,10 @@ class SignUp extends Component {
   render() {
     return (
       <React.Fragment>
-        <SectionTitle title="Sign Up" />
-        <SectionTitlePostsTitle text="Witty-nerdy-cool remark here" />
-        <div className="col-12 col-md-6 offset-md-3">
+        <div className="col-12 col-md-8 offset-md-2">
+          <SectionTitle title="Sign Up" />
+          <SectionTitlePostsTitle text="Witty-nerdy-cool remark here" />
+          <br />
           <SignupForm
             userLogin={this.props.userLogin}
             usersGetList={this.props.usersGetList}

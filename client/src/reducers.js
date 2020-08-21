@@ -13,31 +13,34 @@ import {
   MODAL_LOGIN_FORM,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
-  SOURCE_ADD_FAILURE,
-  SOURCE_ADD_FORM_CATEGORY,
-  SOURCE_ADD_FORM_CATEGORY_GAMING,
-  SOURCE_ADD_FORM_FILTER,
-  SOURCE_ADD_FORM_SELECT,
-  SOURCE_ADD_PENDING,
-  SOURCE_ADD_SUCCESS,
-  SOURCE_GET_REDDIT_POSTS_FAILURE,
-  SOURCE_GET_REDDIT_POSTS_PENDING,
-  SOURCE_GET_REDDIT_POSTS_SUCCESS,
-  SOURCE_GETBYID_FAILURE,
-  SOURCE_GETBYID_PENDING,
-  SOURCE_GETBYID_SUCCESS,
-  SOURCE_REDDIT,
-  SOURCE_REMOVE,
-  SOURCE_TWITTER,
-  SOURCES_RESET_FORM,
   SOURCES_COMBINE,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
+  SOURCES_RESET_FORM,
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
+  SOURCE_ADD_FAILURE,
+  SOURCE_ADD_FORM_CAT,
+  SOURCE_ADD_FORM_CAT_GM,
+  SOURCE_ADD_FORM_FILTER,
+  SOURCE_ADD_FORM_SELECT,
+  SOURCE_ADD_PENDING,
+  SOURCE_ADD_SUCCESS,
+  SOURCE_GETBYID_FAILURE,
+  SOURCE_GETBYID_PENDING,
+  SOURCE_GETBYID_SUCCESS,
+  SOURCE_GET_REDDITS_FAILURE,
+  SOURCE_GET_REDDITS_PENDING,
+  SOURCE_GET_REDDITS_SUCCESS,
+  SOURCE_REDDIT,
+  SOURCE_REMOVE,
+  SOURCE_TWITTER,
   UI_TOGGLE_LIGHTS,
+  USERS_GET_FAILURE,
+  USERS_GET_PENDING,
+  USERS_GET_SUCCESS,
   USER_AUTH_FAILURE,
   USER_AUTH_PENDING,
   USER_AUTH_SUCCESS,
@@ -45,16 +48,14 @@ import {
   USER_LOGIN_PENDING,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
-  USERS_GET_FAILURE,
-  USERS_GET_PENDING,
-  USERS_GET_SUCCESS,
 } from './constants';
 
-import utils from './Components/Utils/utils/utils';
-import settings from './config/settings';
-import loginCreds from './config/loginCreds';
+//
 import levels from './MyNerd/levels/levels';
+import loginCreds from './config/loginCreds';
 import mynerd from './helpers/myNerd';
+import settings from './config/settings';
+import utils from './Components/Utils/utils/utils';
 
 //
 let stateCp;
@@ -210,7 +211,6 @@ export const usersReducer = (state = users, action = {}) => {
       stateCp.loggedIn = action.payload.auth === false ? false : true;
       return Object.assign({}, state, stateCp);
     case USER_LOGOUT:
-      // delete all local storage token stuff
       localStorage.removeItem(settings.localStorage.token);
       localStorage.removeItem(settings.localStorage.login.id);
       localStorage.removeItem(settings.localStorage.login.username);
@@ -273,13 +273,13 @@ const sourceAddForm = {
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
-    case SOURCE_GET_REDDIT_POSTS_PENDING:
+    case SOURCE_GET_REDDITS_PENDING:
       //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: true });
-    case SOURCE_GET_REDDIT_POSTS_FAILURE:
+    case SOURCE_GET_REDDITS_FAILURE:
       //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: false });
-    case SOURCE_GET_REDDIT_POSTS_SUCCESS:
+    case SOURCE_GET_REDDITS_SUCCESS:
       let sourcesRedditPostsCp = state.sourcesRedditPosts;
       if (sourcesRedditPostsCp && sourcesRedditPostsCp.length >= 1) {
         action.payload.data.children.forEach((d) => {
@@ -357,11 +357,11 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         sourceAddPending: false,
       });
-    case SOURCE_ADD_FORM_CATEGORY:
+    case SOURCE_ADD_FORM_CAT:
       return Object.assign({}, state, {
         category: action.payload,
       });
-    case SOURCE_ADD_FORM_CATEGORY_GAMING:
+    case SOURCE_ADD_FORM_CAT_GM:
       return Object.assign({}, state, {
         categoryGaming: action.payload,
       });
@@ -410,6 +410,7 @@ const ui = {
         ? false
         : true
       : false,
+  loginBtnDisplay: true,
 };
 
 export const uiReducer = (state = ui, action = {}) => {

@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import countries from '../../config/countries';
 
 class SignupForm extends Component {
+  componentDidMount() {
+    document.getElementById('ui-login-btn-wrapper').style.display = 'none';
+  }
+  componentWillUnmount() {
+    document.getElementById('ui-login-btn-wrapper').style.display = 'block';
+  }
   render() {
     const hasPasswordMatch = (signupForm) =>
       signupForm.password !== signupForm.password2;

@@ -1,43 +1,37 @@
 // Imports:
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-  withRouter,
-} from 'react-router-dom';
-import { connect } from 'react-redux';
-import Home from './Home';
-import MyNerd from './MyNerd/MyNerd';
-import TVFilm from './TVFilm';
-import Gaming from './Gaming';
-import RetroGames from './RetroGames';
-import ModernGames from './ModernGames';
+import AddSource from './Admin/Sources/AddSource';
+import Admin from './Admin/Admin';
 import BoardGames from './BoardGames';
 import Comics from './Comics';
 import Contact from './Contact';
+import EditSource from './Admin/Sources/EditSource';
+import FlashMsg from './Components/FlashMsg/FlashMsg';
 import Footer from './Components/Footer/Footer';
+import Gaming from './Gaming';
+import GetSources from './Admin/Sources/GetSources/GetSources';
 import Header from './Components/Header/Header';
+import Home from './Home';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
 import LoginBtn from './Components/LoginBtn/LoginBtn';
+import LoginFormPage from './Components/LoginForm/LoginFormPage';
 import Modal from './Components/Modal/Modal';
-import Sources from './Sources';
+import ModernGames from './ModernGames';
+import MyNerd from './MyNerd/MyNerd';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import React, { Component } from 'react';
+import RetroGames from './RetroGames';
 import SignUp from './SignUp';
+import Sources from './Sources';
+import TVFilm from './TVFilm';
+import Unauthorised from './Unauthorised';
 import UserList from './Admin/UserList';
-import Admin from './Admin/Admin';
-import AddSource from './Admin/Sources/AddSource';
-import EditSource from './Admin/Sources/EditSource';
-import GetSources from './Admin/Sources/GetSources/GetSources';
-import FlashMsg from './Components/FlashMsg/FlashMsg';
-import { GlobalStyles } from './themeProvider/global';
-import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from './themeProvider/theme';
+
+// Actions:
 import {
   dataCombine,
   dataFormatReddit,
-  dataRequest,
   dataFormatTweets,
+  dataRequest,
   flashMsgFlash,
   flashMsgUpdate,
   nerdSetupUpdatePhase,
@@ -47,20 +41,31 @@ import {
   sourceAddFormCategoryGaming,
   sourceAddFormFilter,
   sourceAddService,
+  sourceGetById,
   sourceGetRedditPosts,
-  sourcesReset,
+  sourceRemove,
   sourcesCombine,
   sourcesGetReddit,
   sourcesGetTwitter,
-  sourceGetById,
-  sourceRemove,
+  sourcesReset,
   uiToggleLights,
   userAuthenticate,
   userLogin,
   userLogout,
-  usersGetList,
   userSignup,
+  usersGetList,
 } from './actions';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  withRouter,
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { GlobalStyles } from './themeProvider/global';
+import { lightTheme, darkTheme } from './themeProvider/theme';
+import { ThemeProvider } from 'styled-components';
 import './Main.css';
 
 // Parameter state comes from index.js provider store state (rootReducers).
@@ -96,19 +101,19 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(sourceAddFormCategoryGaming(cat)),
     sourceAddFormFilter: (filter) => dispatch(sourceAddFormFilter(filter)),
     sourceAddService: (source) => dispatch(sourceAddService(source)),
+    sourceGetById: (o) => dispatch(sourceGetById(o)),
     sourceGetRedditPosts: (o) => dispatch(sourceGetRedditPosts(o)),
     sourceRemove: (source) => dispatch(sourceRemove(source)),
     sourcesCombine: () => dispatch(sourcesCombine()),
-    sourceGetById: (o) => dispatch(sourceGetById(o)),
-    sourcesReset: () => dispatch(sourcesReset()),
     sourcesGetReddit: (cat) => dispatch(sourcesGetReddit(cat)),
     sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
+    sourcesReset: () => dispatch(sourcesReset()),
     uiToggleLights: () => dispatch(uiToggleLights()),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
     userLogout: () => dispatch(userLogout()),
-    usersGetList: () => dispatch(usersGetList()),
     userSignup: (o) => dispatch(userSignup(o)),
+    usersGetList: () => dispatch(usersGetList()),
   };
 };
 
@@ -152,38 +157,38 @@ class Main extends Component {
     const {
       dataCombine,
       dataFormatReddit,
+      dataFormatTweets,
       dataReducer,
       dataRequest,
-      dataFormatTweets,
       flashMsgFlash,
       flashMsgReducer,
       flashMsgUpdate,
       modalReducer,
       nerdReducer,
-      nerdSetupUpdatePhase,
       nerdSetupReducer,
+      nerdSetupUpdatePhase,
       nerdUpdateCheck,
       sourceAdd,
       sourceAddFormCategory,
       sourceAddFormCategoryGaming,
       sourceAddFormFilter,
-      sourcesCombine,
+      sourceAddService,
       sourceGetById,
       sourceGetRedditPosts,
       sourceReducer,
       sourceRemove,
-      sourcesReset,
-      sourceAddService,
+      sourcesCombine,
       sourcesGetReddit,
       sourcesGetTwitter,
+      sourcesReset,
       uiReducer,
       uiToggleLights,
       userAuthenticate,
       userLogin,
       userLogout,
+      userSignup,
       usersGetList,
       usersReducer,
-      userSignup,
     } = this.props;
     return (
       <Router>
@@ -195,13 +200,19 @@ class Main extends Component {
                 flashMsgFlash={flashMsgFlash}
                 flashMsgReducer={flashMsgReducer}
               />
+
               <Header
                 lightsOff={uiReducer.lightsOff}
                 Link={Link}
                 toggleLights={uiToggleLights}
               />
+
               <KonamiCode />
+
               <Modal userLogin={userLogin} modalReducer={modalReducer} />
+
+              {/* Login/signup button:
+               *****************************************************************/}
               <LoginBtn
                 userAuthenticate={userAuthenticate}
                 userLogout={userLogout}
@@ -228,50 +239,52 @@ class Main extends Component {
                         />
                       )}
                     />
+
                     <Route
                       exact
-                      path="/mynerd"
+                      path="/login"
                       render={(props) => (
-                        <MyNerd
-                          nerdReducer={nerdReducer}
-                          nerdSetupReducer={nerdSetupReducer}
-                          nerdSetupUpdatePhase={nerdSetupUpdatePhase}
-                          nerdUpdateCheck={nerdUpdateCheck}
-                          userAuthenticate={userAuthenticate}
-                          usersReducer={usersReducer}
-                          {...props}
-                        />
+                        <LoginFormPage userLogin={userLogin} {...props} />
                       )}
                     />
+
                     <Route path="/tvfilm" component={withRouter(TVFilm)} />
+
                     <Route
                       exact
                       path="/gaming"
                       render={(props) => (
                         <Gaming
-                          sourceReducer={sourceReducer}
                           sourceGetRedditPosts={sourceGetRedditPosts}
+                          sourceReducer={sourceReducer}
                           sourcesGetReddit={sourcesGetReddit}
                           sourcesReset={sourcesReset}
                           {...props}
                         />
                       )}
                     />
+
                     <Route
                       path="/retrogaming"
                       component={withRouter(RetroGames)}
                     />
+
                     <Route
                       path="/moderngaming"
                       component={withRouter(ModernGames)}
                     />
+
                     <Route
                       path="/boardgaming"
                       component={withRouter(BoardGames)}
                     />
+
                     <Route path="/comics" component={withRouter(Comics)} />
+
                     <Route path="/contact" component={withRouter(Contact)} />
+
                     <Route path="/sources" component={withRouter(Sources)} />
+
                     <Route
                       exact
                       path="/signup"
@@ -285,11 +298,32 @@ class Main extends Component {
                         />
                       )}
                     />
+
+                    <Route
+                      exact
+                      path="/unauthorised"
+                      component={withRouter(Unauthorised)}
+                    />
+
+                    {/* Component: Admin:
+                      - Route type: Protected
+                      - Access: logged in with level 3 or up:
+                     *****************************************************************/}
                     <Route
                       exact
                       path="/admin"
-                      render={(props) => <Admin Link={Link} {...props} />}
+                      render={(props) => (
+                        <ProtectedRoute
+                          exact
+                          accessLevel={3}
+                          component={Admin}
+                          login={usersReducer}
+                          path="/admin"
+                          Link={Link}
+                        />
+                      )}
                     />
+
                     <Route
                       exact
                       path="/admin/userlist"
@@ -301,6 +335,7 @@ class Main extends Component {
                         />
                       )}
                     />
+
                     <Route
                       exact
                       path="/admin/addsource"
@@ -321,28 +356,30 @@ class Main extends Component {
                         />
                       )}
                     />
+
                     <Route
                       exact
                       path="/admin/editsource/:id/:service"
                       render={(props) => (
                         <EditSource
+                          Link={Link}
                           flashMsgFlash={flashMsgFlash}
                           flashMsgUpdate={flashMsgUpdate}
-                          Link={Link}
                           sourceAdd={sourceAdd}
                           sourceAddFormCategory={sourceAddFormCategory}
                           sourceAddFormCategoryGaming={
                             sourceAddFormCategoryGaming
                           }
                           sourceAddFormFilter={sourceAddFormFilter}
+                          sourceAddService={sourceAddService}
                           sourceGetById={sourceGetById}
                           sourceReducer={sourceReducer}
                           sourcesReset={sourcesReset}
-                          sourceAddService={sourceAddService}
                           {...props}
                         />
                       )}
                     />
+
                     <Route
                       exact
                       path="/admin/getsources"
@@ -358,6 +395,31 @@ class Main extends Component {
                           sourceRemove={sourceRemove}
                           sourcesReset={sourcesReset}
                           {...props}
+                        />
+                      )}
+                    />
+
+                    {/* Component: MyNerd:
+                      - Route type: Protected
+                      - Access: logged in:
+                     *****************************************************************/}
+                    <Route
+                      exact
+                      path="/mynerd"
+                      render={(props) => (
+                        <ProtectedRoute
+                          exact
+                          accessLevel={0}
+                          component={MyNerd}
+                          login={usersReducer}
+                          path="/mynerd"
+                          userLogin={userLogin}
+                          nerdReducer={nerdReducer}
+                          nerdSetupReducer={nerdSetupReducer}
+                          nerdSetupUpdatePhase={nerdSetupUpdatePhase}
+                          nerdUpdateCheck={nerdUpdateCheck}
+                          userAuthenticate={userAuthenticate}
+                          usersReducer={usersReducer}
                         />
                       )}
                     />
