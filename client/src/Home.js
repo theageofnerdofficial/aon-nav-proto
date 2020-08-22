@@ -125,7 +125,7 @@ class Home extends Component {
     return (
       <div>
         <div className=" col-md-12 m-0 p-0 row">
-          <div className="col-md-7 m-0 p-0 pr-3">
+          <div className="col-md-7 m-0 p-0 section-home-featured">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Featured"

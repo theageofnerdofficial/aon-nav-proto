@@ -168,6 +168,10 @@ a.nav-link:active {
   z-index: 100000 !important;
 }
 
+.section-home-featured {
+  padding-right: 25px !important;
+}
+
 .section-title {
   border-bottom: 1px solid var(--col-darkest);
   display: block;
@@ -312,7 +316,6 @@ a.nav-link:active {
 
 .carousel-gradient-overlay {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#7d7e7d+0,0e0e0e+100&0.22+0,1+100 */
-
   background: -moz-linear-gradient(
     top,
     rgba(125, 126, 125, 0.22) 0%,
@@ -329,4 +332,27 @@ a.nav-link:active {
     rgba(14, 14, 14, 1) 100%
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#387d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width: 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .section-home-featured {
+    padding-right: 0 !important;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 480px) {
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width: 320px) {
 }
