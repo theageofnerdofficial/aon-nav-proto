@@ -58,6 +58,7 @@ const settings = {
     },
     style: {
       sectionTab: {
+        default: '#ccc',
         featured: '#f44336',
         mynerd: '#8bc34a',
         tvfilm: '#009688',

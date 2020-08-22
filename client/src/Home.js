@@ -1,5 +1,6 @@
 // Imports:
 import React, { Component } from 'react';
+import Carousel from './Components/Carousel/Carousel';
 import Posts from './Components/Post/Posts';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
@@ -7,6 +8,7 @@ import formatTweet from './Components/Utils/utils/formatTweet';
 import formatReddit from './Components/Utils/utils/formatReddit';
 import settings from './config/settings';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
+import PostsDummy from './Components/Post/PostsDummy';
 
 // Prevents repeated requests:
 let dataPosts = {
@@ -128,76 +130,30 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Featured"
             />
-            <div>
-              <div
-                id="carouselExampleIndicators"
-                className="carousel slide"
-                data-ride="carousel"
-              >
-                <ol className="carousel-indicators">
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="0"
-                    className="active"
-                  ></li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="1"
-                  ></li>
-                  <li
-                    data-target="#carouselExampleIndicators"
-                    data-slide-to="2"
-                  ></li>
-                </ol>
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <img
-                      className="d-block w-100"
-                      src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                      // src="..."
-                      alt="First slide"
-                    />
-                  </div>
-                  <div className="carousel-item">
-                    <img
-                      className="d-block w-100"
-                      src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                      alt="Second slide"
-                    />
-                  </div>
-                  <div className="carousel-item">
-                    <img
-                      className="d-block w-100"
-                      src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                      alt="Third slide"
-                    />
-                  </div>
-                </div>
-                <a
-                  className="carousel-control-prev"
-                  href="#carouselExampleIndicators"
-                  role="button"
-                  data-slide="prev"
-                >
-                  <span
-                    className="carousel-control-prev-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="sr-only">Previous</span>
-                </a>
-                <a
-                  className="carousel-control-next"
-                  href="#carouselExampleIndicators"
-                  role="button"
-                  data-slide="next"
-                >
-                  <span
-                    className="carousel-control-next-icon"
-                    aria-hidden="true"
-                  ></span>
-                  <span className="sr-only">Next</span>
-                </a>
-              </div>
+            <div id="eoeoe">
+              <Carousel
+                items={[
+                  {
+                    author: 'J. Bloggs',
+                    align: 'center',
+                    category: 'Comics',
+                    mediaSubtype: 'opinion piece',
+                    mediaType: 'article',
+                    src: 'https://i.ytimg.com/vi/bFinIf1eNEQ/maxresdefault.jpg',
+                    title: 'Goodbye Spidey?',
+                  },
+                  {
+                    author: 'P. Furlong',
+                    align: 'right',
+                    category: 'Gaming',
+                    mediaSubtype: 'Report',
+                    mediaType: 'article',
+                    src:
+                      'https://media.sketchfab.com/models/a657d72420c44e0b8402179e6d061182/thumbnails/79524c9e5a9e488dbb3c90eb961282ed/d62ec24d2c6a467bb3e360df225a76cc.jpeg',
+                    title: 'More Speccy Ports',
+                  },
+                ]}
+              />
             </div>
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
@@ -210,23 +166,9 @@ class Home extends Component {
               title="Nerd Feed"
             />
             <SectionTitlePostsTitle text={sectionTitle} />
-            <Posts allData={allData} />
-          </div>
-          <div className=" col-md-4 m-0 pl-3">
-            <SectionTitle title="Trending" />
-            <div
-              className="shadow-sm rounded bg-custom-panel"
-              style={{
-                height: 500,
-                width: '100%',
-              }}
-            >
-              <img
-                alt="Test"
-                style={{ width: '100%' }}
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-N6U3fMPOy2jNApLFqOPJFpxuuamBIi1GZA&usqp=CAU"
-              />
-            </div>
+            <PostsDummy />
+
+            {/*  <Posts allData={allData} />*/}
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@ class SectionTitle extends Component {
     const Title = styled.div`
       border-bottom: 1px solid #0f0f0f;
       display: block;
-      font-size: 1.6em;
       line-height: 1.3;
       letter-spacing: -0.5px;
       margin-bottom: 1rem;
