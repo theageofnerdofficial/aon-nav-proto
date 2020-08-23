@@ -364,3 +364,10 @@ a.nav-link:active {
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {
 }
+
+.vertical-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+}

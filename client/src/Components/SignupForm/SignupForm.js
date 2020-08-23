@@ -39,9 +39,11 @@ class SignupForm extends Component {
           .then(() => {
             if (usernames.includes(signupForm.username)) {
               alert('That username has already been taken');
+              return;
             } else {
               if (emails.includes(signupForm.email)) {
                 alert('That email address already belongs to an account');
+                return;
               } else {
                 alert('Signup successful. Redirecting in 2 seconds...');
                 this.props.userSignup(signupForm);
@@ -81,12 +83,16 @@ class SignupForm extends Component {
             minLength="8"
             maxLength="100"
             placeholder="Username"
+            required
+            type="text"
           />
           <input
             className="font-weight-light form-control"
             name="email"
             minLength="8"
             placeholder="Email address"
+            required
+            type="email"
           />
           <input
             className="font-weight-light form-control my-2"
@@ -94,12 +100,14 @@ class SignupForm extends Component {
             minLength="8"
             placeholder="Password"
             type="password"
+            required
           />
           <input
             className="font-weight-light form-control my-2"
             name="password2"
             placeholder="Confirm Password"
             type="password"
+            required
           />
           <p className="font-weight-light p-0 pt-2 m-0 text-muted">Location:</p>
           <select
@@ -108,12 +116,11 @@ class SignupForm extends Component {
             placeholder="Location"
           >
             {countries.map((country) => {
-              //
-
               return (
                 <option
                   className="font-weight-light"
                   selected={country.name === 'United Kingdom' ? true : false}
+                  required
                 >
                   {country.name}
                 </option>
