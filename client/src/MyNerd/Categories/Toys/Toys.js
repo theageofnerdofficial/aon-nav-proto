@@ -35,6 +35,9 @@ class Toys extends Component {
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
               reducer={nerdReducer}
+              tooltip={
+                nerdReducer.category[1].level2[8].actionFigures.description
+              }
             />
           </li>
           <li>
@@ -45,6 +48,7 @@ class Toys extends Component {
               label="Lego"
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
+              tooltip={nerdReducer.category[1].level2[7].lego.description}
             />
           </li>
         </ul>

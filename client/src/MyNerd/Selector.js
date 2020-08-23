@@ -41,7 +41,7 @@ class Selector extends Component {
               level,
             });
           }}
-          style={{ height: '100%' }}
+          style={{ cursor: 'pointer', height: '100%' }}
         >
           {this.props.expanded
             ? FontIcon('faChevronDown')
@@ -57,13 +57,22 @@ class Selector extends Component {
             className={` ${
               enumDescendants('hasEnabled') ? 'text-success' : null
             } vertical-center`}
-            style={{ float: 'left', height: '100%', lineHeight: '22px' }}
+            style={{
+              cursor: 'help',
+              float: 'left',
+              height: '100%',
+              lineHeight: '22px',
+            }}
           >
             <span
               data-toggle="tooltip"
               data-placement="top"
               data-html="true"
-              title="Brief description will go here"
+              title={
+                this.props.tooltip
+                  ? this.props.tooltip
+                  : 'Sorry, no description is available for this item'
+              }
             >
               {this.props.label}&nbsp;
               {enumDescendants('count')}{' '}
@@ -84,7 +93,7 @@ class Selector extends Component {
                   });
                 }}
                 id={`checkbox-${category}`}
-                style={{ height: '100%' }}
+                style={{ cursor: 'pointer', height: '100%' }}
                 type="checkbox"
               />
             </div>

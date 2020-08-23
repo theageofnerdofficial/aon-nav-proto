@@ -318,8 +318,8 @@ class Main extends Component {
                           accessLevel={3}
                           component={Admin}
                           login={usersReducer}
-                          path="/admin"
                           Link={Link}
+                          path="/admin"
                         />
                       )}
                     />
@@ -349,9 +349,9 @@ class Main extends Component {
                             sourceAddFormCategoryGaming
                           }
                           sourceAddFormFilter={sourceAddFormFilter}
+                          sourceAddService={sourceAddService}
                           sourceReducer={sourceReducer}
                           sourcesReset={sourcesReset}
-                          sourceAddService={sourceAddService}
                           {...props}
                         />
                       )}
@@ -420,6 +420,7 @@ class Main extends Component {
                           nerdUpdateCheck={nerdUpdateCheck}
                           userAuthenticate={userAuthenticate}
                           usersReducer={usersReducer}
+                          {...props}
                         />
                       )}
                     />

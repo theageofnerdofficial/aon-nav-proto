@@ -30,6 +30,7 @@ class Comics extends Component {
               label="DC"
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
+              tooltip={nerdReducer.category[1].level2[4].dc.description}
             />
           </li>
           <li>
@@ -41,6 +42,7 @@ class Comics extends Component {
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
               reducer={nerdReducer}
+              tooltip={nerdReducer.category[1].level2[3].marvel.description}
             />
           </li>
         </ul>

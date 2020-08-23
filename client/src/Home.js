@@ -125,12 +125,12 @@ class Home extends Component {
     return (
       <div>
         <div className=" col-md-12 m-0 p-0 row">
-          <div className="col-md-7 m-0 p-0 section-home-featured">
+          <div className="col-md-7 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Featured"
             />
-            <div id="eoeoe">
+            <div>
               <Carousel
                 items={[
                   {
@@ -155,12 +155,9 @@ class Home extends Component {
                 ]}
               />
             </div>
-            <SectionTitle
-              tabColour={settings.ui.style.sectionTab.featured}
-              title="More stuff"
-            />
           </div>
-          <div className=" col-md-5 m-0 p-0">
+
+          <div className=" col-md-5 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Nerd Feed"
@@ -169,6 +166,51 @@ class Home extends Component {
             <PostsDummy />
 
             {/*  <Posts allData={allData} />*/}
+          </div>
+        </div>
+
+        {/* row 2
+         *********************/}
+        <div className="col-md-12 m-0 p-0 row">
+          <div className="col-md-4 m-0 p-0 section-responsive-pr">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Quiz"
+            />
+            <div
+              className="bg-secondary rounded"
+              style={{ height: 300, width: '100%' }}
+            ></div>
+            <div
+              className="bg-light rounded shadow-sm"
+              style={{ height: 300, width: '100%' }}
+            ></div>
+          </div>
+
+          <div className="col-md-4 m-0 p-0 section-responsive-pr">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Fact of the Day"
+            />
+            <div
+              className="bg-secondary rounded shadow-sm"
+              style={{ height: 300, width: '100%' }}
+            ></div>
+            <div
+              className="bg-light rounded shadow-sm"
+              style={{ height: 300, width: '100%' }}
+            ></div>
+          </div>
+
+          <div className="col-md-4 m-0 p-0 section-responsive-pr">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="AON Sponsor"
+            />
+            <div
+              className="bg-secondary rounded shadow-sm"
+              style={{ height: 600, width: '100%' }}
+            ></div>
           </div>
         </div>
       </div>

@@ -20,6 +20,8 @@ const level1 = [
         // Tabletop
         'dand',
       ],
+      description:
+        'Groingrabbingly good gaming content from retro to modern to tabletop',
     },
   },
   {
@@ -28,6 +30,7 @@ const level1 = [
       isExpanded: false,
       children: ['marvel', 'dc'],
       gchildren: [],
+      description: 'Awesomely great information trending about comicbooks',
     },
   },
   {
@@ -36,6 +39,7 @@ const level1 = [
       isExpanded: false,
       children: ['television', 'film'],
       gchildren: [],
+      description: 'Top sources on televisual and cinematic media',
     },
   },
   {
@@ -44,14 +48,16 @@ const level1 = [
       isExpanded: false,
       children: ['lego', 'actionFigures'],
       gchildren: [],
+      description: 'Some fun news and information regarding toys',
     },
   },
   {
     wrestling: {
       isEnabled: false,
       isExpanded: false,
-      children: ['wwe', 'tna'],
+      children: ['wwe', 'impact'],
       gchildren: [],
+      description: "The People's professional wrestling content",
     },
   },
 ];

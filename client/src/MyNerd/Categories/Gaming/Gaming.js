@@ -12,6 +12,7 @@ class Gaming extends Component {
         <GamingParent
           nerdReducer={nerdReducer}
           nerdUpdateCheck={nerdUpdateCheck}
+          tooltip="Gaming description"
         />
         <ul
           style={{
@@ -41,6 +42,9 @@ class Gaming extends Component {
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
               reducer={nerdReducer}
+              tooltip={
+                nerdReducer.category[1].level2[0].retroGaming.description
+              }
             />
           </li>
           <ul
@@ -59,6 +63,7 @@ class Gaming extends Component {
                 label="Arcade"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip={nerdReducer.category[2].level3[0].arcade.description}
               />
             </li>
             {/* Level 3 (Gaming > RetroGaming): Atari:
@@ -70,6 +75,7 @@ class Gaming extends Component {
                 label="Atari"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip="Gaming content related to the oldskool electronics giants Atari"
               />
             </li>
             {/* Level 3 (Gaming > RetroGaming): Commodore:
@@ -81,6 +87,7 @@ class Gaming extends Component {
                 label="Commodore"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip="Gaming content keeping up with the Commodore. Are you keeping up?"
               />
             </li>
 
@@ -93,6 +100,7 @@ class Gaming extends Component {
                 label="Nintendo"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip="Gaming content related to oldskool Nintendo. Mama mia!"
               />
             </li>
             {/* Level 3 (Gaming > RetroGaming): Sega:
@@ -104,6 +112,7 @@ class Gaming extends Component {
                 label="Sega"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip="Gaming content related to Sega. Sega does what Nintendon't?"
               />
             </li>
 
@@ -116,6 +125,7 @@ class Gaming extends Component {
                 label="ZX Spectrum"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip="Gaming content related to the ZX Spectrum, AKA. 'the Speccy'"
               />
             </li>
           </ul>
@@ -138,6 +148,9 @@ class Gaming extends Component {
               label="Modern Gaming"
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
+              tooltip={
+                nerdReducer.category[1].level2[1].modernGaming.description
+              }
             />
           </li>
           <ul
@@ -156,6 +169,9 @@ class Gaming extends Component {
                 label="Microsoft"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip={
+                  nerdReducer.category[2].level3[6].microsoft.description
+                }
               />
             </li>
             {/* Level 3 (Gaming > ModernGaming): Nintendo:
@@ -169,6 +185,9 @@ class Gaming extends Component {
                 label="Nintendo"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip={
+                  nerdReducer.category[2].level3[7].nintendoModern.description
+                }
               />
             </li>
             {/* Level 3 (Gaming > ModernGaming): PC:
@@ -180,6 +199,7 @@ class Gaming extends Component {
                 label="PC"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip={nerdReducer.category[2].level3[8].pc.description}
               />
             </li>
             {/* Level 3 (Gaming > ModernGaming): Sony:
@@ -191,6 +211,7 @@ class Gaming extends Component {
                 label="Sony"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip={nerdReducer.category[2].level3[9].sony.description}
               />
             </li>
           </ul>
@@ -209,6 +230,9 @@ class Gaming extends Component {
               label="Tabletop Gaming"
               level="2"
               nerdUpdateCheck={nerdUpdateCheck}
+              tooltip={
+                nerdReducer.category[1].level2[2].tabletopGaming.description
+              }
             />
           </li>
           <ul
@@ -228,6 +252,7 @@ class Gaming extends Component {
                 label="Dungeons & Dragons"
                 level="3"
                 nerdUpdateCheck={nerdUpdateCheck}
+                tooltip={nerdReducer.category[2].level3[10].dand.description}
               />
             </li>
           </ul>

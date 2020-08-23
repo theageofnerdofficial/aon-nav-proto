@@ -27,9 +27,12 @@ h2 {
   font-size: 1.8em;
 }
 
+.carousel {
+}
+
 .carousel-item,
 .carousel-item > img {
-  height: 350px;
+  height: 340px;
 }
 
 a,
@@ -81,8 +84,8 @@ a.nav-link:active {
 .footer {
   background-color: var(--col-lighter);
   bottom: 0;
-  height: 60px;
-  line-height: 60px;
+  height: 35px;
+  line-height: 35px;
   position: fixed;
   width: 100%;
 }
@@ -141,11 +144,12 @@ a.nav-link:active {
 }
 
 .mynerd-wrapper > ul li {
+  color: #000;
+  font-size: 1.35em;
   font-weight: 200 !important;
   letter-spacing: -1 !important;
   list-style-type: none;
-  font-size: 1.6em;
-  color: #000;
+  text-transform: uppercase;
 }
 
 .konami-window {
@@ -168,7 +172,7 @@ a.nav-link:active {
   z-index: 100000 !important;
 }
 
-.section-home-featured {
+.section-responsive-pr {
   padding-right: 25px !important;
 }
 
@@ -344,7 +348,11 @@ a.nav-link:active {
 
 /* Small Devices, Tablets */
 @media only screen and (max-width: 768px) {
-  .section-home-featured {
+  .carousel-item,
+  .carousel-item > img {
+    height: 320px;
+  }
+  .section-responsive-pr {
     padding-right: 0 !important;
   }
 }

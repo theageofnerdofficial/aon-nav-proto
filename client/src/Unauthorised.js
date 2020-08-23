@@ -13,6 +13,7 @@ class Unauthorised extends Component {
           <br />
           <div className="text-center">
             <img
+              alt="Dennis Nedry lockout screen from Jurassic Park"
               className="rounded"
               src="img/unauthorised2.gif"
               style={{ opacity: 0.9, transform: 'scale(0.9)' }}

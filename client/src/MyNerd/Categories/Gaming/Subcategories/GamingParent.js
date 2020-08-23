@@ -35,6 +35,7 @@ class GamingParent extends Component {
           level={1}
           nerdUpdateCheck={nerdUpdateCheck}
           reducer={nerdReducer}
+          tooltip={nerdReducer.category[0].level1[0].gaming.description}
         />
       </li>
     );

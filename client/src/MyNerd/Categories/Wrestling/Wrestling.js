@@ -2,7 +2,6 @@
  *********************************************************/
 import React, { Component } from 'react';
 import Selector from '../../Selector';
-
 import WrestlingParent from './Subcategories/WrestlingParent';
 
 class Wrestling extends Component {
@@ -25,12 +24,13 @@ class Wrestling extends Component {
            ******************************************************/}
           <li>
             <Selector
-              category="tna"
-              enabled={nerdReducer.category[1].level2[10].tna.isEnabled}
-              expanded={nerdReducer.category[1].level2[10].tna.isExpanded}
-              label="TNA"
+              category="impact"
+              enabled={nerdReducer.category[1].level2[10].impact.isEnabled}
+              expanded={nerdReducer.category[1].level2[10].impact.isExpanded}
+              label="Impact"
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
+              tooltip={nerdReducer.category[1].level2[10].impact.description}
             />
           </li>
           <li>
@@ -41,6 +41,7 @@ class Wrestling extends Component {
               label="WWE"
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
+              tooltip={nerdReducer.category[1].level2[9].wwe.description}
             />
           </li>
         </ul>

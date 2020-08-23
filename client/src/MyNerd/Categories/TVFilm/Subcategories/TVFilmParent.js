@@ -21,6 +21,7 @@ class TVFilmParent extends Component {
             level={1}
             nerdUpdateCheck={nerdUpdateCheck}
             reducer={nerdReducer}
+            tooltip={nerdReducer.category[0].level1[2].tvFilm.description}
           />
         </li>
       </ul>

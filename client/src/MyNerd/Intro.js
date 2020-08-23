@@ -14,10 +14,12 @@ class Intro extends Component {
         />
         <SectionTitlePostsTitle text="Let's customize your AON experience." />
         <br />
-        <SectionTitlePostsTitle text="This process will take just a moment & is totally worth it." />
+        <p className="font-weight-light">
+          This process will take just a moment & is totally worth it.
+        </p>
         <button
           className="btn btn-info"
-          style={{ marginTop: 100 }}
+          style={{ marginTop: 80 }}
           onClick={() => {
             this.props.nerdSetupUpdatePhase({ phase: 1 });
           }}

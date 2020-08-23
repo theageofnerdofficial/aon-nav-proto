@@ -20,6 +20,7 @@ class ToysParent extends Component {
           level={1}
           nerdUpdateCheck={nerdUpdateCheck}
           reducer={nerdReducer}
+          tooltip={nerdReducer.category[0].level1[3].toys.description}
         />
       </li>
     );

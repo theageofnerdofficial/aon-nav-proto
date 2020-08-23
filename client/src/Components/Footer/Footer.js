@@ -4,10 +4,8 @@ class Footer extends Component {
   render() {
     return (
       <footer className="footer" style={{ zIndex: '999' }}>
-        <div className="container">
-          <p className="text-muted text-right" style={{ fontWeight: 300 }}>
-            &copy; The Age of Nerd {new Date().getFullYear()}
-          </p>
+        <div className="pr-4 text-muted text-right font-weight-light">
+          &copy; The Age of Nerd {new Date().getFullYear()}
         </div>
       </footer>
     );

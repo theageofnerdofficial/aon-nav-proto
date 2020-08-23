@@ -28,14 +28,14 @@ class ProfileArea extends Component {
         {/* 
 
 
-{this.props.usersReducer.username &&
-        this.props.usersReducer.username.length > 1 ? (
+{this.props.login.username &&
+        this.props.login.username.length > 1 ? (
           <SectionTitlePostsTitle
             text={`${
-              this.props.usersReducer.location
-                ? countries[this.getFlag(this.props.usersReducer.location)].flag
+              this.props.login.location
+                ? countries[this.getFlag(this.props.login.location)].flag
                 : ''
-            } ${this.props.usersReducer.username}'s page`}
+            } ${this.props.login.username}'s page`}
           />
         ) : (
           ''
@@ -46,21 +46,27 @@ class ProfileArea extends Component {
           <div className="mynerd-wrapper mt-1">
             <Avatar
               src={
-                this.props.usersReducer.id ? this.props.usersReducer.id : null
+                this.props.login
+                  ? this.props.login.id
+                    ? this.props.login.id
+                    : null
+                  : null
               }
               style={{
-                width: '60px',
                 margin: 20,
+                width: '60px',
               }}
             />
             <br />
             <h5 className="font-weight-light">
               {`${
-                this.props.usersReducer.location
-                  ? countries[getFlag(this.props.usersReducer.location)].flag
-                  : ''
+                this.props.login
+                  ? this.props.login.location
+                    ? countries[getFlag(this.props.login.location)].flag
+                    : ''
+                  : null
               }
-          ${this.props.usersReducer.username}'s page`}
+          ${this.props.login ? this.props.login.username : null}'s page`}
             </h5>
 
             <table className="table table-striped">

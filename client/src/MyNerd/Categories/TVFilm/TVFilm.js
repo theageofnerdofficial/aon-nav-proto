@@ -31,6 +31,7 @@ class TVFilm extends Component {
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
               reducer={nerdReducer}
+              tooltip={nerdReducer.category[1].level2[6].film.description}
             />
           </li>
           <li>
@@ -42,6 +43,7 @@ class TVFilm extends Component {
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
               reducer={nerdReducer}
+              tooltip={nerdReducer.category[1].level2[5].television.description}
             />
           </li>
         </ul>

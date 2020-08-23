@@ -13,7 +13,7 @@ const levels = {
     // marvel, dc
     // television, film
     // lego
-    // wwe, tna
+    // wwe, impact
     {
       level2: level2,
     },

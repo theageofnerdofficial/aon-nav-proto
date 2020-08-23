@@ -6,6 +6,7 @@ const level2 = [
       isExpanded: false,
       children: ['arcade', 'atari', 'commodore', 'nintendo', 'sega', 'zx'],
       gchildren: [],
+      description: 'Oldskool gaming content to feed those nostalgic cravings',
     },
   },
   {
@@ -14,6 +15,7 @@ const level2 = [
       isExpanded: false,
       children: ['sony', 'microsoft', 'nintendoModern', 'pc'],
       gchildren: [],
+      description: 'Trending content in the world of modern videogames',
     },
   },
   {
@@ -22,6 +24,7 @@ const level2 = [
       isExpanded: false,
       children: ['dand'],
       gchildren: [],
+      description: 'Gaming content related to tabletop entertainment',
     },
   },
   // Comics
@@ -31,6 +34,7 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Comicbook content related to Marvel',
     },
   },
   {
@@ -39,6 +43,7 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Comicbook content related to DC',
     },
   },
   // TV/Film
@@ -48,6 +53,7 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Televisual content from legacy media to streaming services',
     },
   },
   {
@@ -56,6 +62,7 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Film content, movie content... all things cinematic',
     },
   },
   // Toys
@@ -65,6 +72,7 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'All things Lego. Everything is awesome?',
     },
   },
   {
@@ -73,6 +81,7 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Content related to action figure toys',
     },
   },
   // Wrestling
@@ -82,14 +91,17 @@ const level2 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Content related to professional wrestling company WWE',
     },
   },
   {
-    tna: {
+    impact: {
       isEnabled: false,
       isExpanded: false,
       children: [],
       gchildren: [],
+      description:
+        'Content related to sports entertainment company Impact Wrestling',
     },
   },
 ];

@@ -34,11 +34,11 @@ class MyNerd extends Component {
       case 2:
         phaseContent = (
           <ProfileArea
+            login={this.props.login}
             nerdReducer={this.props.nerdReducer}
             nerdSetupReducer={this.props.nerdSetupReducer}
             nerdUpdateCheck={this.props.nerdUpdateCheck}
             nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
-            usersReducer={this.props.usersReducer}
           />
         );
         break;

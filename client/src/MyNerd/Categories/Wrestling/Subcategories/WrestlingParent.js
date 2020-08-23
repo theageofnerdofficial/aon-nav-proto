@@ -15,12 +15,13 @@ class WrestlingParent extends Component {
             expanded={nerdReducer.category[0].level1[4].wrestling.isExpanded}
             descendants={[
               nerdReducer.category[1].level2[9].wwe,
-              nerdReducer.category[1].level2[10].tna,
+              nerdReducer.category[1].level2[10].impact,
             ]}
             label="Wrestling"
             level={1}
             nerdUpdateCheck={nerdUpdateCheck}
             reducer={nerdReducer}
+            tooltip={nerdReducer.category[0].level1[4].wrestling.description}
           />
         </li>
       </ul>

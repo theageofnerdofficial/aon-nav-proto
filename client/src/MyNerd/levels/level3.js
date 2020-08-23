@@ -5,6 +5,8 @@ const level3 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description:
+        'Gaming content related to arcade/co-op machines and related culture',
     },
   },
   //
@@ -60,6 +62,8 @@ const level3 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description:
+        'Gaming content related to Microsoft from Xbox to Windows & beyond',
     },
   },
   {
@@ -68,6 +72,7 @@ const level3 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Gaming content related to modern Nintendo products',
     },
   },
   {
@@ -76,6 +81,7 @@ const level3 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Gaming content related to PCs and computer platforms',
     },
   },
   {
@@ -84,6 +90,7 @@ const level3 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Gaming content related to entertainment giant Sony',
     },
   },
   {
@@ -92,6 +99,7 @@ const level3 = [
       isExpanded: false,
       children: [],
       gchildren: [],
+      description: 'Gaming content related to Dungeons & Dragons',
     },
   },
 ];

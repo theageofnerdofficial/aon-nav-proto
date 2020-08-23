@@ -1,9 +1,6 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import LazyLoad from 'react-lazyload';
-import LoaderCentered from '../Loader/LoaderCentered';
-import Post from './Post';
 
 class PostsDummy extends Component {
   render() {
@@ -32,7 +29,10 @@ class PostsDummy extends Component {
     };
     return (
       <div>
-        <div className="bg-light shadow-sm rounded col-12 p-0 m-0 row">
+        <div
+          className="bg-light shadow-sm rounded col-12 p-0 m-0 mb-4 row"
+          style={{ height: '300px', overflow: 'scroll' }}
+        >
           {getPost()}
           {getPost()}
           {getPost()}
