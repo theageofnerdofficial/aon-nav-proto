@@ -7,7 +7,7 @@ class PostsDummy extends Component {
   render() {
     const getPost = () => {
       return (
-        <div className="col-12 p-0 py-2 m-0 row shadow-sm">
+        <div className="col-12 p-0 py-3 m-0 row shadow-sm">
           <div className="col-1 p-0 m-0 text-center">
             <img
               className="rounded ml-1 post-thumbnail"

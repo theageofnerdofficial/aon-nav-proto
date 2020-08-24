@@ -9,6 +9,8 @@ import formatReddit from './Components/Utils/utils/formatReddit';
 import settings from './config/settings';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 import PostsDummy from './Components/Post/PostsDummy';
+import FontIcon from './Components/FontIcon/FontIcon';
+import Quiz from './Components/Quiz/Quiz';
 
 // Prevents repeated requests:
 let dataPosts = {
@@ -162,7 +164,7 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Nerd Feed"
             />
-            <SectionTitlePostsTitle text={sectionTitle} />
+            <SectionTitlePostsTitle text="Mix (30)" />
             <PostsDummy />
 
             {/*  <Posts allData={allData} />*/}
@@ -175,16 +177,10 @@ class Home extends Component {
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Quiz"
+              title="Today's Quiz"
             />
-            <div
-              className="bg-secondary rounded"
-              style={{ height: 300, width: '100%' }}
-            ></div>
-            <div
-              className="bg-light rounded shadow-sm"
-              style={{ height: 300, width: '100%' }}
-            ></div>
+
+            <Quiz />
           </div>
 
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
@@ -203,10 +199,7 @@ class Home extends Component {
           </div>
 
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
-            <SectionTitle
-              tabColour={settings.ui.style.sectionTab.featured}
-              title="AON Sponsor"
-            />
+            <SectionTitle title={FontIcon('faAd')} isAd={true} />
             <div
               className="bg-secondary rounded shadow-sm"
               style={{ height: 600, width: '100%' }}
