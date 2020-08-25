@@ -186,7 +186,7 @@ class Home extends Component {
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Fact of the Day"
+              title="Video of the Day"
             />
             <div
               className="bg-secondary rounded shadow-sm"
