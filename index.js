@@ -93,6 +93,10 @@ app.post('/user/login', (req, res, next) =>
  *****************************************************************/
 app.get('/users/list', (req, res, next) => userController.list(req, res, next));
 
+app.get('/users/listsecure', (req, res, next) =>
+  userController.listSecure(req, res, next)
+);
+
 /* Sources:
  *****************************************************************/
 app.delete('/source/reddit', (req, res, next) =>

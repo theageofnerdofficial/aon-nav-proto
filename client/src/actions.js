@@ -36,6 +36,7 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
   USERS_GET_PENDING,
@@ -289,6 +290,11 @@ export const sourcesReset = () => ({
 
 /* UI actions:
  ******************************************************/
+export const uiSetBreadcrumbs = (o) => ({
+  type: UI_BREADCRUMBS_SET_PATH,
+  payload: o,
+});
+
 export const uiToggleLights = (o) => ({
   type: UI_TOGGLE_LIGHTS,
   payload: o, // REMOVE???
@@ -342,6 +348,8 @@ export const userLogout = (o) => ({
 });
 
 export const userSignup = (o) => (dispatch) => {
+  console.log(o);
+
   dispatch({ type: USER_SIGNUP_PENDING });
   fetch('/user/create', {
     body: JSON.stringify(o),

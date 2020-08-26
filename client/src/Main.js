@@ -48,6 +48,7 @@ import {
   sourcesGetReddit,
   sourcesGetTwitter,
   sourcesReset,
+  uiSetBreadcrumbs,
   uiToggleLights,
   userAuthenticate,
   userLogin,
@@ -67,6 +68,7 @@ import { GlobalStyles } from './themeProvider/global';
 import { lightTheme, darkTheme } from './themeProvider/theme';
 import { ThemeProvider } from 'styled-components';
 import './Main.css';
+import settings from './config/settings';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -108,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
     sourcesGetReddit: (cat) => dispatch(sourcesGetReddit(cat)),
     sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
     sourcesReset: () => dispatch(sourcesReset()),
+    uiSetBreadcrumbs: (o) => dispatch(uiSetBreadcrumbs(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
@@ -182,6 +185,7 @@ class Main extends Component {
       sourcesGetTwitter,
       sourcesReset,
       uiReducer,
+      uiSetBreadcrumbs,
       uiToggleLights,
       userAuthenticate,
       userLogin,
@@ -239,7 +243,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/login"
@@ -247,9 +250,7 @@ class Main extends Component {
                         <LoginFormPage userLogin={userLogin} {...props} />
                       )}
                     />
-
                     <Route path="/tvfilm" component={withRouter(TVFilm)} />
-
                     <Route
                       exact
                       path="/gaming"
@@ -263,28 +264,21 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route
                       path="/retrogaming"
                       component={withRouter(RetroGames)}
                     />
-
                     <Route
                       path="/moderngaming"
                       component={withRouter(ModernGames)}
                     />
-
                     <Route
                       path="/boardgaming"
                       component={withRouter(BoardGames)}
                     />
-
                     <Route path="/comics" component={withRouter(Comics)} />
-
                     <Route path="/contact" component={withRouter(Contact)} />
-
                     <Route path="/sources" component={withRouter(Sources)} />
-
                     <Route
                       exact
                       path="/signup"
@@ -298,13 +292,11 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/unauthorised"
                       component={withRouter(Unauthorised)}
                     />
-
                     {/* Component: Admin:
                       - Route type: Protected
                       - Access: logged in with level 3 or up:
@@ -315,90 +307,117 @@ class Main extends Component {
                       render={(props) => (
                         <ProtectedRoute
                           exact
-                          accessLevel={3}
+                          accessLevel={settings.permissions.accessLevel.admin}
                           component={Admin}
                           login={usersReducer}
-                          Link={Link}
+                          data={{
+                            Link,
+                          }}
                           path="/admin"
+                          usersGetList={usersGetList}
+                          {...props}
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/admin/userlist"
                       render={(props) => (
-                        <UserList
-                          usersGetList={usersGetList}
-                          usersReducer={usersReducer}
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={UserList}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            usersGetList,
+                            usersReducer,
+                          }}
                           {...props}
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/admin/addsource"
                       render={(props) => (
-                        <AddSource
-                          flashMsgFlash={flashMsgFlash}
-                          flashMsgUpdate={flashMsgUpdate}
-                          sourceAdd={sourceAdd}
-                          sourceAddFormCategory={sourceAddFormCategory}
-                          sourceAddFormCategoryGaming={
-                            sourceAddFormCategoryGaming
-                          }
-                          sourceAddFormFilter={sourceAddFormFilter}
-                          sourceAddService={sourceAddService}
-                          sourceReducer={sourceReducer}
-                          sourcesReset={sourcesReset}
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={AddSource}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            flashMsgFlash,
+                            flashMsgUpdate,
+                            sourceAdd,
+                            sourceAddFormCategory,
+                            sourceAddFormCategoryGaming,
+                            sourceAddFormFilter,
+                            sourceAddService,
+                            sourceReducer,
+                            sourcesReset,
+                          }}
                           {...props}
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/admin/editsource/:id/:service"
                       render={(props) => (
-                        <EditSource
-                          Link={Link}
-                          flashMsgFlash={flashMsgFlash}
-                          flashMsgUpdate={flashMsgUpdate}
-                          sourceAdd={sourceAdd}
-                          sourceAddFormCategory={sourceAddFormCategory}
-                          sourceAddFormCategoryGaming={
-                            sourceAddFormCategoryGaming
-                          }
-                          sourceAddFormFilter={sourceAddFormFilter}
-                          sourceAddService={sourceAddService}
-                          sourceGetById={sourceGetById}
-                          sourceReducer={sourceReducer}
-                          sourcesReset={sourcesReset}
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={EditSource}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            flashMsgFlash,
+                            flashMsgUpdate,
+                            sourceAdd,
+                            sourceAddFormCategory,
+                            sourceAddFormCategoryGaming,
+                            sourceAddFormFilter,
+                            sourceAddService,
+                            sourceGetById,
+                            sourceReducer,
+                            sourcesReset,
+                          }}
                           {...props}
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/admin/getsources"
                       render={(props) => (
-                        <GetSources
-                          flashMsgFlash={flashMsgFlash}
-                          flashMsgUpdate={flashMsgUpdate}
-                          Link={Link}
-                          sourceReducer={sourceReducer}
-                          sourcesCombine={sourcesCombine}
-                          sourcesGetReddit={sourcesGetReddit}
-                          sourcesGetTwitter={sourcesGetTwitter}
-                          sourceRemove={sourceRemove}
-                          sourcesReset={sourcesReset}
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={GetSources}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            flashMsgFlash,
+                            flashMsgUpdate,
+                            sourceAdd,
+                            sourceAddFormCategory,
+                            sourceAddFormCategoryGaming,
+                            sourceAddFormFilter,
+                            sourceAddService,
+                            sourceGetById,
+                            sourceReducer,
+                            sourcesCombine,
+                            sourcesGetReddit,
+                            sourcesGetTwitter,
+                            sourceRemove,
+                            sourcesReset,
+                          }}
                           {...props}
                         />
                       )}
                     />
-
                     {/* Component: MyNerd:
                       - Route type: Protected
                       - Access: logged in:
@@ -409,17 +428,18 @@ class Main extends Component {
                       render={(props) => (
                         <ProtectedRoute
                           exact
-                          accessLevel={0}
+                          accessLevel={settings.permissions.accessLevel.admin}
                           component={MyNerd}
                           login={usersReducer}
-                          path="/mynerd"
-                          userLogin={userLogin}
-                          nerdReducer={nerdReducer}
-                          nerdSetupReducer={nerdSetupReducer}
-                          nerdSetupUpdatePhase={nerdSetupUpdatePhase}
-                          nerdUpdateCheck={nerdUpdateCheck}
-                          userAuthenticate={userAuthenticate}
-                          usersReducer={usersReducer}
+                          data={{
+                            userLogin,
+                            nerdReducer,
+                            nerdSetupReducer,
+                            nerdSetupUpdatePhase,
+                            nerdUpdateCheck,
+                            userAuthenticate,
+                            usersReducer,
+                          }}
                           {...props}
                         />
                       )}

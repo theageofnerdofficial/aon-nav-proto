@@ -3,6 +3,9 @@ import AdminThumb from './AdminThumb';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
 class Admin extends Component {
+  componentDidMount() {
+    console.log(this.props.Link);
+  }
   render() {
     return (
       <div>
@@ -29,22 +32,22 @@ class Admin extends Component {
               Link={this.props.Link}
             />
           </div>
-          <br />
-          <SectionTitlePostsTitle text="Users" />
-          <div className="col-12 row p-0 m-0">
-            <AdminThumb
-              fontIcon="faTasks"
-              label="User List"
-              link="/admin/userlist"
-              Link={this.props.Link}
-            />
-            <AdminThumb
-              fontIcon="faFileAlt"
-              label="Review User Submissions"
-              link="/admin/usersubmissions"
-              Link={this.props.Link}
-            />
-          </div>
+        </div>
+        <br />
+        <SectionTitlePostsTitle text="Users" />
+        <div className="col-12 row p-0 m-0">
+          <AdminThumb
+            fontIcon="faTasks"
+            label="User List"
+            link="/admin/userlist"
+            Link={this.props.Link}
+          />
+          <AdminThumb
+            fontIcon="faFileAlt"
+            label="Review User Submissions"
+            link="/admin/usersubmissions"
+            Link={this.props.Link}
+          />
         </div>
       </div>
     );

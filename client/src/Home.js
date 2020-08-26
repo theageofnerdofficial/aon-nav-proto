@@ -141,7 +141,7 @@ class Home extends Component {
                     category: 'Comics',
                     mediaSubtype: 'opinion piece',
                     mediaType: 'article',
-                    src: 'https://i.ytimg.com/vi/bFinIf1eNEQ/maxresdefault.jpg',
+                    src: '/img/carousel/carousel-1.jpg',
                     title: 'Goodbye Spidey?',
                   },
                   {
@@ -150,8 +150,7 @@ class Home extends Component {
                     category: 'Gaming',
                     mediaSubtype: 'Report',
                     mediaType: 'article',
-                    src:
-                      'https://media.sketchfab.com/models/a657d72420c44e0b8402179e6d061182/thumbnails/79524c9e5a9e488dbb3c90eb961282ed/d62ec24d2c6a467bb3e360df225a76cc.jpeg',
+                    src: '/img/carousel/carousel-2.jpg',
                     title: 'More Speccy Ports',
                   },
                 ]}
@@ -191,7 +190,16 @@ class Home extends Component {
             <div
               className="bg-secondary rounded shadow-sm"
               style={{ height: 300, width: '100%' }}
-            ></div>
+            >
+              <iframe
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                frameborder="0"
+                height="60%"
+                src="https://www.youtube.com/embed/Vdvtssb10Q8?list=FL-3ai5uEU_vcQMCj7TeKILw"
+                width="100%"
+              ></iframe>
+            </div>
             <div
               className="bg-light rounded shadow-sm"
               style={{ height: 300, width: '100%' }}

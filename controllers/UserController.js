@@ -108,6 +108,17 @@ exports.list = (req, res) => {
   });
 };
 
+/* List users:
+ ******************************************************************/
+exports.listSecure = (req, res) => {
+  User.find({}, { email: 1, username: 1 }, (err, user) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(user);
+  });
+};
+
 /* Login user:
  ******************************************************************/
 exports.login = (req, res) => {

@@ -8,7 +8,10 @@ import ModifyBtn from '../Components/Button/ModifyBtn';
 
 class UserList extends Component {
   componentDidMount() {
-    this.props.usersGetList();
+    console.log(this.props);
+    if (this.props.usersGetList) {
+      this.props.usersGetList();
+    }
   }
   getFlag(country) {
     const flag = countries.map((e) => e.name).indexOf(country);
@@ -21,9 +24,7 @@ class UserList extends Component {
         <SectionTitlePostsTitle
           text={`
            Registered Users (${
-             this.props.usersReducer.list
-               ? this.props.usersReducer.list.length
-               : 0
+             this.props.usersReducer ? this.props.usersReducer.list.length : 0
            })`}
         />
         <table className="table table-striped">

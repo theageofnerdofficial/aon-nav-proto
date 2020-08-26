@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import countries from '../../config/countries';
 
 class SignupForm extends Component {
@@ -9,139 +11,213 @@ class SignupForm extends Component {
     document.getElementById('ui-login-btn-wrapper').style.display = 'block';
   }
   render() {
-    const hasPasswordMatch = (signupForm) =>
-      signupForm.password !== signupForm.password2;
-    const validateForm = (signupForm) => {
+    const validateForm = (fields) => {
       let usernames = [];
       let emails = [];
-      console.log(signupForm.hasConfirmed);
-      if (!signupForm.hasConfirmed) {
-        window.alert('You must agree to terms and conditions');
-      } else {
-        if (hasPasswordMatch(signupForm)) {
-          window.alert('Passwords do not match');
-          return false;
-        }
-        fetch('/users/list')
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            } else {
-              return response.json();
-            }
-          })
-          .then((res) => {
-            res.map((r) => {
-              usernames.push(r.username.toLowerCase());
-              emails.push(r.email.toLowerCase());
-            });
-          })
-          .then(() => {
-            if (usernames.includes(signupForm.username)) {
-              alert('That username has already been taken');
+      fetch('/users/listsecure')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          } else {
+            return response.json();
+          }
+        })
+        .then((res) => {
+          res.map((r) => {
+            usernames.push(r.username.toLowerCase());
+            emails.push(r.email.toLowerCase());
+          });
+        })
+        .then(() => {
+          if (usernames.includes(fields.username)) {
+            alert('That username has already been taken');
+            return;
+          } else {
+            if (emails.includes(fields.email)) {
+              alert('That email address already belongs to an account');
               return;
             } else {
-              if (emails.includes(signupForm.email)) {
-                alert('That email address already belongs to an account');
-                return;
-              } else {
-                alert('Signup successful. Redirecting in 2 seconds...');
-                this.props.userSignup(signupForm);
-                const loginForm = {
-                  username: signupForm.username,
-                  password: signupForm.password,
-                };
-                this.props.userLogin(loginForm);
-              }
+              alert('Signup successful. Redirecting in 2 seconds...');
+              this.props.userSignup(fields);
+              const loginForm = {
+                username: fields.username,
+                password: fields.password,
+              };
+              this.props.userLogin(loginForm);
             }
-          })
-          .catch((e) => {
-            alert('There has been a problem with your signup: ' + e.message);
-          });
-      }
+          }
+        })
+        .catch((e) => {
+          alert('There has been a problem with your signup: ' + e.message);
+        });
     };
     return (
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            const { elements } = e.target;
-            const signupForm = {
-              username: elements['username'].value,
-              email: elements['email'].value,
-              password: elements['password'].value,
-              password2: elements['password2'].value,
-              location: elements['location'].value,
-              hasConfirmed: elements['checkagree'].checked,
-            };
-            validateForm(signupForm);
+        <Formik
+          initialValues={{
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            location: 'United Kingdom',
+            acceptTerms: false,
+          }}
+          validationSchema={Yup.object().shape({
+            username: Yup.string()
+              .min(8, 'Username must be at least 8 characters')
+              .required('Username is required'),
+            email: Yup.string()
+              .email('Email is invalid')
+              .required('Email is required'),
+            password: Yup.string()
+              .min(8, 'Password must be at least 8 characters')
+              .required('Password is required'),
+            confirmPassword: Yup.string()
+              .oneOf([Yup.ref('password'), null], 'Passwords must match')
+              .required('Confirm Password is required'),
+            acceptTerms: Yup.bool().oneOf(
+              [true],
+              'You must accept Terms & Conditions'
+            ),
+          })}
+          onSubmit={(fields) => {
+            validateForm(fields);
           }}
         >
-          <input
-            className="font-weight-light form-control my-2"
-            name="username"
-            minLength="8"
-            maxLength="100"
-            placeholder="Username"
-            required
-            type="text"
-          />
-          <input
-            className="font-weight-light form-control"
-            name="email"
-            minLength="8"
-            placeholder="Email address"
-            required
-            type="email"
-          />
-          <input
-            className="font-weight-light form-control my-2"
-            name="password"
-            minLength="8"
-            placeholder="Password"
-            type="password"
-            required
-          />
-          <input
-            className="font-weight-light form-control my-2"
-            name="password2"
-            placeholder="Confirm Password"
-            type="password"
-            required
-          />
-          <p className="font-weight-light p-0 pt-2 m-0 text-muted">Location:</p>
-          <select
-            className="form-control mb-2 font-weight-light"
-            name="location"
-            placeholder="Location"
-          >
-            {countries.map((country) => {
-              return (
-                <option
-                  className="font-weight-light"
-                  selected={country.name === 'United Kingdom' ? true : false}
-                  required
+          {({ errors, status, touched }) => (
+            <Form>
+              <div className="form-row">
+                <div class="form-group col-12">
+                  <label>Username</label>
+                  <Field
+                    name="username"
+                    as="input"
+                    className={
+                      'form-control' +
+                      (errors.username && touched.username ? ' is-invalid' : '')
+                    }
+                  ></Field>
+                  <ErrorMessage
+                    name="username"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <Field
+                  name="email"
+                  type="text"
+                  className={
+                    'form-control' +
+                    (errors.email && touched.email ? ' is-invalid' : '')
+                  }
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="invalid-feedback"
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group col">
+                  <label htmlFor="password">Password</label>
+                  <Field
+                    name="password"
+                    type="password"
+                    className={
+                      'form-control' +
+                      (errors.password && touched.password ? ' is-invalid' : '')
+                    }
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </div>
+                <div className="form-group col">
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <Field
+                    name="confirmPassword"
+                    type="password"
+                    className={
+                      'form-control' +
+                      (errors.confirmPassword && touched.confirmPassword
+                        ? ' is-invalid'
+                        : '')
+                    }
+                  />
+                  <ErrorMessage
+                    name="confirmPassword"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </div>
+                <div className="form-group col-12">
+                  <label htmlFor="location">Location</label>
+                  <Field
+                    name="location"
+                    as="select"
+                    className={
+                      'form-control' +
+                      (errors.location && touched.location ? ' is-invalid' : '')
+                    }
+                  >
+                    {countries.map((country) => {
+                      return (
+                        <option
+                          className="font-weight-light"
+                          selected={
+                            country.name === 'United Kingdom' ? true : false
+                          }
+                          required
+                        >
+                          {country.name}
+                        </option>
+                      );
+                    })}
+                  </Field>
+                  <ErrorMessage
+                    name="location"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </div>
+              </div>
+              <br />
+              <div className="form-group form-check">
+                <Field
+                  type="checkbox"
+                  name="acceptTerms"
+                  className={
+                    'form-check-input ' +
+                    (errors.acceptTerms && touched.acceptTerms
+                      ? ' is-invalid'
+                      : '')
+                  }
+                />
+                <label htmlFor="acceptTerms" className="form-check-label">
+                  Accept Terms & Conditions
+                </label>
+                <ErrorMessage
+                  name="acceptTerms"
+                  component="div"
+                  className="invalid-feedback"
+                />
+              </div>
+              <div className="form-group">
+                <button
+                  type="submit"
+                  className="btn btn-primary col-12 font-weight-light"
                 >
-                  {country.name}
-                </option>
-              );
-            })}
-          </select>
-          <br />
-          <div>
-            <p className="font-weight-light">
-              <input type="checkbox" name="checkagree" />
-              &nbsp;I have read and agree to the{' '}
-              <a href="#">Terms & Conditions</a>
-            </p>
-          </div>
-          <br />
-          <button className="btn btn-primary font-weight-light form-control my-2">
-            Sign Up
-          </button>
-          <br />
-          <br />
-        </form>
+                  Register
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     );
   }

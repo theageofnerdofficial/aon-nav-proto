@@ -37,6 +37,7 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
   USERS_GET_PENDING,
@@ -410,7 +411,7 @@ const ui = {
         ? false
         : true
       : false,
-  loginBtnDisplay: true,
+  breadcrumbsPath: [],
 };
 
 export const uiReducer = (state = ui, action = {}) => {
@@ -418,6 +419,8 @@ export const uiReducer = (state = ui, action = {}) => {
     case UI_TOGGLE_LIGHTS:
       localStorage.setItem(settings.localStorage.darkmode, !state.lightsOff);
       return Object.assign({}, state, { lightsOff: !state.lightsOff });
+    case UI_BREADCRUMBS_SET_PATH:
+      return Object.assign({}, state, { breadcrumbsPath: action.payload });
     default:
       return state;
   }

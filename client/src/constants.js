@@ -51,6 +51,7 @@ export const SOURCES_TWITTER_GET_SUCCESS = 'SOURCES_TWITTER_GET_SUCCESS';
 
 /* UI constants:
  *****************************************************/
+export const UI_BREADCRUMBS_SET_PATH = 'UI_BREADCRUMBS_SET_PATH';
 export const UI_TOGGLE_LIGHTS = 'UI_TOGGLE_LIGHTS';
 
 /* User constants:

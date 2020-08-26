@@ -20,6 +20,7 @@ const settings = {
   },
   permissions: {
     accessLevel: {
+      admin: 3,
       source: {
         canDelete: 2, // Mod
         canEdit: 2, // Mod
