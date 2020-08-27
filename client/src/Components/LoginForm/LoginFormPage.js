@@ -9,7 +9,7 @@ class LoginFormPage extends Component {
   componentWillUnmount() {
     document.getElementById('ui-login-btn-wrapper').style.display = 'block';
   }
-  compo;
+
   render() {
     return (
       <div>

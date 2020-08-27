@@ -220,6 +220,7 @@ export const usersReducer = (state = users, action = {}) => {
         userAuth: {},
       });
     case USER_LOGIN_FAILURE:
+      window.alert('Bad login');
       return Object.assign({}, state, {
         userLoginPending: false,
       });
@@ -228,8 +229,12 @@ export const usersReducer = (state = users, action = {}) => {
         userLoginPending: true,
       });
     case USER_LOGIN_SUCCESS:
-      localStorage.setItem(settings.localStorage.token, action.payload.token);
-      window.location.href = '/';
+      if (!action.payload.auth) {
+        window.alert('Bad login');
+      } else {
+        localStorage.setItem(settings.localStorage.token, action.payload.token);
+        window.location.href = '/mynerd';
+      }
       return Object.assign({}, state, {
         userAuth: action.payload,
         userLoginPending: false,

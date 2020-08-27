@@ -332,7 +332,9 @@ export const userLogin = (o) => (dispatch) => {
     headers: settings.network.headers,
     method: 'POST',
   })
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json();
+    })
     .then((data) => {
       dispatch({
         payload: data,
@@ -348,8 +350,6 @@ export const userLogout = (o) => ({
 });
 
 export const userSignup = (o) => (dispatch) => {
-  console.log(o);
-
   dispatch({ type: USER_SIGNUP_PENDING });
   fetch('/user/create', {
     body: JSON.stringify(o),
