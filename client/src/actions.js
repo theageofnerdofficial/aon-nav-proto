@@ -13,6 +13,8 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   SOURCES_COMBINE,
+  SOURCES_COMBINED_ARRANGE_BY,
+  SOURCES_FILTER_BY_CATEGORY,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
@@ -36,6 +38,7 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  SOURCES_TOGGLE_SORT_UI,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -246,6 +249,16 @@ export const sourcesCombine = () => ({
   type: SOURCES_COMBINE,
 });
 
+export const sourcesCombinedArrangeBy = (o) => ({
+  type: SOURCES_COMBINED_ARRANGE_BY,
+  payload: o,
+});
+
+export const sourcesFilterByCategory = (o) => ({
+  type: SOURCES_FILTER_BY_CATEGORY,
+  payload: o,
+});
+
 export const sourcesGetReddit = (cat) => (dispatch) => {
   const category = cat ? '/' + cat : '/all';
   console.log(category);
@@ -286,6 +299,11 @@ export const sourcesGetTwitter = () => (dispatch) => {
 
 export const sourcesReset = () => ({
   type: SOURCES_RESET_FORM,
+});
+
+export const sourcesToggleSortUI = (o) => ({
+  type: SOURCES_TOGGLE_SORT_UI,
+  payload: o,
 });
 
 /* UI actions:

@@ -14,6 +14,7 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   SOURCES_COMBINE,
+  SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
@@ -37,6 +38,8 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  SOURCES_FILTER_BY_CATEGORY,
+  SOURCES_TOGGLE_SORT_UI,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -264,6 +267,7 @@ const sourceAddForm = {
   categoryGaming: null,
   service: String,
   filter: String,
+  sourceCategoryFilter: 'all',
   sourceAddPending: false,
   sourceRedditGetPending: false,
   sourceRedditPostsPending: false,
@@ -275,6 +279,15 @@ const sourceAddForm = {
   showRedditPeriod: true,
   sourceByIdPending: false,
   sourceById: {},
+  sortUI: {
+    source: { sortDirection: 0 },
+    category: { sortDirection: 0 },
+    service: { sortDirection: 0 },
+    posts: { sortDirection: 0 },
+    filter: { sortDirection: 0 },
+    period: { sortDirection: 0 },
+    addedBy: { sortDirection: 0 },
+  },
 };
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
@@ -298,7 +311,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         sourceRedditPostsPending: false,
         sourcesRedditPosts: sourcesRedditPostsCp,
       });
-
     case SOURCES_COMBINE:
       //return Object.assign({}, state);
       return Object.assign({}, state, {
@@ -307,24 +319,32 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
           ...state.sourcesTwitterData,
         ],
       });
+    case SOURCES_FILTER_BY_CATEGORY:
+      return Object.assign({}, state, { sourceCategoryFilter: action.payload });
+    case SOURCES_TOGGLE_SORT_UI:
+      stateCp = state;
+      stateCp.sortUI[action.payload.name].sortDirection = !stateCp.sortUI[
+        action.payload.name
+      ].sortDirection;
+      return Object.assign({}, state, stateCp);
+    case SOURCES_COMBINED_ARRANGE_BY:
+      const name = action.payload.name;
+      const nameSubtype = action.payload.nameSubtype;
+      stateCp = state;
+      if (stateCp.sortUI[name].sortDirection) {
+        utils.arr.sort.byProperty.ascending(
+          stateCp.sourcesCombined,
+          nameSubtype ? nameSubtype : name
+        );
+      } else {
+        utils.arr.sort.byProperty.descending(
+          stateCp.sourcesCombined,
+          nameSubtype ? nameSubtype : name
+        );
+      }
+      return Object.assign({}, state, stateCp);
     case SOURCES_RESET_FORM:
-      return Object.assign({}, state, {
-        category: null,
-        categoryGaming: null,
-        service: String,
-        filter: String,
-        sourceAddPending: false,
-        sourceRedditGetPending: false,
-        sourceRedditPostsPending: false,
-        sourceTwitterGetPending: false,
-        sourcesCombined: null,
-        sourcesRedditData: null,
-        sourcesRedditPosts: null,
-        sourcesTwitterData: null,
-        showRedditPeriod: true,
-        sourceByIdPending: false,
-        sourceById: {},
-      });
+      return Object.assign({}, state, sourceAddForm);
     case SOURCES_TWITTER_GET_FAILURE:
       return Object.assign({}, state, {
         sourceTwitterGetPending: false,

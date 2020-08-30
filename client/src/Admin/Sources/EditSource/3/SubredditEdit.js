@@ -58,7 +58,7 @@ class SubredditEdit extends Component {
                 <input
                   style={{ height: '100%' }}
                   type="color"
-                  name="twitter-brand-color"
+                  name="reddit-brand-color"
                   defaultValue={
                     this.props.sourceReducer.sourceById
                       ? this.props.sourceReducer.sourceById.brandColor

@@ -1,6 +1,6 @@
 const settings = {
   categories: {
-    arr: ['TV/Film', 'Comics', 'Gaming'],
+    arr: ['TV/Film', 'Comics', 'Gaming', 'Wrestling', 'Toys'],
   },
   localStorage: {
     darkmode: 'aon_darkmode',

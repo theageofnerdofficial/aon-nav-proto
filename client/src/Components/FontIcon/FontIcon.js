@@ -12,6 +12,10 @@ import {
   faCaretUp,
   faCog,
   faCheckCircle,
+  faSortAlphaDown,
+  faSortAlphaUp,
+  faSortNumericDown,
+  faSortNumericUp,
   faChevronDown,
   faChevronLeft,
   faChevronRight,
@@ -109,6 +113,20 @@ const FontIcon = (icon) => {
     case 'faRedditAlien':
       faIcon = faRedditAlien;
       break;
+    case 'faSortNumericDown':
+      faIcon = faSortNumericDown;
+      break;
+    case 'faSortNumericUp':
+      faIcon = faSortNumericUp;
+      break;
+    //
+    case 'faSortAlphaDown':
+      faIcon = faSortAlphaDown;
+      break;
+    case 'faSortAlphaUp':
+      faIcon = faSortAlphaUp;
+      break;
+
     case 'faSun':
       faIcon = faSun;
       break;

@@ -24,10 +24,62 @@ const format = {
           case 'xbox':
             imgSrc = '/img/thumbnails/gaming-xbox.svg';
             break;
+          case 'marvel':
+            imgSrc = '/img/thumbnails/comics-marvel.svg';
+            break;
+          case 'dccomics':
+            imgSrc = '/img/thumbnails/comics-dc.svg';
+            break;
+          case 'wwe':
+            imgSrc = '/img/thumbnails/wrestling-wwe.svg';
+            break;
+          case 'impactwrestling':
+            imgSrc = '/img/thumbnails/wrestling-impact.svg';
+            break;
+          case 'lego':
+            imgSrc = '/img/thumbnails/toys-lego.svg';
+            break;
           default:
             imgSrc = '';
         }
         return imgSrc;
+      },
+      twitter: {
+        source: {
+          thumbnail: (twitterSrc) => {
+            let imgSrc;
+            twitterSrc = twitterSrc.toLowerCase();
+            switch (twitterSrc) {
+              case 'nintendo':
+                imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+                break;
+              case 'sega':
+                imgSrc = '/img/thumbnails/gaming-sega.svg';
+                break;
+              case 'xbox':
+                imgSrc = '/img/thumbnails/gaming-xbox.svg';
+                break;
+              case 'marvel':
+                imgSrc = '/img/thumbnails/comics-marvel.svg';
+                break;
+              case 'dccomics':
+                imgSrc = '/img/thumbnails/comics-dc.svg';
+                break;
+              case 'wwe':
+                imgSrc = '/img/thumbnails/wrestling-wwe.svg';
+                break;
+              case 'impactwrestling':
+                imgSrc = '/img/thumbnails/wrestling-impact.svg';
+                break;
+              case 'lego':
+                imgSrc = '/img/thumbnails/toys-lego.svg';
+                break;
+              default:
+                imgSrc = '';
+            }
+            return imgSrc;
+          },
+        },
       },
       filter: (o) => {
         let period;

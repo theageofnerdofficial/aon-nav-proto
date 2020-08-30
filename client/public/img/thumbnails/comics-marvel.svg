@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="40mm"
+   height="40mm"
+   viewBox="0 0 40 40"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="comics-marvel.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.7916076"
+     inkscape:cx="55.427529"
+     inkscape:cy="91.406194"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1252"
+     inkscape:window-height="803"
+     inkscape:window-x="163"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0">
+    <sodipodi:guide
+       position="31.725554,4.9452205"
+       orientation="0,-1"
+       id="guide16" />
+    <sodipodi:guide
+       position="32.900574,34.51657"
+       orientation="0,-1"
+       id="guide18" />
+    <sodipodi:guide
+       position="5.2875923,18.84963"
+       orientation="1,0"
+       id="guide20" />
+    <sodipodi:guide
+       position="35.250615,30.012325"
+       orientation="1,0"
+       id="guide22" />
+    <sodipodi:guide
+       id="guide891"
+       orientation="0,-1"
+       position="14.91881,-0.34860156" />
+    <sodipodi:guide
+       id="guide893"
+       orientation="0,-1"
+       position="13.562555,40.678127" />
+    <sodipodi:guide
+       id="guide895"
+       orientation="1,0"
+       position="-0.5085958,34.51657" />
+    <sodipodi:guide
+       id="guide899"
+       orientation="1,0"
+       position="40.3486,27.454636" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-53.672619,-41.577381)">
+    <rect
+       y="40.957661"
+       x="53.333557"
+       height="40.968327"
+       width="40.857197"
+       id="rect856"
+       style="fill:#ed1d24;fill-opacity:1;stroke-width:0.264942" />
+    <g
+       style="font-style:normal;font-weight:normal;font-size:9.20974px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.230245"
+       id="text14-9"
+       transform="matrix(0.67488691,0,0,0.72754052,36.054031,10.20298)"
+       aria-label="A">
+      <path
+         id="path12"
+         fill="#ffffff"
+         d="m 74.546117,66.887274 v -2.489126 h -9.142658 l -1.50518,8.312428 -1.487044,-8.312428 h -3.297101 l 0.368454,2.219636 c -0.380082,-0.568885 -1.729303,-2.219636 -4.700192,-2.219636 -0.01974,-9.22e-4 -3.301048,0 -3.301048,0 l -0.01365,12.11601 -2.402633,-12.11601 -4.318617,-9.22e-4 -2.485947,12.553489 0.0014,-12.552512 H 38.12806 l -1.489713,7.051611 -1.451202,-7.051611 H 31.052639 V 78.045986 H 34.30867 V 71.46764 l 1.481285,6.578296 h 1.730689 L 38.98102,71.46764 v 6.578296 h 6.276524 l 0.379549,-2.099198 h 2.526909 l 0.379549,2.099198 6.162701,0.0032 h 0.0045 v -0.0032 h 0.0077 v -4.429525 l 0.754617,-0.08322 1.563958,4.51575 h 3.187759 l -0.0013,-0.0032 h 0.0091 l -2.052208,-5.291469 c 1.039118,-0.583439 2.213713,-2.062546 1.901156,-3.478181 v -4.61e-4 c 0.0038,0.01839 1.937639,8.77924 1.937639,8.77924 l 3.790582,-0.0089 2.589954,-12.369495 v 12.36949 h 6.146277 v -2.454263 h -2.916911 v -3.129453 h 2.916911 v -2.49173 h -2.916911 v -3.083372 z m -28.525551,6.895817 0.89468,-5.83533 0.927004,5.83533 z m 9.462896,-2.694499 c -0.250045,0.09127 -0.510332,0.136941 -0.765071,0.137429 v -4.389375 c 0.0039,0 0.0099,-4.61e-4 0.01632,-4.61e-4 0.253886,-0.0014 2.155149,0.05803 2.155149,2.170634 0,1.105105 -0.646449,1.802074 -1.406399,2.081805 z m 25.621764,4.500961 v 2.453369 H 75.108614 V 64.396194 h 3.229257 v 11.193359 z"
+         style="stroke-width:0.0931099" />
+    </g>
+  </g>
+</svg>

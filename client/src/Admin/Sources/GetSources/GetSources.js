@@ -4,6 +4,8 @@ import LoaderCentered from '../../../Components/Loader/LoaderCentered';
 import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../../../Components/SectionTitle/SectionTitlePostsTitle';
 import Source from './Source';
+import FontIcon from '../../../Components/FontIcon/FontIcon';
+import settings from '../../../config/settings';
 
 // Stop update loop:
 let combined = false;
@@ -35,10 +37,15 @@ class GetSources extends Component {
   }
 
   render() {
+    /* Count sources shows number of sources as feedback:
+     *****************************************************/
     const countSources = () =>
       this.props.sourceReducer.sourcesCombined
         ? this.props.sourceReducer.sourcesCombined.length
         : '0';
+
+    /* No sources: a fallback for no sources (spinner):
+     *****************************************************/
     const noSources = () => {
       if (
         this.props.sourceReducer &&
@@ -64,22 +71,79 @@ class GetSources extends Component {
         );
       }
     };
+
+    /* Sets sort direction icon:
+     *****************************************************/
+    const setSortDirectionIcon = (o) => {
+      const icon = o.numeric ? 'faSortNumeric' : 'faSortAlpha';
+      return FontIcon(
+        this.props.sourceReducer.sortUI[o.name].sortDirection
+          ? icon + 'Down'
+          : icon + 'Up'
+      );
+    };
+
+    /* Button for determining sort direction of sources:
+     *****************************************************/
+    const sortByBtn = (o) => {
+      return (
+        <button
+          className="btn btn-sm btn-light text-muted"
+          data-direction={
+            this.props.sourceReducer.sortUI[o.name]
+              ? this.props.sourceReducer.sortUI[o.name].sortDirection
+              : 0
+          }
+          onClick={(e) => {
+            this.props.sourcesToggleSortUI({ name: o.name });
+            this.props.sourcesCombinedArrangeBy({
+              name: o.name,
+              nameSubtype: o.nameSubtype,
+            });
+          }}
+        >
+          {setSortDirectionIcon(o)}
+        </button>
+      );
+    };
+
     return (
       <React.Fragment>
         <SectionTitle title="Sources" />
         <SectionTitlePostsTitle text={`Sources (${countSources()})`} />
+        <select
+          className="form-control col-12 col-md-4 col-lg-4 mb-3"
+          onChange={(e) => {
+            this.props.sourcesFilterByCategory(e.target.value);
+          }}
+        >
+          <option>All</option>
+          {settings.categories.arr.map((category) => {
+            return <option>{category}</option>;
+          })}
+        </select>
         <div style={{ overflow: 'scroll' }}>
           <table className="table table-striped">
             <thead>
               <tr>
                 <th></th>
-                <th>Category</th>
-                <th>Service</th>
-                <th>Source</th>
-                <th>Posts</th>
-                <th>Filter</th>
-                <th>Period</th>
-                <th>Added By</th>
+                <th>
+                  Source{' '}
+                  {sortByBtn({ name: 'source', nameSubtype: 'subreddit' })}
+                </th>
+                <th>Category {sortByBtn({ name: 'category' })}</th>
+                <th>Service {sortByBtn({ name: 'service' })}</th>
+                <th>
+                  Posts{' '}
+                  {sortByBtn({
+                    name: 'posts',
+                    nameSubtype: 'postsNumber',
+                    numeric: true,
+                  })}
+                </th>
+                <th>Filter {sortByBtn({ name: 'filter' })}</th>
+                <th>Period {sortByBtn({ name: 'period', numeric: true })}</th>
+                <th>Added By {sortByBtn({ name: 'addedBy' })}</th>
                 <th></th>
               </tr>
             </thead>
@@ -96,6 +160,9 @@ class GetSources extends Component {
                       key={'source-' + index}
                       sourceDelete={this.props.sourceDelete}
                       sourceRemove={this.props.sourceRemove}
+                      sourceCategoryFilter={
+                        this.props.sourceReducer.sourceCategoryFilter
+                      }
                       src={s}
                     />
                   );

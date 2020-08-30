@@ -1,3 +1,6 @@
+import ReactHtmlParser from 'react-html-parser';
+import React from 'react';
+
 const utils = {
   arr: {
     randomize(arr) {
@@ -12,6 +15,24 @@ const utils = {
         arr[randomIndex] = temporaryValue;
       }
       return arr;
+    },
+    sort: {
+      byProperty: {
+        ascending(arr, property) {
+          arr.sort((a, b) => {
+            if (a[property] < b[property]) return -1;
+            if (a[property] > b[property]) return 1;
+            return 0;
+          });
+        },
+        descending(arr, property) {
+          arr.sort((a, b) => {
+            if (a[property] > b[property]) return -1;
+            if (a[property] < b[property]) return 1;
+            return 0;
+          });
+        },
+      },
     },
   },
 
@@ -31,6 +52,9 @@ const utils = {
         /\w\S*/g,
         (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
       );
+    },
+    parseHTML(str) {
+      return <React.Fragment>{ReactHtmlParser(str)}</React.Fragment>;
     },
   },
 

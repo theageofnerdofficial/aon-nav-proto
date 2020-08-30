@@ -53,7 +53,6 @@ class TwitterUserEdit extends Component {
           <div className="col-10 p-0">
             <div className="col-12 m-0 p-0 row" style={{ height: '100%' }}>
               <div className="col-2 p-0 ">
-                {' '}
                 <input
                   style={{ height: '100%' }}
                   type="color"

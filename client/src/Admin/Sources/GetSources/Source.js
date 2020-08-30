@@ -9,6 +9,9 @@ import { fetchConstructor } from '../../../actions';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../constants';
 
 class Source extends Component {
+  componentDidMount() {
+    console.log(this.props.src);
+  }
   render() {
     const { props } = this;
     // Delete a source using fetch constructor to connect to DB:
@@ -127,66 +130,84 @@ class Source extends Component {
         );
       }
     };
+
+    // Determine if source has filter category (so we can hide those that don't):
+    const hasFilterCategory = () => {
+      const { sourceCategoryFilter } = this.props;
+      return (
+        sourceCategoryFilter.toLowerCase() === 'all' ||
+        sourceCategoryFilter.toLowerCase() ===
+          this.props.src.category.toLowerCase()
+      );
+    };
     return (
       <React.Fragment>
-        <tr>
-          <td>
-            <img
-              alt="Source logo"
-              src={getLogo(this.props.src)}
-              style={{ width: '65px' }}
-            />
-          </td>
-          <td>
-            {utils.str.makeTitleCase(this.props.src.category)}
-            <br />
-            <small className="font-weight-light">
-              {this.props.src.categoryGaming
-                ? `(${utils.str.makeTitleCase(this.props.src.categoryGaming)})`
-                : ''}
-            </small>
-          </td>
-          <td>{getSource(this.props.src)}</td>
-          <td>
-            <LabelBtn
-              brandColor={this.props.src.brandColor}
-              source={getTableCellsByService(this.props.src)}
-            />
-            {getOfficial(this.props.src)}
-          </td>
-          <td>{this.props.src.postsNumber}</td>
-          <td>{utils.str.makeTitleCase(this.props.src.filter)}</td>
-          <td>{this.props.src.period ? this.props.src.period : 'N/A'}</td>
-          <td>{getCreatedByUser(this.props.src.createdBy)}</td>
-          <td style={{ width: 60 }}>
-            <this.props.Link
-              to={`/admin/editsource/${this.props.src._id}/${getSource(
-                this.props.src
-              ).toLowerCase()}`}
-            >
-              <button className="btn btn-sm btn-secondary form-control mb-1">
-                {FontIcon('faEdit')}
+        {hasFilterCategory() ? (
+          <tr>
+            <td>
+              <img
+                alt="Source logo"
+                className="rounded"
+                src={getLogo(this.props.src)}
+                style={{ width: '65px' }}
+              />
+            </td>
+            <td>
+              <LabelBtn
+                brandColor={this.props.src.brandColor}
+                source={getTableCellsByService(this.props.src)}
+              />
+              {getOfficial(this.props.src)}
+            </td>
+            <td>
+              {utils.str.makeTitleCase(this.props.src.category)}
+              <br />
+              <small className="font-weight-light">
+                {this.props.src.categoryGaming
+                  ? `(${utils.str.makeTitleCase(
+                      this.props.src.categoryGaming
+                    )})`
+                  : ''}
+              </small>
+            </td>
+            <td>{getSource(this.props.src)}</td>
+
+            <td>{this.props.src.postsNumber}</td>
+            <td>{utils.str.makeTitleCase(this.props.src.filter)}</td>
+            <td>{this.props.src.period ? this.props.src.period : 'N/A'}</td>
+            <td>{getCreatedByUser(this.props.src.createdBy)}</td>
+            <td style={{ width: 60 }}>
+              <this.props.Link
+                to={`/admin/editsource/${this.props.src._id}/${getSource(
+                  this.props.src
+                ).toLowerCase()}`}
+              >
+                <button className="btn btn-sm btn-secondary form-control mb-1">
+                  {FontIcon('faEdit')}
+                </button>
+              </this.props.Link>
+              <br />
+              <button
+                className="btn btn-sm btn-danger form-control"
+                onClick={() => {
+                  const hasConfirmed = window.confirm(
+                    'Are you bloody sure you want to do that, mate?'
+                  );
+                  if (hasConfirmed) {
+                    deleteSource({
+                      sourceId: this.props.src._id,
+                      service: this.props.src.service,
+                    });
+                  }
+                }}
+              >
+                {FontIcon('faTrashAlt')}
               </button>
-            </this.props.Link>
-            <br />
-            <button
-              className="btn btn-sm btn-danger form-control"
-              onClick={() => {
-                const hasConfirmed = window.confirm(
-                  'Are you bloody sure you want to do that, mate?'
-                );
-                if (hasConfirmed) {
-                  deleteSource({
-                    sourceId: this.props.src._id,
-                    service: this.props.src.service,
-                  });
-                }
-              }}
-            >
-              {FontIcon('faTrashAlt')}
-            </button>
-          </td>
-        </tr>
+            </td>
+          </tr>
+        ) : (
+          ''
+        )}
       </React.Fragment>
     );
   }
