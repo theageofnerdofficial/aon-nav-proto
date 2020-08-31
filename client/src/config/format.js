@@ -14,6 +14,7 @@ const format = {
       thumbnail: (subreddit) => {
         let imgSrc;
         subreddit = subreddit.toLowerCase();
+        console.log(subreddit);
         switch (subreddit) {
           case 'nintendo':
             imgSrc = '/img/thumbnails/gaming-nintendo.svg';
@@ -38,6 +39,12 @@ const format = {
             break;
           case 'lego':
             imgSrc = '/img/thumbnails/toys-lego.svg';
+            break;
+          case 'netflix':
+            imgSrc = '/img/thumbnails/tvfilm-netflix.svg';
+            break;
+          case 'amazonprime':
+            imgSrc = '/img/thumbnails/tvfilm-prime.svg';
             break;
           default:
             imgSrc = '';
@@ -73,6 +80,12 @@ const format = {
                 break;
               case 'lego':
                 imgSrc = '/img/thumbnails/toys-lego.svg';
+                break;
+              case 'netflix':
+                imgSrc = '/img/thumbnails/tvfilm-netflix.svg';
+                break;
+              case 'amazonprime':
+                imgSrc = '/img/thumbnails/tvfilm-prime.svg';
                 break;
               default:
                 imgSrc = '';

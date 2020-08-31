@@ -22,11 +22,11 @@ a.nav-link {
 }
 
 .hero-bg-img {
-  filter: blur(6px);
+  filter: blur(2px);
   height: 100px;
   opacity: 0.3;
   transform: scaleY(1.2);
-  -webkit-filter: blur(3px);
+  -webkit-filter: blur(2px);
   width: 100%;
   z-index: -10 !important;
 }
