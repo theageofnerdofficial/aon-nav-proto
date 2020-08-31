@@ -84,9 +84,8 @@ export const GlobalStyles = createGlobalStyle`
     filter: ${({ theme }) => theme.navBtnBg.ie};
     border-color: ${({ theme }) => theme.navBtnBorder};
     color: #fff !important;
-
   }
-
+  
   .post-wrapper {
     background: ${({ theme }) => theme.navBtnBg};
     color: ${({ theme }) => theme.text};

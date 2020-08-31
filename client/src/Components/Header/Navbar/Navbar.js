@@ -41,9 +41,15 @@ class Navbar extends Component {
                 <button
                   className={`btn btn-light form-control navbar-btn p-0 rounded-0 text-center text-uppercase ${
                     this.props.activeItem === page.toLowerCase()
-                      ? 'nav-btn-active'
+                      ? `nav-btn-active nav-btn-${page
+                          .toLowerCase()
+                          .replace(/ /g, '')
+                          .replace(/[\/\\]/g, '')}-active`
                       : ''
-                  }`}
+                  } nav-btn-${page
+                    .toLowerCase()
+                    .replace(/ /g, '')
+                    .replace(/[\/\\]/g, '')} `}
                   name={page.toLowerCase()}
                   onClick={(e) => this.props.setActiveItem(e)}
                 >

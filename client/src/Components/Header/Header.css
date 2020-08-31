@@ -71,6 +71,49 @@ a.nav-link {
   letter-spacing: -1.5px !important;
 }
 
+.nav-btn-home,
+.nav-btn-mynerd,
+.nav-btn-tvfilm,
+.nav-btn-comics,
+.nav-btn-gaming {
+  border-bottom: 2px solid #113a7d !important;
+  transition: border 0.8s;
+}
+
+.nav-btn-home:hover,
+.nav-btn-mynerd:hover,
+.nav-btn-tvfilm:hover,
+.nav-btn-comics:hover,
+.nav-btn-gaming:hover {
+  border: 1px solid #000;
+  text-decoration: underline;
+}
+
+.nav-btn-home:hover,
+.nav-btn-home-active {
+  border-bottom: 2px solid red !important;
+}
+
+.nav-btn-mynerd:hover,
+.nav-btn-mynerd-active {
+  border-bottom: 2px solid orange !important;
+}
+
+.nav-btn-tvfilm:hover,
+.nav-btn-tvfilm-active {
+  border-bottom: 2px solid yellow !important;
+}
+
+.nav-btn-comics:hover,
+.nav-btn-comics-active {
+  border-bottom: 2px solid lime !important;
+}
+
+.nav-btn-gaming:hover,
+.nav-btn-gaming-active {
+  border-bottom: 2px solid cyan !important;
+}
+
 .navbar-logo-wrapper {
   height: 100px;
   left: 0;
@@ -82,6 +125,10 @@ a.nav-link {
   text-align: center;
   width: 300px;
   z-index: 10;
+}
+
+.navbar-custom {
+  box-shadow: 1px 1px 1px #222;
 }
 
 .navbar-logo-wrapper > img {

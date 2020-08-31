@@ -48,8 +48,8 @@
       "primary": "#000"
     },
     "hero": {
-      "bgCol": "#0048a1",
-      "opacity": "0.2"
+      "bgCol": "#003475",
+      "opacity": "0.18"
     }
   }
 }
