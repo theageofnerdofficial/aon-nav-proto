@@ -178,7 +178,6 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Today's Quiz"
             />
-
             <Quiz />
           </div>
 
