@@ -22,6 +22,13 @@ export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';
 export const NERD_UPDATE_CHECK = 'NERD_UPDATE_CHECK';
 export const NERD_SETUP_UPDATE_PHASE = 'NERD_SETUP_UPDATE_PHASE';
 
+/* Quiz constants:
+ *****************************************************/
+export const QUIZ_REQUEST_FAILURE = 'QUIZ_REQUEST_FAILURE';
+export const QUIZ_REQUEST_PENDING = 'QUIZ_REQUEST_PENDING';
+export const QUIZ_REQUEST_SUCCESS = 'QUIZ_REQUEST_SUCCESS';
+export const QUIZ_FORM_UPDATE = 'QUIZ_FORM_UPDATE';
+
 /* Source constants:
  *****************************************************/
 export const SOURCE_ADD_FAILURE = 'SOURCE_ADD_FAILURE';

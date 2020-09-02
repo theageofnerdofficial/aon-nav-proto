@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import settings from '../../config/settings';
+//import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
 
 class Carousel extends Component {
   render() {
+    /*
     const getTabColour = (category) => {
       category = category.toLowerCase();
       if (category === 'gaming') {
@@ -11,7 +12,7 @@ class Carousel extends Component {
       } else {
         return settings.ui.style.sectionTab.default;
       }
-    };
+    };*/
 
     const populateItems = () => {
       return this.props.items.map((item, index) => {

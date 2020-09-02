@@ -12,6 +12,10 @@ import {
   FLASH_MSG_UPDATE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  QUIZ_FORM_UPDATE,
+  QUIZ_REQUEST_FAILURE,
+  QUIZ_REQUEST_PENDING,
+  QUIZ_REQUEST_SUCCESS,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
@@ -129,6 +133,26 @@ export const nerdSetupUpdatePhase = (o) => ({
   type: NERD_SETUP_UPDATE_PHASE,
   payload: o,
 });
+
+export const quizFormUpdate = (o) => ({
+  type: QUIZ_FORM_UPDATE,
+  payload: o,
+});
+
+export const quizRequestData = (o) => (dispatch) => {
+  dispatch({ type: QUIZ_REQUEST_PENDING });
+  fetch('/quiz', {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: QUIZ_REQUEST_SUCCESS,
+      });
+    })
+    .catch((error) => dispatch({ type: QUIZ_REQUEST_FAILURE, payload: error }));
+};
 
 /* Source add form actions:
  ******************************************************/

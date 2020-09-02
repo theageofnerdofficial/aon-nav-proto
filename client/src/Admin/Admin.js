@@ -49,6 +49,22 @@ class Admin extends Component {
             Link={this.props.Link}
           />
         </div>
+        <br />
+        <SectionTitlePostsTitle text="Quizzes" />
+        <div className="col-12 row p-0 m-0">
+          <AdminThumb
+            fontIcon="faTasks"
+            label="Quiz List"
+            link="/admin/quizlist"
+            Link={this.props.Link}
+          />
+          <AdminThumb
+            fontIcon="faPlus"
+            label="Add Quiz"
+            link="/admin/addquiz"
+            Link={this.props.Link}
+          />
+        </div>
       </div>
     );
   }

@@ -16,10 +16,11 @@ class Navbar extends Component {
       return 'col-2';
     };
     const formatLink = (link) => {
-      var lowerCaseLink = link.toLowerCase();
-      var slashlessLink = lowerCaseLink.replace(/\//g, '');
-      var spacelessLink = slashlessLink.replace(/\s/g, '');
-      return spacelessLink;
+      const lowerCaseLink = link.toLowerCase();
+      const slashlessLink = lowerCaseLink.replace(/\//g, '');
+      const spacelessLink = slashlessLink.replace(/\s/g, '');
+      const dashlessLink = spacelessLink.replace(/[\/\\]/g, '');
+      return dashlessLink;
     };
 
     return (
@@ -41,15 +42,9 @@ class Navbar extends Component {
                 <button
                   className={`btn btn-light form-control navbar-btn p-0 rounded-0 text-center text-uppercase ${
                     this.props.activeItem === page.toLowerCase()
-                      ? `nav-btn-active nav-btn-${page
-                          .toLowerCase()
-                          .replace(/ /g, '')
-                          .replace(/[\/\\]/g, '')}-active`
+                      ? `nav-btn-active nav-btn-${formatLink(page)}-active`
                       : ''
-                  } nav-btn-${page
-                    .toLowerCase()
-                    .replace(/ /g, '')
-                    .replace(/[\/\\]/g, '')} `}
+                  } nav-btn-${formatLink(page)} `}
                   name={page.toLowerCase()}
                   onClick={(e) => this.props.setActiveItem(e)}
                 >

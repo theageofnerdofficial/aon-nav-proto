@@ -22,6 +22,7 @@ app.use(cors());
 const userController = require('./controllers/UserController');
 const redditSourceController = require('./controllers/sources/RedditSourceController');
 const twitterSourceController = require('./controllers/sources/TwitterSourceController');
+const quizController = require('./controllers/QuizController');
 
 // For env variables:
 dotenv.config();
@@ -138,6 +139,10 @@ app.put('/source/twitter/', (req, res, next) =>
 app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
   twitterSourceController.getSource(req, res, next)
 );
+
+/* Quiz:
+ *****************************************************************/
+app.post('/quiz', (req, res, next) => quizController.create(req, res, next));
 
 /* Description: Handle additional request: direct to index.html
    Permission: Unprotected GET

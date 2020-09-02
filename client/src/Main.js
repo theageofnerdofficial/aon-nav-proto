@@ -51,6 +51,8 @@ import {
   sourcesGetTwitter,
   sourcesReset,
   sourcesToggleSortUI,
+  quizFormUpdate,
+  quizRequestData,
   uiSetBreadcrumbs,
   uiToggleLights,
   userAuthenticate,
@@ -72,6 +74,7 @@ import { lightTheme, darkTheme } from './themeProvider/theme';
 import { ThemeProvider } from 'styled-components';
 import './Main.css';
 import settings from './config/settings';
+import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -81,6 +84,7 @@ const mapStateToProps = (state) => {
     modalReducer: state.modalReducer,
     nerdReducer: state.nerdReducer,
     nerdSetupReducer: state.nerdSetupReducer,
+    quizReducer: state.quizReducer,
     sourceReducer: state.sourceReducer,
     uiReducer: state.uiReducer,
     usersReducer: state.usersReducer,
@@ -100,6 +104,8 @@ const mapDispatchToProps = (dispatch) => {
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
     nerdSetupUpdatePhase: (o) => dispatch(nerdSetupUpdatePhase(o)),
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
+    quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
+    quizRequestData: (o) => dispatch(quizRequestData(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
     sourceAddFormCategoryGaming: (cat) =>
@@ -177,6 +183,9 @@ class Main extends Component {
       nerdSetupReducer,
       nerdSetupUpdatePhase,
       nerdUpdateCheck,
+      quizFormUpdate,
+      quizReducer,
+      quizRequestData,
       sourceAdd,
       sourceAddFormCategory,
       sourceAddFormCategoryGaming,
@@ -194,7 +203,7 @@ class Main extends Component {
       sourcesReset,
       sourcesToggleSortUI,
       uiReducer,
-      uiSetBreadcrumbs,
+      // uiSetBreadcrumbs,
       uiToggleLights,
       userAuthenticate,
       userLogin,
@@ -248,6 +257,7 @@ class Main extends Component {
                           dataFormatTweets={dataFormatTweets}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
+                          quizRequestData={quizRequestData}
                           {...props}
                         />
                       )}
@@ -430,6 +440,48 @@ class Main extends Component {
                         />
                       )}
                     />
+                    <Route
+                      exact
+                      path="/admin/quizlist"
+                      render={(props) => (
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={UserList}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            usersGetList,
+                            usersReducer,
+                          }}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/admin/addQuiz"
+                      render={(props) => (
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={AddQuiz}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            flashMsgFlash,
+                            flashMsgReducer,
+                            flashMsgUpdate,
+                            quizFormUpdate,
+                            quizReducer,
+                            usersGetList,
+                            usersReducer,
+                          }}
+                          {...props}
+                        />
+                      )}
+                    />
+
                     {/* Component: MyNerd:
                       - Route type: Protected
                       - Access: logged in:

@@ -4,6 +4,9 @@ import Question from './Question';
 import FontIcon from '../FontIcon/FontIcon';
 
 class Quiz extends Component {
+  componentDidMount() {
+    this.props.quizRequestData();
+  }
   render() {
     var quizData = [
       {

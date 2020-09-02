@@ -1,7 +1,7 @@
 // Imports:
 import React, { Component } from 'react';
 import Carousel from './Components/Carousel/Carousel';
-import Posts from './Components/Post/Posts';
+// import Posts from './Components/Post/Posts';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
 import formatTweet from './Components/Utils/utils/formatTweet';
@@ -123,7 +123,7 @@ class Home extends Component {
   };
   render() {
     const { allData } = this.props.dataReducer;
-    const sectionTitle = `Mix (${allData ? allData.length : 0})`;
+    // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
         <div className=" col-md-12 m-0 p-0 row">
@@ -178,7 +178,7 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Today's Quiz"
             />
-            <Quiz />
+            <Quiz quizRequestData={this.props.quizRequestData} />
           </div>
 
           <div className="col-md-4 m-0 p-0 section-responsive-pr">

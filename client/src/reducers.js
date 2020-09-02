@@ -13,6 +13,10 @@ import {
   MODAL_LOGIN_FORM,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  QUIZ_FORM_UPDATE,
+  QUIZ_REQUEST_FAILURE,
+  QUIZ_REQUEST_PENDING,
+  QUIZ_REQUEST_SUCCESS,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_REDDIT_GET_FAILURE,
@@ -171,6 +175,72 @@ export const flashMsgReducer = (state = flashMsg, action = {}) => {
       });
     default:
       return state;
+  }
+};
+
+const quiz = {
+  title: String,
+  subtitle: String,
+  quizNumber: Number,
+  score: Number,
+  questionNumber: Number,
+  questionData: [],
+  quizFormQuestions: [
+    /* { question: null, answers: [null, null, null, null], correct: null },*/
+  ],
+  quizRequestPending: false,
+};
+
+export const quizReducer = (state = quiz, action = {}) => {
+  switch (action.type) {
+    case QUIZ_FORM_UPDATE:
+      stateCp = state;
+      const questionIndex = action.payload.name.split('-')[1];
+      const answerIndex = action.payload.name.split('-')[2];
+      const isQuestion = action.payload.name.split('-')[2] === 'question';
+      const isAnswer = action.payload.name.split('-')[3] === 'answer';
+      const isCorrect = action.payload.name.split('-')[2] === 'correct';
+      const isQuizTitle = action.payload.name.split('-')[1] === 'title';
+      const addQuestion = action.payload.name === 'qq-add';
+      const removeQuestion = action.payload.name.split('-')[2] === 'remove';
+
+      if (isQuizTitle) {
+        //
+        console.log('got to title');
+        stateCp.title = action.payload.value;
+      }
+
+      if (removeQuestion) {
+        //
+        stateCp.quizFormQuestions.splice(action.payload.name.split('-')[1], 1);
+      }
+      if (addQuestion) {
+        stateCp.quizFormQuestions.push({
+          question: null,
+          answers: [null, null, null, null],
+          correct: null,
+        });
+      }
+      if (isAnswer) {
+        stateCp.quizFormQuestions[questionIndex].answers[answerIndex] =
+          action.payload.value;
+      }
+      if (isQuestion) {
+        stateCp.quizFormQuestions[questionIndex].question =
+          action.payload.value;
+      }
+      if (isCorrect) {
+        stateCp.quizFormQuestions[questionIndex].correct = action.payload.value;
+      }
+      return Object.assign({}, state, stateCp);
+    case QUIZ_REQUEST_FAILURE:
+      return Object.assign({}, state, { quizRequestPending: false });
+    case QUIZ_REQUEST_PENDING:
+      return Object.assign({}, state, { quizRequestPending: true });
+    case QUIZ_REQUEST_SUCCESS:
+      return Object.assign({}, state, { quizRequestPending: false });
+    default:
+      return Object.assign({}, state);
   }
 };
 
