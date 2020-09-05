@@ -13,6 +13,9 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   QUIZ_FORM_UPDATE,
+  QUIZ_LIST_FAILURE,
+  QUIZ_LIST_PENDING,
+  QUIZ_LIST_SUCCESS,
   QUIZ_REQUEST_FAILURE,
   QUIZ_REQUEST_PENDING,
   QUIZ_REQUEST_SUCCESS,
@@ -152,6 +155,21 @@ export const quizRequestData = (o) => (dispatch) => {
       });
     })
     .catch((error) => dispatch({ type: QUIZ_REQUEST_FAILURE, payload: error }));
+};
+
+export const quizzesGetList = () => (dispatch) => {
+  dispatch({ type: QUIZ_LIST_PENDING });
+  fetch('/quiz/list', {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: QUIZ_LIST_SUCCESS,
+      });
+    })
+    .catch((error) => dispatch({ type: QUIZ_LIST_FAILURE, payload: error }));
 };
 
 /* Source add form actions:

@@ -142,6 +142,8 @@ app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
 
 /* Quiz:
  *****************************************************************/
+app.get('/quiz/list', (req, res, next) => quizController.list(req, res, next));
+
 app.post('/quiz', (req, res, next) => quizController.create(req, res, next));
 
 /* Description: Handle additional request: direct to index.html

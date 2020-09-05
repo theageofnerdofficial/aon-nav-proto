@@ -11,6 +11,15 @@ class Admin extends Component {
       <div>
         <SectionTitle title="Admin" />
         <div style={{ transform: 'scale(1)' }}>
+          <SectionTitlePostsTitle text="Content Scheduler" />
+          <div className="col-12 row p-0 m-0">
+            <AdminThumb
+              fontIcon="faCalendar"
+              label="Content Scheduler"
+              link="/admin/scheduler"
+              Link={this.props.Link}
+            />
+          </div>
           <SectionTitlePostsTitle text="Sources" />
           <div className="col-12 row p-0 m-0">
             <AdminThumb

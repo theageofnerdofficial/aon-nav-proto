@@ -19,3 +19,14 @@ exports.create = (req, res) => {
     res.status(201).json(quiz);
   });
 };
+
+/* List quizzes:
+ ******************************************************************/
+exports.list = (req, res) => {
+  Quiz.find({}, (err, quizzes) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(quizzes);
+  });
+};

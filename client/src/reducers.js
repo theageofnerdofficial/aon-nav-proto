@@ -17,6 +17,9 @@ import {
   QUIZ_REQUEST_FAILURE,
   QUIZ_REQUEST_PENDING,
   QUIZ_REQUEST_SUCCESS,
+  QUIZ_LIST_FAILURE,
+  QUIZ_LIST_PENDING,
+  QUIZ_LIST_SUCCESS,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_REDDIT_GET_FAILURE,
@@ -129,6 +132,19 @@ export const modalReducer = (state = modal, action = {}) => {
   }
 };
 
+/* Scheduler:
+ *********************************************************/
+const scheduler = {
+  dateSelected: 'hello',
+};
+
+export const schedulerReducer = (state = scheduler, action = {}) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
 /* Nerd:
  *********************************************************/
 export const nerdReducer = (state = levels, action = {}) => {
@@ -188,11 +204,22 @@ const quiz = {
   quizFormQuestions: [
     /* { question: null, answers: [null, null, null, null], correct: null },*/
   ],
+  quizListData: [],
   quizRequestPending: false,
+  quizListPending: false,
 };
 
 export const quizReducer = (state = quiz, action = {}) => {
   switch (action.type) {
+    case QUIZ_LIST_FAILURE:
+      return Object.assign({}, state, { quizListPending: false });
+    case QUIZ_LIST_PENDING:
+      return Object.assign({}, state, { quizListPending: true });
+    case QUIZ_LIST_SUCCESS:
+      return Object.assign({}, state, {
+        quizListData: action.payload,
+        quizListPending: false,
+      });
     case QUIZ_FORM_UPDATE:
       stateCp = state;
       const questionIndex = action.payload.name.split('-')[1];
@@ -205,8 +232,6 @@ export const quizReducer = (state = quiz, action = {}) => {
       const removeQuestion = action.payload.name.split('-')[2] === 'remove';
 
       if (isQuizTitle) {
-        //
-        console.log('got to title');
         stateCp.title = action.payload.value;
       }
 

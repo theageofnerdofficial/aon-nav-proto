@@ -7,6 +7,8 @@
     "npm": "6.x"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "^2.7.1",
+    "@devexpress/dx-react-scheduler": "^2.7.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
@@ -16,6 +18,7 @@
     "@testing-library/user-event": "^7.1.2",
     "formik": "^2.1.5",
     "moment": "^2.27.0",
+    "moment-range": "^4.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-html-parser": "^2.0.2",

@@ -36,6 +36,7 @@ import {
   flashMsgUpdate,
   nerdSetupUpdatePhase,
   nerdUpdateCheck,
+  quizzesGetList,
   sourceAdd,
   sourceAddFormCategory,
   sourceAddFormCategoryGaming,
@@ -75,6 +76,8 @@ import { ThemeProvider } from 'styled-components';
 import './Main.css';
 import settings from './config/settings';
 import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
+import QuizList from './Admin/QuizList';
+import ContentScheduler from './Admin/ContentScheduler';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -85,6 +88,7 @@ const mapStateToProps = (state) => {
     nerdReducer: state.nerdReducer,
     nerdSetupReducer: state.nerdSetupReducer,
     quizReducer: state.quizReducer,
+    schedulerReducer: state.schedulerReducer,
     sourceReducer: state.sourceReducer,
     uiReducer: state.uiReducer,
     usersReducer: state.usersReducer,
@@ -106,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
     quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
     quizRequestData: (o) => dispatch(quizRequestData(o)),
+    quizzesGetList: (o) => dispatch(quizzesGetList(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
     sourceAddFormCategoryGaming: (cat) =>
@@ -186,6 +191,8 @@ class Main extends Component {
       quizFormUpdate,
       quizReducer,
       quizRequestData,
+      quizzesGetList,
+      schedulerReducer,
       sourceAdd,
       sourceAddFormCategory,
       sourceAddFormCategoryGaming,
@@ -222,7 +229,6 @@ class Main extends Component {
                 flashMsgFlash={flashMsgFlash}
                 flashMsgReducer={flashMsgReducer}
               />
-
               <Header
                 lightsOff={uiReducer.lightsOff}
                 Link={Link}
@@ -340,6 +346,25 @@ class Main extends Component {
                     />
                     <Route
                       exact
+                      path="/admin/scheduler"
+                      render={(props) => (
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={ContentScheduler}
+                          login={usersReducer}
+                          data={{
+                            Link,
+                            schedulerReducer,
+                          }}
+                          path="/admin/scheduler"
+                          usersGetList={usersGetList}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
                       path="/admin/userlist"
                       render={(props) => (
                         <ProtectedRoute
@@ -447,10 +472,12 @@ class Main extends Component {
                         <ProtectedRoute
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
-                          component={UserList}
+                          component={QuizList}
                           login={usersReducer}
                           data={{
                             Link,
+                            quizReducer,
+                            quizzesGetList,
                             usersGetList,
                             usersReducer,
                           }}
