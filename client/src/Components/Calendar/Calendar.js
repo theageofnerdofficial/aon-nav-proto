@@ -199,7 +199,11 @@ export default class Calendar extends React.Component {
         selectedDay: d,
       },
       () => {
-        console.log('SELECTED DAY: ', this.state.selectedDay);
+        this.props.schedulerSelectDate(
+          `${this.year()}-${moment().month(this.month()).format('MM')}-${
+            this.state.selectedDay
+          }`
+        );
       }
     );
   };

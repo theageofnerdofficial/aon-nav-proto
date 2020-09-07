@@ -46,6 +46,10 @@ const utils = {
     return link;
   },
 
+  num: {
+    zeroPad: (num, places) => String(num).padStart(places, '0'),
+  },
+
   str: {
     makeTitleCase(str) {
       return str.replace(

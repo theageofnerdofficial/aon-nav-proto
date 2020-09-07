@@ -3,6 +3,7 @@ import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
 //import ModifyBtn from '../Components/Button/ModifyBtn';
 import FontIcon from '../Components/FontIcon/FontIcon';
+import utils from '../Components/Utils/utils/utils';
 
 class QuizList extends Component {
   componentDidMount() {
@@ -19,15 +20,23 @@ class QuizList extends Component {
         />
         <table className="table table-striped">
           <tr>
+            <th>#</th>
             <th>Title</th>
             <th className="text-center">Number of Questions</th>
             <th className="text-center">Added By</th>
             <th>-</th>
           </tr>
           <tbody>
-            {this.props.quizReducer.quizListData.map((q) => {
+            {this.props.quizReducer.quizListData.map((q, index) => {
               return (
                 <tr>
+                  <td>
+                    #
+                    {utils.num.zeroPad(
+                      this.props.quizReducer.quizListData.length - index,
+                      7
+                    )}
+                  </td>
                   <td>{q.title}</td>
                   <td className="text-center">{q.questions.length}</td>
                   <td className="text-center">{q.createdBy}</td>
@@ -37,7 +46,6 @@ class QuizList extends Component {
                         {FontIcon('faEdit')}
                       </button>
                     </this.props.Link>
-
                     <br />
                     <button
                       className="btn btn-sm btn-danger form-control"

@@ -28,5 +28,5 @@ exports.list = (req, res) => {
       res.status(500).send(err);
     }
     res.status(200).json(quizzes);
-  });
+  }).sort({ createdOn: -1 });
 };

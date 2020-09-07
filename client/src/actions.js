@@ -19,6 +19,7 @@ import {
   QUIZ_REQUEST_FAILURE,
   QUIZ_REQUEST_PENDING,
   QUIZ_REQUEST_SUCCESS,
+  SCHEDULER_SELECT_DATE,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
@@ -171,6 +172,13 @@ export const quizzesGetList = () => (dispatch) => {
     })
     .catch((error) => dispatch({ type: QUIZ_LIST_FAILURE, payload: error }));
 };
+
+/* Scheduler actions:
+ ******************************************************/
+export const schedulerSelectDate = (o) => ({
+  type: SCHEDULER_SELECT_DATE,
+  payload: o,
+});
 
 /* Source add form actions:
  ******************************************************/

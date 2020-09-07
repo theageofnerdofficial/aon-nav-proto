@@ -1,12 +1,18 @@
 // Imports:
 import React, { Component } from 'react';
-
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import Calendar from '../Components/Calendar/Calendar';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
 import FontIcon from '../Components/FontIcon/FontIcon';
+import utils from '../Components/Utils/utils/utils';
 
 class ContentScheduler extends Component {
+  componentDidMount() {
+    if (this.props.quizzesGetList) {
+      this.props.quizzesGetList();
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -30,19 +36,41 @@ class ContentScheduler extends Component {
                   </td>
                 </tr>
               </table>
-              <Calendar />
+              <Calendar schedulerSelectDate={this.props.schedulerSelectDate} />
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-8 m-0 p-0">
             <SectionTitlePostsTitle text="Specify Content" />
+            <p>
+              Note:::: Not working yet but you can see how it will function. If
+              date has no quiz, then a random one will be chosen.
+            </p>
             <label>Date Selected</label>
             <br />
-            {this.props.schedulerReducer.dateSelected}
-            <input className="form-control" readOnly value="dd-mm-yy" />
+            <input
+              className="form-control"
+              type="date"
+              readOnly
+              value={this.props.schedulerReducer.dateSelected}
+            />
             <br />
             Quiz:
             <select className="form-control">
-              <option>ddddd</option>
+              {this.props.quizReducer.quizListData
+                ? this.props.quizReducer.quizListData.map((q, index) => {
+                    return (
+                      <option>
+                        #
+                        {utils.num.zeroPad(
+                          this.props.quizReducer.quizListData.length - index,
+                          7
+                        )}
+                        {' - '}
+                        {q.title}
+                      </option>
+                    );
+                  })
+                : null}
             </select>
             <br />
             <button className="btn btn-light form-control shadow-sm">

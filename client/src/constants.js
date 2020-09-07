@@ -32,6 +32,10 @@ export const QUIZ_REQUEST_PENDING = 'QUIZ_REQUEST_PENDING';
 export const QUIZ_REQUEST_SUCCESS = 'QUIZ_REQUEST_SUCCESS';
 export const QUIZ_FORM_UPDATE = 'QUIZ_FORM_UPDATE';
 
+/* Scheduler constants:
+ *****************************************************/
+export const SCHEDULER_SELECT_DATE = 'SCHEDULER_SELECT_DATE';
+
 /* Source constants:
  *****************************************************/
 export const SOURCE_ADD_FAILURE = 'SOURCE_ADD_FAILURE';

@@ -20,6 +20,7 @@ import {
   QUIZ_LIST_FAILURE,
   QUIZ_LIST_PENDING,
   QUIZ_LIST_SUCCESS,
+  SCHEDULER_SELECT_DATE,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_REDDIT_GET_FAILURE,
@@ -140,6 +141,9 @@ const scheduler = {
 
 export const schedulerReducer = (state = scheduler, action = {}) => {
   switch (action.type) {
+    case SCHEDULER_SELECT_DATE:
+      console.log('selecttttttt datttte');
+      return Object.assign({}, state, { dateSelected: action.payload });
     default:
       return state;
   }

@@ -37,6 +37,7 @@ import {
   nerdSetupUpdatePhase,
   nerdUpdateCheck,
   quizzesGetList,
+  schedulerSelectDate,
   sourceAdd,
   sourceAddFormCategory,
   sourceAddFormCategoryGaming,
@@ -111,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
     quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
     quizRequestData: (o) => dispatch(quizRequestData(o)),
     quizzesGetList: (o) => dispatch(quizzesGetList(o)),
+    schedulerSelectDate: (o) => dispatch(schedulerSelectDate(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
     sourceAddFormCategory: (cat) => dispatch(sourceAddFormCategory(cat)),
     sourceAddFormCategoryGaming: (cat) =>
@@ -193,6 +195,7 @@ class Main extends Component {
       quizRequestData,
       quizzesGetList,
       schedulerReducer,
+      schedulerSelectDate,
       sourceAdd,
       sourceAddFormCategory,
       sourceAddFormCategoryGaming,
@@ -355,7 +358,10 @@ class Main extends Component {
                           login={usersReducer}
                           data={{
                             Link,
+                            quizReducer,
+                            quizzesGetList,
                             schedulerReducer,
+                            schedulerSelectDate,
                           }}
                           path="/admin/scheduler"
                           usersGetList={usersGetList}
