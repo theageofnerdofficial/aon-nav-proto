@@ -19,15 +19,15 @@ class PostsDummy extends Component {
       'wrestling-impact',
     ];
     const content = [
-      'This new product releases tomorrow. Be the first to get your hands on it!',
+      'This new product releases tomorrow. Be the first to get your hands on it! Insofar grandeur victorious zarathustra right. Madness burying deceptions war right virtues endless faithful aversion endless. Ubermensch christianity play overcome morality overcome war',
       'We are celebrating 25 years of being in business. To mark this occassion, we shall be doing things.',
-      'Be the first to see our new #product. See a special sneak preview now',
-      'Can you answer the following question?: what is love? It is something very few people know as the themetune to #product',
-      'One of our representatives will be delivering a special AMA thread. Be sure to check in.',
+      'Be the first to see our new #product. See a special sneak preview now. Pinnacle zarathustra truth sea ascetic pious philosophy law decieve society right.',
+      'Can you answer the following question?: what is love? It is something very few people know as the themetune to #product. Ultimate mountains play virtues god gains victorious moral virtues ideal ideal. Oneself philosophy chaos war fearful intentions grandeur hope burying sea reason faith will deceptions',
+      'One of our representatives will be delivering a special AMA thread. Be sure to check in. Horror zarathustra evil deceptions grandeur justice free good intentions moral.',
       '#product is making its way onto a new platform. We cannot wait.',
-      'An original artefact has been uncovered and in mint condition. Very rare.',
-      'Forget Shark Month — this is Dinosaur Year. www.website.com',
-      'Yet another placeholder for something exciting happening',
+      'An original artefact has been uncovered and in mint condition. Very rare. Selfish contradict convictions inexpedient against good snare eternal-return noble.',
+      'Forget Shark Month — this is Dinosaur Year. www.website.com. Son, as your lawyer, I declare yall are in a 12-piece bucket o trouble. But I done struck you a deal: Five hours of community service cleanin up that ol mess you caused.',
+      'Yet another placeholder for something exciting happening. Spirit free eternal-return love self christianity horror intentions sea joy battle battle hope intentions.',
     ];
     const getPost = () => {
       return (

@@ -161,12 +161,12 @@ class Home extends Component {
           <div className=" col-md-5 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Nerd Feed"
+              title="Newsfeed"
             />
             <SectionTitlePostsTitle text="Mix (30)" />
             <PostsDummy />
 
-            {/*  <Posts allData={allData} />*/}
+            {/* <Posts allData={allData} />*/}
           </div>
         </div>
 
@@ -178,39 +178,87 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Today's Quiz"
             />
-            <Quiz quizRequestData={this.props.quizRequestData} />
+            <Quiz
+              quizId="5f58f9790a27010acad1d82e"
+              quizReducer={this.props.quizReducer}
+              quizRequestData={this.props.quizRequestData}
+              quizUpdateQNumber={this.props.quizUpdateQNumber}
+            />
           </div>
 
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Video of the Day"
+              title="Videos of the Week"
             />
             <div
-              className="bg-secondary rounded shadow-sm"
+              className="bg-light rounded shadow-sm"
               style={{ height: 300, width: '100%' }}
             >
               <iframe
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
+                className="rounded"
                 frameborder="0"
                 height="60%"
-                src="https://www.youtube.com/embed/Vdvtssb10Q8?list=FL-3ai5uEU_vcQMCj7TeKILw"
+                src="https://www.youtube.com/embed/Vdvtssb10Q8"
                 width="100%"
               ></iframe>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Numquam enim possimus distinctio temporibus perferendis tempore
+                incidunt facilis aperiam.
+              </p>
             </div>
             <div
               className="bg-light rounded shadow-sm"
               style={{ height: 300, width: '100%' }}
-            ></div>
+            >
+              <iframe
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                className="rounded"
+                frameborder="0"
+                height="60%"
+                src="https://www.youtube.com/embed/8K8-fLbV9Ec"
+                width="100%"
+              ></iframe>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Numquam enim possimus distinctio temporibus perferendis tempore
+                incidunt facilis aperiam.
+              </p>
+            </div>
           </div>
 
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle title={FontIcon('faAd')} isAd={true} />
             <div
-              className="bg-secondary rounded shadow-sm"
-              style={{ height: 600, width: '100%' }}
-            ></div>
+              className="bg-light rounded shadow-sm"
+              style={{ width: '100%' }}
+            >
+              <img
+                className="rounded"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSW5__jf83H2uCndvgpC-A_J-FtbyiKxsxS5w&usqp=CAU"
+                style={{
+                  width: '100%',
+                }}
+              />
+            </div>
+            <br />
+            <div
+              className="bg-light rounded shadow-sm"
+              style={{ width: '100%' }}
+            >
+              <img
+                className="rounded"
+                src="/img/logo2.svg"
+                style={{
+                  width: '100%',
+                }}
+              />
+              <p>Advertise with us?</p>
+            </div>
           </div>
         </div>
       </div>

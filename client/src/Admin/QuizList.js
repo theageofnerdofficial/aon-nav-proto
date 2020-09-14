@@ -36,6 +36,8 @@ class QuizList extends Component {
                       this.props.quizReducer.quizListData.length - index,
                       7
                     )}
+                    <br />
+                    <small className="text-muted">{q._id}</small>
                   </td>
                   <td>{q.title}</td>
                   <td className="text-center">{q.questions.length}</td>

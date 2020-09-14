@@ -144,7 +144,15 @@ app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
  *****************************************************************/
 app.get('/quiz/list', (req, res, next) => quizController.list(req, res, next));
 
+app.get('/quiz/:id', (req, res, next) =>
+  quizController.findById(req, res, next)
+);
+
 app.post('/quiz', (req, res, next) => quizController.create(req, res, next));
+
+app.put('/quiz/schedule', (req, res, next) =>
+  quizController.schedule(req, res, next)
+);
 
 /* Description: Handle additional request: direct to index.html
    Permission: Unprotected GET

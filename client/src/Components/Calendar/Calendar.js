@@ -3,7 +3,32 @@ import moment from 'moment';
 //import { range } from 'moment-range';
 import './Calendar.css';
 
+let gotData = false;
+let scheduleArr = [];
+
 export default class Calendar extends React.Component {
+  componentDidUpdate() {
+    if (this.props.quizReducer.quizListData.length && !gotData) {
+      gotData = true;
+    }
+  }
+
+  hasQuiz = (day, month) => {
+    if (this.props.quizReducer.quizListData) {
+      this.props.quizReducer.quizListData.map((s) => {
+        if (s.schedule) {
+          s.schedule.forEach((dateElem) => {
+            if (parseInt(day) == parseInt(dateElem.split('-')[2])) {
+              scheduleArr.push(day);
+            }
+          });
+        }
+      });
+    }
+    return scheduleArr;
+    //return day == 8;
+  };
+
   weekdayshort = moment.weekdaysShort();
   state = {
     showYearTable: false,
@@ -149,9 +174,7 @@ export default class Calendar extends React.Component {
   YearTable = (props) => {
     let months = [];
     let nextten = moment().set('year', props).add('year', 12).format('Y');
-
     let tenyear = this.getDates(props, nextten);
-
     tenyear.map((data) => {
       months.push(
         <td
@@ -222,7 +245,10 @@ export default class Calendar extends React.Component {
 
       // Added "isCurrentMonth" so today's date isn't marked in other months:
       let currentDay = d == this.currentDay() && isCurrentMonth ? 'today' : '';
-      let markedDay = d == 6 ? 'hasQuiz' : '';
+      //
+      //
+      let markedDay = scheduleArr.includes(d) ? 'hasQuiz' : '';
+      //let markedDay; // = this.hasQuiz(d).includes(d) ? 'hasQuiz' : '';
 
       daysInMonth.push(
         <td key={d} className={`calendar-day ${currentDay} ${markedDay}`}>

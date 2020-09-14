@@ -49,6 +49,8 @@ const QuizSchema = new Schema({
     },
   ],
 
+  schedule: [],
+
   createdBy: {
     type: ObjectId,
     ref: 'User',

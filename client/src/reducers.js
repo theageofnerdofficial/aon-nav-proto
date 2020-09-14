@@ -14,6 +14,7 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   QUIZ_FORM_UPDATE,
+  QUIZ_Q_NUMBER_UPDATE,
   QUIZ_REQUEST_FAILURE,
   QUIZ_REQUEST_PENDING,
   QUIZ_REQUEST_SUCCESS,
@@ -203,7 +204,7 @@ const quiz = {
   subtitle: String,
   quizNumber: Number,
   score: Number,
-  questionNumber: Number,
+  questionNumber: 0,
   questionData: [],
   quizFormQuestions: [
     /* { question: null, answers: [null, null, null, null], correct: null },*/
@@ -215,6 +216,16 @@ const quiz = {
 
 export const quizReducer = (state = quiz, action = {}) => {
   switch (action.type) {
+    case QUIZ_Q_NUMBER_UPDATE:
+      stateCp = state;
+      if (action.payload.inc) {
+        // if ...
+        stateCp.questionNumber += 1;
+      } else {
+        stateCp.questionNumber -= 1;
+      }
+      return Object.assign({}, state, { quizListPending: false });
+
     case QUIZ_LIST_FAILURE:
       return Object.assign({}, state, { quizListPending: false });
     case QUIZ_LIST_PENDING:
@@ -267,7 +278,10 @@ export const quizReducer = (state = quiz, action = {}) => {
     case QUIZ_REQUEST_PENDING:
       return Object.assign({}, state, { quizRequestPending: true });
     case QUIZ_REQUEST_SUCCESS:
-      return Object.assign({}, state, { quizRequestPending: false });
+      return Object.assign({}, state, {
+        questionData: action.payload,
+        quizRequestPending: false,
+      });
     default:
       return Object.assign({}, state);
   }

@@ -20,6 +20,19 @@ exports.create = (req, res) => {
   });
 };
 
+exports.findById = (req, res) => {
+  Quiz.findById(
+    req.params.id,
+
+    (err, quiz) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.status(200).json(quiz);
+    }
+  );
+};
+
 /* List quizzes:
  ******************************************************************/
 exports.list = (req, res) => {
@@ -29,4 +42,16 @@ exports.list = (req, res) => {
     }
     res.status(200).json(quizzes);
   }).sort({ createdOn: -1 });
+};
+
+exports.schedule = (req, res) => {
+  const { quizId, quizDate } = req.body;
+  Quiz.findById(quizId, (err, quiz) => {
+    if (err) return res.status(500).send(msg.err.findErr('quiz'));
+    if (!quiz) return res.status(404).send(msg.err.noFoundErr('quiz'));
+    quiz.schedule.push(quizDate);
+    quiz.save((err, quiz) => {
+      res.status(200).send(quiz);
+    });
+  });
 };

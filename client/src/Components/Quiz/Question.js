@@ -13,25 +13,25 @@ class Question extends Component {
 
         <div className="col-12 p-0 m-0">
           <button className="btn btn-sm btn-light form-control">
-            A. {this.props.answers[0]}
+            A. {this.props.answers.a}
           </button>
         </div>
 
         <div className="col-12 p-0 m-0">
           <button className="btn btn-sm btn-light form-control">
-            B. {this.props.answers[1]}
+            B. {this.props.answers.b}
           </button>
         </div>
 
         <div className="col-12 p-0 m-0">
           <button className="btn btn-sm btn-light form-control">
-            C. {this.props.answers[2]}
+            C. {this.props.answers.c}
           </button>
         </div>
 
         <div className="col-12 p-0 m-0">
           <button className="btn btn-sm btn-light form-control">
-            D. {this.props.answers[3]}
+            D. {this.props.answers.d}
           </button>
         </div>
         <br />

@@ -24,6 +24,7 @@ export const NERD_SETUP_UPDATE_PHASE = 'NERD_SETUP_UPDATE_PHASE';
 
 /* Quiz constants:
  *****************************************************/
+export const QUIZ_Q_NUMBER_UPDATE = 'QUIZ_Q_NUMBER_UPDATE';
 export const QUIZ_LIST_FAILURE = 'QUIZ_LIST_FAILURE';
 export const QUIZ_LIST_PENDING = 'QUIZ_LIST_PENDING';
 export const QUIZ_LIST_SUCCESS = 'QUIZ_LIST_SUCCESS';

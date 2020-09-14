@@ -13,6 +13,7 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   QUIZ_FORM_UPDATE,
+  QUIZ_Q_NUMBER_UPDATE,
   QUIZ_LIST_FAILURE,
   QUIZ_LIST_PENDING,
   QUIZ_LIST_SUCCESS,
@@ -145,7 +146,8 @@ export const quizFormUpdate = (o) => ({
 
 export const quizRequestData = (o) => (dispatch) => {
   dispatch({ type: QUIZ_REQUEST_PENDING });
-  fetch('/quiz', {
+  console.log(o.id);
+  fetch(`/quiz/${o.id}`, {
     method: 'GET',
   })
     .then((res) => res.json())
@@ -157,6 +159,11 @@ export const quizRequestData = (o) => (dispatch) => {
     })
     .catch((error) => dispatch({ type: QUIZ_REQUEST_FAILURE, payload: error }));
 };
+
+export const quizUpdateQNumber = (o) => ({
+  type: QUIZ_Q_NUMBER_UPDATE,
+  payload: o,
+});
 
 export const quizzesGetList = () => (dispatch) => {
   dispatch({ type: QUIZ_LIST_PENDING });
@@ -453,12 +460,15 @@ export const usersGetList = () => (dispatch) => {
 /* Misc actions:
  ******************************************************/
 export const fetchConstructor = (o, props) => {
+  console.log('got here');
+
   fetch(o.url, {
     body: o.body,
     headers: settings.network.headers,
     method: o.method,
   })
     .then((response) => {
+      console.log(response);
       return response.json();
     })
     .then((res) => {

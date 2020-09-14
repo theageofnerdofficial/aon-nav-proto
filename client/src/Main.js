@@ -55,6 +55,7 @@ import {
   sourcesToggleSortUI,
   quizFormUpdate,
   quizRequestData,
+  quizUpdateQNumber,
   uiSetBreadcrumbs,
   uiToggleLights,
   userAuthenticate,
@@ -79,6 +80,7 @@ import settings from './config/settings';
 import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
 import QuizList from './Admin/QuizList';
 import ContentScheduler from './Admin/ContentScheduler';
+import QuizPage from './Components/Quiz/QuizPage';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -111,6 +113,7 @@ const mapDispatchToProps = (dispatch) => {
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
     quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
     quizRequestData: (o) => dispatch(quizRequestData(o)),
+    quizUpdateQNumber: (o) => dispatch(quizUpdateQNumber(o)),
     quizzesGetList: (o) => dispatch(quizzesGetList(o)),
     schedulerSelectDate: (o) => dispatch(schedulerSelectDate(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
@@ -193,6 +196,7 @@ class Main extends Component {
       quizFormUpdate,
       quizReducer,
       quizRequestData,
+      quizUpdateQNumber,
       quizzesGetList,
       schedulerReducer,
       schedulerSelectDate,
@@ -266,7 +270,9 @@ class Main extends Component {
                           dataFormatTweets={dataFormatTweets}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
+                          quizReducer={quizReducer}
                           quizRequestData={quizRequestData}
+                          quizUpdateQNumber={quizUpdateQNumber}
                           {...props}
                         />
                       )}
@@ -325,6 +331,20 @@ class Main extends Component {
                       path="/unauthorised"
                       component={withRouter(Unauthorised)}
                     />
+
+                    <Route
+                      exact
+                      path="/quiz"
+                      render={(props) => (
+                        <QuizPage
+                          quizReducer={quizReducer}
+                          quizRequestData={quizRequestData}
+                          quizUpdateQNumber={quizUpdateQNumber}
+                          {...props}
+                        />
+                      )}
+                    />
+
                     {/* Component: Admin:
                       - Route type: Protected
                       - Access: logged in with level 3 or up:
@@ -357,6 +377,8 @@ class Main extends Component {
                           component={ContentScheduler}
                           login={usersReducer}
                           data={{
+                            flashMsgFlash,
+                            flashMsgUpdate,
                             Link,
                             quizReducer,
                             quizzesGetList,
@@ -514,7 +536,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     {/* Component: MyNerd:
                       - Route type: Protected
                       - Access: logged in:
