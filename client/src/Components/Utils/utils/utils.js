@@ -1,5 +1,5 @@
-import ReactHtmlParser from 'react-html-parser';
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 
 const utils = {
   arr: {
@@ -47,6 +47,8 @@ const utils = {
   },
 
   num: {
+    percentage: (numerator, denominator) => (numerator / denominator) * 100,
+
     zeroPad: (num, places) => String(num).padStart(places, '0'),
   },
 

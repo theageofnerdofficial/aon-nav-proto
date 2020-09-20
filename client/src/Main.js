@@ -53,9 +53,13 @@ import {
   sourcesGetTwitter,
   sourcesReset,
   sourcesToggleSortUI,
+  quizAddAnswer,
+  quizCalculateScore,
   quizFormUpdate,
   quizRequestData,
+  quizReset,
   quizUpdateQNumber,
+  quizUpdateScreen,
   uiSetBreadcrumbs,
   uiToggleLights,
   userAuthenticate,
@@ -78,9 +82,10 @@ import { ThemeProvider } from 'styled-components';
 import './Main.css';
 import settings from './config/settings';
 import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
-import QuizList from './Admin/QuizList';
 import ContentScheduler from './Admin/ContentScheduler';
+import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
+import Quizzes from './Components/Quiz/Quizzes';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -111,9 +116,13 @@ const mapDispatchToProps = (dispatch) => {
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
     nerdSetupUpdatePhase: (o) => dispatch(nerdSetupUpdatePhase(o)),
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
+    quizAddAnswer: (o) => dispatch(quizAddAnswer(o)),
+    quizCalculateScore: (o) => dispatch(quizCalculateScore(o)),
     quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
     quizRequestData: (o) => dispatch(quizRequestData(o)),
+    quizReset: () => dispatch(quizReset()),
     quizUpdateQNumber: (o) => dispatch(quizUpdateQNumber(o)),
+    quizUpdateScreen: (o) => dispatch(quizUpdateScreen(o)),
     quizzesGetList: (o) => dispatch(quizzesGetList(o)),
     schedulerSelectDate: (o) => dispatch(schedulerSelectDate(o)),
     sourceAdd: (source) => dispatch(sourceAdd(source)),
@@ -193,10 +202,14 @@ class Main extends Component {
       nerdSetupReducer,
       nerdSetupUpdatePhase,
       nerdUpdateCheck,
+      quizAddAnswer,
+      quizCalculateScore,
       quizFormUpdate,
       quizReducer,
       quizRequestData,
+      quizReset,
       quizUpdateQNumber,
+      quizUpdateScreen,
       quizzesGetList,
       schedulerReducer,
       schedulerSelectDate,
@@ -270,9 +283,14 @@ class Main extends Component {
                           dataFormatTweets={dataFormatTweets}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
+                          quizAddAnswer={quizAddAnswer}
+                          quizCalculateScore={quizCalculateScore}
+                          quizId="5f58f9790a27010acad1d82e"
                           quizReducer={quizReducer}
                           quizRequestData={quizRequestData}
+                          quizReset={quizReset}
                           quizUpdateQNumber={quizUpdateQNumber}
+                          quizUpdateScreen={quizUpdateScreen}
                           {...props}
                         />
                       )}
@@ -334,12 +352,29 @@ class Main extends Component {
 
                     <Route
                       exact
-                      path="/quiz"
+                      path="/quizzes"
+                      render={(props) => (
+                        <Quizzes
+                          Link={Link}
+                          quizReducer={quizReducer}
+                          quizzesGetList={quizzesGetList}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/quiz/:id"
                       render={(props) => (
                         <QuizPage
+                          quizAddAnswer={quizAddAnswer}
+                          quizCalculateScore={quizCalculateScore}
+                          quizId="5f58f9790a27010acad1d82e"
                           quizReducer={quizReducer}
                           quizRequestData={quizRequestData}
+                          quizReset={quizReset}
                           quizUpdateQNumber={quizUpdateQNumber}
+                          quizUpdateScreen={quizUpdateScreen}
                           {...props}
                         />
                       )}
@@ -357,10 +392,10 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={Admin}
-                          login={usersReducer}
                           data={{
                             Link,
                           }}
+                          login={usersReducer}
                           path="/admin"
                           usersGetList={usersGetList}
                           {...props}
@@ -375,7 +410,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={ContentScheduler}
-                          login={usersReducer}
                           data={{
                             flashMsgFlash,
                             flashMsgUpdate,
@@ -385,6 +419,7 @@ class Main extends Component {
                             schedulerReducer,
                             schedulerSelectDate,
                           }}
+                          login={usersReducer}
                           path="/admin/scheduler"
                           usersGetList={usersGetList}
                           {...props}
@@ -399,12 +434,12 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={UserList}
-                          login={usersReducer}
                           data={{
                             Link,
                             usersGetList,
                             usersReducer,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}
@@ -417,7 +452,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={AddSource}
-                          login={usersReducer}
                           data={{
                             Link,
                             flashMsgFlash,
@@ -430,6 +464,7 @@ class Main extends Component {
                             sourceReducer,
                             sourcesReset,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}
@@ -442,7 +477,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={EditSource}
-                          login={usersReducer}
                           data={{
                             Link,
                             flashMsgFlash,
@@ -456,6 +490,7 @@ class Main extends Component {
                             sourceReducer,
                             sourcesReset,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}
@@ -468,7 +503,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={GetSources}
-                          login={usersReducer}
                           data={{
                             Link,
                             flashMsgFlash,
@@ -489,6 +523,7 @@ class Main extends Component {
                             sourcesReset,
                             sourcesToggleSortUI,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}
@@ -501,7 +536,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={QuizList}
-                          login={usersReducer}
                           data={{
                             Link,
                             quizReducer,
@@ -509,6 +543,7 @@ class Main extends Component {
                             usersGetList,
                             usersReducer,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}
@@ -521,7 +556,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={AddQuiz}
-                          login={usersReducer}
                           data={{
                             Link,
                             flashMsgFlash,
@@ -532,6 +566,7 @@ class Main extends Component {
                             usersGetList,
                             usersReducer,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}
@@ -548,7 +583,6 @@ class Main extends Component {
                           exact
                           accessLevel={settings.permissions.accessLevel.admin}
                           component={MyNerd}
-                          login={usersReducer}
                           data={{
                             userLogin,
                             nerdReducer,
@@ -558,6 +592,7 @@ class Main extends Component {
                             userAuthenticate,
                             usersReducer,
                           }}
+                          login={usersReducer}
                           {...props}
                         />
                       )}

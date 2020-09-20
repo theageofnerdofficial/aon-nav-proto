@@ -9,10 +9,6 @@
   --col-txt: var(--col-darkest);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;500;600;700&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap');
 
 * {
@@ -31,14 +27,6 @@ h2 {
   font-size: 1.8em;
 }
 
-.carousel {
-}
-
-.carousel-item,
-.carousel-item > img {
-  height: 340px;
-}
-
 a,
 .btn-link {
   color: var(--col-blue-brand);
@@ -54,6 +42,14 @@ a.nav-link:hover {
 }
 a.nav-link:active {
   text-decoration: none;
+}
+
+.carousel {
+}
+
+.carousel-item,
+.carousel-item > img {
+  height: 300px;
 }
 
 .dropdown-item.active,
@@ -98,6 +94,11 @@ a.nav-link:active {
   border: 0px solid red;
 }
 
+.quiz-user-answer {
+  color: red;
+  border: 1px solid red;
+}
+
 .tooltip-main {
   background: #f3f3f3;
   border: 1px solid #737373;
@@ -135,16 +136,15 @@ a.nav-link:active {
 .bs-tooltip-auto[x-placement^='bottom'] .arrow::before,
 .bs-tooltip-bottom .arrow::before {
   border-bottom-color: #f00;
-  /* Red */
 }
 
 .nerd-label {
-  letter-spacing: -1px !important;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1s; /* Firefox < 16 */
   -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
+  letter-spacing: -1px !important;
 }
 
 .mynerd-wrapper > ul li {
@@ -228,6 +228,14 @@ a.nav-link:active {
 }
 
 .quiz-question-card {
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+}
+
+.quiz-qa-wrapper {
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 1s; /* Firefox < 16 */
   -ms-animation: fadein 1s; /* Internet Explorer */

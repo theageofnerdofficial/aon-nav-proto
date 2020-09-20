@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import FontIcon from '../Components/FontIcon/FontIcon';
+//import ModifyBtn from '../Components/Button/ModifyBtn';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
-//import ModifyBtn from '../Components/Button/ModifyBtn';
-import FontIcon from '../Components/FontIcon/FontIcon';
 import utils from '../Components/Utils/utils/utils';
 
 class QuizList extends Component {

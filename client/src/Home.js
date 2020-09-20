@@ -1,16 +1,16 @@
 // Imports:
 import React, { Component } from 'react';
+import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 import Carousel from './Components/Carousel/Carousel';
+import FontIcon from './Components/FontIcon/FontIcon';
 // import Posts from './Components/Post/Posts';
+import PostsDummy from './Components/Post/PostsDummy';
+import Quiz from './Components/Quiz/Quiz';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
-import formatTweet from './Components/Utils/utils/formatTweet';
 import formatReddit from './Components/Utils/utils/formatReddit';
+import formatTweet from './Components/Utils/utils/formatTweet';
 import settings from './config/settings';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
-import PostsDummy from './Components/Post/PostsDummy';
-import FontIcon from './Components/FontIcon/FontIcon';
-import Quiz from './Components/Quiz/Quiz';
 
 // Prevents repeated requests:
 let dataPosts = {
@@ -126,8 +126,58 @@ class Home extends Component {
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
-        <div className=" col-md-12 m-0 p-0 row">
-          <div className="col-md-7 m-0 p-0 section-responsive-pr">
+        <div className="col-12 m-0 p-0 row">
+          <div
+            className="jumbotron jumbotron-sm shadow-sm"
+            style={{ padding: '1.5rem 2rem', width: '100%' }}
+          >
+            <h1 className="font-weight-light">Welcome to AON</h1>
+            <p className="mb-0 pb-0">
+              AON means "Age of Nerd" & this site/app hopes to meet your nerdy
+              needs blah blah
+              <br /> <br />
+              <button className="btn btn-light">Get Started</button>&nbsp;
+              <button className="btn btn-light">
+                More {FontIcon('faChevronDown')}
+              </button>
+            </p>
+          </div>
+        </div>
+        <br />
+        <div className="col-md-12 m-0 p-0 row">
+          <div className="col-md-6 m-0 p-0 section-responsive-pr">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Newsfeed"
+            />
+            <SectionTitlePostsTitle text="Mix (30)" />
+            <PostsDummy />
+
+            {/* <Posts allData={allData} />*/}
+          </div>
+
+          <div className="col-md-6 m-0 p-0 section-responsive-pr">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Today's Quiz"
+            />
+            <Quiz
+              quizAddAnswer={this.props.quizAddAnswer}
+              quizCalculateScore={this.props.quizCalculateScore}
+              quizId="5f58f9790a27010acad1d82e"
+              quizReducer={this.props.quizReducer}
+              quizRequestData={this.props.quizRequestData}
+              quizReset={this.props.quizReset}
+              quizUpdateQNumber={this.props.quizUpdateQNumber}
+              quizUpdateScreen={this.props.quizUpdateScreen}
+            />
+          </div>
+        </div>
+        <br />
+        {/* row 2
+         *********************/}
+        <div className="col-md-12 m-0 mt-4 p-0 row">
+          <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Featured"
@@ -158,38 +208,10 @@ class Home extends Component {
             </div>
           </div>
 
-          <div className=" col-md-5 m-0 p-0 section-responsive-pr">
-            <SectionTitle
-              tabColour={settings.ui.style.sectionTab.featured}
-              title="Newsfeed"
-            />
-            <SectionTitlePostsTitle text="Mix (30)" />
-            <PostsDummy />
-
-            {/* <Posts allData={allData} />*/}
-          </div>
-        </div>
-
-        {/* row 2
-         *********************/}
-        <div className="col-md-12 m-0 p-0 row">
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Today's Quiz"
-            />
-            <Quiz
-              quizId="5f58f9790a27010acad1d82e"
-              quizReducer={this.props.quizReducer}
-              quizRequestData={this.props.quizRequestData}
-              quizUpdateQNumber={this.props.quizUpdateQNumber}
-            />
-          </div>
-
-          <div className="col-md-4 m-0 p-0 section-responsive-pr">
-            <SectionTitle
-              tabColour={settings.ui.style.sectionTab.featured}
-              title="Videos of the Week"
+              title="Video of the Week"
             />
             <div
               className="bg-light rounded shadow-sm"
@@ -204,26 +226,7 @@ class Home extends Component {
                 src="https://www.youtube.com/embed/Vdvtssb10Q8"
                 width="100%"
               ></iframe>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Numquam enim possimus distinctio temporibus perferendis tempore
-                incidunt facilis aperiam.
-              </p>
-            </div>
-            <div
-              className="bg-light rounded shadow-sm"
-              style={{ height: 300, width: '100%' }}
-            >
-              <iframe
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                className="rounded"
-                frameborder="0"
-                height="60%"
-                src="https://www.youtube.com/embed/8K8-fLbV9Ec"
-                width="100%"
-              ></iframe>
-              <p>
+              <p className="p-2">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Numquam enim possimus distinctio temporibus perferendis tempore
                 incidunt facilis aperiam.
@@ -244,20 +247,6 @@ class Home extends Component {
                   width: '100%',
                 }}
               />
-            </div>
-            <br />
-            <div
-              className="bg-light rounded shadow-sm"
-              style={{ width: '100%' }}
-            >
-              <img
-                className="rounded"
-                src="/img/logo2.svg"
-                style={{
-                  width: '100%',
-                }}
-              />
-              <p>Advertise with us?</p>
             </div>
           </div>
         </div>

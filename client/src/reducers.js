@@ -13,21 +13,27 @@ import {
   MODAL_LOGIN_FORM,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
+  QUIZ_LIST_FAILURE,
+  QUIZ_LIST_PENDING,
+  QUIZ_LIST_SUCCESS,
   QUIZ_Q_NUMBER_UPDATE,
   QUIZ_REQUEST_FAILURE,
   QUIZ_REQUEST_PENDING,
   QUIZ_REQUEST_SUCCESS,
-  QUIZ_LIST_FAILURE,
-  QUIZ_LIST_PENDING,
-  QUIZ_LIST_SUCCESS,
+  QUIZ_RESET,
+  QUIZ_SCORE_CALCULATE,
+  QUIZ_SCREEN_UPDATE,
   SCHEDULER_SELECT_DATE,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
+  SOURCES_FILTER_BY_CATEGORY,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
   SOURCES_RESET_FORM,
+  SOURCES_TOGGLE_SORT_UI,
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
@@ -47,8 +53,6 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
-  SOURCES_FILTER_BY_CATEGORY,
-  SOURCES_TOGGLE_SORT_UI,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -143,7 +147,6 @@ const scheduler = {
 export const schedulerReducer = (state = scheduler, action = {}) => {
   switch (action.type) {
     case SCHEDULER_SELECT_DATE:
-      console.log('selecttttttt datttte');
       return Object.assign({}, state, { dateSelected: action.payload });
     default:
       return state;
@@ -206,26 +209,44 @@ const quiz = {
   score: Number,
   questionNumber: 0,
   questionData: [],
-  quizFormQuestions: [
-    /* { question: null, answers: [null, null, null, null], correct: null },*/
-  ],
+  quizFormQuestions: [],
   quizListData: [],
-  quizRequestPending: false,
   quizListPending: false,
+  quizRequestPending: false,
+  quizScreen: 1,
 };
 
 export const quizReducer = (state = quiz, action = {}) => {
   switch (action.type) {
+    case QUIZ_RESET:
+      stateCp = quiz;
+      return Object.assign({}, state, stateCp);
+    case QUIZ_ANS_ADD:
+      stateCp = state;
+      stateCp.questionData.questions[state.questionNumber].userAnswer =
+        action.payload.answerIndex;
+      return Object.assign({}, state, stateCp);
     case QUIZ_Q_NUMBER_UPDATE:
       stateCp = state;
       if (action.payload.inc) {
-        // if ...
-        stateCp.questionNumber += 1;
+        if (state.questionNumber < stateCp.questionData.questions.length)
+          stateCp.questionNumber += 1;
       } else {
-        stateCp.questionNumber -= 1;
+        if (stateCp.questionNumber >= 0) stateCp.questionNumber -= 1;
       }
-      return Object.assign({}, state, { quizListPending: false });
-
+      return Object.assign({}, state, {
+        state: stateCp,
+        quizListPending: false,
+      });
+    case QUIZ_SCORE_CALCULATE:
+      return Object.assign({}, state, {
+        score: action.payload,
+      });
+    case QUIZ_SCREEN_UPDATE:
+      return Object.assign({}, state, {
+        state: stateCp,
+        quizScreen: action.payload,
+      });
     case QUIZ_LIST_FAILURE:
       return Object.assign({}, state, { quizListPending: false });
     case QUIZ_LIST_PENDING:
@@ -246,14 +267,9 @@ export const quizReducer = (state = quiz, action = {}) => {
       const addQuestion = action.payload.name === 'qq-add';
       const removeQuestion = action.payload.name.split('-')[2] === 'remove';
 
-      if (isQuizTitle) {
-        stateCp.title = action.payload.value;
-      }
-
-      if (removeQuestion) {
-        //
+      if (isQuizTitle) stateCp.title = action.payload.value;
+      if (removeQuestion)
         stateCp.quizFormQuestions.splice(action.payload.name.split('-')[1], 1);
-      }
       if (addQuestion) {
         stateCp.quizFormQuestions.push({
           question: null,
@@ -261,10 +277,10 @@ export const quizReducer = (state = quiz, action = {}) => {
           correct: null,
         });
       }
-      if (isAnswer) {
+      if (isAnswer)
         stateCp.quizFormQuestions[questionIndex].answers[answerIndex] =
           action.payload.value;
-      }
+
       if (isQuestion) {
         stateCp.quizFormQuestions[questionIndex].question =
           action.payload.value;

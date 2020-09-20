@@ -12,14 +12,18 @@ import {
   FLASH_MSG_UPDATE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
-  QUIZ_Q_NUMBER_UPDATE,
   QUIZ_LIST_FAILURE,
   QUIZ_LIST_PENDING,
   QUIZ_LIST_SUCCESS,
+  QUIZ_Q_NUMBER_UPDATE,
   QUIZ_REQUEST_FAILURE,
   QUIZ_REQUEST_PENDING,
   QUIZ_REQUEST_SUCCESS,
+  QUIZ_RESET,
+  QUIZ_SCORE_CALCULATE,
+  QUIZ_SCREEN_UPDATE,
   SCHEDULER_SELECT_DATE,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
@@ -28,6 +32,7 @@ import {
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
   SOURCES_RESET_FORM,
+  SOURCES_TOGGLE_SORT_UI,
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
@@ -47,7 +52,6 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
-  SOURCES_TOGGLE_SORT_UI,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -129,13 +133,25 @@ export const flashMsgUpdate = (o) => ({
 
 /* Nerd actions:
  ******************************************************/
+export const nerdSetupUpdatePhase = (o) => ({
+  type: NERD_SETUP_UPDATE_PHASE,
+  payload: o,
+});
+
 export const nerdUpdateCheck = (o) => ({
   type: NERD_UPDATE_CHECK,
   payload: o,
 });
 
-export const nerdSetupUpdatePhase = (o) => ({
-  type: NERD_SETUP_UPDATE_PHASE,
+/* Quiz actions:
+ ******************************************************/
+export const quizAddAnswer = (o) => ({
+  type: QUIZ_ANS_ADD,
+  payload: o,
+});
+
+export const quizCalculateScore = (o) => ({
+  type: QUIZ_SCORE_CALCULATE,
   payload: o,
 });
 
@@ -160,8 +176,17 @@ export const quizRequestData = (o) => (dispatch) => {
     .catch((error) => dispatch({ type: QUIZ_REQUEST_FAILURE, payload: error }));
 };
 
+export const quizReset = () => ({
+  type: QUIZ_RESET,
+});
+
 export const quizUpdateQNumber = (o) => ({
   type: QUIZ_Q_NUMBER_UPDATE,
+  payload: o,
+});
+
+export const quizUpdateScreen = (o) => ({
+  type: QUIZ_SCREEN_UPDATE,
   payload: o,
 });
 
@@ -460,8 +485,6 @@ export const usersGetList = () => (dispatch) => {
 /* Misc actions:
  ******************************************************/
 export const fetchConstructor = (o, props) => {
-  console.log('got here');
-
   fetch(o.url, {
     body: o.body,
     headers: settings.network.headers,

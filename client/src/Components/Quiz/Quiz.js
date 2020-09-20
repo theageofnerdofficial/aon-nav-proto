@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
-import Question from './Question';
 import FontIcon from '../FontIcon/FontIcon';
-
+import Question from './Question';
+import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
 class Quiz extends Component {
   componentDidMount() {
     if (this.props.quizId) {
@@ -10,18 +9,16 @@ class Quiz extends Component {
     }
   }
   render() {
-    const { quizReducer, quizUpdateQNumber } = this.props;
+    const {
+      quizAddAnswer,
+      quizReducer,
+      quizReset,
+      quizUpdateQNumber,
+      quizUpdateScreen,
+    } = this.props;
 
-    //
-    const getQNumber = () => (quizReducer ? quizReducer.questionNumber : null);
-
-    //
-    const getQPercentage = () =>
-      quizReducer && quizReducer.questionData.questions
-        ? (getQNumber() / quizReducer.questionData.questions.length) * 100
-        : null;
-
-    const isQLast = () => {
+    // :
+    const hasLastQuestion = () => {
       if (quizReducer && quizReducer.questionData.questions) {
         return getQNumber() === quizReducer.questionData.questions.length - 1
           ? 'disabled'
@@ -30,6 +27,16 @@ class Quiz extends Component {
         return null;
       }
     };
+
+    // :
+    const getQNumber = () => (quizReducer ? quizReducer.questionNumber : null);
+
+    // :
+    const getQPercentage = () =>
+      quizReducer && quizReducer.questionData.questions
+        ? (getQNumber() / quizReducer.questionData.questions.length) * 100
+        : null;
+
     return (
       <React.Fragment>
         <div className="rounded" style={{ height: 300, width: '100%' }}>
@@ -43,16 +50,6 @@ class Quiz extends Component {
             />
           </div>
           <Question
-            question={
-              quizReducer && quizReducer.questionData.questions
-                ? quizReducer.questionData.questions[getQNumber()].question
-                : null
-            }
-            quizLength={
-              quizReducer && quizReducer.questionData.questions
-                ? quizReducer.questionData.questions.length
-                : null
-            }
             answers={{
               a:
                 quizReducer && quizReducer.questionData.questions
@@ -77,6 +74,20 @@ class Quiz extends Component {
                 : null
             }
             index={getQNumber()}
+            question={
+              quizReducer && quizReducer.questionData.questions
+                ? quizReducer.questionData.questions[getQNumber()].question
+                : null
+            }
+            quizAddAnswer={quizAddAnswer}
+            quizLength={
+              quizReducer && quizReducer.questionData.questions
+                ? quizReducer.questionData.questions.length
+                : null
+            }
+            quizReducer={quizReducer}
+            quizUpdateQNumber={quizUpdateQNumber}
+            quizUpdateScreen={quizUpdateScreen}
           />
           <div className="col-12 m-0 p-0 row">
             <div className="m-0 p-0 col-10">
@@ -93,12 +104,11 @@ class Quiz extends Component {
             </div>
           </div>
         </div>
-
-        <div className="rounded" style={{ height: 300, width: '100%' }}>
-          <div className="col-12 p-0 m-0 row">
-            <div className="col-6 p-0 m-0">
+        <div className="rounded" style={{ width: '100%' }}>
+          <div className="col-12 m-0 p-0 row">
+            <div className="col-6 m-0 p-0">
               <button
-                className={`btn btn-sm btn-light form-control ${
+                className={`btn btn-light btn-sm form-control ${
                   quizReducer.questionNumber ? null : 'disabled'
                 }`}
                 onClick={(e) => {
@@ -110,9 +120,9 @@ class Quiz extends Component {
                 {FontIcon('faChevronLeft')}&nbsp;Prev
               </button>
             </div>
-            <div className="col-6 p-0 m-0">
+            <div className="col-6 m-0 p-0">
               <button
-                className={`btn btn-sm btn-light form-control ${isQLast()}`}
+                className={`btn btn-light btn-sm form-control ${hasLastQuestion()}`}
                 onClick={(e) => {
                   if (!e.target.classList.contains('disabled')) {
                     quizUpdateQNumber({ inc: 1 });
@@ -123,28 +133,6 @@ class Quiz extends Component {
               </button>
             </div>
           </div>
-
-          <div className="col-12 p-0 m-0">
-            <br />
-            <SectionTitlePostsTitle text="Quiz Archives" />
-          </div>
-          <ul className="font-weight-light">
-            <li>
-              <a href="#">Quiz #000001</a>
-            </li>
-            <li>
-              <a href="#">Quiz #000001</a>
-            </li>
-            <li>
-              <a href="#">Quiz #000001</a>
-            </li>
-            <li>
-              <a href="#">Quiz #000001</a>
-            </li>
-            <li>
-              <a href="#">Quiz #000001</a>
-            </li>
-          </ul>
         </div>
       </React.Fragment>
     );
