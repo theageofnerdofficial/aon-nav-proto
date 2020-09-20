@@ -128,24 +128,55 @@ class Home extends Component {
       <div>
         <div className="col-12 m-0 p-0 row">
           <div
-            className="jumbotron jumbotron-sm shadow-sm"
+            className="jumbotron jumbotron-sm shadow"
             style={{ padding: '1.5rem 2rem', width: '100%' }}
           >
-            <h1 className="font-weight-light">Welcome to AON</h1>
-            <p className="mb-0 pb-0">
-              AON means "Age of Nerd" & this site/app hopes to meet your nerdy
-              needs blah blah
-              <br /> <br />
-              <button className="btn btn-light">Get Started</button>&nbsp;
-              <button className="btn btn-light">
-                More {FontIcon('faChevronDown')}
-              </button>
-            </p>
+            <div className="col-12 m-0 p-0 row">
+              <div className="col-12 col-md-6 m-0 p-0">
+                <h1 className="font-weight-light">Welcome to AON</h1>
+                <p className="mb-0 pb-0">
+                  AON means "Age of Nerd" & this site/app hopes to meet your
+                  nerdy needs blah blah
+                  <br /> <br />
+                  <button className="btn btn-light">Get Started</button>&nbsp;
+                  <button className="btn btn-light">
+                    More {FontIcon('faChevronDown')}
+                  </button>
+                </p>
+              </div>
+              {/* */}
+              <div className="col-12 col-lg-6 m-0 p-0 row">
+                <div className="col-4 m-0 p-0 rounded">
+                  <img className="p-2 rounded" src="img/1.png" width="100%" />
+                  <div
+                    className="test-caption bg-danger"
+                    style={{
+                      width: '250',
+                      padding: '1px',
+                      height: 30,
+
+                      position: 'absolute',
+                      margin: 5,
+                      bottom: 0,
+                    }}
+                  >
+                    TEST CAPTION!
+                  </div>
+                </div>
+                <div className="col-4 m-0 p-0 rounded">
+                  <img className="p-2 rounded" src="img/2.png" width="100%" />
+                </div>
+                <div className="col-4 m-0 p-0 rounded">
+                  {' '}
+                  <img className="p-2 rounded" src="img/3.png" width="100%" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <br />
         <div className="col-md-12 m-0 p-0 row">
-          <div className="col-md-6 m-0 p-0 section-responsive-pr">
+          <div className="col-lg-6 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Newsfeed"
