@@ -53,7 +53,7 @@ a.nav-link:active {
 
 .carousel-item,
 .carousel-item > img {
-  height: 300px;
+  height: 220px;
 }
 
 .dropdown-item.active,

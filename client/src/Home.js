@@ -11,6 +11,7 @@ import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsT
 import formatReddit from './Components/Utils/utils/formatReddit';
 import formatTweet from './Components/Utils/utils/formatTweet';
 import settings from './config/settings';
+import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
 
 // Prevents repeated requests:
 let dataPosts = {
@@ -127,54 +128,21 @@ class Home extends Component {
     return (
       <div>
         <div className="col-12 m-0 p-0 row">
-          <div
-            className="jumbotron jumbotron-sm shadow"
-            style={{ padding: '1.5rem 2rem', width: '100%' }}
-          >
-            <div className="col-12 m-0 p-0 row">
-              <div className="col-12 col-md-6 m-0 p-0">
-                <h1 className="font-weight-light">Welcome to AON</h1>
-                <p className="mb-0 pb-0">
-                  AON means "Age of Nerd" & this site/app hopes to meet your
-                  nerdy needs blah blah
-                  <br /> <br />
-                  <button className="btn btn-light">Get Started</button>&nbsp;
-                  <button className="btn btn-light">
-                    More {FontIcon('faChevronDown')}
-                  </button>
-                </p>
-              </div>
-              {/* */}
-              <div className="col-12 col-lg-6 m-0 p-0 row">
-                <div className="col-4 m-0 p-0 rounded">
-                  <img className="p-2 rounded" src="img/1.png" width="100%" />
-                  <div
-                    className="test-caption bg-danger"
-                    style={{
-                      width: '250',
-                      padding: '1px',
-                      height: 30,
-
-                      position: 'absolute',
-                      margin: 5,
-                      bottom: 0,
-                    }}
-                  >
-                    TEST CAPTION!
-                  </div>
-                </div>
-                <div className="col-4 m-0 p-0 rounded">
-                  <img className="p-2 rounded" src="img/2.png" width="100%" />
-                </div>
-                <div className="col-4 m-0 p-0 rounded">
-                  {' '}
-                  <img className="p-2 rounded" src="img/3.png" width="100%" />
-                </div>
-              </div>
-            </div>
+          <div style={{ width: '100%' }}>
+            <CarouselJumbotron
+              items={[
+                {
+                  align: 'center',
+                  category: 'Comics',
+                  mediaSubtype: 'Age of Nerd is a site for all',
+                  mediaType: 'article',
+                  src: '/img/',
+                  title: 'Welcome to AON',
+                },
+              ]}
+            />
           </div>
         </div>
-        <br />
         <div className="col-md-12 m-0 p-0 row">
           <div className="col-lg-6 m-0 p-0 section-responsive-pr">
             <SectionTitle
@@ -214,6 +182,7 @@ class Home extends Component {
               title="Featured"
             />
             <div>
+              {/* 
               <Carousel
                 items={[
                   {
@@ -235,7 +204,7 @@ class Home extends Component {
                     title: 'More Speccy Ports',
                   },
                 ]}
-              />
+              />*/}
             </div>
           </div>
 
