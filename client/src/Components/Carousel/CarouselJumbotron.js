@@ -20,7 +20,7 @@ class CarouselJumbotron extends Component {
           <div className={`carousel-item ${index === 0 ? 'active' : null}`}>
             <div
               //carousel-gradient-overlay
-              className="vertical-center  x"
+              className="vertical-center bg-white  x m-0 p-0"
               style={{
                 position: 'absolute',
 
