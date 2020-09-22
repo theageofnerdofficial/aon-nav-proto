@@ -132,11 +132,13 @@ class Home extends Component {
             <CarouselJumbotron
               items={[
                 {
-                  align: 'center',
+                  align: 'left',
                   category: 'Comics',
-                  mediaSubtype: 'Age of Nerd is a site for all',
+                  mediaSubtype:
+                    'Quick intro to how user can customize experience',
                   mediaType: 'article',
-                  src: '/img/',
+                  src:
+                    'https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
                   title: 'Welcome to AON',
                 },
               ]}
@@ -211,7 +213,7 @@ class Home extends Component {
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Video of the Week"
+              title="Weekly Video Pick"
             />
             <div
               className="bg-light rounded shadow-sm"
