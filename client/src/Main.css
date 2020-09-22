@@ -48,12 +48,18 @@ a.nav-link:active {
   text-decoration: none;
 }
 
+.x {
+}
 .carousel {
 }
 
 .carousel-item,
 .carousel-item > img {
   height: 160px;
+}
+
+.carousel-indicators li {
+  border-bottom: 5px solid transparent;
 }
 
 .dropdown-item.active,

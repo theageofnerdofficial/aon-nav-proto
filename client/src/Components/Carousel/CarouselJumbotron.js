@@ -19,12 +19,11 @@ class CarouselJumbotron extends Component {
         return (
           <div className={`carousel-item ${index === 0 ? 'active' : null}`}>
             <div
-              className="vertical-center carousel-gradient-overlay"
+              //carousel-gradient-overlay
+              className="vertical-center  x"
               style={{
                 position: 'absolute',
-                background: `url(${item.src})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+
                 height: '100%',
 
                 width: '100%',
@@ -37,7 +36,7 @@ class CarouselJumbotron extends Component {
                 style={{ width: '75%' }}
               >
                 <h1
-                  className={`font-weight-light text-${item.align} text-dark`}
+                  className={`xx font-weight-light text-${item.align} text-dark`}
                   style={{
                     textShadow: '1px 1px 1px #fff',
                     letterSpacing: '-1px',
@@ -48,7 +47,9 @@ class CarouselJumbotron extends Component {
                 <p className={`font-italic text-${item.align} text-dark`}>
                   {utils.str.makeTitleCase(item.mediaSubtype)}
                 </p>
-                <button className="btn btn-sm btn-secondary">Sign Up</button>
+                <button className="btn btn-sm btn-secondary mb-1">
+                  Sign Up
+                </button>
               </div>
             </div>
             {/*  <img alt={item.alt} className="d-block w-100" src={item.src} />*/}
@@ -62,7 +63,12 @@ class CarouselJumbotron extends Component {
         className="carousel slide rounded shadow-sm"
         data-ride="carousel"
       >
-        <ol className="carousel-indicators">
+        <ol
+          className="carousel-indicators"
+          style={{
+            marginBottom: '0.01em',
+          }}
+        >
           <li
             data-target="#carouselExampleIndicators"
             data-slide-to="0"

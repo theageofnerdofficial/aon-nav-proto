@@ -132,10 +132,9 @@ class Home extends Component {
             <CarouselJumbotron
               items={[
                 {
-                  align: 'left',
+                  align: 'center',
                   category: 'Comics',
-                  mediaSubtype:
-                    'Quick intro to how user can customize experience',
+                  mediaSubtype: "It's better when sign up",
                   mediaType: 'article',
                   src:
                     'https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
