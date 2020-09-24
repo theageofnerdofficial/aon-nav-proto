@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Solid SVG icons:
 import {
-  faArchway,
   faAd,
+  faArchway,
+  faArrowUp,
   faAt,
   faBan,
   faCalendar,
@@ -53,6 +54,9 @@ const FontIcon = (icon) => {
       break;
     case 'faArchway':
       faIcon = faArchway;
+      break;
+    case 'faArrowUp':
+      faIcon = faArrowUp;
       break;
     case 'faAt':
       faIcon = faAt;

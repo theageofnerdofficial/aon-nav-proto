@@ -12,6 +12,7 @@ import formatReddit from './Components/Utils/utils/formatReddit';
 import formatTweet from './Components/Utils/utils/formatTweet';
 import settings from './config/settings';
 import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
+import TrendingList from './Components/Post/Trending/TrendingList';
 
 // Prevents repeated requests:
 let dataPosts = {
@@ -160,8 +161,8 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Trending"
             />
-            <SectionTitlePostsTitle text="Popular Posts (30)" />
-            <PostsDummy />
+            <SectionTitlePostsTitle text="Popular Posts (5)" />
+            <TrendingList />
           </div>
 
           {/* 
