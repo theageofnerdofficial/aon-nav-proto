@@ -134,7 +134,7 @@ class Home extends Component {
                 {
                   align: 'center',
                   category: 'Comics',
-                  mediaSubtype: "It's better when sign up",
+                  mediaSubtype: 'Customise your browsing experience',
                   mediaType: 'article',
                   src:
                     'https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -150,12 +150,21 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Newsfeed"
             />
-            <SectionTitlePostsTitle text="Mix (30)" />
+            <SectionTitlePostsTitle text="Most Popular Posts (10)" />
             <PostsDummy />
 
             {/* <Posts allData={allData} />*/}
           </div>
+          <div className="col-lg-6 m-0 p-0 section-responsive-pr">
+            <SectionTitle
+              tabColour={settings.ui.style.sectionTab.featured}
+              title="Trending"
+            />
+            <SectionTitlePostsTitle text="Popular Posts (30)" />
+            <PostsDummy />
+          </div>
 
+          {/* 
           <div className="col-md-6 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
@@ -172,6 +181,7 @@ class Home extends Component {
               quizUpdateScreen={this.props.quizUpdateScreen}
             />
           </div>
+          */}
         </div>
         <br />
         {/* row 2
@@ -180,7 +190,7 @@ class Home extends Component {
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Featured"
+              title="AON Exclusives"
             />
             <div>
               {/* 
@@ -212,27 +222,18 @@ class Home extends Component {
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
-              title="Weekly Video Pick"
+              title="Today's Quiz"
             />
-            <div
-              className="bg-light rounded shadow-sm"
-              style={{ height: 300, width: '100%' }}
-            >
-              <iframe
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                className="rounded"
-                frameborder="0"
-                height="60%"
-                src="https://www.youtube.com/embed/Vdvtssb10Q8"
-                width="100%"
-              ></iframe>
-              <p className="p-2">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Numquam enim possimus distinctio temporibus perferendis tempore
-                incidunt facilis aperiam.
-              </p>
-            </div>
+            <Quiz
+              quizAddAnswer={this.props.quizAddAnswer}
+              quizCalculateScore={this.props.quizCalculateScore}
+              quizId="5f58f9790a27010acad1d82e"
+              quizReducer={this.props.quizReducer}
+              quizRequestData={this.props.quizRequestData}
+              quizReset={this.props.quizReset}
+              quizUpdateQNumber={this.props.quizUpdateQNumber}
+              quizUpdateScreen={this.props.quizUpdateScreen}
+            />
           </div>
 
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
