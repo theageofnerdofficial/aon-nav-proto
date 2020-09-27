@@ -60,7 +60,7 @@ class CarouselJumbotron extends Component {
     return (
       <div
         id="carouselExampleIndicators"
-        className="carousel slide rounded shadow-sm"
+        className="carousel-wrapper carousel slide rounded shadow-sm"
         data-ride="carousel"
       >
         <ol

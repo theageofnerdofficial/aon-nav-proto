@@ -64,7 +64,7 @@ class PostsDummy extends Component {
       <div>
         <div
           className="bg-light shadow-sm rounded col-12 p-0 m-0 mb-4 row"
-          style={{ height: '300px', overflow: 'scroll', paddingBottom: 5 }}
+          style={{ height: '470px', overflow: 'scroll', paddingBottom: 5 }}
         >
           {Array(30)
             .fill()
