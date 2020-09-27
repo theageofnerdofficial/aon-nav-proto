@@ -17,6 +17,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "formik": "^2.1.5",
+    "is-dark-color": "^1.2.0",
     "moment": "^2.27.0",
     "moment-range": "^4.0.2",
     "react": "^16.13.1",

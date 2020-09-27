@@ -1,6 +1,7 @@
 // Imports:
 import React, { Component } from 'react';
 import format from '../../../config/format';
+import isDarkColor from 'is-dark-color';
 import labels from '../../../config/labels';
 import utils from '../../../Components/Utils/utils/utils';
 import FontIcon from '../../../Components/FontIcon/FontIcon';
@@ -102,17 +103,20 @@ class Source extends Component {
     const getLogo = (src) => {
       if (src.service === SOURCE_REDDIT) {
         return format.reddit.source.thumbnail(src.subreddit);
+      } else if (src.service === SOURCE_TWITTER) {
+        return format.twitter.source.thumbnail(src.twitterUser);
       }
     };
 
     // Get table cells by service — different services have differently formatted URLs, for example:
     const getTableCellsByService = (src) => {
       if (src.service === SOURCE_REDDIT) {
+        console.log(src.brandColor);
         return (
           <a
             href={`https://www.reddit.com/r/${src.subreddit}`}
             rel="noopener noreferrer"
-            style={{ color: '#fff' }}
+            style={{ color: isDarkColor(src.brandColor) ? '#fff' : '#000' }}
             target="_blank"
           >
             {utils.str.makeTitleCase(src.subreddit)}
@@ -123,6 +127,7 @@ class Source extends Component {
           <a
             href={`https://www.twitter.com/${src.twitterUser}`}
             rel="noopener noreferrer"
+            style={{ color: isDarkColor(src.brandColor) ? '#fff' : '#000' }}
             target="_blank"
           >
             {utils.str.makeTitleCase(src.twitterUser)}
