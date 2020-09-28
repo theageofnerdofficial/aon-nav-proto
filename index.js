@@ -5,7 +5,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('./config/db');
 const app = express();
+const Instagram = require('instagram-web-api');
 const Twit = require('twit');
+
 const snoowrap = require('snoowrap');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -29,7 +31,23 @@ dotenv.config();
 
 /* Database URI and options:
  ***************************************************/
-const { DB_TWITTER_CONSUMER_KEY, DB_TWITTER_CONSUMER_SECRET } = process.env;
+const {
+  DB_INSTAGRAM_USER,
+  DB_INSTAGRAM_PASS,
+  DB_TWITTER_CONSUMER_KEY,
+  DB_TWITTER_CONSUMER_SECRET,
+} = process.env;
+
+const client = new Instagram({ DB_INSTAGRAM_USER, DB_INSTAGRAM_PASS });
+app.get('/api/request_data_instagram', (req, res, next) => {
+  console.log('got insta');
+
+  return client.getUserByUsername({ username: 'instagram' }).then((data) => {
+    const { id, username, profile_pic_url } = data;
+    const edges = data.edge_owner_to_timeline_media.edges;
+    res.json({ id, username, profile_pic_url, edges });
+  });
+});
 
 /* Snoowrap (Reddit API package) — oAuth credentials:
  ***************************************************/

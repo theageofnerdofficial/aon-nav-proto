@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import FontIcon from '../../../../Components/FontIcon/FontIcon';
 import BrandColourAddInfo from './BrandColourAddInfo';
 
-class TwitterUserAdd extends Component {
+class InstagramUserAdd extends Component {
   render() {
     return (
       <div className="col-12 row p-0 m-0 my-3">
         <div className="col-2 p-0">
           <button
-            className="btn btn-light form-control font-weight-light"
+            className="btn btn-light form-control font-weight-light text-muted"
             style={{
               borderBottomRightRadius: 0,
               borderTopRightRadius: 0,
             }}
           >
-            @
+            {FontIcon('faUser')}
           </button>
         </div>
         <div className="col-10 p-0">
@@ -66,4 +67,4 @@ class TwitterUserAdd extends Component {
   }
 }
 
-export default TwitterUserAdd;
+export default InstagramUserAdd;

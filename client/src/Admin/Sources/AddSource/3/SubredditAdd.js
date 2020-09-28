@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BrandColourAddInfo from './BrandColourAddInfo';
 
 class SubredditAdd extends Component {
   render() {
@@ -60,21 +61,7 @@ class SubredditAdd extends Component {
                 ></input>
               </div>
               <div className="col-10 p-0 ">
-                <p
-                  className="font-italic font-weight-light mt-2"
-                  style={{ fontSize: '0.85em' }}
-                >
-                  NOTE: try for official trademark colours. Nintendo use #e4000f
-                  for example. Try{' '}
-                  <a
-                    href="https://encycolorpedia.com/"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Encycolorpedia
-                  </a>
-                  ?
-                </p>
+                <BrandColourAddInfo />
               </div>
             </div>
           </div>

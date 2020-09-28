@@ -1,21 +1,23 @@
 // Imports:
 import React, { Component } from 'react';
+import FontIcon from '../../../Components/FontIcon/FontIcon';
+import LabelBtn from '../../../Components/UI/LabelBtn';
 import format from '../../../config/format';
 import isDarkColor from 'is-dark-color';
 import labels from '../../../config/labels';
 import utils from '../../../Components/Utils/utils/utils';
-import FontIcon from '../../../Components/FontIcon/FontIcon';
-import LabelBtn from '../../../Components/UI/LabelBtn';
 import { fetchConstructor } from '../../../actions';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../constants';
 
 class Source extends Component {
   componentDidMount() {
-    console.log(this.props.src);
+    // console.log(this.props.src);
   }
   render() {
     const { props } = this;
-    // Delete a source using fetch constructor to connect to DB:
+
+    /* Delete a source using fetch constructor to connect to DB:
+     ************************************************************/
     const deleteSource = (source) => {
       let url;
       switch (source.service) {
@@ -68,7 +70,8 @@ class Source extends Component {
       );
     };
 
-    // Get user by name — change if more admins/mods come along:
+    /* Get user by name — change if more admins/mods come along::
+     ************************************************************/
     const getCreatedByUser = (id) => {
       if (id === '5f1f2de55581752c7424b86a') {
         return 'gilfoylethegreat';

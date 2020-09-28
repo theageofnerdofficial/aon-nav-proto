@@ -16,8 +16,15 @@ import TweetFilterAdd from './AddSource/5/TweetFilterAdd';
 import SubredditPeriodAdd from './AddSource/6/SubredditPeriodAdd';
 import TweetQueryAdd from './AddSource/6/TweetQueryAdd';
 import IsOfficialCheckAdd from './AddSource/7/IsOfficialCheckAdd';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
+import {
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  SOURCE_INSTAGRAM,
+} from '../../constants';
 import { fetchConstructor } from '../../actions';
+import InstagramUserAdd from './AddSource/3/InstagramUserAdd';
+import NumberOfInstagramPostsAdd from './AddSource/4/NumberOfInstagramPostsAdd';
+import InstagramPostFilterAdd from './AddSource/5/InstagramPostFilterAdd copy';
 
 class AddSource extends Component {
   componentDidMount() {
@@ -32,6 +39,8 @@ class AddSource extends Component {
             return fieldsByService.reddit();
           } else if (form.service === SOURCE_TWITTER) {
             return fieldsByService.twitter();
+          } else if (form.service === SOURCE_INSTAGRAM) {
+            return fieldsByService.instagram();
           }
         }
       },
@@ -67,7 +76,22 @@ class AddSource extends Component {
           </React.Fragment>
         );
       },
+      instagram: () => {
+        return (
+          <React.Fragment>
+            <InstagramUserAdd
+              getPlaceholder={FormatSource.form.getPlaceholder}
+              sourceReducer={this.props.sourceReducer}
+            />
+            <NumberOfInstagramPostsAdd />
+            <InstagramPostFilterAdd
+              sourceAddFormFilter={this.props.sourceAddFormFilter}
+            />
+          </React.Fragment>
+        );
+      },
     };
+
     return (
       <div>
         <SectionTitle

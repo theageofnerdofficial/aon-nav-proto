@@ -67,6 +67,7 @@ import {
   USER_SIGNUP_FAILURE,
   USER_SIGNUP_PENDING,
   USER_SIGNUP_SUCCESS,
+  SOURCE_INSTAGRAM,
 } from './constants';
 
 // :
@@ -97,6 +98,8 @@ export const dataRequest = (o) => (dispatch) => {
       return `/api/request_data_twitter/${o.endpoint}/${o.user}/${o.q}/${o.count}`;
     } else if (o.src === SOURCE_REDDIT) {
       return `https://www.reddit.com/r/${o.user}/${o.endpoint}.json`;
+    } else if (o.src === SOURCE_INSTAGRAM) {
+      return `/api/request_data_instagram/${o.user}/${o.count}`;
     }
   };
   fetch(url(), {
@@ -222,6 +225,9 @@ export const sourceAdd = (source) => (dispatch, getState) => {
       break;
     case SOURCE_TWITTER:
       url = '/source/twitter';
+      break;
+    case SOURCE_INSTAGRAM:
+      url = '/source/instagram';
       break;
     default:
       url = '/source/add';

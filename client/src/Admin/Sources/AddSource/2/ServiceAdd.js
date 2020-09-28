@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../../constants';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+} from '../../../../constants';
 
 class ServiceAdd extends Component {
   render() {
@@ -15,6 +19,8 @@ class ServiceAdd extends Component {
               service = SOURCE_REDDIT;
             } else if (e.target.value === 'twitter') {
               service = SOURCE_TWITTER;
+            } else if (e.target.value === 'instagram') {
+              service = SOURCE_INSTAGRAM;
             }
             this.props.sourceAddService(service);
           }}
@@ -28,6 +34,7 @@ class ServiceAdd extends Component {
           </option>
           <option value="reddit">Reddit</option>
           <option value="twitter">Twitter</option>
+          <option value="instagram">Instagram</option>
         </select>
       </React.Fragment>
     );

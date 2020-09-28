@@ -12,10 +12,8 @@ const format = {
   twitter: {
     source: {
       thumbnail: (twitterSrc) => {
-        console.log('fuck?');
         let imgSrc;
         twitterSrc = twitterSrc.toLowerCase();
-        console.log(twitterSrc);
         switch (twitterSrc) {
           case 'nintendo':
             imgSrc = '/img/thumbnails/gaming-nintendo.svg';
@@ -101,7 +99,6 @@ const format = {
       thumbnail: (subreddit) => {
         let imgSrc;
         subreddit = subreddit.toLowerCase();
-        console.log(subreddit);
         switch (subreddit) {
           case 'nintendo':
             imgSrc = '/img/thumbnails/gaming-nintendo.svg';
