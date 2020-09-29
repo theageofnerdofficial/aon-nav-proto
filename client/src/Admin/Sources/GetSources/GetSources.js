@@ -1,10 +1,10 @@
 // Imports:
 import React, { Component } from 'react';
+import FontIcon from '../../../Components/FontIcon/FontIcon';
 import LoaderCentered from '../../../Components/Loader/LoaderCentered';
 import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../../../Components/SectionTitle/SectionTitlePostsTitle';
 import Source from './Source';
-import FontIcon from '../../../Components/FontIcon/FontIcon';
 import settings from '../../../config/settings';
 
 // Stop update loop:
@@ -16,10 +16,12 @@ class GetSources extends Component {
     this.props.sourcesReset();
     this.props.sourcesGetReddit();
     this.props.sourcesGetTwitter();
+    this.props.sourcesGetInstagram();
   }
 
   componentDidUpdate() {
     const {
+      sourceInstagramGetPending,
       sourceRedditGetPending,
       sourceReducer,
       sourceTwitterGetPending,
@@ -30,7 +32,15 @@ class GetSources extends Component {
       !sourceRedditGetPending && sourceReducer.sourcesRedditData;
     const gotTwitterData =
       !sourceTwitterGetPending && sourceReducer.sourcesTwitterData;
-    if (gotRedditData && gotTwitterData && !combined) {
+
+    //
+    //
+
+    const gotInstagramData =
+      !sourceInstagramGetPending && sourceReducer.sourcesInstagramData;
+
+    if (gotRedditData && gotTwitterData && gotInstagramData && !combined) {
+      // &&gotInstagramData
       this.props.sourcesCombine();
       combined = true;
     }
@@ -152,6 +162,8 @@ class GetSources extends Component {
               {this.props.sourceReducer &&
               this.props.sourceReducer.sourcesCombined ? (
                 this.props.sourceReducer.sourcesCombined.map((s, index) => {
+                  console.log(s);
+                  //return true;
                   return (
                     <Source
                       flashMsgFlash={this.props.flashMsgFlash}

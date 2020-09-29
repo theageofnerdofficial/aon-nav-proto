@@ -7,7 +7,7 @@ const InstagramSource = require('../../models/sources/InstagramSource');
 /* Create source:
  ******************************************************************/
 exports.create = (req, res, next) => {
-  let newSource = new RedditSource(req.body);
+  let newSource = new InstagramSource(req.body);
   newSource.save((err, source) => {
     if (err) {
       console.log(err);
@@ -20,13 +20,14 @@ exports.create = (req, res, next) => {
 /* List sources:
  ******************************************************************/
 exports.list = (req, res) => {
+  console.log('LIST - got here');
   let conditionObj = {};
   ['TV/Film', 'Comics', 'Gaming'].forEach((category) => {
     if (category.toLowerCase() === req.params.category) {
       conditionObj.category = category.toLowerCase();
     }
   });
-  RedditSource.find(conditionObj, (err, source) => {
+  InstagramSource.find(conditionObj, (err, source) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -38,7 +39,7 @@ exports.list = (req, res) => {
 /* Get source:
  ******************************************************************/
 exports.get = (req, res) => {
-  RedditSource.findById(req.params.id, (err, source) => {
+  InstagramSource.findById(req.params.id, (err, source) => {
     if (err) {
       res.status(500).send(err);
     }

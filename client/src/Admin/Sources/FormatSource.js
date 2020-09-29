@@ -1,5 +1,9 @@
 // Imports:
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
+import {
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  SOURCE_INSTAGRAM,
+} from '../../constants';
 
 const FormatSource = {
   form: {
@@ -26,6 +30,8 @@ const FormatSource = {
         return 'reddit';
       } else if (src.service === SOURCE_TWITTER) {
         return 'twitter';
+      } else if (src.service === SOURCE_INSTAGRAM) {
+        return 'instagram';
       }
     },
 
@@ -42,8 +48,38 @@ const FormatSource = {
           src: FormatSource.twitter.schemify(el),
           url: '/source/twitter',
         };
+      } else if (el['service'].value === 'instagram') {
+        formData = {
+          src: FormatSource.instagram.schemify(el),
+          url: '/source/instagram',
+        };
       }
       return formData;
+    },
+  },
+
+  instagram: {
+    schemify: (el) => {
+      return {
+        category: el['category'].value,
+        categoryGaming: el['category-gaming']
+          ? el['category-gaming'].value
+          : null,
+        username: el['instagram-user'] ? el['instagram-user'].value : null,
+        brandColor: el['instagram-brand-color']
+          ? el['instagram-brand-color'].value
+          : null,
+        postsNumber: el['posts'] ? el['posts'].value : null,
+        filter: el['instagram-post-filter']
+          ? el['instagram-post-filter'].value
+          : null,
+        service: SOURCE_INSTAGRAM,
+        period: el['instagram-period'] ? el['instagram-period'].value : null,
+        createdBy: localStorage.getItem('aon_user_id'),
+        isOfficial: el['is-official-source']
+          ? el['is-official-source'].checked
+          : false,
+      };
     },
   },
 
@@ -74,7 +110,6 @@ const FormatSource = {
   //
   twitter: {
     schemify: (el) => {
-      console.log(el['twitter-brand-color'].value);
       return {
         category: el['category'].value,
         categoryGaming: el['category-gaming']

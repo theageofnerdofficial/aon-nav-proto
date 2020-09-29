@@ -25,6 +25,7 @@ import { fetchConstructor } from '../../actions';
 import InstagramUserAdd from './AddSource/3/InstagramUserAdd';
 import NumberOfInstagramPostsAdd from './AddSource/4/NumberOfInstagramPostsAdd';
 import InstagramPostFilterAdd from './AddSource/5/InstagramPostFilterAdd copy';
+import InstagramPeriodAdd from './AddSource/6/InstagramPeriodAdd copy';
 
 class AddSource extends Component {
   componentDidMount() {
@@ -87,6 +88,11 @@ class AddSource extends Component {
             <InstagramPostFilterAdd
               sourceAddFormFilter={this.props.sourceAddFormFilter}
             />
+
+            {/*   {(sourceReducer && sourceReducer.filter === 'controversial') ||
+            sourceReducer.filter === 'top' ? (
+              <InstagramPeriodAdd />
+            ) : null}*/}
           </React.Fragment>
         );
       },

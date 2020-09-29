@@ -20,7 +20,7 @@ class InstagramUserAdd extends Component {
         <div className="col-10 p-0">
           <input
             className="form-control font-weight-light"
-            name="twitter-user"
+            name="instagram-user"
             placeholder={`e.g. ${this.props.getPlaceholder(
               this.props.sourceReducer
             )}`}
@@ -52,7 +52,7 @@ class InstagramUserAdd extends Component {
                 <input
                   style={{ height: '100%' }}
                   type="color"
-                  name="twitter-brand-color"
+                  name="instagram-brand-color"
                   defaultValue="#e4000f"
                 ></input>
               </div>

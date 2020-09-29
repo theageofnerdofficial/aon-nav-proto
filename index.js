@@ -22,6 +22,7 @@ app.use(cors());
 
 // Controllers:
 const userController = require('./controllers/UserController');
+const instagramSourceController = require('./controllers/sources/InstagramSourceController');
 const redditSourceController = require('./controllers/sources/RedditSourceController');
 const twitterSourceController = require('./controllers/sources/TwitterSourceController');
 const quizController = require('./controllers/QuizController');
@@ -157,6 +158,18 @@ app.put('/source/twitter/', (req, res, next) =>
 app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
   twitterSourceController.getSource(req, res, next)
 );
+
+app.post('/source/instagram/', (req, res, next) =>
+  instagramSourceController.create(req, res, next)
+);
+
+app.get('/source/getInstagramSourceByUsername/:username', (req, res, next) =>
+  instagramSourceController.get(req, res, next)
+);
+app.get('/source/instagram/', (req, res, next) => {
+  console.log('GOT HERE');
+  return instagramSourceController.list(req, res, next);
+});
 
 /* Quiz:
  *****************************************************************/

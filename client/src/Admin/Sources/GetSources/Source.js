@@ -7,7 +7,11 @@ import isDarkColor from 'is-dark-color';
 import labels from '../../../config/labels';
 import utils from '../../../Components/Utils/utils/utils';
 import { fetchConstructor } from '../../../actions';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../constants';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+} from '../../../constants';
 
 class Source extends Component {
   componentDidMount() {
@@ -100,6 +104,8 @@ class Source extends Component {
         return 'Reddit';
       } else if (src.service === SOURCE_TWITTER) {
         return 'Twitter';
+      } else if (src.service === SOURCE_INSTAGRAM) {
+        return 'Instagram';
       }
     };
 
@@ -108,13 +114,14 @@ class Source extends Component {
         return format.reddit.source.thumbnail(src.subreddit);
       } else if (src.service === SOURCE_TWITTER) {
         return format.twitter.source.thumbnail(src.twitterUser);
+      } else if (src.service === SOURCE_INSTAGRAM) {
+        return format.instagram.source.thumbnail(src.username);
       }
     };
 
     // Get table cells by service — different services have differently formatted URLs, for example:
     const getTableCellsByService = (src) => {
       if (src.service === SOURCE_REDDIT) {
-        console.log(src.brandColor);
         return (
           <a
             href={`https://www.reddit.com/r/${src.subreddit}`}
@@ -134,6 +141,17 @@ class Source extends Component {
             target="_blank"
           >
             {utils.str.makeTitleCase(src.twitterUser)}
+          </a>
+        );
+      } else if (src.service === SOURCE_INSTAGRAM) {
+        return (
+          <a
+            href={`https://www.instagram.com/${src.username}`}
+            rel="noopener noreferrer"
+            style={{ color: isDarkColor(src.brandColor) ? '#fff' : '#000' }}
+            target="_blank"
+          >
+            {utils.str.makeTitleCase(src.username)}
           </a>
         );
       }

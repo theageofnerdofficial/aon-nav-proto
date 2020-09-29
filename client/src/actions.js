@@ -25,9 +25,14 @@ import {
   QUIZ_SCORE_CALCULATE,
   QUIZ_SCREEN_UPDATE,
   SCHEDULER_SELECT_DATE,
+  SOURCE_GET_INSTAGRAM_FAILURE,
+  SOURCE_GET_INSTAGRAM_SUCCESS,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
+  SOURCES_INSTAGRAM_GET_FAILURE,
+  SOURCES_INSTAGRAM_GET_PENDING,
+  SOURCES_INSTAGRAM_GET_SUCCESS,
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
@@ -300,6 +305,41 @@ export const sourceGetById = (o) => (dispatch) => {
     );
 };
 
+// sourcesGet gets all whereas sourceGetPosts gets posts by username or id or category
+export const sourcesGetInstagram = (o) => (dispatch) => {
+  dispatch({ type: SOURCES_INSTAGRAM_GET_PENDING });
+  fetch('/source/instagram/', {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: SOURCES_INSTAGRAM_GET_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCES_INSTAGRAM_GET_FAILURE, payload: error })
+    );
+};
+
+export const sourcesGetInstagramPosts = (o) => (dispatch) => {
+  dispatch({ type: SOURCES_INSTAGRAM_GET_PENDING });
+  fetch('/source/instagram/', {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: SOURCES_INSTAGRAM_GET_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCES_INSTAGRAM_GET_FAILURE, payload: error })
+    );
+};
+
 export const sourceGetRedditPosts = (o) => (dispatch) => {
   let redditUrl = `https://www.reddit.com/r/${o.subreddit}/${o.filter}.json?`;
   let params = [];
@@ -349,7 +389,6 @@ export const sourcesFilterByCategory = (o) => ({
 
 export const sourcesGetReddit = (cat) => (dispatch) => {
   const category = cat ? '/' + cat : '/all';
-  console.log(category);
   dispatch({ type: SOURCES_REDDIT_GET_PENDING });
   fetch('/source/reddit' + category, {
     headers: settings.network.headers,

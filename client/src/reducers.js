@@ -32,6 +32,9 @@ import {
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
+  SOURCES_INSTAGRAM_GET_FAILURE,
+  SOURCES_INSTAGRAM_GET_PENDING,
+  SOURCES_INSTAGRAM_GET_SUCCESS,
   SOURCES_RESET_FORM,
   SOURCES_TOGGLE_SORT_UI,
   SOURCES_TWITTER_GET_FAILURE,
@@ -47,6 +50,9 @@ import {
   SOURCE_GETBYID_FAILURE,
   SOURCE_GETBYID_PENDING,
   SOURCE_GETBYID_SUCCESS,
+  SOURCE_GET_INSTAGRAM_FAILURE,
+  SOURCE_GET_INSTAGRAM_PENDING,
+  SOURCE_GET_INSTAGRAM_SUCCESS,
   SOURCE_GET_REDDITS_FAILURE,
   SOURCE_GET_REDDITS_PENDING,
   SOURCE_GET_REDDITS_SUCCESS,
@@ -398,6 +404,8 @@ const sourceAddForm = {
   filter: String,
   sourceCategoryFilter: 'all',
   sourceAddPending: false,
+  sourceInstagramGetPending: false,
+  sourceInstagramPostsPending: false,
   sourceRedditGetPending: false,
   sourceRedditPostsPending: false,
   sourceTwitterGetPending: false,
@@ -405,6 +413,7 @@ const sourceAddForm = {
   sourcesRedditData: null,
   sourcesRedditPosts: null,
   sourcesTwitterData: null,
+  sourcesInstagramData: null,
   showRedditPeriod: true,
   sourceByIdPending: false,
   sourceById: {},
@@ -424,6 +433,17 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
     case SOURCE_GET_REDDITS_PENDING:
       //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: true });
+
+    case SOURCE_GET_INSTAGRAM_PENDING:
+      console.log('instagram pending');
+      return Object.assign({}, state, { sourceInstagramPostsPending: true });
+
+    case SOURCE_GET_INSTAGRAM_FAILURE:
+      return Object.assign({}, state, { sourceInstagramPostsPending: false });
+
+    case SOURCE_GET_INSTAGRAM_SUCCESS:
+      return Object.assign({}, state, { sourceInstagramPostsPending: false });
+
     case SOURCE_GET_REDDITS_FAILURE:
       //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: false });
@@ -444,6 +464,7 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       //return Object.assign({}, state);
       return Object.assign({}, state, {
         sourcesCombined: [
+          ...state.sourcesInstagramData,
           ...state.sourcesRedditData,
           ...state.sourcesTwitterData,
         ],
@@ -487,6 +508,21 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         sourcesTwitterData: action.payload,
         sourceTwitterGetPending: false,
       });
+
+    case SOURCES_INSTAGRAM_GET_FAILURE:
+      return Object.assign({}, state, {
+        sourceInstagramGetPending: false,
+      });
+    case SOURCES_INSTAGRAM_GET_PENDING:
+      return Object.assign({}, state, {
+        sourceInstagramGetPending: true,
+      });
+    case SOURCES_INSTAGRAM_GET_SUCCESS:
+      return Object.assign({}, state, {
+        sourcesInstagramData: action.payload,
+        sourceInstagramGetPending: false,
+      });
+
     case SOURCES_REDDIT_GET_FAILURE:
       return Object.assign({}, state, {
         sourceRedditGetPending: false,

@@ -24,7 +24,6 @@ exports.list = (req, res) => {
     if (err) {
       res.status(500).send(err);
     }
-    console.log(source);
     res.status(200).json(source);
   });
 };

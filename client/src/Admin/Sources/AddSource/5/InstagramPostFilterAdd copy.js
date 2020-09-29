@@ -20,7 +20,7 @@ class InstagramPostFilterAdd extends Component {
           <div className="col-10 p-0">
             <select
               className="form-control font-weight-light mb-3"
-              name="tweet-filter"
+              name="instagram-post-filter"
               onChange={(e) => {
                 this.props.sourceAddFormFilter(e.target.value);
               }}

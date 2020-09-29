@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 // Schema:
-const RedditSourceSchema = new Schema({
+const InstagramSourceSchema = new Schema({
   category: {
     type: String,
     lowercase: true,
@@ -69,4 +69,4 @@ const RedditSourceSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('RedditSources', RedditSourceSchema);
+module.exports = mongoose.model('InstagramSources', InstagramSourceSchema);
