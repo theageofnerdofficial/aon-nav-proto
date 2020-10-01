@@ -135,7 +135,8 @@ class Home extends Component {
                 {
                   align: 'center',
                   category: 'Comics',
-                  mediaSubtype: 'Customise your browsing experience',
+                  mediaSubtype:
+                    'Create a profile to personalise your experience',
                   mediaType: 'article',
                   src:
                     'https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
