@@ -9,6 +9,7 @@ import {
   faArrowUp,
   faAt,
   faBan,
+  faCircle,
   faCalendar,
   faCaretDown,
   faCaretUp,
@@ -89,6 +90,9 @@ const FontIcon = (icon) => {
       break;
     case 'faChevronUp':
       faIcon = faChevronUp;
+      break;
+    case 'faCircle':
+      faIcon = faCircle;
       break;
     case 'faCog':
       faIcon = faCog;
