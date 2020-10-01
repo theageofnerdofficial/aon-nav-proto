@@ -23,6 +23,8 @@ import {
   faChevronRight,
   faChevronUp,
   faDownload,
+  faVolumeMute,
+  faVolumeUp,
   faEdit,
   faEllipsisV,
   faExclamationTriangle,
@@ -127,14 +129,12 @@ const FontIcon = (icon) => {
     case 'faSortNumericUp':
       faIcon = faSortNumericUp;
       break;
-    //
     case 'faSortAlphaDown':
       faIcon = faSortAlphaDown;
       break;
     case 'faSortAlphaUp':
       faIcon = faSortAlphaUp;
       break;
-
     case 'faSun':
       faIcon = faSun;
       break;
@@ -158,6 +158,12 @@ const FontIcon = (icon) => {
       break;
     case 'faUser':
       faIcon = faUser;
+      break;
+    case 'faVolumeMute':
+      faIcon = faVolumeMute;
+      break;
+    case 'faVolumeUp':
+      faIcon = faVolumeUp;
       break;
     default:
       faIcon = faArchway;

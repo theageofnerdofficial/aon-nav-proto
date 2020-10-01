@@ -20,7 +20,6 @@ exports.create = (req, res, next) => {
 /* List sources:
  ******************************************************************/
 exports.list = (req, res) => {
-  console.log('LIST - got here');
   let conditionObj = {};
   ['TV/Film', 'Comics', 'Gaming'].forEach((category) => {
     if (category.toLowerCase() === req.params.category) {
@@ -50,7 +49,7 @@ exports.get = (req, res) => {
 /* Delete source:
  ******************************************************************/
 exports.delete = (req, res) => {
-  RedditSource.deleteOne({ _id: req.body.sourceId }, (err, source) => {
+  InstagramSource.deleteOne({ _id: req.body.sourceId }, (err, source) => {
     if (err) {
       res.status(404).send(err);
     }
@@ -61,7 +60,7 @@ exports.delete = (req, res) => {
 /* Update source:
  ******************************************************************/
 exports.update = (req, res) => {
-  RedditSource.findOneAndUpdate(
+  InstagramSource.findOneAndUpdate(
     { _id: req.body._id },
     req.body,
     { new: true },

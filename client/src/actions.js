@@ -286,6 +286,8 @@ export const sourceGetById = (o) => (dispatch) => {
       return `/source/getRedditSourceById/${o.id}`;
     } else if (o.service === 'twitter') {
       return `/source/getTwitterSourceById/${o.id}`;
+    } else if (o.service === 'instagram') {
+      return `/source/getInstagramSourceById/${o.id}`;
     }
   };
   dispatch({ type: SOURCE_GETBYID_PENDING });

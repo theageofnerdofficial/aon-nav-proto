@@ -25,6 +25,9 @@ class Source extends Component {
     const deleteSource = (source) => {
       let url;
       switch (source.service) {
+        case SOURCE_INSTAGRAM:
+          url = '/source/instagram';
+          break;
         case SOURCE_REDDIT:
           url = '/source/reddit';
           break;
@@ -110,12 +113,12 @@ class Source extends Component {
     };
 
     const getLogo = (src) => {
-      if (src.service === SOURCE_REDDIT) {
+      if (src.service === SOURCE_INSTAGRAM) {
+        return format.instagram.source.thumbnail(src.username);
+      } else if (src.service === SOURCE_REDDIT) {
         return format.reddit.source.thumbnail(src.subreddit);
       } else if (src.service === SOURCE_TWITTER) {
         return format.twitter.source.thumbnail(src.twitterUser);
-      } else if (src.service === SOURCE_INSTAGRAM) {
-        return format.instagram.source.thumbnail(src.username);
       }
     };
 
@@ -148,7 +151,13 @@ class Source extends Component {
           <a
             href={`https://www.instagram.com/${src.username}`}
             rel="noopener noreferrer"
-            style={{ color: isDarkColor(src.brandColor) ? '#fff' : '#000' }}
+            style={{
+              color: src.brandColor
+                ? isDarkColor(src.brandColor)
+                  ? '#fff'
+                  : '#000'
+                : '#000',
+            }}
             target="_blank"
           >
             {utils.str.makeTitleCase(src.username)}
@@ -177,6 +186,12 @@ class Source extends Component {
                 src={getLogo(this.props.src)}
                 style={{ width: '65px' }}
               />
+              <button
+                className="btn btn-sm btn-light shadow-sm text-muted"
+                style={{ borderBottomLeftRadius: 0, borderTopLeftRadius: 0 }}
+              >
+                {FontIcon('faVolumeUp')}
+              </button>
             </td>
             <td>
               <LabelBtn
@@ -197,9 +212,12 @@ class Source extends Component {
               </small>
             </td>
             <td>{getSource(this.props.src)}</td>
-
             <td>{this.props.src.postsNumber}</td>
-            <td>{utils.str.makeTitleCase(this.props.src.filter)}</td>
+            <td>
+              {this.props.src.filter
+                ? utils.str.makeTitleCase(this.props.src.filter)
+                : 'N/A'}
+            </td>
             <td>{this.props.src.period ? this.props.src.period : 'N/A'}</td>
             <td>{getCreatedByUser(this.props.src.createdBy)}</td>
             <td style={{ width: 60 }}>

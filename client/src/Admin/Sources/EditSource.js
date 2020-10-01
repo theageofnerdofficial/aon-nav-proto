@@ -16,10 +16,17 @@ import TweetFilterEdit from './EditSource/5/TweetFilterEdit';
 import SubredditPeriodAdd from './EditSource/6/SubredditPeriodAdd';
 import TweetQueryAdd from './EditSource/6/TweetQueryAdd';
 import IsOfficialCheckAdd from './EditSource/7/IsOfficialCheckAdd';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../constants';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+} from '../../constants';
 import { fetchConstructor } from '../../actions';
 
 import LoaderCentered from '../../Components/Loader/LoaderCentered';
+import InstagramUserEdit from './EditSource/3/InstagramUserEdit';
+import NumberOfInstagramPostsEdit from './EditSource/4/NumberOfInstagramPostsEdit';
+import InstagramFilterEdit from './EditSource/5/InstagramFilterEdit';
 
 // Stop update loop:
 let gotUpdatedSource = false;
@@ -50,12 +57,36 @@ class EditSource extends Component {
     const fieldsByService = {
       get: (form) => {
         if (form.service) {
-          if (form.service === SOURCE_REDDIT) {
+          if (form.service === SOURCE_INSTAGRAM) {
+            return fieldsByService.instagram();
+          } else if (form.service === SOURCE_REDDIT) {
             return fieldsByService.reddit();
           } else if (form.service === SOURCE_TWITTER) {
             return fieldsByService.twitter();
           }
         }
+      },
+      instagram: () => {
+        const { sourceAddFormFilter, sourceReducer } = this.props;
+        return (
+          <React.Fragment>
+            <InstagramUserEdit
+              getPlaceholder={FormatSource.form.getPlaceholder}
+              sourceReducer={this.props.sourceReducer}
+            />
+            <NumberOfInstagramPostsEdit
+              sourceById={this.props.sourceReducer.sourceById}
+            />
+            <InstagramFilterEdit
+              sourceAddFormFilter={sourceAddFormFilter}
+              sourceReducer={this.props.sourceReducer}
+            />
+            {(sourceReducer && sourceReducer.filter === 'controversial') ||
+            sourceReducer.filter === 'top' ? (
+              <SubredditPeriodAdd sourceReducer={this.props.sourceReducer} />
+            ) : null}
+          </React.Fragment>
+        );
       },
       reddit: () => {
         const { sourceAddFormFilter, sourceReducer } = this.props;
@@ -72,10 +103,6 @@ class EditSource extends Component {
               sourceAddFormFilter={sourceAddFormFilter}
               sourceReducer={this.props.sourceReducer}
             />
-            {(sourceReducer && sourceReducer.filter === 'controversial') ||
-            sourceReducer.filter === 'top' ? (
-              <SubredditPeriodAdd sourceReducer={this.props.sourceReducer} />
-            ) : null}
           </React.Fragment>
         );
       },

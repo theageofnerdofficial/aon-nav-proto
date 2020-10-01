@@ -34,13 +34,10 @@ class GetSources extends Component {
       !sourceTwitterGetPending && sourceReducer.sourcesTwitterData;
 
     //
-    //
-
     const gotInstagramData =
       !sourceInstagramGetPending && sourceReducer.sourcesInstagramData;
 
     if (gotRedditData && gotTwitterData && gotInstagramData && !combined) {
-      // &&gotInstagramData
       this.props.sourcesCombine();
       combined = true;
     }
@@ -121,17 +118,26 @@ class GetSources extends Component {
       <React.Fragment>
         <SectionTitle title="Sources" />
         <SectionTitlePostsTitle text={`Sources (${countSources()})`} />
-        <select
-          className="form-control col-12 col-md-4 col-lg-4 mb-3"
-          onChange={(e) => {
-            this.props.sourcesFilterByCategory(e.target.value);
-          }}
-        >
-          <option>All</option>
-          {settings.categories.arr.map((category) => {
-            return <option>{category}</option>;
-          })}
-        </select>
+        <div className="m-0 p-0 col-12 row">
+          <div className="m-0 p-0 col-6">
+            <select
+              className="form-control col-12 col-md-4 col-lg-4 mb-3"
+              onChange={(e) => {
+                this.props.sourcesFilterByCategory(e.target.value);
+              }}
+            >
+              <option>All</option>
+              {settings.categories.arr.map((category) => {
+                return <option>{category}</option>;
+              })}
+            </select>
+          </div>
+          <div className="m-0 p-0 col-6 text-right">
+            <this.props.Link to="/admin/addsource">
+              <button className="btn btn-light">Add source +</button>
+            </this.props.Link>
+          </div>
+        </div>
         <div style={{ overflow: 'scroll' }}>
           <table className="table table-striped">
             <thead>

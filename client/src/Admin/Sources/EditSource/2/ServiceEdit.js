@@ -22,6 +22,7 @@ class ServiceEdit extends Component {
           </option>
           <option value="reddit">Reddit</option>
           <option value="twitter">Twitter</option>
+          <option value="instagram">Instagram</option>
         </select>
       </React.Fragment>
     );

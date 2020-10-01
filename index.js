@@ -119,6 +119,10 @@ app.get('/users/listsecure', (req, res, next) =>
 
 /* Sources:
  *****************************************************************/
+app.delete('/source/instagram', (req, res, next) =>
+  instagramSourceController.delete(req, res, next)
+);
+
 app.delete('/source/reddit', (req, res, next) =>
   redditSourceController.delete(req, res, next)
 );
@@ -129,6 +133,14 @@ app.get('/source/reddit/:category', (req, res, next) =>
 
 app.get('/source/getRedditSourceById/:id', (req, res, next) =>
   redditSourceController.get(req, res, next)
+);
+
+app.get('/source/getInstagramSourceById/:id', (req, res, next) =>
+  instagramSourceController.get(req, res, next)
+);
+
+app.put('/source/instagram/', (req, res, next) =>
+  instagramSourceController.update(req, res, next)
 );
 
 app.post('/source/reddit/', (req, res, next) =>

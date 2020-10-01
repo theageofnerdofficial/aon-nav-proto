@@ -16,7 +16,7 @@ class BrandColourAddInfo extends Component {
         >
           Encycolorpedia
         </a>
-        ? Also, use hexidecimal. Chrome, Firefox, and Opera have a hex value
+        ? Also, use hexidecimal. Chrome, Firefox, and Opera have hex value
         selections in their colour pickers.{' '}
         <a
           href="https://css-tricks.com/color-inputs-a-deep-dive-into-cross-browser-differences/"

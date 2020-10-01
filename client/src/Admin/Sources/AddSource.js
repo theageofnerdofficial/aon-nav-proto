@@ -24,8 +24,8 @@ import {
 import { fetchConstructor } from '../../actions';
 import InstagramUserAdd from './AddSource/3/InstagramUserAdd';
 import NumberOfInstagramPostsAdd from './AddSource/4/NumberOfInstagramPostsAdd';
-import InstagramPostFilterAdd from './AddSource/5/InstagramPostFilterAdd copy';
-import InstagramPeriodAdd from './AddSource/6/InstagramPeriodAdd copy';
+import InstagramPostFilterAdd from './AddSource/5/InstagramPostFilterAdd';
+import InstagramPeriodAdd from './AddSource/6/InstagramPeriodAdd';
 
 class AddSource extends Component {
   componentDidMount() {
