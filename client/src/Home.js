@@ -128,9 +128,10 @@ class Home extends Component {
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
-        <div className="col-12 m-0 p-0 row">
+        <div className="col-12 m-0 p-0 mb-4 row">
           <div style={{ width: '100%' }}>
             <CarouselJumbotron
+              usersReducer={this.props.usersReducer}
               items={[
                 {
                   align: 'center',

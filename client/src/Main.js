@@ -294,6 +294,7 @@ class Main extends Component {
                           quizReset={quizReset}
                           quizUpdateQNumber={quizUpdateQNumber}
                           quizUpdateScreen={quizUpdateScreen}
+                          usersReducer={usersReducer}
                           {...props}
                         />
                       )}

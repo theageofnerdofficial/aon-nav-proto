@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import loginCreds from '../../config/loginCreds';
 import LoggedIn from './LoggedIn';
 import NotLoggedIn from './NotLoggedIn';
+import loginCreds from '../../config/loginCreds';
 
 class LoginBtn extends Component {
   componentDidMount() {

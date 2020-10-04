@@ -7,7 +7,7 @@ class Footer extends Component {
       <footer className="footer" style={{ zIndex: '999' }}>
         <div className="m-0 p-0 col-12 row">
           <div className="m-0 p-0 col-6 text-muted">
-            <span className="pl-2 text-danger">{FontIcon('faCircle')}</span>
+            <span className="pl-2 text-secondary">{FontIcon('faCircle')}</span>
             &nbsp;AON Twitch: offline
           </div>
           <div className="m-0 p-0 col-6">
@@ -16,10 +16,6 @@ class Footer extends Component {
             </div>
           </div>
         </div>
-
-        {/* 
-       
-        */}
       </footer>
     );
   }

@@ -34,6 +34,7 @@ export const GlobalStyles = createGlobalStyle`
   .btn-login {
     border: 0 !important;
     background: ${({ theme }) => theme.loginBtn};
+    z-index: 999;
   }
 
   .bg-custom-panel {

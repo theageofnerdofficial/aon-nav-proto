@@ -9,9 +9,7 @@ const ProtectedRoute = ({ component: Component, data, ...rest }) => (
       return localStorage.getItem('aon_user_id') ? (
         <Component {...props} {...data} />
       ) : (
-        <Redirect
-          to={{ pathname: '/login', state: { from: props.location } }}
-        />
+        <Redirect to={{ pathname: '/', state: { from: props.location } }} />
       );
     }}
   />
