@@ -67,6 +67,11 @@ const InstagramSourceSchema = new Schema({
     type: String,
     required: true,
   },
+
+  muted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('InstagramSources', InstagramSourceSchema);

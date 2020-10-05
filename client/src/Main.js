@@ -54,6 +54,7 @@ import {
   sourcesGetTwitter,
   sourcesReset,
   sourcesToggleSortUI,
+  sourcesToggleSourceMute,
   quizAddAnswer,
   quizCalculateScore,
   quizFormUpdate,
@@ -143,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
     sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
     sourcesReset: () => dispatch(sourcesReset()),
     sourcesToggleSortUI: (o) => dispatch(sourcesToggleSortUI(o)),
+    sourcesToggleSourceMute: (o) => dispatch(sourcesToggleSourceMute(o)),
     uiSetBreadcrumbs: (o) => dispatch(uiSetBreadcrumbs(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
     userAuthenticate: () => dispatch(userAuthenticate()),
@@ -232,6 +234,7 @@ class Main extends Component {
       sourcesGetTwitter,
       sourcesReset,
       sourcesToggleSortUI,
+      sourcesToggleSourceMute,
       uiReducer,
       // uiSetBreadcrumbs,
       uiToggleLights,
@@ -527,6 +530,7 @@ class Main extends Component {
                             sourceRemove,
                             sourcesReset,
                             sourcesToggleSortUI,
+                            sourcesToggleSourceMute,
                           }}
                           login={usersReducer}
                           {...props}

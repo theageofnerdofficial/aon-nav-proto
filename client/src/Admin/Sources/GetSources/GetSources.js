@@ -168,7 +168,6 @@ class GetSources extends Component {
               {this.props.sourceReducer &&
               this.props.sourceReducer.sourcesCombined ? (
                 this.props.sourceReducer.sourcesCombined.map((s, index) => {
-                  console.log(s);
                   //return true;
                   return (
                     <Source
@@ -180,6 +179,9 @@ class GetSources extends Component {
                       sourceRemove={this.props.sourceRemove}
                       sourceCategoryFilter={
                         this.props.sourceReducer.sourceCategoryFilter
+                      }
+                      sourcesToggleSourceMute={
+                        this.props.sourcesToggleSourceMute
                       }
                       src={s}
                     />

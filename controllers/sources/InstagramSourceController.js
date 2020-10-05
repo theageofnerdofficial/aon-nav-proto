@@ -60,6 +60,8 @@ exports.delete = (req, res) => {
 /* Update source:
  ******************************************************************/
 exports.update = (req, res) => {
+  console.log(req.body);
+  return;
   InstagramSource.findOneAndUpdate(
     { _id: req.body._id },
     req.body,

@@ -73,6 +73,11 @@ const TwitterSourceSchema = new Schema({
     type: String,
     required: true,
   },
+
+  muted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('TwitterSources', TwitterSourceSchema);

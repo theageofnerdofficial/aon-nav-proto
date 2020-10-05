@@ -178,8 +178,8 @@ app.post('/source/instagram/', (req, res, next) =>
 app.get('/source/getInstagramSourceByUsername/:username', (req, res, next) =>
   instagramSourceController.get(req, res, next)
 );
+
 app.get('/source/instagram/', (req, res, next) => {
-  console.log('GOT HERE');
   return instagramSourceController.list(req, res, next);
 });
 

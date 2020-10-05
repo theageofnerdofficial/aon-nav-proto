@@ -12,6 +12,7 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
 } from '../../../constants';
+import FormatSource from '../FormatSource';
 
 class Source extends Component {
   componentDidMount() {
@@ -20,10 +21,9 @@ class Source extends Component {
   render() {
     const { props } = this;
 
-    /* Delete a source using fetch constructor to connect to DB:
-     ************************************************************/
-    const deleteSource = (source) => {
+    const getSourceUrl = (source) => {
       let url;
+      //console.log(source.service);
       switch (source.service) {
         case SOURCE_INSTAGRAM:
           url = '/source/instagram';
@@ -35,8 +35,14 @@ class Source extends Component {
           url = '/source/twitter';
           break;
         default:
-          url = '/source/delete';
+          url = '/source/';
       }
+      return url;
+    };
+    /* Delete a source using fetch constructor to connect to DB:
+     ************************************************************/
+    const deleteSource = (source) => {
+      let url = getSourceUrl(source);
       fetchConstructor(
         {
           url: url,
@@ -76,7 +82,6 @@ class Source extends Component {
         this.props
       );
     };
-
     /* Get user by name — change if more admins/mods come along::
      ************************************************************/
     const getCreatedByUser = (id) => {
@@ -186,12 +191,77 @@ class Source extends Component {
                 src={getLogo(this.props.src)}
                 style={{ width: '65px' }}
               />
-              <button
-                className="btn btn-sm btn-light shadow-sm text-muted"
-                style={{ borderBottomLeftRadius: 0, borderTopLeftRadius: 0 }}
+              <form
+                style={{ float: 'right', width: 30 }}
+                onSubmit={(e) => {
+                  e.preventDefault();
+
+                  this.props.sourcesToggleSourceMute({
+                    id: this.props.src._id,
+                  });
+
+                  return;
+
+                  const { elements } = e.target;
+                  const { props } = this;
+
+                  fetchConstructor(
+                    {
+                      url: getSourceUrl(this.props.src),
+                      body: JSON.stringify({
+                        id: this.props.src._id,
+                        muted: false,
+                      }),
+                      method: 'PUT',
+                      func: {
+                        checkErrors: (res) => {
+                          if (res.errors) {
+                            const warnings = res.message;
+                            props.flashMsgUpdate({
+                              msg: warnings.split(',')[0],
+                              style: 'danger',
+                            });
+                            props.flashMsgFlash();
+                            return false;
+                          } else {
+                            props.flashMsgUpdate({
+                              msg: `${labels.response.success}: this source was successfully edited.`,
+                              style: 'success',
+                            });
+                            props.flashMsgFlash();
+                            props.sourcesReset();
+                            setTimeout(() => {
+                              window.history.back();
+                            }, 1000);
+                          }
+                        },
+                        checkCatch: (e) => {
+                          props.flashMsgUpdate({
+                            msg: e.message,
+                            style: 'danger',
+                          });
+                          props.flashMsgFlash();
+                        },
+                      },
+                    },
+                    this.props
+                  );
+                }}
               >
-                {FontIcon('faVolumeUp')}
-              </button>
+                <button
+                  className="btn btn-sm btn-light shadow-sm text-muted"
+                  name="source-toggle-mute"
+                  style={{
+                    borderBottomLeftRadius: 0,
+                    borderTopLeftRadius: 0,
+                    opacity: this.props.src.muted ? 0.5 : 1,
+                  }}
+                >
+                  {this.props.src.muted
+                    ? FontIcon('faVolumeMute')
+                    : FontIcon('faVolumeUp')}
+                </button>
+              </form>
             </td>
             <td>
               <LabelBtn
@@ -219,7 +289,11 @@ class Source extends Component {
                 : 'N/A'}
             </td>
             <td>{this.props.src.period ? this.props.src.period : 'N/A'}</td>
-            <td>{getCreatedByUser(this.props.src.createdBy)}</td>
+            <td>
+              <this.props.Link to="/">
+                {getCreatedByUser(this.props.src.createdBy)}
+              </this.props.Link>
+            </td>
             <td style={{ width: 60 }}>
               <this.props.Link
                 to={`/admin/editsource/${this.props.src._id}/${getSource(

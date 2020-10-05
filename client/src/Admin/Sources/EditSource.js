@@ -144,6 +144,7 @@ class EditSource extends Component {
                   }
                   let formData = FormatSource.form.getSubmissionData(elements);
                   formData.src._id = this.props.sourceReducer.sourceById._id;
+
                   fetchConstructor(
                     {
                       url: formData.url,

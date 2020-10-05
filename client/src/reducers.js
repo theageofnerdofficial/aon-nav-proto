@@ -37,6 +37,7 @@ import {
   SOURCES_INSTAGRAM_GET_SUCCESS,
   SOURCES_RESET_FORM,
   SOURCES_TOGGLE_SORT_UI,
+  SOURCES_TOGGLE_SOURCE_MUTE,
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
@@ -477,6 +478,19 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         action.payload.name
       ].sortDirection;
       return Object.assign({}, state, stateCp);
+
+    case SOURCES_TOGGLE_SOURCE_MUTE:
+      stateCp = state;
+      stateCp.sourcesCombined = state.sourcesCombined.map((s) => {
+        if (s._id === action.payload.id) {
+          s.muted = !s.muted;
+        }
+        return s;
+      });
+      //console.log(action.payload.id);
+      //window.alert('got here');
+      return Object.assign({}, state, stateCp);
+
     case SOURCES_COMBINED_ARRANGE_BY:
       const name = action.payload.name;
       const nameSubtype = action.payload.nameSubtype;
