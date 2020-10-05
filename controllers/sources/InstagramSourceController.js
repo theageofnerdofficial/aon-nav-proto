@@ -17,6 +17,28 @@ exports.create = (req, res, next) => {
   });
 };
 
+/* Delete source:
+ ******************************************************************/
+exports.delete = (req, res) => {
+  InstagramSource.deleteOne({ _id: req.body.sourceId }, (err, source) => {
+    if (err) {
+      res.status(404).send(err);
+    }
+    res.status(200).json(source);
+  });
+};
+
+/* Get source:
+ ******************************************************************/
+exports.get = (req, res) => {
+  InstagramSource.findById(req.params.id, (err, source) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(source);
+  });
+};
+
 /* List sources:
  ******************************************************************/
 exports.list = (req, res) => {
@@ -35,42 +57,15 @@ exports.list = (req, res) => {
   });
 };
 
-/* Get source:
+/* Toggle mute on source:
  ******************************************************************/
-exports.get = (req, res) => {
-  InstagramSource.findById(req.params.id, (err, source) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.status(200).json(source);
+exports.toggleMute = (req, res) => {
+  InstagramSource.findById(req.body._id, (err, source) => {
+    if (err) return res.status(500).send(msg.err.findErr('source'));
+    if (!source) return res.status(404).send(msg.err.noFoundErr('source'));
+    source.muted = source.muted ? false : true;
+    source.save((err, source) => {
+      res.status(200).send(source);
+    });
   });
-};
-
-/* Delete source:
- ******************************************************************/
-exports.delete = (req, res) => {
-  InstagramSource.deleteOne({ _id: req.body.sourceId }, (err, source) => {
-    if (err) {
-      res.status(404).send(err);
-    }
-    res.status(200).json(source);
-  });
-};
-
-/* Update source:
- ******************************************************************/
-exports.update = (req, res) => {
-  console.log(req.body);
-  return;
-  InstagramSource.findOneAndUpdate(
-    { _id: req.body._id },
-    req.body,
-    { new: true },
-    (err, source) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      res.status(200).json(source);
-    }
-  );
 };

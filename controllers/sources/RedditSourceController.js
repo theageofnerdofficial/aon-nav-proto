@@ -17,23 +17,6 @@ exports.create = (req, res, next) => {
   });
 };
 
-/* List sources:
- ******************************************************************/
-exports.list = (req, res) => {
-  let conditionObj = {};
-  ['TV/Film', 'Comics', 'Gaming'].forEach((category) => {
-    if (category.toLowerCase() === req.params.category) {
-      conditionObj.category = category.toLowerCase();
-    }
-  });
-  RedditSource.find(conditionObj, (err, source) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.status(200).json(source);
-  });
-};
-
 /* Get source:
  ******************************************************************/
 exports.get = (req, res) => {
@@ -53,6 +36,36 @@ exports.delete = (req, res) => {
       res.status(404).send(err);
     }
     res.status(200).json(source);
+  });
+};
+
+/* List sources:
+ ******************************************************************/
+exports.list = (req, res) => {
+  let conditionObj = {};
+  ['TV/Film', 'Comics', 'Gaming'].forEach((category) => {
+    if (category.toLowerCase() === req.params.category) {
+      conditionObj.category = category.toLowerCase();
+    }
+  });
+  RedditSource.find(conditionObj, (err, source) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(source);
+  });
+};
+
+/* Toggle mute on source:
+ ******************************************************************/
+exports.toggleMute = (req, res) => {
+  RedditSource.findById(req.body._id, (err, source) => {
+    if (err) return res.status(500).send(msg.err.findErr('source'));
+    if (!source) return res.status(404).send(msg.err.noFoundErr('source'));
+    source.muted = source.muted ? false : true;
+    source.save((err, source) => {
+      res.status(200).send(source);
+    });
   });
 };
 

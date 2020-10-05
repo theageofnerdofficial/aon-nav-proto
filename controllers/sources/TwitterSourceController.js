@@ -17,12 +17,12 @@ exports.create = (req, res, next) => {
   });
 };
 
-/* List sources:
+/* Delete source:
  ******************************************************************/
-exports.list = (req, res) => {
-  TwitterSource.find({}, (err, source) => {
+exports.deleteSource = (req, res) => {
+  TwitterSource.deleteOne({ _id: req.body.sourceId }, (err, source) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(404).send(err);
     }
     res.status(200).json(source);
   });
@@ -39,14 +39,27 @@ exports.getSource = (req, res) => {
   });
 };
 
-/* Delete source:
+/* List sources:
  ******************************************************************/
-exports.deleteSource = (req, res) => {
-  TwitterSource.deleteOne({ _id: req.body.sourceId }, (err, source) => {
+exports.list = (req, res) => {
+  TwitterSource.find({}, (err, source) => {
     if (err) {
-      res.status(404).send(err);
+      res.status(500).send(err);
     }
     res.status(200).json(source);
+  });
+};
+
+/* Toggle mute on source:
+ ******************************************************************/
+exports.toggleMute = (req, res) => {
+  TwitterSource.findById(req.body._id, (err, source) => {
+    if (err) return res.status(500).send(msg.err.findErr('source'));
+    if (!source) return res.status(404).send(msg.err.noFoundErr('source'));
+    source.muted = source.muted ? false : true;
+    source.save((err, source) => {
+      res.status(200).send(source);
+    });
   });
 };
 

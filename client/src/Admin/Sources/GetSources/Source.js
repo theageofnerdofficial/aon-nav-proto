@@ -1,18 +1,18 @@
 // Imports:
 import React, { Component } from 'react';
 import FontIcon from '../../../Components/FontIcon/FontIcon';
-import LabelBtn from '../../../Components/UI/LabelBtn';
-import format from '../../../config/format';
-import isDarkColor from 'is-dark-color';
-import labels from '../../../config/labels';
-import utils from '../../../Components/Utils/utils/utils';
-import { fetchConstructor } from '../../../actions';
 import {
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
 } from '../../../constants';
-import FormatSource from '../FormatSource';
+import LabelBtn from '../../../Components/UI/LabelBtn';
+import format from '../../../config/format';
+import isDarkColor from 'is-dark-color';
+import labels from '../../../config/labels';
+import utils from '../../../Components/Utils/utils/utils';
+
+import { fetchConstructor } from '../../../actions';
 
 class Source extends Component {
   componentDidMount() {
@@ -21,9 +21,10 @@ class Source extends Component {
   render() {
     const { props } = this;
 
+    /* Get endpoint URL from source's service:
+     ************************************************************/
     const getSourceUrl = (source) => {
       let url;
-      //console.log(source.service);
       switch (source.service) {
         case SOURCE_INSTAGRAM:
           url = '/source/instagram';
@@ -82,6 +83,7 @@ class Source extends Component {
         this.props
       );
     };
+
     /* Get user by name — change if more admins/mods come along::
      ************************************************************/
     const getCreatedByUser = (id) => {
@@ -183,7 +185,7 @@ class Source extends Component {
     return (
       <React.Fragment>
         {hasFilterCategory() ? (
-          <tr>
+          <tr style={{ opacity: this.props.src.muted ? 0.3 : 1 }}>
             <td>
               <img
                 alt="Source logo"
@@ -195,53 +197,20 @@ class Source extends Component {
                 style={{ float: 'right', width: 30 }}
                 onSubmit={(e) => {
                   e.preventDefault();
-
                   this.props.sourcesToggleSourceMute({
                     id: this.props.src._id,
                   });
-
-                  return;
-
-                  const { elements } = e.target;
-                  const { props } = this;
-
                   fetchConstructor(
                     {
-                      url: getSourceUrl(this.props.src),
+                      url: getSourceUrl(this.props.src) + '/mute',
                       body: JSON.stringify({
-                        id: this.props.src._id,
+                        _id: this.props.src._id,
                         muted: false,
                       }),
                       method: 'PUT',
                       func: {
-                        checkErrors: (res) => {
-                          if (res.errors) {
-                            const warnings = res.message;
-                            props.flashMsgUpdate({
-                              msg: warnings.split(',')[0],
-                              style: 'danger',
-                            });
-                            props.flashMsgFlash();
-                            return false;
-                          } else {
-                            props.flashMsgUpdate({
-                              msg: `${labels.response.success}: this source was successfully edited.`,
-                              style: 'success',
-                            });
-                            props.flashMsgFlash();
-                            props.sourcesReset();
-                            setTimeout(() => {
-                              window.history.back();
-                            }, 1000);
-                          }
-                        },
-                        checkCatch: (e) => {
-                          props.flashMsgUpdate({
-                            msg: e.message,
-                            style: 'danger',
-                          });
-                          props.flashMsgFlash();
-                        },
+                        checkErrors: () => {},
+                        checkCatch: () => {},
                       },
                     },
                     this.props
@@ -254,7 +223,6 @@ class Source extends Component {
                   style={{
                     borderBottomLeftRadius: 0,
                     borderTopLeftRadius: 0,
-                    opacity: this.props.src.muted ? 0.5 : 1,
                   }}
                 >
                   {this.props.src.muted

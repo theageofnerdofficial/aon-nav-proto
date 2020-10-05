@@ -32,8 +32,6 @@ class GetSources extends Component {
       !sourceRedditGetPending && sourceReducer.sourcesRedditData;
     const gotTwitterData =
       !sourceTwitterGetPending && sourceReducer.sourcesTwitterData;
-
-    //
     const gotInstagramData =
       !sourceInstagramGetPending && sourceReducer.sourcesInstagramData;
 
@@ -44,20 +42,43 @@ class GetSources extends Component {
   }
 
   render() {
+    const {
+      sourceReducer,
+      sourcesCombinedArrangeBy,
+      sourcesFilterByCategory,
+      sourcesToggleSortUI,
+    } = this.props;
+
     /* Count sources shows number of sources as feedback:
      *****************************************************/
-    const countSources = () =>
-      this.props.sourceReducer.sourcesCombined
-        ? this.props.sourceReducer.sourcesCombined.length
-        : '0';
+    const countTotalSources = () =>
+      sourceReducer.sourcesCombined ? sourceReducer.sourcesCombined.length : 0;
+
+    /* Count sources by their activity (active or muted):
+     *****************************************************/
+    const countSourcesByActivity = (activity) => {
+      let count = 0;
+      if (sourceReducer.sourcesCombined) {
+        sourceReducer.sourcesCombined.forEach((s) => {
+          if (activity.active && s.muted) {
+            count += 1;
+          } else if (!activity.active && !s.muted) {
+            count += 1;
+          }
+        });
+      } else {
+        return count;
+      }
+      return count;
+    };
 
     /* No sources: a fallback for no sources (spinner):
      *****************************************************/
     const noSources = () => {
       if (
-        this.props.sourceReducer &&
-        this.props.sourceReducer.sourcesCombined &&
-        this.props.sourceReducer.sourcesCombined.length <= 0
+        sourceReducer &&
+        sourceReducer.sourcesCombined &&
+        sourceReducer.sourcesCombined.length <= 0
       ) {
         return (
           <td colSpan="7" className="text-center py-4">
@@ -84,9 +105,7 @@ class GetSources extends Component {
     const setSortDirectionIcon = (o) => {
       const icon = o.numeric ? 'faSortNumeric' : 'faSortAlpha';
       return FontIcon(
-        this.props.sourceReducer.sortUI[o.name].sortDirection
-          ? icon + 'Down'
-          : icon + 'Up'
+        sourceReducer.sortUI[o.name].sortDirection ? icon + 'Down' : icon + 'Up'
       );
     };
 
@@ -97,13 +116,13 @@ class GetSources extends Component {
         <button
           className="btn btn-sm btn-light text-muted"
           data-direction={
-            this.props.sourceReducer.sortUI[o.name]
-              ? this.props.sourceReducer.sortUI[o.name].sortDirection
+            sourceReducer.sortUI[o.name]
+              ? sourceReducer.sortUI[o.name].sortDirection
               : 0
           }
-          onClick={(e) => {
-            this.props.sourcesToggleSortUI({ name: o.name });
-            this.props.sourcesCombinedArrangeBy({
+          onClick={() => {
+            sourcesToggleSortUI({ name: o.name });
+            sourcesCombinedArrangeBy({
               name: o.name,
               nameSubtype: o.nameSubtype,
             });
@@ -117,13 +136,17 @@ class GetSources extends Component {
     return (
       <React.Fragment>
         <SectionTitle title="Sources" />
-        <SectionTitlePostsTitle text={`Sources (${countSources()})`} />
+        <SectionTitlePostsTitle
+          text={`Total (${countTotalSources()}) — Active (${countSourcesByActivity(
+            { active: true }
+          )}) — Muted (${countSourcesByActivity({ active: false })})`}
+        />
         <div className="m-0 p-0 col-12 row">
           <div className="m-0 p-0 col-6">
             <select
               className="form-control col-12 col-md-4 col-lg-4 mb-3"
               onChange={(e) => {
-                this.props.sourcesFilterByCategory(e.target.value);
+                sourcesFilterByCategory(e.target.value);
               }}
             >
               <option>All</option>
@@ -165,10 +188,8 @@ class GetSources extends Component {
             </thead>
             <tbody>
               {noSources()}
-              {this.props.sourceReducer &&
-              this.props.sourceReducer.sourcesCombined ? (
-                this.props.sourceReducer.sourcesCombined.map((s, index) => {
-                  //return true;
+              {sourceReducer && sourceReducer.sourcesCombined ? (
+                sourceReducer.sourcesCombined.map((s, index) => {
                   return (
                     <Source
                       flashMsgFlash={this.props.flashMsgFlash}
@@ -176,10 +197,8 @@ class GetSources extends Component {
                       Link={this.props.Link}
                       key={'source-' + index}
                       sourceDelete={this.props.sourceDelete}
+                      sourceCategoryFilter={sourceReducer.sourceCategoryFilter}
                       sourceRemove={this.props.sourceRemove}
-                      sourceCategoryFilter={
-                        this.props.sourceReducer.sourceCategoryFilter
-                      }
                       sourcesToggleSourceMute={
                         this.props.sourcesToggleSourceMute
                       }

@@ -139,16 +139,16 @@ app.get('/source/getInstagramSourceById/:id', (req, res, next) =>
   instagramSourceController.get(req, res, next)
 );
 
-app.put('/source/instagram/', (req, res, next) =>
-  instagramSourceController.update(req, res, next)
-);
-
 app.post('/source/reddit/', (req, res, next) =>
   redditSourceController.create(req, res, next)
 );
 
 app.put('/source/reddit/', (req, res, next) =>
   redditSourceController.update(req, res, next)
+);
+
+app.put('/source/reddit/mute', (req, res, next) =>
+  redditSourceController.toggleMute(req, res, next)
 );
 
 app.delete('/source/twitter', (req, res, next) =>
@@ -167,6 +167,10 @@ app.put('/source/twitter/', (req, res, next) =>
   twitterSourceController.update(req, res, next)
 );
 
+app.put('/source/twitter/mute', (req, res, next) =>
+  twitterSourceController.toggleMute(req, res, next)
+);
+
 app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
   twitterSourceController.getSource(req, res, next)
 );
@@ -183,6 +187,13 @@ app.get('/source/instagram/', (req, res, next) => {
   return instagramSourceController.list(req, res, next);
 });
 
+app.put('/source/instagram/', (req, res, next) =>
+  instagramSourceController.update(req, res, next)
+);
+
+app.put('/source/instagram/mute', (req, res, next) =>
+  instagramSourceController.toggleMute(req, res, next)
+);
 /* Quiz:
  *****************************************************************/
 app.get('/quiz/list', (req, res, next) => quizController.list(req, res, next));
