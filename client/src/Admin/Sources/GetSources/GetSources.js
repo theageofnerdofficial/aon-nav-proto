@@ -60,9 +60,9 @@ class GetSources extends Component {
       let count = 0;
       if (sourceReducer.sourcesCombined) {
         sourceReducer.sourcesCombined.forEach((s) => {
-          if (activity.active && s.muted) {
+          if (activity.muted && s.muted) {
             count += 1;
-          } else if (!activity.active && !s.muted) {
+          } else if (!activity.muted && !s.muted) {
             count += 1;
           }
         });
@@ -136,10 +136,15 @@ class GetSources extends Component {
     return (
       <React.Fragment>
         <SectionTitle title="Sources" />
+
+        {/*
+        
+        CHANGE ACTIVE TO MUTED
+        */}
         <SectionTitlePostsTitle
-          text={`Total (${countTotalSources()}) — Active (${countSourcesByActivity(
-            { active: true }
-          )}) — Muted (${countSourcesByActivity({ active: false })})`}
+          text={`Total (${countTotalSources()}) — Muted (${countSourcesByActivity(
+            { muted: true }
+          )}) — Active (${countSourcesByActivity({ muted: false })})`}
         />
         <div className="m-0 p-0 col-12 row">
           <div className="m-0 p-0 col-6">

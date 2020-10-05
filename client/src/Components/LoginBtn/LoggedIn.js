@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import loginCreds from '../../config/loginCreds';
 import Avatar from '../Avatar/Avatar';
 
 class LoggedIn extends Component {
@@ -35,7 +34,6 @@ class LoggedIn extends Component {
         <div
           className="m-0 p-0 col-4"
           onClick={() => {
-            //
             this.props.userLogout();
           }}
           style={{
@@ -48,23 +46,6 @@ class LoggedIn extends Component {
             Logout
           </button>
         </div>
-
-        {/*
-        <div
-          className="m-0 p-0 col-6 border"
-          onClick={() => {
-            //
-            this.props.userLogout();
-          }}
-          className="btn btn-light btn-link btn-login"
-          style={{
-            border: 0,
-            fontWeight: 300,
-            letterSpacing: -1,
-          }}
-        >
-          Logout
-        </div> */}
       </div>
     );
   }

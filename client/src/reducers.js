@@ -29,12 +29,12 @@ import {
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
-  SOURCES_REDDIT_GET_FAILURE,
-  SOURCES_REDDIT_GET_PENDING,
-  SOURCES_REDDIT_GET_SUCCESS,
   SOURCES_INSTAGRAM_GET_FAILURE,
   SOURCES_INSTAGRAM_GET_PENDING,
   SOURCES_INSTAGRAM_GET_SUCCESS,
+  SOURCES_REDDIT_GET_FAILURE,
+  SOURCES_REDDIT_GET_PENDING,
+  SOURCES_REDDIT_GET_SUCCESS,
   SOURCES_RESET_FORM,
   SOURCES_TOGGLE_SORT_UI,
   SOURCES_TOGGLE_SOURCE_MUTE,
@@ -104,10 +104,13 @@ export const dataReducer = (state = data, action = {}) => {
           ...state.tweetDataFormatted,
         ]),
       });
+
     case DATA_REQUEST_FAILURE:
       return Object.assign({}, state, { dataPending: false });
+
     case DATA_REQUEST_PENDING:
       return Object.assign({}, state, { dataPending: true });
+
     case DATA_REQUEST_SUCCESS:
       let newState = { dataPending: false };
       if (action.source === SOURCE_TWITTER) {
@@ -119,10 +122,12 @@ export const dataReducer = (state = data, action = {}) => {
         );
       }
       return Object.assign({}, state, newState);
+
     case DATA_FORMAT_REDDIT:
       return Object.assign({}, state, {
         redditDataFormatted: action.payload,
       });
+
     case DATA_FORMAT_TWEETS:
       return Object.assign({}, state, {
         tweetDataFormatted: action.payload,
@@ -197,8 +202,10 @@ export const flashMsgReducer = (state = flashMsg, action = {}) => {
   switch (action.type) {
     case FLASH_MSG_SHOW:
       return Object.assign({}, state, { showFlashMsg: true });
+
     case FLASH_MSG_HIDE:
       return Object.assign({}, state, { showFlashMsg: false });
+
     case FLASH_MSG_UPDATE:
       return Object.assign({}, state, {
         msg: action.payload.msg,
@@ -228,11 +235,13 @@ export const quizReducer = (state = quiz, action = {}) => {
     case QUIZ_RESET:
       stateCp = quiz;
       return Object.assign({}, state, stateCp);
+
     case QUIZ_ANS_ADD:
       stateCp = state;
       stateCp.questionData.questions[state.questionNumber].userAnswer =
         action.payload.answerIndex;
       return Object.assign({}, state, stateCp);
+
     case QUIZ_Q_NUMBER_UPDATE:
       stateCp = state;
       if (action.payload.inc) {
@@ -245,24 +254,30 @@ export const quizReducer = (state = quiz, action = {}) => {
         state: stateCp,
         quizListPending: false,
       });
+
     case QUIZ_SCORE_CALCULATE:
       return Object.assign({}, state, {
         score: action.payload,
       });
+
     case QUIZ_SCREEN_UPDATE:
       return Object.assign({}, state, {
         state: stateCp,
         quizScreen: action.payload,
       });
+
     case QUIZ_LIST_FAILURE:
       return Object.assign({}, state, { quizListPending: false });
+
     case QUIZ_LIST_PENDING:
       return Object.assign({}, state, { quizListPending: true });
+
     case QUIZ_LIST_SUCCESS:
       return Object.assign({}, state, {
         quizListData: action.payload,
         quizListPending: false,
       });
+
     case QUIZ_FORM_UPDATE:
       stateCp = state;
       const questionIndex = action.payload.name.split('-')[1];
@@ -273,7 +288,6 @@ export const quizReducer = (state = quiz, action = {}) => {
       const isQuizTitle = action.payload.name.split('-')[1] === 'title';
       const addQuestion = action.payload.name === 'qq-add';
       const removeQuestion = action.payload.name.split('-')[2] === 'remove';
-
       if (isQuizTitle) stateCp.title = action.payload.value;
       if (removeQuestion)
         stateCp.quizFormQuestions.splice(action.payload.name.split('-')[1], 1);
@@ -296,10 +310,13 @@ export const quizReducer = (state = quiz, action = {}) => {
         stateCp.quizFormQuestions[questionIndex].correct = action.payload.value;
       }
       return Object.assign({}, state, stateCp);
+
     case QUIZ_REQUEST_FAILURE:
       return Object.assign({}, state, { quizRequestPending: false });
+
     case QUIZ_REQUEST_PENDING:
       return Object.assign({}, state, { quizRequestPending: true });
+
     case QUIZ_REQUEST_SUCCESS:
       return Object.assign({}, state, {
         questionData: action.payload,
@@ -334,8 +351,10 @@ export const usersReducer = (state = users, action = {}) => {
       stateCp.authenticationPending = false;
       stateCp.authenticationSuccess = false;
       return Object.assign({}, state, stateCp);
+
     case USER_AUTH_PENDING:
       return Object.assign({}, state, { authenticationPending: true });
+
     case USER_AUTH_SUCCESS:
       stateCp = state;
       stateCp.authenticationPending = false;
@@ -350,6 +369,7 @@ export const usersReducer = (state = users, action = {}) => {
       stateCp.submissions = action.payload.quizSubmissions;
       stateCp.loggedIn = action.payload.auth === false ? false : true;
       return Object.assign({}, state, stateCp);
+
     case USER_LOGOUT:
       localStorage.removeItem(settings.localStorage.token);
       localStorage.removeItem(settings.localStorage.login.id);
@@ -358,15 +378,18 @@ export const usersReducer = (state = users, action = {}) => {
       return Object.assign({}, state, {
         userAuth: {},
       });
+
     case USER_LOGIN_FAILURE:
       window.alert('Bad login');
       return Object.assign({}, state, {
         userLoginPending: false,
       });
+
     case USER_LOGIN_PENDING:
       return Object.assign({}, state, {
         userLoginPending: true,
       });
+
     case USER_LOGIN_SUCCESS:
       if (!action.payload.auth) {
         window.alert('Bad login');
@@ -378,14 +401,17 @@ export const usersReducer = (state = users, action = {}) => {
         userAuth: action.payload,
         userLoginPending: false,
       });
+
     case USERS_GET_PENDING:
       return Object.assign({}, state, {
         usersPending: true,
       });
+
     case USERS_GET_FAILURE:
       return Object.assign({}, state, {
         usersPending: false,
       });
+
     case USERS_GET_SUCCESS:
       return Object.assign({}, state, {
         list: action.payload,
@@ -432,11 +458,9 @@ const sourceAddForm = {
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
     case SOURCE_GET_REDDITS_PENDING:
-      //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: true });
 
     case SOURCE_GET_INSTAGRAM_PENDING:
-      console.log('instagram pending');
       return Object.assign({}, state, { sourceInstagramPostsPending: true });
 
     case SOURCE_GET_INSTAGRAM_FAILURE:
@@ -446,8 +470,8 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, { sourceInstagramPostsPending: false });
 
     case SOURCE_GET_REDDITS_FAILURE:
-      //return Object.assign({}, state);
       return Object.assign({}, state, { sourceRedditPostsPending: false });
+
     case SOURCE_GET_REDDITS_SUCCESS:
       let sourcesRedditPostsCp = state.sourcesRedditPosts;
       if (sourcesRedditPostsCp && sourcesRedditPostsCp.length >= 1) {
@@ -461,8 +485,8 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         sourceRedditPostsPending: false,
         sourcesRedditPosts: sourcesRedditPostsCp,
       });
+
     case SOURCES_COMBINE:
-      //return Object.assign({}, state);
       return Object.assign({}, state, {
         sourcesCombined: [
           ...state.sourcesInstagramData,
@@ -470,8 +494,10 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
           ...state.sourcesTwitterData,
         ],
       });
+
     case SOURCES_FILTER_BY_CATEGORY:
       return Object.assign({}, state, { sourceCategoryFilter: action.payload });
+
     case SOURCES_TOGGLE_SORT_UI:
       stateCp = state;
       stateCp.sortUI[action.payload.name].sortDirection = !stateCp.sortUI[
@@ -487,8 +513,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         }
         return s;
       });
-      //console.log(action.payload.id);
-      //window.alert('got here');
       return Object.assign({}, state, stateCp);
 
     case SOURCES_COMBINED_ARRANGE_BY:
@@ -507,16 +531,20 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
         );
       }
       return Object.assign({}, state, stateCp);
+
     case SOURCES_RESET_FORM:
       return Object.assign({}, state, sourceAddForm);
+
     case SOURCES_TWITTER_GET_FAILURE:
       return Object.assign({}, state, {
         sourceTwitterGetPending: false,
       });
+
     case SOURCES_TWITTER_GET_PENDING:
       return Object.assign({}, state, {
         sourceTwitterGetPending: true,
       });
+
     case SOURCES_TWITTER_GET_SUCCESS:
       return Object.assign({}, state, {
         sourcesTwitterData: action.payload,
@@ -527,10 +555,12 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         sourceInstagramGetPending: false,
       });
+
     case SOURCES_INSTAGRAM_GET_PENDING:
       return Object.assign({}, state, {
         sourceInstagramGetPending: true,
       });
+
     case SOURCES_INSTAGRAM_GET_SUCCESS:
       return Object.assign({}, state, {
         sourcesInstagramData: action.payload,
@@ -541,43 +571,53 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         sourceRedditGetPending: false,
       });
+
     case SOURCES_REDDIT_GET_PENDING:
       return Object.assign({}, state, {
         sourceRedditGetPending: true,
       });
+
     case SOURCES_REDDIT_GET_SUCCESS:
       return Object.assign({}, state, {
         sourcesRedditData: action.payload,
         sourceRedditGetPending: false,
       });
+
     case SOURCE_ADD_FAILURE:
       return Object.assign({}, state, {
         sourceAddPending: false,
       });
+
     case SOURCE_ADD_PENDING:
       return Object.assign({}, state, {
         sourceAddPending: true,
       });
+
     case SOURCE_ADD_SUCCESS:
       return Object.assign({}, state, {
         sourceAddPending: false,
       });
+
     case SOURCE_ADD_FORM_CAT:
       return Object.assign({}, state, {
         category: action.payload,
       });
+
     case SOURCE_ADD_FORM_CAT_GM:
       return Object.assign({}, state, {
         categoryGaming: action.payload,
       });
+
     case SOURCE_ADD_FORM_FILTER:
       return Object.assign({}, state, {
         filter: action.payload,
       });
+
     case SOURCE_ADD_FORM_SELECT:
       return Object.assign({}, state, {
         service: action.payload,
       });
+
     case SOURCE_REMOVE:
       const { sourceId } = action.payload;
       const sourcesCombinedCp = state.sourcesCombined.filter((source) => {
@@ -586,14 +626,17 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         sourcesCombined: sourcesCombinedCp,
       });
+
     case SOURCE_GETBYID_FAILURE:
       return Object.assign({}, state, {
         sourceByIdPending: false,
       });
+
     case SOURCE_GETBYID_PENDING:
       return Object.assign({}, state, {
         sourceByIdPending: true,
       });
+
     case SOURCE_GETBYID_SUCCESS:
       return Object.assign({}, state, {
         sourceById: action.payload,
@@ -623,8 +666,10 @@ export const uiReducer = (state = ui, action = {}) => {
     case UI_TOGGLE_LIGHTS:
       localStorage.setItem(settings.localStorage.darkmode, !state.lightsOff);
       return Object.assign({}, state, { lightsOff: !state.lightsOff });
+
     case UI_BREADCRUMBS_SET_PATH:
       return Object.assign({}, state, { breadcrumbsPath: action.payload });
+
     default:
       return state;
   }

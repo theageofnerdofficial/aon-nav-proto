@@ -1,32 +1,32 @@
 // Imports:
 import React, { Component } from 'react';
-import labels from '../../config/labels';
-import settings from '../../config/settings';
-import FormatSource from './FormatSource';
-import SectionTitle from '../../Components/SectionTitle/SectionTitle';
 import CategoryEdit from './EditSource/1/CategoryEdit';
 import CategoryGamingEdit from './EditSource/1.5/CategoryGamingEdit';
-import ServiceEdit from './EditSource/2/ServiceEdit';
-import SubredditEdit from './EditSource/3/SubredditEdit';
-import TwitterUserEdit from './EditSource/3/TwitterUserEdit';
+import FormatSource from './FormatSource';
+import InstagramFilterEdit from './EditSource/5/InstagramFilterEdit';
+import InstagramUserEdit from './EditSource/3/InstagramUserEdit';
+import IsOfficialCheckAdd from './EditSource/7/IsOfficialCheckAdd';
+import LoaderCentered from '../../Components/Loader/LoaderCentered';
+import NumberOfInstagramPostsEdit from './EditSource/4/NumberOfInstagramPostsEdit';
 import NumberOfPostsEdit from './EditSource/4/NumberOfPostsEdit';
 import NumberOfTweetsEdit from './EditSource/4/NumberOfTweetsEdit';
+import SectionTitle from '../../Components/SectionTitle/SectionTitle';
+import ServiceEdit from './EditSource/2/ServiceEdit';
+import SubredditEdit from './EditSource/3/SubredditEdit';
 import SubredditFilterEdit from './EditSource/5/SubredditFilterEdit';
-import TweetFilterEdit from './EditSource/5/TweetFilterEdit';
 import SubredditPeriodAdd from './EditSource/6/SubredditPeriodAdd';
+import TweetFilterEdit from './EditSource/5/TweetFilterEdit';
 import TweetQueryAdd from './EditSource/6/TweetQueryAdd';
-import IsOfficialCheckAdd from './EditSource/7/IsOfficialCheckAdd';
+import TwitterUserEdit from './EditSource/3/TwitterUserEdit';
 import {
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
 } from '../../constants';
-import { fetchConstructor } from '../../actions';
+import labels from '../../config/labels';
+import settings from '../../config/settings';
 
-import LoaderCentered from '../../Components/Loader/LoaderCentered';
-import InstagramUserEdit from './EditSource/3/InstagramUserEdit';
-import NumberOfInstagramPostsEdit from './EditSource/4/NumberOfInstagramPostsEdit';
-import InstagramFilterEdit from './EditSource/5/InstagramFilterEdit';
+import { fetchConstructor } from '../../actions';
 
 // Stop update loop:
 let gotUpdatedSource = false;

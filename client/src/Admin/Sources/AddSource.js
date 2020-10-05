@@ -1,37 +1,45 @@
 // Imports:
 import React, { Component } from 'react';
-import labels from '../../config/labels';
-import settings from '../../config/settings';
-import FormatSource from './FormatSource';
-import SectionTitle from '../../Components/SectionTitle/SectionTitle';
 import CategoryAdd from './AddSource/1/CategoryAdd';
 import CategoryGamingAdd from './AddSource/1.5/CategoryGamingAdd';
-import SelectService from './AddSource/2/ServiceAdd';
-import SubredditAdd from './AddSource/3/SubredditAdd';
-import TwitterUserAdd from './AddSource/3/TwitterUserAdd';
+import FormatSource from './FormatSource';
+import InstagramPostFilterAdd from './AddSource/5/InstagramPostFilterAdd';
+import InstagramUserAdd from './AddSource/3/InstagramUserAdd';
+import IsOfficialCheckAdd from './AddSource/7/IsOfficialCheckAdd';
+import NumberOfInstagramPostsAdd from './AddSource/4/NumberOfInstagramPostsAdd';
 import NumberOfPostsAdd from './AddSource/4/NumberOfPostsAdd';
 import NumberOfTweetsAdd from './AddSource/4/NumberOfTweetsAdd';
+import SectionTitle from '../../Components/SectionTitle/SectionTitle';
+import SelectService from './AddSource/2/ServiceAdd';
+import SubredditAdd from './AddSource/3/SubredditAdd';
 import SubredditFilterAdd from './AddSource/5/SubredditFilterAdd';
-import TweetFilterAdd from './AddSource/5/TweetFilterAdd';
 import SubredditPeriodAdd from './AddSource/6/SubredditPeriodAdd';
+import TweetFilterAdd from './AddSource/5/TweetFilterAdd';
 import TweetQueryAdd from './AddSource/6/TweetQueryAdd';
-import IsOfficialCheckAdd from './AddSource/7/IsOfficialCheckAdd';
+import TwitterUserAdd from './AddSource/3/TwitterUserAdd';
 import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   SOURCE_INSTAGRAM,
 } from '../../constants';
+import labels from '../../config/labels';
+import settings from '../../config/settings';
+
 import { fetchConstructor } from '../../actions';
-import InstagramUserAdd from './AddSource/3/InstagramUserAdd';
-import NumberOfInstagramPostsAdd from './AddSource/4/NumberOfInstagramPostsAdd';
-import InstagramPostFilterAdd from './AddSource/5/InstagramPostFilterAdd';
-import InstagramPeriodAdd from './AddSource/6/InstagramPeriodAdd';
 
 class AddSource extends Component {
   componentDidMount() {
     this.props.sourcesReset();
   }
   render() {
+    const {
+      sourceAddFormCategory,
+      sourceAddFormCategoryGaming,
+      sourceAddFormFilter,
+      sourceAddService,
+      sourceReducer,
+    } = this.props;
+
     // Display or hide fields by service:
     const fieldsByService = {
       get: (form) => {
@@ -46,12 +54,11 @@ class AddSource extends Component {
         }
       },
       reddit: () => {
-        const { sourceAddFormFilter, sourceReducer } = this.props;
         return (
           <React.Fragment>
             <SubredditAdd
               getPlaceholder={FormatSource.form.getPlaceholder}
-              sourceReducer={this.props.sourceReducer}
+              sourceReducer={sourceReducer}
             />
             <NumberOfPostsAdd />
             <SubredditFilterAdd sourceAddFormFilter={sourceAddFormFilter} />
@@ -67,12 +74,10 @@ class AddSource extends Component {
           <React.Fragment>
             <TwitterUserAdd
               getPlaceholder={FormatSource.form.getPlaceholder}
-              sourceReducer={this.props.sourceReducer}
+              sourceReducer={sourceReducer}
             />
             <NumberOfTweetsAdd />
-            <TweetFilterAdd
-              sourceAddFormFilter={this.props.sourceAddFormFilter}
-            />
+            <TweetFilterAdd sourceAddFormFilter={sourceAddFormFilter} />
             <TweetQueryAdd />
           </React.Fragment>
         );
@@ -82,17 +87,10 @@ class AddSource extends Component {
           <React.Fragment>
             <InstagramUserAdd
               getPlaceholder={FormatSource.form.getPlaceholder}
-              sourceReducer={this.props.sourceReducer}
+              sourceReducer={sourceReducer}
             />
             <NumberOfInstagramPostsAdd />
-            <InstagramPostFilterAdd
-              sourceAddFormFilter={this.props.sourceAddFormFilter}
-            />
-
-            {/*   {(sourceReducer && sourceReducer.filter === 'controversial') ||
-            sourceReducer.filter === 'top' ? (
-              <InstagramPeriodAdd />
-            ) : null}*/}
+            <InstagramPostFilterAdd sourceAddFormFilter={sourceAddFormFilter} />
           </React.Fragment>
         );
       },
@@ -164,19 +162,17 @@ class AddSource extends Component {
             >
               <CategoryAdd
                 settings={settings}
-                sourceAddFormCategory={this.props.sourceAddFormCategory}
+                sourceAddFormCategory={sourceAddFormCategory}
               />
-              {this.props.sourceReducer.category === 'gaming' ? (
+              {sourceReducer.category === 'gaming' ? (
                 <CategoryGamingAdd
-                  sourceAddFormCategoryGaming={
-                    this.props.sourceAddFormCategoryGaming
-                  }
+                  sourceAddFormCategoryGaming={sourceAddFormCategoryGaming}
                 />
               ) : null}
-              {this.props.sourceReducer.category ? (
-                <SelectService sourceAddService={this.props.sourceAddService} />
+              {sourceReducer.category ? (
+                <SelectService sourceAddService={sourceAddService} />
               ) : null}
-              {fieldsByService.get(this.props.sourceReducer)}
+              {fieldsByService.get(sourceReducer)}
               <br />
               <IsOfficialCheckAdd />
               <br />

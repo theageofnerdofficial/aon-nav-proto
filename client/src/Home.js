@@ -166,25 +166,6 @@ class Home extends Component {
             <SectionTitlePostsTitle text="Popular Posts (5)" />
             <TrendingList />
           </div>
-
-          {/* 
-          <div className="col-md-6 m-0 p-0 section-responsive-pr">
-            <SectionTitle
-              tabColour={settings.ui.style.sectionTab.featured}
-              title="Today's Quiz"
-            />
-            <Quiz
-              quizAddAnswer={this.props.quizAddAnswer}
-              quizCalculateScore={this.props.quizCalculateScore}
-              quizId="5f58f9790a27010acad1d82e"
-              quizReducer={this.props.quizReducer}
-              quizRequestData={this.props.quizRequestData}
-              quizReset={this.props.quizReset}
-              quizUpdateQNumber={this.props.quizUpdateQNumber}
-              quizUpdateScreen={this.props.quizUpdateScreen}
-            />
-          </div>
-          */}
         </div>
         <br />
         {/* row 2
@@ -196,29 +177,8 @@ class Home extends Component {
               title="AON Exclusives"
             />
             <div>
-              {/* 
-              <Carousel
-                items={[
-                  {
-                    author: 'J. Bloggs',
-                    align: 'center',
-                    category: 'Comics',
-                    mediaSubtype: 'opinion piece',
-                    mediaType: 'article',
-                    src: '/img/carousel/carousel-1.jpg',
-                    title: 'Goodbye Spidey?',
-                  },
-                  {
-                    author: 'P. Furlong',
-                    align: 'right',
-                    category: 'Gaming',
-                    mediaSubtype: 'Report',
-                    mediaType: 'article',
-                    src: '/img/carousel/carousel-2.jpg',
-                    title: 'More Speccy Ports',
-                  },
-                ]}
-              />*/}
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio
+              perferendis, fugit, hic eos animi doloribus.
             </div>
           </div>
 

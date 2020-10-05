@@ -98,7 +98,7 @@ class Source extends Component {
 
     // Get official determines if source is official & displays "Official" flair:
     const getOfficial = (src) => {
-      const label = src.isOfficial ? 'Official source' : '';
+      const label = src.isOfficial ? 'Official source' : null;
       const formattedLabel = (
         <React.Fragment>
           <br />

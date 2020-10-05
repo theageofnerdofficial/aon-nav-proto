@@ -1,12 +1,13 @@
+// Imports:
 import moment from 'moment';
 
 const format = {
   time: {
-    uetToHumanReadable(unixEpochTime) {
-      return moment.unix(unixEpochTime);
-    },
     from(time) {
       return moment(time).fromNow();
+    },
+    uetToHumanReadable(unixEpochTime) {
+      return moment.unix(unixEpochTime);
     },
   },
   twitter: {
