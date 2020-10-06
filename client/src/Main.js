@@ -252,39 +252,39 @@ class Main extends Component {
     } = this.props;
     return (
       <Router>
-        <Switch>
-          <ThemeProvider theme={uiReducer.lightsOff ? darkTheme : lightTheme}>
-            <GlobalStyles />
-            <div>
-              <FlashMsg
-                flashMsgFlash={flashMsgFlash}
-                flashMsgReducer={flashMsgReducer}
-              />
-              <Header
-                lightsOff={uiReducer.lightsOff}
-                Link={Link}
-                toggleLights={uiToggleLights}
-              />
+        <ThemeProvider theme={uiReducer.lightsOff ? darkTheme : lightTheme}>
+          <GlobalStyles />
+          <div>
+            <FlashMsg
+              flashMsgFlash={flashMsgFlash}
+              flashMsgReducer={flashMsgReducer}
+            />
+            <Header
+              lightsOff={uiReducer.lightsOff}
+              Link={Link}
+              toggleLights={uiToggleLights}
+            />
 
-              <KonamiCode />
+            <KonamiCode />
 
-              <Modal userLogin={userLogin} modalReducer={modalReducer} />
+            <Modal userLogin={userLogin} modalReducer={modalReducer} />
 
-              {/* Login/signup button:
-               *****************************************************************/}
-              <LoginBtn
-                Link={Link}
-                userAuthenticate={userAuthenticate}
-                userLogout={userLogout}
-                usersReducer={usersReducer}
-              />
-              <main
-                className="flex-shrink-0"
-                role="main"
-                style={{ marginTop: 110 }}
-              >
-                <div className="container">
-                  <div className="content">
+            {/* Login/signup button:
+             *****************************************************************/}
+            <LoginBtn
+              Link={Link}
+              userAuthenticate={userAuthenticate}
+              userLogout={userLogout}
+              usersReducer={usersReducer}
+            />
+            <main
+              className="flex-shrink-0"
+              role="main"
+              style={{ marginTop: 110 }}
+            >
+              <div className="container">
+                <div className="content">
+                  <Switch>
                     <Route
                       exact
                       path="/"
@@ -620,15 +620,14 @@ class Main extends Component {
                         />
                       )}
                     />{' '}
-                    <Route path="/404" component={NoMatch} />
-                    <Redirect from="*" to="/404" />
-                  </div>
+                    <Route component={NoMatch} />
+                  </Switch>
                 </div>
-              </main>
-              <Footer />
-            </div>
-          </ThemeProvider>
-        </Switch>
+              </div>
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </Router>
     );
   }
