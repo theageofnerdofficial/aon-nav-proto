@@ -13,6 +13,7 @@ import formatTweet from './Components/Utils/utils/formatTweet';
 import settings from './config/settings';
 import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
 import TrendingList from './Components/Post/Trending/TrendingList';
+import labels from './config/labels';
 
 // Prevents repeated requests:
 let dataPosts = {
@@ -136,12 +137,11 @@ class Home extends Component {
                 {
                   align: 'center',
                   category: 'Comics',
-                  mediaSubtype:
-                    'Create a profile to personalise your experience',
+                  mediaSubtype: labels.ui.home.welcomeSubtitle,
                   mediaType: 'article',
                   src:
                     'https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-                  title: 'Welcome to AON',
+                  title: labels.ui.home.welcomeTitle,
                 },
               ]}
             />

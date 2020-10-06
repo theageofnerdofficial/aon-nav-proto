@@ -7,7 +7,7 @@ class CarouselLoggedIn extends Component {
     return (
       <React.Fragment>
         <h4
-          className={`font-weight-light text-left text-dark`}
+          className={`font-weight-light p-0 pt-4 text-left text-dark`}
           style={{
             fontSize: '1.35rem',
             letterSpacing: '-1px',
@@ -17,7 +17,6 @@ class CarouselLoggedIn extends Component {
           Welcome back,{' '}
           {utils.str.makeTitleCase(loginCreds.storageItem.getUsername())}!
         </h4>
-        <br />
       </React.Fragment>
     );
   }

@@ -88,6 +88,7 @@ import ContentScheduler from './Admin/ContentScheduler';
 import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
 import Quizzes from './Components/Quiz/Quizzes';
+import UserProfile from './UserProfile';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -97,6 +98,7 @@ const mapStateToProps = (state) => {
     modalReducer: state.modalReducer,
     nerdReducer: state.nerdReducer,
     nerdSetupReducer: state.nerdSetupReducer,
+    profileReducer: state.profileReducer,
     quizReducer: state.quizReducer,
     schedulerReducer: state.schedulerReducer,
     sourceReducer: state.sourceReducer,
@@ -206,6 +208,7 @@ class Main extends Component {
       nerdSetupReducer,
       nerdSetupUpdatePhase,
       nerdUpdateCheck,
+      profileReducer,
       quizAddAnswer,
       quizCalculateScore,
       quizFormUpdate,
@@ -268,6 +271,7 @@ class Main extends Component {
               {/* Login/signup button:
                *****************************************************************/}
               <LoginBtn
+                Link={Link}
                 userAuthenticate={userAuthenticate}
                 userLogout={userLogout}
                 usersReducer={usersReducer}
@@ -323,6 +327,18 @@ class Main extends Component {
                         />
                       )}
                     />
+
+                    <Route
+                      exact
+                      path="/profile/:id"
+                      render={(props) => (
+                        <UserProfile
+                          profileReducer={profileReducer}
+                          {...props}
+                        />
+                      )}
+                    />
+
                     <Route
                       path="/retrogaming"
                       component={withRouter(RetroGames)}

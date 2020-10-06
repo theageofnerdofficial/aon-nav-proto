@@ -674,3 +674,17 @@ export const uiReducer = (state = ui, action = {}) => {
       return state;
   }
 };
+
+/* Profile:
+ *********************************************************/
+const profile = {
+  username: String,
+  nationality: String,
+};
+
+export const profileReducer = (state = profile, action = {}) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};

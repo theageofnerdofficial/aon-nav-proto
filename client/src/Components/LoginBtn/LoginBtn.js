@@ -28,7 +28,12 @@ class LoginBtn extends Component {
         <div id="ui-login-btn-wrapper">
           {this.props.usersReducer
             ? checkLoggedIn({
-                loggedIn: <LoggedIn userLogout={this.props.userLogout} />,
+                loggedIn: (
+                  <LoggedIn
+                    Link={this.props.Link}
+                    userLogout={this.props.userLogout}
+                  />
+                ),
                 notLoggedIn: <NotLoggedIn />,
               })
             : ''}

@@ -19,6 +19,12 @@ a.nav-link {
   background: none !important;
   font-weight: 300;
   color: #fff;
+  transition: color 0.8s;
+}
+
+.btn-nav-link:active,
+.btn-nav-link:hover {
+  color: var(--cyan);
 }
 
 .hero-bg-img {

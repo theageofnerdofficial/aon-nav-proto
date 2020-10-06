@@ -60,15 +60,15 @@ const settings = {
     style: {
       sectionTab: {
         default: '#ccc',
-        featured: '#f44336',
-        mynerd: '#8bc34a',
-        tvfilm: '#009688',
+        featured: 'red',
+        mynerd: 'orange',
+        tvfilm: 'yellow',
         gaming: {
-          retro: '#cddc39',
-          modern: '#795548',
-          board: '#673ab7',
+          retro: 'violet',
+          modern: 'cyan',
+          board: 'indigo',
         },
-        comics: '#ffc107',
+        comics: 'lime',
       },
     },
   },

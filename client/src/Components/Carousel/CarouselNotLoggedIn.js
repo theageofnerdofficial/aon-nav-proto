@@ -21,7 +21,7 @@ class CarouselNotLoggedIn extends Component {
               style={{ width: '75%' }}
             >
               <h1
-                className={`font-weight-light text-${item.align} text-dark`}
+                className={`font-weight-light m-0 text-${item.align} text-dark`}
                 style={{
                   letterSpacing: '-1px',
                   textShadow: '1px 1px 1px #fff',
