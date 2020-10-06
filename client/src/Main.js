@@ -73,6 +73,7 @@ import {
 import {
   BrowserRouter as Router,
   Link,
+  Redirect,
   Route,
   Switch,
   withRouter,
@@ -89,7 +90,7 @@ import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
 import Quizzes from './Components/Quiz/Quizzes';
 import UserProfile from './UserProfile';
-import NotFound from './NotFound';
+import NoMatch from './NoMatch';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -328,7 +329,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route
                       exact
                       path="/profile/:id"
@@ -339,7 +339,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     <Route
                       path="/retrogaming"
                       component={withRouter(RetroGames)}
@@ -373,7 +372,6 @@ class Main extends Component {
                       path="/unauthorised"
                       component={withRouter(Unauthorised)}
                     />
-
                     <Route
                       exact
                       path="/quizzes"
@@ -403,7 +401,6 @@ class Main extends Component {
                         />
                       )}
                     />
-
                     {/* Component: Admin:
                       - Route type: Protected
                       - Access: logged in with level 3 or up:
@@ -622,9 +619,9 @@ class Main extends Component {
                           {...props}
                         />
                       )}
-                    />
-
-                    <Route component={NotFound} />
+                    />{' '}
+                    <Route path="/404" component={NoMatch} />
+                    <Redirect from="*" to="/404" />
                   </div>
                 </div>
               </main>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FontIcon from './Components/FontIcon/FontIcon';
 import './Main.css';
 
-class NotFound extends Component {
+class NoMatch extends Component {
   render() {
     return (
       <div
@@ -48,4 +48,4 @@ class NotFound extends Component {
   }
 }
 
-export default NotFound;
+export default NoMatch;
