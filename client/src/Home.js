@@ -1,7 +1,6 @@
 // Imports:
 import React, { Component } from 'react';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
-import Carousel from './Components/Carousel/Carousel';
 import FontIcon from './Components/FontIcon/FontIcon';
 // import Posts from './Components/Post/Posts';
 import PostsDummy from './Components/Post/PostsDummy';

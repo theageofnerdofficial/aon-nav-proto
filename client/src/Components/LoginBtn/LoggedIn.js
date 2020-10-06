@@ -1,32 +1,19 @@
 import React, { Component } from 'react';
 import Avatar from '../Avatar/Avatar';
-
+import loginCreds from '../../config/loginCreds';
+import '../../Main.css';
 class LoggedIn extends Component {
   render() {
     return (
-      <div
-        className="m-0 p-0 col-12 row"
-        style={{
-          fontWeight: 300,
-          letterSpacing: -1,
-          position: 'absolute',
-          right: 15,
-          top: 185,
-          width: 220,
-          // zIndex: 99999999,
-        }}
-      >
-        <div
-          className="m-0 p-0 col-8"
-          style={{
-            border: 0,
-            fontWeight: 300,
-            letterSpacing: -1,
-          }}
-        >
+      <div className="col-12 m-0 p-0 row div-loggedin-wrapper">
+        <div className="col-8 div-loggedin-subwrapper m-0 p-0">
           <this.props.Link to="/profile/1">
             <button className="btn btn-light btn-link btn-login form-control">
-              <Avatar src="kdslkds" style={{ width: 20 }}></Avatar> My Profile
+              <Avatar
+                src={loginCreds.storageItem.getUsername()}
+                style={{ width: 20 }}
+              ></Avatar>{' '}
+              My Profile
             </button>
           </this.props.Link>
         </div>

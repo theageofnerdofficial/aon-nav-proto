@@ -89,6 +89,7 @@ import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
 import Quizzes from './Components/Quiz/Quizzes';
 import UserProfile from './UserProfile';
+import NotFound from './NotFound';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -622,6 +623,8 @@ class Main extends Component {
                         />
                       )}
                     />
+
+                    <Route component={NotFound} />
                   </div>
                 </div>
               </main>

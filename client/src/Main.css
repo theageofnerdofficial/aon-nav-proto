@@ -27,6 +27,12 @@ h2 {
   font-size: 1.8em;
 }
 
+.h4-welcome-title {
+  font-size: 1.35rem;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 1px var(--col-lightest);
+}
+
 a,
 .btn-link {
   color: var(--col-blue-brand);
@@ -54,6 +60,21 @@ a.nav-link:active {
 
 .carousel-indicators li {
   border-bottom: 5px solid transparent;
+}
+
+.div-loggedin-wrapper {
+  font-weight: 300;
+  letter-spacing: -1px;
+  position: absolute;
+  right: 15px;
+  top: 185px;
+  width: 220px;
+}
+
+.div-loggedin-subwrapper {
+  border: 0;
+  font-weight: 300;
+  letter-spacing: -1px;
 }
 
 .dropdown-item.active,

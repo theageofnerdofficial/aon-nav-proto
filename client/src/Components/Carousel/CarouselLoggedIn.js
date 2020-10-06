@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import labels from '../../config/labels';
 import loginCreds from '../../config/loginCreds';
 import utils from '../Utils/utils/utils';
 
@@ -7,14 +8,9 @@ class CarouselLoggedIn extends Component {
     return (
       <React.Fragment>
         <h4
-          className={`font-weight-light p-0 pt-4 text-left text-dark`}
-          style={{
-            fontSize: '1.35rem',
-            letterSpacing: '-1px',
-            textShadow: '1px 1px 1px #fff',
-          }}
+          className={`font-weight-light p-0 pt-4 text-left text-muted h4-welcome-title`}
         >
-          Welcome back,{' '}
+          {labels.ui.home.welcomeSignedIn},{' '}
           {utils.str.makeTitleCase(loginCreds.storageItem.getUsername())}!
         </h4>
       </React.Fragment>

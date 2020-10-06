@@ -36,7 +36,7 @@ class LoginBtn extends Component {
                 ),
                 notLoggedIn: <NotLoggedIn />,
               })
-            : ''}
+            : null}
         </div>
       </React.Fragment>
     );
