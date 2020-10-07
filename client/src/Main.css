@@ -447,6 +447,9 @@ a.nav-link:active {
   .carousel-item > img {
     height: 205px;
   }
+  .user-profile-title {
+    font-size: 0.8em;
+  }
 }
 
 /* Extra Small Devices, Phones */

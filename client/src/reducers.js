@@ -13,6 +13,9 @@ import {
   MODAL_LOGIN_FORM,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  PROFILE_GETBYID_FAILURE,
+  PROFILE_GETBYID_PENDING,
+  PROFILE_GETBYID_SUCCESS,
   QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
@@ -680,10 +683,22 @@ export const uiReducer = (state = ui, action = {}) => {
 const profile = {
   username: String,
   nationality: String,
+  profileGetByIdPending: false,
+  profileData: {},
 };
 
 export const profileReducer = (state = profile, action = {}) => {
   switch (action.type) {
+    case PROFILE_GETBYID_FAILURE:
+      return Object.assign({}, state, { profileGetByIdPending: false });
+    case PROFILE_GETBYID_PENDING:
+      return Object.assign({}, state, { profileGetByIdPending: true });
+    case PROFILE_GETBYID_SUCCESS:
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        profileData: action.payload,
+        profileGetByIdPending: false,
+      });
     default:
       return state;
   }

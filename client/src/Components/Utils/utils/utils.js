@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import countries from '../../../config/countries';
 
 const utils = {
   arr: {
@@ -61,6 +62,23 @@ const utils = {
     },
     parseHTML(str) {
       return <React.Fragment>{ReactHtmlParser(str)}</React.Fragment>;
+    },
+  },
+
+  location: {
+    getCodeByCountry(country) {
+      let code;
+      countries.forEach((c) => {
+        if (c.name === country) code = c.code;
+      });
+      return code;
+    },
+    getFlagByCountry(country) {
+      let flag;
+      countries.forEach((c) => {
+        if (c.name === country) flag = c.flag;
+      });
+      return flag;
     },
   },
 

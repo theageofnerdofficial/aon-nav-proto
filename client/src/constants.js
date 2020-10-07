@@ -22,6 +22,12 @@ export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';
 export const NERD_UPDATE_CHECK = 'NERD_UPDATE_CHECK';
 export const NERD_SETUP_UPDATE_PHASE = 'NERD_SETUP_UPDATE_PHASE';
 
+/* Profile constants:
+ *****************************************************/
+export const PROFILE_GETBYID_FAILURE = 'PROFILE_GETBYID_FAILURE';
+export const PROFILE_GETBYID_PENDING = 'PROFILE_GETBYID_PENDING';
+export const PROFILE_GETBYID_SUCCESS = 'PROFILE_GETBYID_SUCCESS';
+
 /* Quiz constants:
  *****************************************************/
 export const QUIZ_ANS_ADD = 'QUIZ_ANS_ADD';

@@ -68,11 +68,13 @@ exports.findById = (req, res) => {
     req.params.id,
     {
       username: 1,
+      location: 1,
+      friends: 1,
       accessLevel: 1,
       createdOn: 1,
       favourites: 1,
       quizResults: 1,
-      quizSubmissions: 1,
+      submissions: 1,
     },
     (err, user) => {
       if (err) {

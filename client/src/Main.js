@@ -36,6 +36,7 @@ import {
   flashMsgUpdate,
   nerdSetupUpdatePhase,
   nerdUpdateCheck,
+  profileGetByUserId,
   quizzesGetList,
   schedulerSelectDate,
   sourceAdd,
@@ -122,6 +123,7 @@ const mapDispatchToProps = (dispatch) => {
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
     nerdSetupUpdatePhase: (o) => dispatch(nerdSetupUpdatePhase(o)),
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
+    profileGetByUserId: (o) => dispatch(profileGetByUserId(o)),
     quizAddAnswer: (o) => dispatch(quizAddAnswer(o)),
     quizCalculateScore: (o) => dispatch(quizCalculateScore(o)),
     quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
@@ -210,6 +212,7 @@ class Main extends Component {
       nerdSetupReducer,
       nerdSetupUpdatePhase,
       nerdUpdateCheck,
+      profileGetByUserId,
       profileReducer,
       quizAddAnswer,
       quizCalculateScore,
@@ -334,6 +337,7 @@ class Main extends Component {
                       path="/profile/:id"
                       render={(props) => (
                         <UserProfile
+                          profileGetByUserId={profileGetByUserId}
                           profileReducer={profileReducer}
                           {...props}
                         />

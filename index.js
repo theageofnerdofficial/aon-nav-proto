@@ -101,6 +101,10 @@ app.get('/user/authenticate', verifyToken, (req, res, next) =>
   userController.authenticate(req, res, next)
 );
 
+app.get('/user/getUserById/:id', (req, res, next) =>
+  userController.findById(req, res, next)
+);
+
 app.post('/user/create', (req, res, next) =>
   userController.create(req, res, next)
 );

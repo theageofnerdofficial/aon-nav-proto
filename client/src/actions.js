@@ -12,6 +12,9 @@ import {
   FLASH_MSG_UPDATE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  PROFILE_GETBYID_FAILURE,
+  PROFILE_GETBYID_PENDING,
+  PROFILE_GETBYID_SUCCESS,
   QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
@@ -137,6 +140,23 @@ export const flashMsgUpdate = (o) => ({
     style: o.style,
   },
 });
+
+export const profileGetByUserId = (id) => (dispatch) => {
+  dispatch({ type: PROFILE_GETBYID_PENDING });
+  fetch('/user/getUserById/' + id, {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: PROFILE_GETBYID_SUCCESS,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: PROFILE_GETBYID_FAILURE, payload: error })
+    );
+};
 
 /* Nerd actions:
  ******************************************************/
