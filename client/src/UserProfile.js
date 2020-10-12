@@ -2,24 +2,47 @@ import React, { Component } from 'react';
 import Avatar from './Components/Avatar/Avatar';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitleSm from './Components/SectionTitle/SectionTitlePostsTitleSm';
-import utils from './Components/Utils/utils/utils';
-import countries from './config/countries';
+import format from './config/format';
+import labels from './config/labels';
 import loginCreds from './config/loginCreds';
+import utils from './Components/Utils/utils/utils';
 
 class UserProfile extends Component {
   componentDidMount() {
     this.props.profileGetByUserId(loginCreds.storageItem.getId());
   }
   render() {
+    const { location } = utils;
+    const { profileReducer } = this.props;
+    const { ui } = labels;
+
+    /* Get access level label.
+       E.g. level 0 = "Banned":
+     ******************************************/
+    const getAccessLevelLabel = () => {
+      let label;
+      if (profileReducer.profileData) {
+        label = format.user.labelFromAccessLevel(
+          profileReducer.profileData.accessLevel
+        );
+      }
+      return label && label.length ? ` (${label})` : null;
+    };
+
+    /* Get joined date — in a nice format:
+     ******************************************/
+    const getJoinedDate = () => {
+      return profileReducer.profileData.createdOn
+        ? format.time.formatReadable(profileReducer.profileData.createdOn)
+        : ui.general.notAvailable;
+    };
+
+    /* Get user location w/ country code & flag:
+     ******************************************/
     const getLocation = () => {
-      let flag, location;
-      flag = utils.location.getFlagByCountry(
-        this.props.profileReducer.profileData.location
-      );
-      location = utils.location.getCodeByCountry(
-        this.props.profileReducer.profileData.location
-      );
-      return `${location} ${flag}`;
+      return `${location.getCodeByCountry(
+        profileReducer.profileData.location
+      )} ${location.getFlagByCountry(profileReducer.profileData.location)}`;
     };
     return (
       <div>
@@ -47,22 +70,21 @@ class UserProfile extends Component {
           <table className="shadow-sm shadow-sm shadow-sm table table-striped">
             <tr>
               <td>Joined</td>
-              <td>
-                {this.props.profileReducer.profileData.createdOn
-                  ? this.props.profileReducer.profileData.createdOn
-                  : 'N/A'}
-              </td>
+              <td>{getJoinedDate()}</td>
             </tr>
             <tr>
               <td>User Rank</td>
-              <td>Newbie {this.props.profileReducer.profileData.level}</td>
+              <td>
+                Newbie
+                {getAccessLevelLabel()}
+              </td>
             </tr>
             <tr>
               <td>Location</td>
               <td>
-                {this.props.profileReducer.profileData.location
+                {profileReducer.profileData.location
                   ? getLocation()
-                  : 'N/A'}
+                  : ui.general.notAvailable}
               </td>
             </tr>
             <tr>

@@ -7,6 +7,8 @@ const db = require('./config/db');
 const app = express();
 const Instagram = require('instagram-web-api');
 const Twit = require('twit');
+const TwitchAPI = require('twitch-api-v5');
+const fetch = require('node-fetch');
 
 const snoowrap = require('snoowrap');
 const dotenv = require('dotenv');
@@ -26,6 +28,7 @@ const instagramSourceController = require('./controllers/sources/InstagramSource
 const redditSourceController = require('./controllers/sources/RedditSourceController');
 const twitterSourceController = require('./controllers/sources/TwitterSourceController');
 const quizController = require('./controllers/QuizController');
+const accessTokenController = require('./controllers/AccessTokenController');
 
 // For env variables:
 dotenv.config();
@@ -37,7 +40,19 @@ const {
   DB_INSTAGRAM_PASS,
   DB_TWITTER_CONSUMER_KEY,
   DB_TWITTER_CONSUMER_SECRET,
+  DB_TWITCH_CLIENT_ID,
+  DB_TWITCH_SECRET,
 } = process.env;
+
+TwitchAPI.clientID = DB_TWITCH_CLIENT_ID;
+
+app.get('/accesstoken', (req, res, next) => {
+  res.DB_TWITCH_CLIENT_ID = DB_TWITCH_CLIENT_ID;
+  res.DB_TWITCH_SECRET = DB_TWITCH_SECRET;
+  accessTokenController.list(req, res, next);
+});
+
+//app.get('/api/request_data_twitch', (req, res, next) => {});
 
 const client = new Instagram({ DB_INSTAGRAM_USER, DB_INSTAGRAM_PASS });
 app.get('/api/request_data_instagram', (req, res, next) => {

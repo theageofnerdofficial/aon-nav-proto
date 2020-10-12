@@ -24,9 +24,11 @@
     "instagram-web-api": "^2.2.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.19",
+    "node-fetch": "^2.6.1",
     "react-html-parser": "^2.0.2",
     "react-lazyload": "^3.0.0",
     "snoowrap": "^1.21.0",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "twitch-api-v5": "^2.0.4"
   }
 }

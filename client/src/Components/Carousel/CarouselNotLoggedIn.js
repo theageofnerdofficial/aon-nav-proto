@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import SectionTitle from '../SectionTitle/SectionTitle';
+import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
 import utils from '../Utils/utils/utils';
 
 class CarouselNotLoggedIn extends Component {
   render() {
     return this.props.items.map((item, index) => {
       return (
-        <div className={`carousel-item ${index === 0 ? 'active' : null}`}>
+        <div
+          className={`rounded carousel-item ${index === 0 ? 'active' : null}`}
+        >
           <div
-            //carousel-gradient-overlay
-            className="bg-white m-0 p-0 vertical-center"
+            className="bg-white m-0 p-0 rounded shadow-sm vertical-center"
             style={{
               height: '100%',
               position: 'absolute',
@@ -20,18 +23,15 @@ class CarouselNotLoggedIn extends Component {
               className={`font-weight-light text-${item.align}`}
               style={{ width: '75%' }}
             >
-              <h1
-                className={`font-weight-light m-0 text-${item.align} text-dark`}
-                style={{
-                  letterSpacing: '-1px',
-                  textShadow: '1px 1px 1px #fff',
-                }}
-              >
-                {item.title}
-              </h1>
-              <p className={`font-italic text-${item.align} text-dark`}>
-                {utils.str.makeTitleCase(item.mediaSubtype)}
-              </p>
+              <SectionTitle
+                title={item.title}
+                omitTabline={true}
+                flatten={true}
+                align={item.align}
+              />
+              <SectionTitlePostsTitle
+                text={utils.str.makeTitleCase(item.mediaSubtype)}
+              />
               <button className="btn btn-sm btn-secondary mb-1">Sign Up</button>
             </div>
           </div>

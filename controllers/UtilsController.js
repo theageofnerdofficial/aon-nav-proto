@@ -5,6 +5,18 @@ const msg = require('../common/msg');
 const Quiz = require('../models/Quiz');
 const User = require('../models/User');
 
+exports.createAccessToken = (req, res) => {
+  let newUser = new User(reqBodyCp);
+  console.log(newUser);
+  newUser.save((err, user) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    res.status(201).json(user);
+  });
+};
+
 /* Delete favourites:
  ******************************************************************/
 exports.quizzesDeleteFavs = (req, res) => {

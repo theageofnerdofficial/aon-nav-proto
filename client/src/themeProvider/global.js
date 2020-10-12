@@ -7,6 +7,20 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  .trending-list-wrapper {
+    background: ${({ theme }) => theme.loginBtn};
+  }
+
+  .post-newspost-wrapper {
+    background: ${({ theme }) => theme.body};
+  }
+
+  .post-newspost-content-wrapper {
+    background: ${({ theme }) => theme.loginBtn} !important;
+  }
+
+
+
   body, html {
     background: ${({ theme }) => theme.body} !important;
     color: ${({ theme }) => theme.text};

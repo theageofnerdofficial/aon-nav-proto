@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontIcon from '../../FontIcon/FontIcon';
 import NewsPost from '../NewsPost';
 
 class TrendingList extends Component {
@@ -43,7 +42,7 @@ class TrendingList extends Component {
     return (
       <div>
         <div
-          className="bg-light col-12 m-0 mb-4 p-0 rounded row shadow-sm"
+          className="trending-list-wrapper col-12 m-0 mb-4 p-0 rounded row shadow-sm"
           style={{ height: '470px', overflow: 'scroll' }}
         >
           {Array(5)

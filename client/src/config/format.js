@@ -2,9 +2,35 @@
 import moment from 'moment';
 
 const format = {
+  user: {
+    labelFromAccessLevel(accessLevel) {
+      let label;
+      switch (accessLevel) {
+        case 0:
+          label = 'Banned';
+          break;
+        case 1:
+          label = '';
+          break;
+        case 2:
+          label = 'Moderator';
+          break;
+        case 3:
+          label = 'Admin';
+          break;
+        case 4:
+          label = 'Super Admin';
+          break;
+      }
+      return label;
+    },
+  },
   time: {
     from(time) {
       return moment(time).fromNow();
+    },
+    formatReadable(time) {
+      return moment(time).format('dddd, MMMM Do YYYY');
     },
     uetToHumanReadable(unixEpochTime) {
       return moment.unix(unixEpochTime);
