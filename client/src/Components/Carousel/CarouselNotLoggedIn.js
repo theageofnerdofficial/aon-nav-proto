@@ -25,10 +25,10 @@ class CarouselNotLoggedIn extends Component {
               style={{ width: '75%' }}
             >
               <SectionTitle
-                title={item.title}
-                omitTabline={true}
-                flatten={true}
                 align={item.align}
+                flatten={true}
+                omitTabline={true}
+                title={item.title}
               />
               <SectionTitlePostsTitle
                 text={utils.str.makeTitleCase(item.mediaSubtype)}

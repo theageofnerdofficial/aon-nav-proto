@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class SectionTitlePostsTitle extends Component {
   render() {
     return (
-      <h5 className="font-weight-light my-3 text-muted">{this.props.text}</h5>
+      <h5 className="font-weight-light my-2 text-muted">{this.props.text}</h5>
     );
   }
 }
