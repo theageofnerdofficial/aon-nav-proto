@@ -43,7 +43,22 @@ const {
   DB_TWITCH_CLIENT_ID,
   DB_TWITCH_SECRET,
 } = process.env;
+//
 
+//
+
+// YOUTUBE
+// Get channel ID by username:
+// https://www.googleapis.com/youtube/v3/channels?forUsername=theyoungturks&part=contentDetails&key=AIzaSyBauxGUpuvJuequjTXCrt8klbasUMfE01M
+//
+// Grab ID from what's returned here... then...
+
+//https://www.googleapis.com/youtube/v3/search?key={your API key here}&channelId={ the channel id}&part=snippet,id&order=date&maxResults=20
+
+//
+//
+//
+//
 TwitchAPI.clientID = DB_TWITCH_CLIENT_ID;
 
 app.get('/accesstoken', (req, res, next) => {

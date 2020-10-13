@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAd,
   faArchway,
+  faArrowRight,
   faArrowUp,
   faAt,
   faBan,
@@ -58,6 +59,9 @@ const FontIcon = (icon) => {
       break;
     case 'faArchway':
       faIcon = faArchway;
+      break;
+    case 'faArrowRight':
+      faIcon = faArrowRight;
       break;
     case 'faArrowUp':
       faIcon = faArrowUp;
