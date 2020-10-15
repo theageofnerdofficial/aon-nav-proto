@@ -21,11 +21,14 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   SOURCE_INSTAGRAM,
+  SOURCE_YOUTUBE,
 } from '../../constants';
 import labels from '../../config/labels';
 import settings from '../../config/settings';
 
 import { fetchConstructor } from '../../actions';
+import YoutubeUserAdd from './AddSource/3/YoutubeUserAdd';
+import NumberOfYoutubeVidsAdd from './AddSource/4/NumberOfYoutubeVidsAdd';
 
 class AddSource extends Component {
   componentDidMount() {
@@ -50,6 +53,8 @@ class AddSource extends Component {
             return fieldsByService.twitter();
           } else if (form.service === SOURCE_INSTAGRAM) {
             return fieldsByService.instagram();
+          } else if (form.service === SOURCE_YOUTUBE) {
+            return fieldsByService.youtube();
           }
         }
       },
@@ -91,6 +96,18 @@ class AddSource extends Component {
             />
             <NumberOfInstagramPostsAdd />
             <InstagramPostFilterAdd sourceAddFormFilter={sourceAddFormFilter} />
+          </React.Fragment>
+        );
+      },
+      youtube: () => {
+        return (
+          <React.Fragment>
+            <YoutubeUserAdd
+              getPlaceholder={FormatSource.form.getPlaceholder}
+              sourceGenerateYoutubeId={this.props.sourceGenerateYoutubeId}
+              sourceReducer={sourceReducer}
+            />
+            <NumberOfYoutubeVidsAdd />
           </React.Fragment>
         );
       },

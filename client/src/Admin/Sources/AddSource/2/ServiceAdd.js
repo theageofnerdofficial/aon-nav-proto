@@ -3,6 +3,7 @@ import {
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
+  SOURCE_YOUTUBE,
 } from '../../../../constants';
 
 class ServiceAdd extends Component {
@@ -21,6 +22,8 @@ class ServiceAdd extends Component {
               service = SOURCE_TWITTER;
             } else if (e.target.value === 'instagram') {
               service = SOURCE_INSTAGRAM;
+            } else if (e.target.value === 'youtube') {
+              service = SOURCE_YOUTUBE;
             }
             this.props.sourceAddService(service);
           }}
@@ -35,6 +38,7 @@ class ServiceAdd extends Component {
           <option value="reddit">Reddit</option>
           <option value="twitter">Twitter</option>
           <option value="instagram">Instagram</option>
+          <option value="youtube">Youtube</option>
         </select>
       </React.Fragment>
     );

@@ -28,6 +28,9 @@ import {
   QUIZ_SCORE_CALCULATE,
   QUIZ_SCREEN_UPDATE,
   SCHEDULER_SELECT_DATE,
+  SOURCE_GEN_YT_ID_FAILURE,
+  SOURCE_GEN_YT_ID_PENDING,
+  SOURCE_GEN_YT_ID_SUCCESS,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
@@ -60,6 +63,7 @@ import {
   SOURCE_REDDIT,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  SOURCE_YOUTUBE,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -253,6 +257,9 @@ export const sourceAdd = (source) => (dispatch, getState) => {
     case SOURCE_INSTAGRAM:
       url = '/source/instagram';
       break;
+    case SOURCE_YOUTUBE:
+      url = '/source/youtube';
+      break;
     default:
       url = '/source/add';
   }
@@ -298,6 +305,31 @@ export const sourceAddService = (source) => ({
   type: SOURCE_ADD_FORM_SELECT,
   payload: source,
 });
+
+export const sourceGenerateYoutubeId = (o) => (dispatch) => {
+  dispatch({ type: SOURCE_GEN_YT_ID_PENDING });
+  fetch('/youtubeid/' + o.user, {
+    headers: settings.network.headers,
+    method: 'GET',
+  })
+    .then((res) => {
+      console.log('action');
+      console.log(res);
+
+      return res.json();
+    })
+    .then((data) => {
+      console.log('DATA');
+      console.log(data);
+      dispatch({
+        payload: data,
+        type: SOURCE_GEN_YT_ID_SUCCESS,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCE_GEN_YT_ID_FAILURE, payload: error })
+    );
+};
 
 export const sourceGetById = (o) => (dispatch) => {
   const url = () => {

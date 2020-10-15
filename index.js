@@ -27,6 +27,7 @@ const userController = require('./controllers/UserController');
 const instagramSourceController = require('./controllers/sources/InstagramSourceController');
 const redditSourceController = require('./controllers/sources/RedditSourceController');
 const twitterSourceController = require('./controllers/sources/TwitterSourceController');
+const youtubeSourceController = require('./controllers/sources/YoutubeSourceController');
 const quizController = require('./controllers/QuizController');
 const accessTokenController = require('./controllers/AccessTokenController');
 
@@ -42,10 +43,14 @@ const {
   DB_TWITTER_CONSUMER_SECRET,
   DB_TWITCH_CLIENT_ID,
   DB_TWITCH_SECRET,
+  DB_YOUTUBE_SECRET,
 } = process.env;
-//
 
 //
+app.get('/youtubeid/:user', (req, res, next) => {
+  res.DB_YOUTUBE_SECRET = DB_YOUTUBE_SECRET;
+  return youtubeSourceController.getId(req, res, next);
+});
 
 // YOUTUBE
 // Get channel ID by username:
@@ -71,8 +76,6 @@ app.get('/accesstoken', (req, res, next) => {
 
 const client = new Instagram({ DB_INSTAGRAM_USER, DB_INSTAGRAM_PASS });
 app.get('/api/request_data_instagram', (req, res, next) => {
-  console.log('got insta');
-
   return client.getUserByUsername({ username: 'instagram' }).then((data) => {
     const { id, username, profile_pic_url } = data;
     const edges = data.edge_owner_to_timeline_media.edges;
@@ -228,6 +231,11 @@ app.put('/source/instagram/', (req, res, next) =>
 app.put('/source/instagram/mute', (req, res, next) =>
   instagramSourceController.toggleMute(req, res, next)
 );
+
+app.post('/source/youtube', (req, res, next) =>
+  youtubeSourceController.create(req, res, next)
+);
+
 /* Quiz:
  *****************************************************************/
 app.get('/quiz/list', (req, res, next) => quizController.list(req, res, next));

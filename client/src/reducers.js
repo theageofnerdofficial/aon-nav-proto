@@ -51,6 +51,9 @@ import {
   SOURCE_ADD_FORM_SELECT,
   SOURCE_ADD_PENDING,
   SOURCE_ADD_SUCCESS,
+  SOURCE_GEN_YT_ID_FAILURE,
+  SOURCE_GEN_YT_ID_PENDING,
+  SOURCE_GEN_YT_ID_SUCCESS,
   SOURCE_GETBYID_FAILURE,
   SOURCE_GETBYID_PENDING,
   SOURCE_GETBYID_SUCCESS,
@@ -456,6 +459,8 @@ const sourceAddForm = {
     period: { sortDirection: 0 },
     addedBy: { sortDirection: 0 },
   },
+  sourceGenYoutubeIdPending: false,
+  youtubeChannelId: null,
 };
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
@@ -644,6 +649,24 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, {
         sourceById: action.payload,
         sourceByIdPending: false,
+      });
+
+    case SOURCE_GEN_YT_ID_FAILURE:
+      return Object.assign({}, state, {
+        sourceGenYoutubeIdPending: false,
+      });
+
+    case SOURCE_GEN_YT_ID_PENDING:
+      return Object.assign({}, state, {
+        sourceGenYoutubeIdPending: true,
+        youtubeChannelId: 'Pending...',
+      });
+
+    case SOURCE_GEN_YT_ID_SUCCESS:
+      console.log(action.payload.items[0].id);
+      return Object.assign({}, state, {
+        youtubeChannelId: action.payload.items[0].id,
+        sourceGenYoutubeIdPending: false,
       });
     default:
       return state;

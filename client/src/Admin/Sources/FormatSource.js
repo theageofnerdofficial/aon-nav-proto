@@ -3,6 +3,7 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   SOURCE_INSTAGRAM,
+  SOURCE_YOUTUBE,
 } from '../../constants';
 
 const FormatSource = {
@@ -20,6 +21,10 @@ const FormatSource = {
           } else {
             return 'Nintendo';
           }
+        } else if (form.category === 'toys') {
+          return 'Lego';
+        } else if (form.category === 'wrestling') {
+          return 'WWE';
         }
       }
     },
@@ -32,6 +37,8 @@ const FormatSource = {
         return 'twitter';
       } else if (src.service === SOURCE_INSTAGRAM) {
         return 'instagram';
+      } else if (src.service === SOURCE_YOUTUBE) {
+        return 'youtube';
       }
     },
 
@@ -52,6 +59,11 @@ const FormatSource = {
         formData = {
           src: FormatSource.instagram.schemify(el),
           url: '/source/instagram',
+        };
+      } else if (el['service'].value === 'youtube') {
+        formData = {
+          src: FormatSource.youtube.schemify(el),
+          url: '/source/youtube',
         };
       }
       return formData;
@@ -124,6 +136,29 @@ const FormatSource = {
         service: SOURCE_TWITTER,
         queryKeyword: el['query-keyword'] ? el['query-keyword'].value : null,
         queryDate: el['query-date'] ? el['query-date'].value : null,
+        createdBy: localStorage.getItem('aon_user_id'),
+        isOfficial: el['is-official-source']
+          ? el['is-official-source'].checked
+          : false,
+      };
+    },
+  },
+
+  //
+  youtube: {
+    schemify: (el) => {
+      return {
+        category: el['category'].value,
+        categoryGaming: el['category-gaming']
+          ? el['category-gaming'].value
+          : null,
+
+        youtubeUser: el['youtube-user'] ? el['youtube-user'].value : null,
+        brandColor: el['youtube-brand-color']
+          ? el['youtube-brand-color'].value
+          : null,
+        videosNumber: el['videos'] ? el['videos'].value : null,
+        service: SOURCE_YOUTUBE,
         createdBy: localStorage.getItem('aon_user_id'),
         isOfficial: el['is-official-source']
           ? el['is-official-source'].checked
