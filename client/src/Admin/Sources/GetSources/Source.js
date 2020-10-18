@@ -5,6 +5,7 @@ import {
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
+  SOURCE_YOUTUBE,
 } from '../../../constants';
 import LabelBtn from '../../../Components/UI/LabelBtn';
 import format from '../../../config/format';
@@ -40,6 +41,7 @@ class Source extends Component {
       }
       return url;
     };
+
     /* Delete a source using fetch constructor to connect to DB:
      ************************************************************/
     const deleteSource = (source) => {
@@ -116,6 +118,8 @@ class Source extends Component {
         return 'Twitter';
       } else if (src.service === SOURCE_INSTAGRAM) {
         return 'Instagram';
+      } else if (src.service === SOURCE_YOUTUBE) {
+        return 'Youtube';
       }
     };
 
@@ -126,6 +130,8 @@ class Source extends Component {
         return format.reddit.source.thumbnail(src.subreddit);
       } else if (src.service === SOURCE_TWITTER) {
         return format.twitter.source.thumbnail(src.twitterUser);
+      } else if (src.service === SOURCE_YOUTUBE) {
+        return format.youtube.source.thumbnail(src.youtubeUser);
       }
     };
 
@@ -168,6 +174,23 @@ class Source extends Component {
             target="_blank"
           >
             {utils.str.makeTitleCase(src.username)}
+          </a>
+        );
+      } else if (src.service === SOURCE_YOUTUBE) {
+        return (
+          <a
+            href={`https://www.youtube.com/${src.youtubeUser}`}
+            rel="noopener noreferrer"
+            style={{
+              color: src.brandColor
+                ? isDarkColor(src.brandColor)
+                  ? '#fff'
+                  : '#000'
+                : '#000',
+            }}
+            target="_blank"
+          >
+            {utils.str.makeTitleCase(src.youtubeUser)}
           </a>
         );
       }
@@ -250,7 +273,11 @@ class Source extends Component {
               </small>
             </td>
             <td>{getSource(this.props.src)}</td>
-            <td>{this.props.src.postsNumber}</td>
+            <td>
+              {this.props.src.postsNumber
+                ? this.props.src.postsNumber
+                : this.props.src.videosNumber}
+            </td>
             <td>
               {this.props.src.filter
                 ? utils.str.makeTitleCase(this.props.src.filter)

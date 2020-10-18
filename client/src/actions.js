@@ -368,6 +368,9 @@ export const sourcesGetYoutube = () => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log('HERE>...');
+
+      console.log(data);
       dispatch({
         type: SOURCES_YOUTUBE_GET_SUCCESS,
         payload: data,

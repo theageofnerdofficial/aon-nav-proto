@@ -5,6 +5,8 @@ const fetch = require('node-fetch');
 // Model(s):
 const YoutubeSource = require('../../models/sources/YoutubeSource');
 
+/* Get channel data using Node fetch request:
+ ******************************************************************/
 const getChannelData = (req, res, youtubeUserId, secret, videosNumber) => {
   return fetch(
     `https://www.googleapis.com/youtube/v3/search?key=${secret}&channelId=${youtubeUserId}&part=snippet,id&order=date&maxResults=${videosNumber}`,
@@ -22,6 +24,7 @@ const getChannelData = (req, res, youtubeUserId, secret, videosNumber) => {
       res.status(400).send(error);
     });
 };
+
 /* Create source:
  ******************************************************************/
 exports.create = (req, res, next) => {
@@ -35,12 +38,13 @@ exports.create = (req, res, next) => {
   });
 };
 
-exports.getUserByUserId = (req, res, next) => {
+/* Create source:
+ ******************************************************************/
+exports.getChannelDataByUserId = (req, res, next) => {
   YoutubeSource.find({ youtubeUserId: req.params.user_id }, (err, source) => {
     if (err) {
       res.status(500).send(err);
     }
-    console.log(res.DB_YOUTUBE_SECRET);
     getChannelData(
       req,
       res,
@@ -51,6 +55,8 @@ exports.getUserByUserId = (req, res, next) => {
   });
 };
 
+/* Get Youtube user ID:
+ ******************************************************************/
 exports.getId = (req, res, next) => {
   return fetch(
     `https://www.googleapis.com/youtube/v3/channels?forUsername=${req.params.user}&part=contentDetails&key=${res.DB_YOUTUBE_SECRET}`,
@@ -68,13 +74,13 @@ exports.getId = (req, res, next) => {
     });
 };
 
-exports.create = (req, res, next) => {
-  let newSource = new YoutubeSource(req.body);
-  newSource.save((err, source) => {
+/* List sources:
+ ******************************************************************/
+exports.list = (req, res) => {
+  YoutubeSource.find({}, (err, source) => {
     if (err) {
-      console.log(err);
       res.status(500).send(err);
     }
-    res.status(201).json(source);
+    res.status(200).json(source);
   });
 };

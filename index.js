@@ -2,17 +2,17 @@
  ***************************************************/
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
-const db = require('./config/db');
 const app = express();
+const path = require('path');
+const dotenv = require('dotenv');
+const db = require('./config/db');
+const cors = require('cors');
+// const fetch = require('node-fetch');
+
 const Instagram = require('instagram-web-api');
+const snoowrap = require('snoowrap');
 const Twit = require('twit');
 const TwitchAPI = require('twitch-api-v5');
-const fetch = require('node-fetch');
-
-const snoowrap = require('snoowrap');
-const dotenv = require('dotenv');
-const cors = require('cors');
 
 const verifyToken = require('./common/verifyToken');
 
@@ -23,13 +23,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Controllers:
-const userController = require('./controllers/UserController');
+const accessTokenController = require('./controllers/AccessTokenController');
 const instagramSourceController = require('./controllers/sources/InstagramSourceController');
+const quizController = require('./controllers/QuizController');
 const redditSourceController = require('./controllers/sources/RedditSourceController');
 const twitterSourceController = require('./controllers/sources/TwitterSourceController');
+const userController = require('./controllers/UserController');
 const youtubeSourceController = require('./controllers/sources/YoutubeSourceController');
-const quizController = require('./controllers/QuizController');
-const accessTokenController = require('./controllers/AccessTokenController');
 
 // For env variables:
 dotenv.config();
@@ -100,7 +100,7 @@ app.get('/api/getreddit', (req, res, next) => {
  *****************************************************************/
 app.get('/api/request_data_youtube/:user_id/', (req, res, next) => {
   res.DB_YOUTUBE_SECRET = DB_YOUTUBE_SECRET;
-  return youtubeSourceController.getUserByUserId(req, res, next);
+  return youtubeSourceController.getChannelDataByUserId(req, res, next);
 });
 
 /* Description: Twitter — search Tweets

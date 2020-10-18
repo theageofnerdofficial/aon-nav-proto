@@ -44,6 +44,9 @@ import {
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
+  SOURCES_YOUTUBE_GET_PENDING,
+  SOURCES_YOUTUBE_GET_FAILURE,
+  SOURCES_YOUTUBE_GET_SUCCESS,
   SOURCE_ADD_FAILURE,
   SOURCE_ADD_FORM_CAT,
   SOURCE_ADD_FORM_CAT_GM,
@@ -448,6 +451,10 @@ const sourceAddForm = {
   sourcesRedditPosts: null,
   sourcesTwitterData: null,
   sourcesInstagramData: null,
+  //
+  //
+  sourcesYoutubeData: null,
+  //
   showRedditPeriod: true,
   sourceByIdPending: false,
   sourceById: {},
@@ -466,6 +473,20 @@ const sourceAddForm = {
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
+    case SOURCES_YOUTUBE_GET_PENDING:
+      return Object.assign({}, state, { sourceYoutubeGetPending: true });
+
+    case SOURCES_YOUTUBE_GET_FAILURE:
+      return Object.assign({}, state, { sourceYoutubeGetPending: false });
+
+    case SOURCES_YOUTUBE_GET_SUCCESS:
+      console.log('success');
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        sourcesYoutubeData: action.payload,
+        sourceYoutubeGetPending: false,
+      });
+
     case SOURCE_GET_REDDITS_PENDING:
       return Object.assign({}, state, { sourceRedditPostsPending: true });
 
@@ -501,6 +522,7 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
           ...state.sourcesInstagramData,
           ...state.sourcesRedditData,
           ...state.sourcesTwitterData,
+          ...state.sourcesYoutubeData,
         ],
       });
 
