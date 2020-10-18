@@ -46,35 +46,22 @@ const {
   DB_YOUTUBE_SECRET,
 } = process.env;
 
-//
-app.get('/youtubeid/:user', (req, res, next) => {
-  res.DB_YOUTUBE_SECRET = DB_YOUTUBE_SECRET;
-  return youtubeSourceController.getId(req, res, next);
-});
+// Initialise the Instagram web API with username & password:
+const client = new Instagram({ DB_INSTAGRAM_USER, DB_INSTAGRAM_PASS });
 
-// YOUTUBE
-// Get channel ID by username:
-// https://www.googleapis.com/youtube/v3/channels?forUsername=theyoungturks&part=contentDetails&key=AIzaSyBauxGUpuvJuequjTXCrt8klbasUMfE01M
-//
-// Grab ID from what's returned here... then...
-
-//https://www.googleapis.com/youtube/v3/search?key={your API key here}&channelId={ the channel id}&part=snippet,id&order=date&maxResults=20
-
-//
-//
-//
-//
+// Add client ID to Twitch API:
 TwitchAPI.clientID = DB_TWITCH_CLIENT_ID;
 
+/* :
+ ***************************************************/
 app.get('/accesstoken', (req, res, next) => {
   res.DB_TWITCH_CLIENT_ID = DB_TWITCH_CLIENT_ID;
   res.DB_TWITCH_SECRET = DB_TWITCH_SECRET;
   accessTokenController.list(req, res, next);
 });
 
-//app.get('/api/request_data_twitch', (req, res, next) => {});
-
-const client = new Instagram({ DB_INSTAGRAM_USER, DB_INSTAGRAM_PASS });
+/* :
+ ***************************************************/
 app.get('/api/request_data_instagram', (req, res, next) => {
   return client.getUserByUsername({ username: 'instagram' }).then((data) => {
     const { id, username, profile_pic_url } = data;
@@ -103,11 +90,17 @@ const T = new Twit({
 /* :
  *****************************************************************/
 app.get('/api/getreddit', (req, res, next) => {
-  //
   return r
     .getHot()
     .map((post) => post.title)
     .then((data) => res.json(data));
+});
+
+/* :
+ *****************************************************************/
+app.get('/api/request_data_youtube/:user_id/', (req, res, next) => {
+  res.DB_YOUTUBE_SECRET = DB_YOUTUBE_SECRET;
+  return youtubeSourceController.getUserByUserId(req, res, next);
 });
 
 /* Description: Twitter — search Tweets
@@ -129,7 +122,6 @@ app.get(
 
 /* User:
  *****************************************************************/
-// add verifyToken middleware
 app.get('/user/authenticate', verifyToken, (req, res, next) =>
   userController.authenticate(req, res, next)
 );
@@ -232,6 +224,10 @@ app.put('/source/instagram/mute', (req, res, next) =>
   instagramSourceController.toggleMute(req, res, next)
 );
 
+app.get('/source/youtube/', (req, res, next) =>
+  youtubeSourceController.list(req, res, next)
+);
+
 app.post('/source/youtube', (req, res, next) =>
   youtubeSourceController.create(req, res, next)
 );
@@ -249,6 +245,13 @@ app.post('/quiz', (req, res, next) => quizController.create(req, res, next));
 app.put('/quiz/schedule', (req, res, next) =>
   quizController.schedule(req, res, next)
 );
+
+/* :
+ ***************************************************/
+app.get('/youtubeid/:user', (req, res, next) => {
+  res.DB_YOUTUBE_SECRET = DB_YOUTUBE_SECRET;
+  return youtubeSourceController.getId(req, res, next);
+});
 
 /* Description: Handle additional request: direct to index.html
    Permission: Unprotected GET

@@ -12,7 +12,7 @@ class Quiz extends Component {
     const {
       quizAddAnswer,
       quizReducer,
-      quizReset,
+      // quizReset,
       quizUpdateQNumber,
       quizUpdateScreen,
     } = this.props;

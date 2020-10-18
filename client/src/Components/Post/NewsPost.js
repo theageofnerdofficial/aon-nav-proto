@@ -10,6 +10,7 @@ class NewsPost extends Component {
             {this.props.index + 1}
           </div>
           <img
+            alt="Source thumbnail"
             className="rounded ml-1 post-thumbnail p-1"
             src={`img/thumbnails/${this.props.thumbnail}.svg`}
             style={{ width: '100%' }}

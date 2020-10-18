@@ -34,6 +34,7 @@ class PostsDummy extends Component {
         <div className="col-12 p-0 py-3 m-0 row shadow-sm">
           <div className="col-1 p-0 m-0 text-center">
             <img
+              alt="Placeholder thumbnail"
               className="rounded ml-1 post-thumbnail"
               src={`img/thumbnails/${
                 arr[Math.floor(Math.random() * arr.length)]

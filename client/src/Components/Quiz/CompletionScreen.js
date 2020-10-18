@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontIcon from '../FontIcon/FontIcon';
 import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
 import utils from '../Utils/utils/utils';
 
@@ -12,6 +11,7 @@ class CompletionScreen extends Component {
           if (question.correctAnswer === question.userAnswer) {
             score += 1;
           }
+          return 0;
         });
       }
       this.props.quizCalculateScore(score);

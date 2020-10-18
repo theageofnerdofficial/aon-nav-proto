@@ -26,6 +26,14 @@ const YoutubeSourceSchema = new Schema({
     unique: true,
   },
 
+  youtubeUserId: {
+    type: String,
+    maxlength: 100,
+    minlength: 3,
+    required: true,
+    unique: true,
+  },
+
   service: {
     type: String,
     required: true,

@@ -17,6 +17,7 @@ class GetSources extends Component {
     this.props.sourcesGetReddit();
     this.props.sourcesGetTwitter();
     this.props.sourcesGetInstagram();
+    // this.props.sourcesGetYoutube();
   }
 
   componentDidUpdate() {
@@ -25,6 +26,7 @@ class GetSources extends Component {
       sourceRedditGetPending,
       sourceReducer,
       sourceTwitterGetPending,
+      // sourceYoutubeGetPending,
     } = this.props;
 
     // Conditions that must be met before combining sources:
@@ -34,7 +36,9 @@ class GetSources extends Component {
       !sourceTwitterGetPending && sourceReducer.sourcesTwitterData;
     const gotInstagramData =
       !sourceInstagramGetPending && sourceReducer.sourcesInstagramData;
+    // const gotYoutubeData = !sourceYoutubeGetPending && sourceReducer.sourcesYoutubeData
 
+    // && gotYoutubeData
     if (gotRedditData && gotTwitterData && gotInstagramData && !combined) {
       this.props.sourcesCombine();
       combined = true;

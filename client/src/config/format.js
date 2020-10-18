@@ -21,6 +21,9 @@ const format = {
         case 4:
           label = 'Super Admin';
           break;
+        default:
+          label = null;
+          break;
       }
       return label;
     },

@@ -124,7 +124,7 @@ class Home extends Component {
     },
   };
   render() {
-    const { allData } = this.props.dataReducer;
+    // const { allData } = this.props.dataReducer;
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
@@ -205,6 +205,7 @@ class Home extends Component {
               style={{ width: '100%' }}
             >
               <img
+                alt="Placeholder ad"
                 className="rounded"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSW5__jf83H2uCndvgpC-A_J-FtbyiKxsxS5w&usqp=CAU"
                 style={{

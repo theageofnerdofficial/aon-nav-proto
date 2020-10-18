@@ -34,6 +34,9 @@ import {
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
+  SOURCES_YOUTUBE_GET_FAILURE,
+  SOURCES_YOUTUBE_GET_PENDING,
+  SOURCES_YOUTUBE_GET_SUCCESS,
   SOURCES_INSTAGRAM_GET_FAILURE,
   SOURCES_INSTAGRAM_GET_PENDING,
   SOURCES_INSTAGRAM_GET_SUCCESS,
@@ -355,6 +358,23 @@ export const sourceGetById = (o) => (dispatch) => {
     })
     .catch((error) =>
       dispatch({ type: SOURCE_GETBYID_FAILURE, payload: error })
+    );
+};
+
+export const sourcesGetYoutube = () => (dispatch) => {
+  dispatch({ type: SOURCES_YOUTUBE_GET_PENDING });
+  fetch('/source/youtube/', {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        type: SOURCES_YOUTUBE_GET_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: SOURCES_YOUTUBE_GET_FAILURE, payload: error })
     );
 };
 

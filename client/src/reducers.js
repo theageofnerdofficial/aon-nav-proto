@@ -442,6 +442,7 @@ const sourceAddForm = {
   sourceRedditGetPending: false,
   sourceRedditPostsPending: false,
   sourceTwitterGetPending: false,
+  sourceYoutubeGetPending: false,
   sourcesCombined: null,
   sourcesRedditData: null,
   sourcesRedditPosts: null,

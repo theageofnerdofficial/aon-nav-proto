@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontIcon from '../FontIcon/FontIcon';
 import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import utils from '../Utils/utils/utils';

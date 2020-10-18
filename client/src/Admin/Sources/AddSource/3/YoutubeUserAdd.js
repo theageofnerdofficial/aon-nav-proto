@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FontIcon from '../../../../Components/FontIcon/FontIcon';
 import BrandColourAddInfo from './BrandColourAddInfo';
 
 class YoutubeUserAdd extends Component {
@@ -51,7 +50,7 @@ class YoutubeUserAdd extends Component {
             className="form-control font-weight-light"
             disabled
             placeholder="--"
-            name="youtube-id"
+            name="youtube-user-id"
             readonly="readonly"
             required
             defaultValue={

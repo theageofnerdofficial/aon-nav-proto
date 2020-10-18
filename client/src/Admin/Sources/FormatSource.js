@@ -154,6 +154,9 @@ const FormatSource = {
           : null,
 
         youtubeUser: el['youtube-user'] ? el['youtube-user'].value : null,
+        youtubeUserId: el['youtube-user-id']
+          ? el['youtube-user-id'].value
+          : null,
         brandColor: el['youtube-brand-color']
           ? el['youtube-brand-color'].value
           : null,
