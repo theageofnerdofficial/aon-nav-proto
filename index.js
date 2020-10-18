@@ -180,6 +180,10 @@ app.put('/source/reddit/mute', (req, res, next) =>
   redditSourceController.toggleMute(req, res, next)
 );
 
+app.put('/source/youtube/mute', (req, res, next) =>
+  youtubeSourceController.toggleMute(req, res, next)
+);
+
 app.delete('/source/twitter', (req, res, next) =>
   twitterSourceController.deleteSource(req, res, next)
 );

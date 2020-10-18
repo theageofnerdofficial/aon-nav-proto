@@ -36,6 +36,9 @@ class Source extends Component {
         case SOURCE_TWITTER:
           url = '/source/twitter';
           break;
+        case SOURCE_YOUTUBE:
+          url = '/source/youtube';
+          break;
         default:
           url = '/source/';
       }
@@ -219,7 +222,6 @@ class Source extends Component {
               <form
                 style={{ float: 'right', width: 30 }}
                 onSubmit={(e) => {
-                  e.preventDefault();
                   this.props.sourcesToggleSourceMute({
                     id: this.props.src._id,
                   });
