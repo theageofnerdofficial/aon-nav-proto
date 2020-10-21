@@ -31,7 +31,7 @@ class Carousel extends Component {
             >
               <div
                 className={`font-weight-light text-${item.align}`}
-                style={{ width: '75%' }}
+                style={{ width: '100%' }}
               >
                 <h1
                   className={`font-weight-light text-${item.align}`}

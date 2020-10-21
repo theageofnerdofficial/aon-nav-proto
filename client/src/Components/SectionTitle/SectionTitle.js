@@ -32,7 +32,7 @@ class SectionTitle extends Component {
     const Title = styled.div`
       display: block;
       letter-spacing: -0.5px;
-      line-height: 1.3;
+      line-height: 1;
       ${addPaddingMargin()}
       position: relative;
       text-align: center !important;
@@ -44,7 +44,7 @@ class SectionTitle extends Component {
     const TitleAd = styled.div`
       border-bottom: 1px dashed #ccc;
       display: block;
-      line-height: 1.3;
+      line-height: 1;
       letter-spacing: -0.5px;
       ${addPaddingMargin()}
       position: relative;

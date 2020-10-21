@@ -26,6 +26,10 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
   }
   
+  .bg-custom {
+    background-color: ${({ theme }) => theme.heroBgCol};
+  }
+
   .bg-custom-2 {
     background-color: ${({ theme }) => theme.heroBgCol};
   }

@@ -146,7 +146,7 @@ class Home extends Component {
             />
           </div>
         </div>
-        <div className="col-md-12 m-0 p-0 row">
+        <div className="col-md-12 m-0 p-0 pt-4 row">
           <div className="col-lg-6 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}

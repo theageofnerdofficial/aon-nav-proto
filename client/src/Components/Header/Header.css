@@ -93,6 +93,20 @@ a.nav-link {
 .nav-btn-gaming:hover {
   border: 1px solid #000;
   text-decoration: underline;
+  background-color: #111;
+}
+
+.nav-btn-home:active,
+.nav-btn-home:focus,
+.nav-btn-mynerd:active,
+.nav-btn-mynerd:focus,
+.nav-btn-tvfilm:active,
+.nav-btn-tvfilm:focus,
+.nav-btn-comics:active,
+.nav-btn-comics:focus,
+.nav-btn-gaming:active,
+.nav-btn-gaming:focus {
+  background-color: #222 !important;
 }
 
 .nav-btn-home:hover,

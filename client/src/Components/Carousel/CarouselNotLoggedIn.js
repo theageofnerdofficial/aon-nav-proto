@@ -22,7 +22,7 @@ class CarouselNotLoggedIn extends Component {
           >
             <div
               className={`font-weight-light text-${item.align}`}
-              style={{ width: '75%' }}
+              style={{ width: '100%' }}
             >
               <SectionTitle
                 align={item.align}
