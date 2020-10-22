@@ -67,8 +67,11 @@ import {
   SOURCE_GET_REDDITS_PENDING,
   SOURCE_GET_REDDITS_SUCCESS,
   SOURCE_REDDIT,
+  SOURCES_REFINE_BY_SERVICE,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  SOURCE_INSTAGRAM,
+  SOURCE_YOUTUBE,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -451,10 +454,7 @@ const sourceAddForm = {
   sourcesRedditPosts: null,
   sourcesTwitterData: null,
   sourcesInstagramData: null,
-  //
-  //
   sourcesYoutubeData: null,
-  //
   showRedditPeriod: true,
   sourceByIdPending: false,
   sourceById: {},
@@ -466,6 +466,12 @@ const sourceAddForm = {
     filter: { sortDirection: 0 },
     period: { sortDirection: 0 },
     addedBy: { sortDirection: 0 },
+  },
+  serviceShown: {
+    SOURCE_INSTAGRAM: true,
+    SOURCE_REDDIT: true,
+    SOURCE_TWITTER: true,
+    SOURCE_YOUTUBE: true,
   },
   sourceGenYoutubeIdPending: false,
   youtubeChannelId: null,
@@ -480,12 +486,32 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       return Object.assign({}, state, { sourceYoutubeGetPending: false });
 
     case SOURCES_YOUTUBE_GET_SUCCESS:
-      console.log('success');
-      console.log(action.payload);
       return Object.assign({}, state, {
         sourcesYoutubeData: action.payload,
         sourceYoutubeGetPending: false,
       });
+
+    case SOURCES_REFINE_BY_SERVICE:
+      let serviceByName;
+      switch (action.payload.service) {
+        case 'reddit':
+          serviceByName = SOURCE_REDDIT;
+          break;
+        case 'twitter':
+          serviceByName = SOURCE_TWITTER;
+          break;
+        case 'instagram':
+          serviceByName = SOURCE_INSTAGRAM;
+          break;
+        case 'youtube':
+          serviceByName = SOURCE_YOUTUBE;
+          break;
+        default:
+          serviceByName = null;
+      }
+      stateCp = state;
+      stateCp.serviceShown[serviceByName] = action.payload.value ? true : false;
+      return Object.assign({}, state, stateCp);
 
     case SOURCE_GET_REDDITS_PENDING:
       return Object.assign({}, state, { sourceRedditPostsPending: true });

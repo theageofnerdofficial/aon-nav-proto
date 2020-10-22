@@ -6,6 +6,13 @@ import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../../../Components/SectionTitle/SectionTitlePostsTitle';
 import Source from './Source';
 import settings from '../../../config/settings';
+import SourceRefineByService from './SourceRefineByService';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  SOURCE_YOUTUBE,
+} from '../../../constants';
 
 // Stop update loop:
 let combined = false;
@@ -147,20 +154,41 @@ class GetSources extends Component {
     return (
       <React.Fragment>
         <SectionTitle title="Sources" />
-
-        {/*
-        
-        CHANGE ACTIVE TO MUTED
-        */}
         <SectionTitlePostsTitle
           text={`Total (${countTotalSources()}) — Muted (${countSourcesByActivity(
             { muted: true }
           )}) — Active (${countSourcesByActivity({ muted: false })})`}
         />
+        <div className="col-12 col-lg-6 m-0 p-0 py-3 row">
+          <SourceRefineByService
+            serviceName="Instagram"
+            source={SOURCE_INSTAGRAM}
+            sourceReducer={this.props.sourceReducer}
+            sourcesRefineByService={this.props.sourcesRefineByService}
+          />
+          <SourceRefineByService
+            serviceName="Reddit"
+            source={SOURCE_REDDIT}
+            sourceReducer={this.props.sourceReducer}
+            sourcesRefineByService={this.props.sourcesRefineByService}
+          />
+          <SourceRefineByService
+            serviceName="Twitter"
+            source={SOURCE_TWITTER}
+            sourceReducer={this.props.sourceReducer}
+            sourcesRefineByService={this.props.sourcesRefineByService}
+          />
+          <SourceRefineByService
+            serviceName="Youtube"
+            source={SOURCE_YOUTUBE}
+            sourceReducer={this.props.sourceReducer}
+            sourcesRefineByService={this.props.sourcesRefineByService}
+          />
+        </div>
         <div className="m-0 p-0 col-12 row">
           <div className="m-0 p-0 col-6">
             <select
-              className="form-control col-12 col-md-4 col-lg-4 mb-3"
+              className="form-control col-12 col-md-4 col-lg-12 mb-3"
               onChange={(e) => {
                 sourcesFilterByCategory(e.target.value);
               }}
@@ -214,6 +242,7 @@ class GetSources extends Component {
                       key={'source-' + index}
                       sourceDelete={this.props.sourceDelete}
                       sourceCategoryFilter={sourceReducer.sourceCategoryFilter}
+                      sourceReducer={sourceReducer}
                       sourceRemove={this.props.sourceRemove}
                       sourcesToggleSourceMute={
                         this.props.sourcesToggleSourceMute

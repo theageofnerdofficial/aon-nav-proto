@@ -1,26 +1,24 @@
 // Imports:
 import React, { Component } from 'react';
 import FontIcon from '../../../Components/FontIcon/FontIcon';
+import LabelBtn from '../../../Components/UI/LabelBtn';
+import format from '../../../config/format';
+import isDarkColor from 'is-dark-color';
+import labels from '../../../config/labels';
+import utils from '../../../Components/Utils/utils/utils';
 import {
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
   SOURCE_YOUTUBE,
 } from '../../../constants';
-import LabelBtn from '../../../Components/UI/LabelBtn';
-import format from '../../../config/format';
-import isDarkColor from 'is-dark-color';
-import labels from '../../../config/labels';
-import utils from '../../../Components/Utils/utils/utils';
 
 import { fetchConstructor } from '../../../actions';
 
 class Source extends Component {
-  componentDidMount() {
-    // console.log(this.props.src);
-  }
   render() {
     const { props } = this;
+    const { sourceReducer, sourcesToggleSourceMute, src } = this.props;
 
     /* Get endpoint URL from source's service:
      ************************************************************/
@@ -71,8 +69,8 @@ class Source extends Component {
                 });
                 props.flashMsgFlash();
                 props.sourceRemove({
-                  sourceId: this.props.src._id,
-                  service: this.props.src.service,
+                  sourceId: src._id,
+                  service: src.service,
                 });
               }
             },
@@ -204,32 +202,40 @@ class Source extends Component {
       const { sourceCategoryFilter } = this.props;
       return (
         sourceCategoryFilter.toLowerCase() === 'all' ||
-        sourceCategoryFilter.toLowerCase() ===
-          this.props.src.category.toLowerCase()
+        sourceCategoryFilter.toLowerCase() === src.category.toLowerCase()
       );
     };
+
+    // Has source been refined through input checkbox?:
+    const hasSourceCheck = () => sourceReducer.serviceShown[src.service];
+
     return (
       <React.Fragment>
         {hasFilterCategory() ? (
-          <tr style={{ opacity: this.props.src.muted ? 0.3 : 1 }}>
+          <tr
+            style={{
+              display: hasSourceCheck() ? null : 'none',
+              opacity: src.muted ? 0.3 : 1,
+            }}
+          >
             <td>
               <img
                 alt="Source logo"
                 className="rounded"
-                src={getLogo(this.props.src)}
+                src={getLogo(src)}
                 style={{ width: '65px' }}
               />
               <form
                 style={{ float: 'right', width: 30 }}
                 onSubmit={(e) => {
-                  this.props.sourcesToggleSourceMute({
-                    id: this.props.src._id,
+                  sourcesToggleSourceMute({
+                    id: src._id,
                   });
                   fetchConstructor(
                     {
-                      url: getSourceUrl(this.props.src) + '/mute',
+                      url: getSourceUrl(src) + '/mute',
                       body: JSON.stringify({
-                        _id: this.props.src._id,
+                        _id: src._id,
                         muted: false,
                       }),
                       method: 'PUT',
@@ -250,7 +256,7 @@ class Source extends Component {
                     borderTopLeftRadius: 0,
                   }}
                 >
-                  {this.props.src.muted
+                  {src.muted
                     ? FontIcon('faVolumeMute')
                     : FontIcon('faVolumeUp')}
                 </button>
@@ -258,43 +264,33 @@ class Source extends Component {
             </td>
             <td>
               <LabelBtn
-                brandColor={this.props.src.brandColor}
-                source={getTableCellsByService(this.props.src)}
+                brandColor={src.brandColor}
+                source={getTableCellsByService(src)}
               />
-              {getOfficial(this.props.src)}
+              {getOfficial(src)}
             </td>
             <td>
-              {utils.str.makeTitleCase(this.props.src.category)}
+              {utils.str.makeTitleCase(src.category)}
               <br />
               <small className="font-weight-light">
-                {this.props.src.categoryGaming
-                  ? `(${utils.str.makeTitleCase(
-                      this.props.src.categoryGaming
-                    )})`
+                {src.categoryGaming
+                  ? `(${utils.str.makeTitleCase(src.categoryGaming)})`
                   : ''}
               </small>
             </td>
-            <td>{getSource(this.props.src)}</td>
-            <td>
-              {this.props.src.postsNumber
-                ? this.props.src.postsNumber
-                : this.props.src.videosNumber}
-            </td>
-            <td>
-              {this.props.src.filter
-                ? utils.str.makeTitleCase(this.props.src.filter)
-                : 'N/A'}
-            </td>
-            <td>{this.props.src.period ? this.props.src.period : 'N/A'}</td>
+            <td>{getSource(src)}</td>
+            <td>{src.postsNumber ? src.postsNumber : src.videosNumber}</td>
+            <td>{src.filter ? utils.str.makeTitleCase(src.filter) : 'N/A'}</td>
+            <td>{src.period ? src.period : 'N/A'}</td>
             <td>
               <this.props.Link to="/">
-                {getCreatedByUser(this.props.src.createdBy)}
+                {getCreatedByUser(src.createdBy)}
               </this.props.Link>
             </td>
             <td style={{ width: 60 }}>
               <this.props.Link
-                to={`/admin/editsource/${this.props.src._id}/${getSource(
-                  this.props.src
+                to={`/admin/editsource/${src._id}/${getSource(
+                  src
                 ).toLowerCase()}`}
               >
                 <button className="btn btn-sm btn-secondary form-control mb-1">
@@ -310,8 +306,8 @@ class Source extends Component {
                   );
                   if (hasConfirmed) {
                     deleteSource({
-                      sourceId: this.props.src._id,
-                      service: this.props.src.service,
+                      sourceId: src._id,
+                      service: src.service,
                     });
                   }
                 }}

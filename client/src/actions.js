@@ -64,6 +64,7 @@ import {
   SOURCE_GET_REDDITS_SUCCESS,
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
+  SOURCES_REFINE_BY_SERVICE,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
   SOURCE_YOUTUBE,
@@ -307,6 +308,11 @@ export const sourceAddFormFilter = (filter) => ({
 export const sourceAddService = (source) => ({
   type: SOURCE_ADD_FORM_SELECT,
   payload: source,
+});
+
+export const sourcesRefineByService = (o) => ({
+  type: SOURCES_REFINE_BY_SERVICE,
+  payload: o,
 });
 
 export const sourceGenerateYoutubeId = (o) => (dispatch) => {
