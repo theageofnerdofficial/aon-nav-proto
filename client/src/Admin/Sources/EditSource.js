@@ -18,15 +18,18 @@ import SubredditPeriodAdd from './EditSource/6/SubredditPeriodAdd';
 import TweetFilterEdit from './EditSource/5/TweetFilterEdit';
 import TweetQueryAdd from './EditSource/6/TweetQueryAdd';
 import TwitterUserEdit from './EditSource/3/TwitterUserEdit';
+import YoutubeUserEdit from './EditSource/3/YoutubeUserEdit';
 import {
   SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
   SOURCE_TWITTER,
+  SOURCE_YOUTUBE,
 } from '../../constants';
 import labels from '../../config/labels';
 import settings from '../../config/settings';
 
 import { fetchConstructor } from '../../actions';
+import NumberOfYoutubeVidsEdit from './EditSource/4/NumberOfYoutubeVidsEdit';
 
 // Stop update loop:
 let gotUpdatedSource = false;
@@ -63,6 +66,8 @@ class EditSource extends Component {
             return fieldsByService.reddit();
           } else if (form.service === SOURCE_TWITTER) {
             return fieldsByService.twitter();
+          } else if (form.service === SOURCE_YOUTUBE) {
+            return fieldsByService.youtube();
           }
         }
       },
@@ -121,6 +126,19 @@ class EditSource extends Component {
               sourceReducer={this.props.sourceReducer}
             />
             <TweetQueryAdd sourceReducer={this.props.sourceReducer} />
+          </React.Fragment>
+        );
+      },
+      youtube: () => {
+        return (
+          <React.Fragment>
+            <YoutubeUserEdit
+              getPlaceholder={FormatSource.form.getPlaceholder}
+              sourceReducer={this.props.sourceReducer}
+            />
+            <NumberOfYoutubeVidsEdit
+              sourceById={this.props.sourceReducer.sourceById}
+            />
           </React.Fragment>
         );
       },

@@ -148,24 +148,46 @@ app.get('/users/listsecure', (req, res, next) =>
 
 /* Sources:
  *****************************************************************/
+// Instagram:
 app.delete('/source/instagram', (req, res, next) =>
   instagramSourceController.delete(req, res, next)
 );
 
-app.delete('/source/reddit', (req, res, next) =>
-  redditSourceController.delete(req, res, next)
+app.get('/source/getInstagramSourceById/:id', (req, res, next) =>
+  instagramSourceController.get(req, res, next)
 );
 
-app.get('/source/reddit/:category', (req, res, next) =>
-  redditSourceController.list(req, res, next)
+app.get('/source/getInstagramSourceByUsername/:username', (req, res, next) =>
+  instagramSourceController.get(req, res, next)
+);
+
+app.get('/source/instagram/', (req, res, next) => {
+  return instagramSourceController.list(req, res, next);
+});
+
+app.post('/source/instagram/', (req, res, next) =>
+  instagramSourceController.create(req, res, next)
+);
+
+app.put('/source/instagram/', (req, res, next) =>
+  instagramSourceController.update(req, res, next)
+);
+
+app.put('/source/instagram/mute', (req, res, next) =>
+  instagramSourceController.toggleMute(req, res, next)
+);
+
+// Reddit:
+app.delete('/source/reddit', (req, res, next) =>
+  redditSourceController.delete(req, res, next)
 );
 
 app.get('/source/getRedditSourceById/:id', (req, res, next) =>
   redditSourceController.get(req, res, next)
 );
 
-app.get('/source/getInstagramSourceById/:id', (req, res, next) =>
-  instagramSourceController.get(req, res, next)
+app.get('/source/reddit/:category', (req, res, next) =>
+  redditSourceController.list(req, res, next)
 );
 
 app.post('/source/reddit/', (req, res, next) =>
@@ -180,12 +202,13 @@ app.put('/source/reddit/mute', (req, res, next) =>
   redditSourceController.toggleMute(req, res, next)
 );
 
-app.put('/source/youtube/mute', (req, res, next) =>
-  youtubeSourceController.toggleMute(req, res, next)
-);
-
+// Twitter
 app.delete('/source/twitter', (req, res, next) =>
   twitterSourceController.deleteSource(req, res, next)
+);
+
+app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
+  twitterSourceController.getSource(req, res, next)
 );
 
 app.get('/source/twitter/', (req, res, next) =>
@@ -204,28 +227,9 @@ app.put('/source/twitter/mute', (req, res, next) =>
   twitterSourceController.toggleMute(req, res, next)
 );
 
-app.get('/source/getTwitterSourceById/:id', (req, res, next) =>
-  twitterSourceController.getSource(req, res, next)
-);
-
-app.post('/source/instagram/', (req, res, next) =>
-  instagramSourceController.create(req, res, next)
-);
-
-app.get('/source/getInstagramSourceByUsername/:username', (req, res, next) =>
-  instagramSourceController.get(req, res, next)
-);
-
-app.get('/source/instagram/', (req, res, next) => {
-  return instagramSourceController.list(req, res, next);
-});
-
-app.put('/source/instagram/', (req, res, next) =>
-  instagramSourceController.update(req, res, next)
-);
-
-app.put('/source/instagram/mute', (req, res, next) =>
-  instagramSourceController.toggleMute(req, res, next)
+// Youtube
+app.get('/source/getYoutubeSourceById/:id', (req, res, next) =>
+  youtubeSourceController.get(req, res, next)
 );
 
 app.get('/source/youtube/', (req, res, next) =>
@@ -234,6 +238,14 @@ app.get('/source/youtube/', (req, res, next) =>
 
 app.post('/source/youtube', (req, res, next) =>
   youtubeSourceController.create(req, res, next)
+);
+
+app.put('/source/youtube/', (req, res, next) =>
+  youtubeSourceController.update(req, res, next)
+);
+
+app.put('/source/youtube/mute', (req, res, next) =>
+  youtubeSourceController.toggleMute(req, res, next)
 );
 
 /* Quiz:

@@ -38,7 +38,18 @@ exports.create = (req, res, next) => {
   });
 };
 
-/* Create source:
+/* Get source by source ID:
+ ******************************************************************/
+exports.get = (req, res) => {
+  YoutubeSource.findById(req.params.id, (err, source) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(source);
+  });
+};
+
+/* Find channel data by user id:
  ******************************************************************/
 exports.getChannelDataByUserId = (req, res, next) => {
   YoutubeSource.find({ youtubeUserId: req.params.user_id }, (err, source) => {
@@ -96,4 +107,20 @@ exports.toggleMute = (req, res) => {
       res.status(200).send(source);
     });
   });
+};
+
+/* Update source:
+ ******************************************************************/
+exports.update = (req, res) => {
+  YoutubeSource.findOneAndUpdate(
+    { _id: req.body._id },
+    req.body,
+    { new: true },
+    (err, source) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.status(200).json(source);
+    }
+  );
 };

@@ -348,6 +348,8 @@ export const sourceGetById = (o) => (dispatch) => {
       return `/source/getTwitterSourceById/${o.id}`;
     } else if (o.service === 'instagram') {
       return `/source/getInstagramSourceById/${o.id}`;
+    } else if (o.service === 'youtube') {
+      return `/source/getYoutubeSourceById/${o.id}`;
     }
   };
   dispatch({ type: SOURCE_GETBYID_PENDING });
