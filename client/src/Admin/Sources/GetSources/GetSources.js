@@ -153,6 +153,13 @@ class GetSources extends Component {
 
     return (
       <React.Fragment>
+        <this.props.Link to="/admin/">
+          <button className="btn btn-sm btn-light">
+            {FontIcon('faChevronLeft')} Back to Admin
+          </button>
+        </this.props.Link>
+        <br />
+        <br />
         <SectionTitle title="Sources" />
         <SectionTitlePostsTitle
           text={`Total (${countTotalSources()}) — Muted (${countSourcesByActivity(
@@ -206,7 +213,7 @@ class GetSources extends Component {
           </div>
         </div>
         <div style={{ overflow: 'scroll' }}>
-          <table className="table table-striped">
+          <table className="table table-striped text-center">
             <thead>
               <tr>
                 <th></th>

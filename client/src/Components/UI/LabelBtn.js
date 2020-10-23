@@ -8,6 +8,7 @@ class LabelBtn extends Component {
         style={{
           background: this.props.brandColor,
           fontWeight: 300,
+          width: this.props.stretch ? '100%' : null,
         }}
       >
         <span className="font-weight-light m-0 p-0 text-light">

@@ -105,7 +105,12 @@ class Source extends Component {
       const formattedLabel = (
         <React.Fragment>
           <br />
-          <small className="badge badge-light font-weight-light">{label}</small>
+          <small
+            className="badge badge-light font-weight-light"
+            style={{ width: '100%' }}
+          >
+            {label}
+          </small>
         </React.Fragment>
       );
       return formattedLabel;
@@ -266,6 +271,7 @@ class Source extends Component {
               <LabelBtn
                 brandColor={src.brandColor}
                 source={getTableCellsByService(src)}
+                stretch={true}
               />
               {getOfficial(src)}
             </td>
