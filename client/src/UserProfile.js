@@ -4,12 +4,27 @@ import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitleSm from './Components/SectionTitle/SectionTitlePostsTitleSm';
 import format from './config/format';
 import labels from './config/labels';
-import loginCreds from './config/loginCreds';
 import utils from './Components/Utils/utils/utils';
+
+let check = false;
+let url;
 
 class UserProfile extends Component {
   componentDidMount() {
-    this.props.profileGetByUserId(loginCreds.storageItem.getId());
+    let userIdFromUrl = window.location.href.split('profile/')[1];
+    this.props.profileDataReset();
+    this.props.profileGetByUserId(userIdFromUrl);
+    url = userIdFromUrl;
+  }
+  componentDidUpdate() {
+    let userIdFromUrl = window.location.href.split('profile/')[1];
+    if (userIdFromUrl !== url && !check) {
+      this.props.profileGetByUserId(userIdFromUrl);
+      check = true;
+    }
+  }
+  componentWillUnmount() {
+    window.location.reload();
   }
   render() {
     const { location } = utils;
@@ -46,16 +61,19 @@ class UserProfile extends Component {
     };
     return (
       <div>
-        <div className="col-12 m-0 p-0 row">
+        <div
+          className="col-12 m-0 p-0 row"
+          style={{ display: profileReducer.profileData ? null : 'none' }}
+        >
           <div className="col-3 col-sm-2 col-md-2 col-lg-1 m-0 p-0">
             <Avatar
-              src={loginCreds.storageItem.getUsername()}
+              src={profileReducer.profileData.username}
               style={{ width: 65 }}
             />
           </div>
           <div className="col-9 col-sm-10 col-md-10 col-lg-11 m-0 p-0">
             <div className="user-profile-title">
-              <SectionTitle title="gilfoylethegreat" />
+              <SectionTitle title={profileReducer.profileData.username} />
             </div>
           </div>
         </div>

@@ -16,6 +16,7 @@ import {
   PROFILE_GETBYID_FAILURE,
   PROFILE_GETBYID_PENDING,
   PROFILE_GETBYID_SUCCESS,
+  PROFILE_DATA_RESET,
   QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
@@ -761,6 +762,8 @@ const profile = {
 
 export const profileReducer = (state = profile, action = {}) => {
   switch (action.type) {
+    case PROFILE_DATA_RESET:
+      return Object.assign({}, state, { profileData: {} });
     case PROFILE_GETBYID_FAILURE:
       return Object.assign({}, state, { profileGetByIdPending: false });
     case PROFILE_GETBYID_PENDING:

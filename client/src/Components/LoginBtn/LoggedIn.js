@@ -7,7 +7,7 @@ class LoggedIn extends Component {
     return (
       <div className="col-12 m-0 p-0 row div-loggedin-wrapper">
         <div className="col-8 div-loggedin-subwrapper m-0 p-0">
-          <this.props.Link to="/profile/1">
+          <this.props.Link to={`/profile/${loginCreds.storageItem.getId()}`}>
             <button className="btn btn-light btn-link btn-login form-control">
               <Avatar
                 src={loginCreds.storageItem.getUsername()}

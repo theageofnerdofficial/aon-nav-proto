@@ -15,6 +15,7 @@ import {
   PROFILE_GETBYID_FAILURE,
   PROFILE_GETBYID_PENDING,
   PROFILE_GETBYID_SUCCESS,
+  PROFILE_DATA_RESET,
   QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
@@ -147,6 +148,10 @@ export const flashMsgUpdate = (o) => ({
     msg: o.msg,
     style: o.style,
   },
+});
+
+export const profileDataReset = () => ({
+  type: PROFILE_DATA_RESET,
 });
 
 export const profileGetByUserId = (id) => (dispatch) => {

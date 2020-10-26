@@ -27,6 +27,7 @@ export const NERD_SETUP_UPDATE_PHASE = 'NERD_SETUP_UPDATE_PHASE';
 export const PROFILE_GETBYID_FAILURE = 'PROFILE_GETBYID_FAILURE';
 export const PROFILE_GETBYID_PENDING = 'PROFILE_GETBYID_PENDING';
 export const PROFILE_GETBYID_SUCCESS = 'PROFILE_GETBYID_SUCCESS';
+export const PROFILE_DATA_RESET = 'PROFILE_DATA_RESET';
 
 /* Quiz constants:
  *****************************************************/

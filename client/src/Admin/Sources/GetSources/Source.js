@@ -289,7 +289,7 @@ class Source extends Component {
             <td>{src.filter ? utils.str.makeTitleCase(src.filter) : 'N/A'}</td>
             <td>{src.period ? src.period : 'N/A'}</td>
             <td>
-              <this.props.Link to="/">
+              <this.props.Link to={`/profile/${src.createdBy}`}>
                 {getCreatedByUser(src.createdBy)}
               </this.props.Link>
             </td>
