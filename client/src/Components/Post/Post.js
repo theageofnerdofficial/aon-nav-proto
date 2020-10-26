@@ -88,7 +88,7 @@ class Post extends Component {
     const { id, source, text, userData } = this.props;
 
     return (
-      <div className=" col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm">
+      <div className="col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm border">
         <div className=" col-2 text-center p-0 m-0">
           {postElem.thumbnail.get({ source, userData }, settings)}
           <br />

@@ -146,17 +146,20 @@ class Home extends Component {
             />
           </div>
         </div>
-        <div className="col-md-12 m-0 p-0 pt-2 row">
-          <div className="col-lg-7 m-0 p-0 section-responsive-pr">
+        <div className="col-md-12 m-0 p-0 pt-4 pb-4 row border rounded">
+          <div className="col-lg-7 m-0 p-0 mb-4 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Newsfeed"
             />
-            <SectionTitlePostsTitle text="Mostf Popular Posts (10)" />
+
+            <SectionTitlePostsTitle text="Mixed Content" />
 
             {/*  <PostsDummy /> */}
 
-            <Posts allData={allData} />
+            <div style={{ height: 540, overflow: 'scroll' }}>
+              <Posts allData={allData} />
+            </div>
           </div>
           <div className="col-lg-5 m-0 p-0 section-responsive-pr">
             <SectionTitle
@@ -164,7 +167,7 @@ class Home extends Component {
               title="Trending"
             />
             <SectionTitlePostsTitle text="Popular Posts (5)" />
-            {/* <TrendingList /> */}
+            <TrendingList />
           </div>
         </div>
         <br />
