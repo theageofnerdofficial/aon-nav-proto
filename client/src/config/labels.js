@@ -5,7 +5,7 @@ const labels = {
     },
     home: {
       welcomeTitle: 'Welcome to AON',
-      welcomeSubtitle: 'Create a profile & personalise your experience',
+      welcomeSubtitle: 'Create a profile & personalise',
       welcomeSignedIn: 'Welcome back',
     },
   },

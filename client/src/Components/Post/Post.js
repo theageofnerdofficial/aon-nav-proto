@@ -6,6 +6,7 @@ import postElem from './PostElemBySource/PostElem';
 import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
 import FontIcon from '../FontIcon/FontIcon';
+import CreatedCaption from './PostUI/CreatedCaption';
 
 class Post extends Component {
   render() {
@@ -87,18 +88,20 @@ class Post extends Component {
     const { id, source, text, userData } = this.props;
 
     return (
-      <div className="col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm">
-        <div className="col-2 text-center p-0 m-0">
+      <div className=" col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm">
+        <div className=" col-2 text-center p-0 m-0">
           {postElem.thumbnail.get({ source, userData }, settings)}
+          <br />
+          <CreatedCaption />
         </div>
-        <div className="col-10">
+        <div className=" col-10">
           <h6 className="font-weight-normal">
             {postElem.user.get({ source, userData })}
           </h6>
 
           {/* */}
           <div
-            className="rounded shadow"
+            className=" rounded shadow"
             id={'panel-' + id}
             style={{
               background: 'white',
@@ -156,12 +159,6 @@ class Post extends Component {
           {postElem.accordion.get({ id, source, userData }, settings)}
         </div>
         <div className="col-12 m-0 p-2 row">{getEmbeddedMedia()}</div>
-        <small
-          style={{ fontWeight: 300, opacity: 0.5 }}
-          className="text-muted font-italic px-2 pt-1"
-        >
-          2 hours ago
-        </small>
       </div>
     );
   }

@@ -55,7 +55,7 @@ a.nav-link:active {
 
 .carousel-item,
 .carousel-item > img {
-  height: 160px;
+  height: 120px;
 }
 
 .carousel-indicators li {
@@ -435,17 +435,18 @@ a.nav-link:active {
 @media only screen and (max-width: 768px) {
   .carousel-item,
   .carousel-item > img {
-    height: 320px;
+    height: 150px;
   }
   .section-responsive-pr {
     padding-right: 0 !important;
   }
   .carousel-wrapper {
-    height: 205px;
+    height: 150px;
   }
   .carousel-item,
   .carousel-item > img {
-    height: 205px;
+    border: 1px solid red;
+    height: 150px;
   }
   .user-profile-title {
     font-size: 0.8em;

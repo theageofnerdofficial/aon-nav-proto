@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 import FontIcon from './Components/FontIcon/FontIcon';
-// import Posts from './Components/Post/Posts';
+import Posts from './Components/Post/Posts';
 import PostsDummy from './Components/Post/PostsDummy';
 import Quiz from './Components/Quiz/Quiz';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
@@ -124,7 +124,7 @@ class Home extends Component {
     },
   };
   render() {
-    // const { allData } = this.props.dataReducer;
+    const { allData } = this.props.dataReducer;
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
@@ -146,24 +146,25 @@ class Home extends Component {
             />
           </div>
         </div>
-        <div className="col-md-12 m-0 p-0 pt-4 row">
-          <div className="col-lg-6 m-0 p-0 section-responsive-pr">
+        <div className="col-md-12 m-0 p-0 pt-2 row">
+          <div className="col-lg-7 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Newsfeed"
             />
-            <SectionTitlePostsTitle text="Most Popular Posts (10)" />
-            <PostsDummy />
+            <SectionTitlePostsTitle text="Mostf Popular Posts (10)" />
 
-            {/* <Posts allData={allData} />*/}
+            {/*  <PostsDummy /> */}
+
+            <Posts allData={allData} />
           </div>
-          <div className="col-lg-6 m-0 p-0 section-responsive-pr">
+          <div className="col-lg-5 m-0 p-0 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Trending"
             />
             <SectionTitlePostsTitle text="Popular Posts (5)" />
-            <TrendingList />
+            {/* <TrendingList /> */}
           </div>
         </div>
         <br />

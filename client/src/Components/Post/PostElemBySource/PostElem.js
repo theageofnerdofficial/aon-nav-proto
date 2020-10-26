@@ -92,8 +92,9 @@ const postElem = {
       return (
         <img
           alt={`Thumbnail for ${source} post`}
+          className="rounded"
           src={src}
-          style={{ borderRadius: '100px', width: '40px' }}
+          style={{ width: '50px' }}
         />
       );
     },
