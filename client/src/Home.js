@@ -1,6 +1,6 @@
 // Imports:
 import React, { Component } from 'react';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
+import { SOURCE_INSTAGRAM, SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 import FontIcon from './Components/FontIcon/FontIcon';
 import Posts from './Components/Post/Posts';
 import PostsDummy from './Components/Post/PostsDummy';
@@ -25,13 +25,15 @@ let dataPosts = {
 
 class Home extends Component {
   componentDidMount() {
-    this.data.request.getRedditRaw();
+    //this.data.request.getRedditRaw();
     this.data.request.getTwitterRaw();
+    //this.data.request.getInstagramRaw();
   }
 
   componentDidUpdate() {
-    this.data.format.setRedditFormatted();
+    //this.data.format.setRedditFormatted();
     this.data.format.setTwitterFormatted();
+    //this.data.format.setInstagramFormatted();
     this.data.combine();
   }
 
@@ -47,10 +49,20 @@ class Home extends Component {
       const hasTweetFormatted =
         tweetDataFormatted && tweetDataFormatted.length > 0;
       // Combine formatted post/data:
-      if (hasRedditFormatted && hasTweetFormatted && !dataPosts.hasCombined) {
+      //
+      //
+      //
+      if (hasTweetFormatted && !dataPosts.hasCombined) {
         dataPosts.hasCombined = true;
         this.props.dataCombine();
       }
+      //
+      //
+      /*
+      if (hasRedditFormatted && hasTweetFormatted && !dataPosts.hasCombined) {
+        dataPosts.hasCombined = true;
+        this.props.dataCombine();
+      }*/
     },
     format: {
       setRedditFormatted: () => {
@@ -79,8 +91,38 @@ class Home extends Component {
           this.props.dataFormatTweets(formattedTweetData);
         }
       },
+
+      setInstagramFormatted: () => {
+        let formattedInstagramData = [];
+        const { instagramDataRaw } = this.props.dataReducer;
+        const hasInstagramRaw = instagramDataRaw && instagramDataRaw.statuses;
+
+        //
+        // If we have Twitter raw data but it's not formatted, format it:
+        /*
+        if (hasInstagramRaw && !dataPosts.hasFormatted.twitter) {
+          dataPosts.hasFormatted.twitter = true;
+          instagramDataRaw.statuses.forEach((t) => {
+            formattedTweetData.push(formatTweet.formatTweetData(t));
+          });
+          this.props.dataFormatTweets(formattedTweetData);
+        }*/
+      },
     },
     request: {
+      getInstagramRaw: () => {
+        this.props.dataRequest({
+          count: 15,
+          src: SOURCE_INSTAGRAM,
+          user: 'sega',
+        });
+
+        this.props.dataRequest({
+          count: 15,
+          src: SOURCE_INSTAGRAM,
+          user: 'nintendo',
+        });
+      },
       getRedditRaw: () => {
         this.props.dataRequest({
           count: 15,
@@ -104,11 +146,13 @@ class Home extends Component {
         });
       },
       getTwitterRaw: () => {
+        //
+        //
         this.props.dataRequest({
           count: 15,
           endpoint: 'search%2Ftweets',
           src: SOURCE_TWITTER,
-          user: 'nintendouk',
+          user: 'xbox',
           // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
         });
         //

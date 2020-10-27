@@ -1,4 +1,4 @@
-import themeDefault from './theme_default.json';
+import themeDefault from './theme_default2.json';
 
 export const lightTheme = {
   body: themeDefault.light.bg.primary,

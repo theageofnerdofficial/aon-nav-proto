@@ -29,10 +29,9 @@
         "old": "rgb(16,105,182)",
         "ff3to15": "-moz-linear-gradient(top,  rgba(16,105,182,1) 0%, rgba(16,92,164,1) 50%, rgba(11,80,153,1) 51%, rgba(17,58,125,1) 100%)",
 
-        
-        "chromeAndSafari": "-webkit-linear-gradient(top,  rgba(16,105,182,1) 0%,rgba(16,92,164,1) 50%,rgba(11,80,153,1) 51%,rgba(17,58,125,1) 100%)",
+        "chromeAndSafari": "#1565c0",
 
-        "modern": "linear-gradient(to bottom,  rgba(16,105,182,1) 0%,rgba(16,92,164,1) 50%,rgba(11,80,153,1) 51%,rgba(17,58,125,1) 100%)",
+        "modern": "#1565c0",
 
         "ie": "progid:DXImageTransform.Microsoft.gradient( startColorstr='#1069b6', endColorstr='#113a7d',GradientType=0 )"
       },

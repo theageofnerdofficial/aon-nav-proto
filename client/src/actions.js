@@ -115,7 +115,9 @@ export const dataRequest = (o) => (dispatch) => {
     } else if (o.src === SOURCE_REDDIT) {
       return `https://www.reddit.com/r/${o.user}/${o.endpoint}.json`;
     } else if (o.src === SOURCE_INSTAGRAM) {
-      return `/api/request_data_instagram/${o.user}/${o.count}`;
+      return `/api/request_data_instagram/${o.user}`;
+    } else if (o.src === SOURCE_YOUTUBE) {
+      return `/api/request_data_youtube/${o.userID}`;
     }
   };
   fetch(url(), {

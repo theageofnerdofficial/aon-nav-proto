@@ -106,6 +106,8 @@ const data = {
   redditDataRaw: [],
   tweetDataFormatted: [],
   tweetDataRaw: [],
+  instagramDataRaw: [],
+  instagramDataFormatted: [],
 };
 
 export const dataReducer = (state = data, action = {}) => {
@@ -133,6 +135,8 @@ export const dataReducer = (state = data, action = {}) => {
           0,
           action.count
         );
+      } else if (action.source === SOURCE_INSTAGRAM) {
+        newState.instagramDataRaw = action.payload;
       }
       return Object.assign({}, state, newState);
 

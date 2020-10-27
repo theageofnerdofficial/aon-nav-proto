@@ -95,9 +95,9 @@ class Post extends Component {
           <CreatedCaption />
         </div>
         <div className=" col-10">
-          <h6 className="font-weight-normal">
+          <p className="bg-danger mr-3 font-weight-normal">
             {postElem.user.get({ source, userData })}
-          </h6>
+          </p>
 
           {/* */}
           <div
@@ -149,13 +149,13 @@ class Post extends Component {
               {FontIcon('faEllipsisV')}
             </button>
           </span>
-          <h6 className="font-weight-light">
+          <p className="font-weight-light">
             {postElem.text.get(
               { source, text, userData },
               utils,
               ReactHtmlParser
             )}
-          </h6>
+          </p>
           {postElem.accordion.get({ id, source, userData }, settings)}
         </div>
         <div className="col-12 m-0 p-2 row">{getEmbeddedMedia()}</div>

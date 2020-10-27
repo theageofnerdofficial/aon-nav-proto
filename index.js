@@ -62,12 +62,14 @@ app.get('/accesstoken', (req, res, next) => {
 
 /* :
  ***************************************************/
-app.get('/api/request_data_instagram', (req, res, next) => {
-  return client.getUserByUsername({ username: 'instagram' }).then((data) => {
-    const { id, username, profile_pic_url } = data;
-    const edges = data.edge_owner_to_timeline_media.edges;
-    res.json({ id, username, profile_pic_url, edges });
-  });
+app.get('/api/request_data_instagram/:username', (req, res, next) => {
+  return client
+    .getUserByUsername({ username: req.params.username })
+    .then((data) => {
+      const { id, username, profile_pic_url } = data;
+      const edges = data.edge_owner_to_timeline_media.edges;
+      res.json({ id, username, profile_pic_url, edges });
+    });
 });
 
 /* Snoowrap (Reddit API package) — oAuth credentials:

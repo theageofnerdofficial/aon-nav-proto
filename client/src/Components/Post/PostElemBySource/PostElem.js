@@ -92,9 +92,9 @@ const postElem = {
       return (
         <img
           alt={`Thumbnail for ${source} post`}
-          className="rounded"
+          className="mx-1 rounded"
           src={src}
-          style={{ width: '50px' }}
+          style={{ width: '60px' }}
         />
       );
     },
