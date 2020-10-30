@@ -59,7 +59,7 @@ class SectionTitle extends Component {
         <Title>
           <h2
             style={{
-              fontWeight: 300,
+              fontWeight: 400,
               textAlign: this.props.align ? this.props.align : 'left',
               textTransform: 'uppercase',
             }}

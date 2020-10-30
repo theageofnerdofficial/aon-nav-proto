@@ -13,6 +13,10 @@ import {
   MODAL_LOGIN_FORM,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  NEWSFEED_DATA_RESET,
+  NEWSFEED_INC_SOURCE_COUNT,
+  NEWSFEED_POSTS_HAVE_COMBINED,
+  NEWSFEED_SERVICE_FORMAT,
   PROFILE_GETBYID_FAILURE,
   PROFILE_GETBYID_PENDING,
   PROFILE_GETBYID_SUCCESS,
@@ -127,18 +131,23 @@ export const dataReducer = (state = data, action = {}) => {
       return Object.assign({}, state, { dataPending: true });
 
     case DATA_REQUEST_SUCCESS:
-      let newState = { dataPending: false };
+      // let newState = { dataPending: false };
+      stateCp = state;
+      //
+      //
       if (action.source === SOURCE_TWITTER) {
-        newState.tweetDataRaw = action.payload;
+        stateCp.tweetDataRaw.push(action.payload);
       } else if (action.source === SOURCE_REDDIT) {
+        /*
         newState.redditDataRaw = action.payload.data.children.slice(
           0,
           action.count
-        );
+        );*/
       } else if (action.source === SOURCE_INSTAGRAM) {
-        newState.instagramDataRaw = action.payload;
+        // newState.instagramDataRaw = action.payload;
       }
-      return Object.assign({}, state, newState);
+      stateCp.dataPending = false;
+      return Object.assign({}, state, stateCp);
 
     case DATA_FORMAT_REDDIT:
       return Object.assign({}, state, {
@@ -473,10 +482,10 @@ const sourceAddForm = {
     addedBy: { sortDirection: 0 },
   },
   serviceShown: {
-    SOURCE_INSTAGRAM: true,
-    SOURCE_REDDIT: true,
+    SOURCE_INSTAGRAM: false,
+    SOURCE_REDDIT: false,
     SOURCE_TWITTER: true,
-    SOURCE_YOUTUBE: true,
+    SOURCE_YOUTUBE: false,
   },
   sourceGenYoutubeIdPending: false,
   youtubeChannelId: null,
@@ -717,7 +726,6 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
       });
 
     case SOURCE_GEN_YT_ID_SUCCESS:
-      console.log(action.payload.items[0].id);
       return Object.assign({}, state, {
         youtubeChannelId: action.payload.items[0].id,
         sourceGenYoutubeIdPending: false,
@@ -773,11 +781,49 @@ export const profileReducer = (state = profile, action = {}) => {
     case PROFILE_GETBYID_PENDING:
       return Object.assign({}, state, { profileGetByIdPending: true });
     case PROFILE_GETBYID_SUCCESS:
-      console.log(action.payload);
       return Object.assign({}, state, {
         profileData: action.payload,
         profileGetByIdPending: false,
       });
+    default:
+      return state;
+  }
+};
+
+/* Profile:
+ *********************************************************/
+const newsfeed = {
+  dataPosts: {
+    hasCombined: false,
+    count: {
+      twitter: 0,
+    },
+    hasFormatted: {
+      reddit: false,
+      twitter: false,
+    },
+  },
+};
+
+export const newsfeedReducer = (state = newsfeed, action = {}) => {
+  switch (action.type) {
+    case NEWSFEED_POSTS_HAVE_COMBINED:
+      stateCp = state;
+      stateCp.dataPosts.hasCombined = action.payload;
+      return Object.assign({}, state, stateCp);
+    case NEWSFEED_DATA_RESET:
+      stateCp = state;
+      return Object.assign({}, state, stateCp);
+    case NEWSFEED_INC_SOURCE_COUNT:
+      stateCp = state;
+      stateCp.dataPosts.count[action.payload.service] += action.payload.value;
+      return Object.assign({}, state, stateCp);
+    case NEWSFEED_SERVICE_FORMAT:
+      //
+      stateCp = state;
+      stateCp.dataPosts.hasFormatted[action.payload.service] =
+        action.payload.value;
+      return Object.assign({}, state, stateCp);
     default:
       return state;
   }

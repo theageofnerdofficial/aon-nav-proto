@@ -5,6 +5,7 @@
   --col-darkest: #0f0f0f;
   --col-lightest: #fff;
   --col-lighter: #f5f5f5;
+  --col-greyish: rgb(235, 235, 235);
   --col-bg: var(--col-lightest);
   --col-txt: var(--col-darkest);
 }
@@ -25,6 +26,10 @@ body {
 
 h2 {
   font-size: 1.8em;
+}
+
+.feed-title {
+  background-color: var(--col-greyish);
 }
 
 .h4-welcome-title {

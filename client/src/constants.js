@@ -22,6 +22,13 @@ export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';
 export const NERD_UPDATE_CHECK = 'NERD_UPDATE_CHECK';
 export const NERD_SETUP_UPDATE_PHASE = 'NERD_SETUP_UPDATE_PHASE';
 
+/* Newsfeed constant:
+ *****************************************************/
+export const NEWSFEED_DATA_RESET = 'NEWSFEED_DATA_RESET';
+export const NEWSFEED_INC_SOURCE_COUNT = 'NEWSFEED_INC_SOURCE_COUNT';
+export const NEWSFEED_POSTS_HAVE_COMBINED = 'NEWSFEED_POSTS_HAVE_COMBINED';
+export const NEWSFEED_SERVICE_FORMAT = 'NEWSFEED_SERVICE_FORMAT';
+
 /* Profile constants:
  *****************************************************/
 export const PROFILE_GETBYID_FAILURE = 'PROFILE_GETBYID_FAILURE';

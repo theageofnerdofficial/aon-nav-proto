@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { SOURCE_INSTAGRAM, SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
 import FontIcon from './Components/FontIcon/FontIcon';
 import Posts from './Components/Post/Posts';
-import PostsDummy from './Components/Post/PostsDummy';
+//import PostsDummy from './Components/Post/PostsDummy';
 import Quiz from './Components/Quiz/Quiz';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
@@ -14,25 +14,32 @@ import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
 import TrendingList from './Components/Post/Trending/TrendingList';
 import labels from './config/labels';
 
-// Prevents repeated requests:
-let dataPosts = {
-  hasCombined: false,
-  hasFormatted: {
-    reddit: false,
-    twitter: false,
-  },
-};
+// Variables (to be moved to reducer as state eventually):
+let dataPosts;
+let formattedTweets = false;
+let gotTwitterData = false;
 
 class Home extends Component {
   componentDidMount() {
+    this.props.newsfeedResetData();
+    this.props.sourcesGetTwitter();
+    //
     //this.data.request.getRedditRaw();
-    this.data.request.getTwitterRaw();
     //this.data.request.getInstagramRaw();
   }
 
   componentDidUpdate() {
-    //this.data.format.setRedditFormatted();
+    const { sourcesTwitterData } = this.props.sourceReducer;
+
+    //
     this.data.format.setTwitterFormatted();
+
+    if (sourcesTwitterData && !gotTwitterData) {
+      gotTwitterData = true;
+      this.data.request.getTwitterRaw();
+    }
+    //
+    //this.data.format.setRedditFormatted();
     //this.data.format.setInstagramFormatted();
     this.data.combine();
   }
@@ -52,11 +59,13 @@ class Home extends Component {
       //
       //
       //
-      if (hasTweetFormatted && !dataPosts.hasCombined) {
-        dataPosts.hasCombined = true;
+      if (
+        hasTweetFormatted &&
+        !this.props.newsfeedReducer.dataPosts.hasCombined
+      ) {
+        this.props.newsfeedPostsHaveCombined(true);
         this.props.dataCombine();
       }
-      //
       //
       /*
       if (hasRedditFormatted && hasTweetFormatted && !dataPosts.hasCombined) {
@@ -78,16 +87,36 @@ class Home extends Component {
           this.props.dataFormatReddit(formattedRedditData);
         }
       },
-      setTwitterFormatted: () => {
-        let formattedTweetData = [];
+      //
+      //
+      //
+      setTwitterFormatted: (total) => {
+        const { dataPosts } = this.props.newsfeedReducer;
         const { tweetDataRaw } = this.props.dataReducer;
-        const hasTweetsRaw = tweetDataRaw && tweetDataRaw.statuses;
-        // If we have Twitter raw data but it's not formatted, format it:
-        if (hasTweetsRaw && !dataPosts.hasFormatted.twitter) {
-          dataPosts.hasFormatted.twitter = true;
-          tweetDataRaw.statuses.forEach((t) => {
-            formattedTweetData.push(formatTweet.formatTweetData(t));
-          });
+        // Arrays to store tweet data temporarily:
+        let formattedTweetData = [];
+        let gotAllTweets;
+        let unformattedTweetData = [];
+
+        //
+        tweetDataRaw.forEach((t) => {
+          if (t.statuses) unformattedTweetData.push(t.statuses);
+        });
+
+        // Flatten unformatted Tweets (3D arr -> 2D arr to loop & format Tweets)
+        unformattedTweetData
+          .flat(1)
+          .forEach((t) =>
+            formattedTweetData.push(formatTweet.formatTweetData(t))
+          );
+
+        gotAllTweets =
+          tweetDataRaw.length &&
+          formattedTweetData.length === dataPosts.count.twitter;
+
+        //
+        if (gotAllTweets && !formattedTweets) {
+          formattedTweets = true;
           this.props.dataFormatTweets(formattedTweetData);
         }
       },
@@ -96,17 +125,6 @@ class Home extends Component {
         let formattedInstagramData = [];
         const { instagramDataRaw } = this.props.dataReducer;
         const hasInstagramRaw = instagramDataRaw && instagramDataRaw.statuses;
-
-        //
-        // If we have Twitter raw data but it's not formatted, format it:
-        /*
-        if (hasInstagramRaw && !dataPosts.hasFormatted.twitter) {
-          dataPosts.hasFormatted.twitter = true;
-          instagramDataRaw.statuses.forEach((t) => {
-            formattedTweetData.push(formatTweet.formatTweetData(t));
-          });
-          this.props.dataFormatTweets(formattedTweetData);
-        }*/
       },
     },
     request: {
@@ -145,24 +163,38 @@ class Home extends Component {
           user: 'playstation',
         });
       },
+
       getTwitterRaw: () => {
-        //
-        //
-        this.props.dataRequest({
-          count: 15,
-          endpoint: 'search%2Ftweets',
-          src: SOURCE_TWITTER,
-          user: 'xbox',
-          // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
-        });
-        //
-        //
-        this.props.dataRequest({
-          count: 15,
-          endpoint: 'search%2Ftweets',
-          src: SOURCE_TWITTER,
-          user: 'playstation',
-          // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
+        /* 
+        category: "wrestling"
+        categoryGaming: null
+        filter: "recent"
+        isOfficial: true
+        muted: false
+        postsNumber: 10
+        queryDate: ""
+        queryKeyword: ""
+        twitterUser: "WWEUniverse"
+        */
+        const req = (count, o) => {
+          this.props.newsfeedIncrSourceCount({
+            service: 'twitter',
+            value: count,
+          });
+          o.count = count;
+          this.props.dataRequest(o);
+        };
+
+        this.props.sourceReducer.sourcesTwitterData.map((source) => {
+          //
+          if (!source.muted) {
+            req(source.postsNumber, {
+              endpoint: 'search%2Ftweets',
+              src: SOURCE_TWITTER,
+              user: source.twitterUser,
+              // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
+            });
+          }
         });
       },
     },

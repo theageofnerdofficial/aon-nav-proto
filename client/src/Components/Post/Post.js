@@ -49,7 +49,7 @@ class Post extends Component {
               >
                 <img
                   alt="Embedded media"
-                  className="rounded"
+                  className="rounded lazy"
                   width="100%"
                   src={m.media_url}
                 />
@@ -95,13 +95,13 @@ class Post extends Component {
           <CreatedCaption />
         </div>
         <div className=" col-10">
-          <p className="bg-danger mr-3 font-weight-normal">
+          <p className=" pl-1 rounded mr-3 mb-2 font-weight-normal feed-title">
             {postElem.user.get({ source, userData })}
           </p>
 
           {/* */}
           <div
-            className=" rounded shadow"
+            className="rounded shadow"
             id={'panel-' + id}
             style={{
               background: 'white',
@@ -149,7 +149,7 @@ class Post extends Component {
               {FontIcon('faEllipsisV')}
             </button>
           </span>
-          <p className="font-weight-light">
+          <p className="font-weight-light p-0 m-0">
             {postElem.text.get(
               { source, text, userData },
               utils,

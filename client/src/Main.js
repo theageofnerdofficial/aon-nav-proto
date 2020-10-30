@@ -36,6 +36,10 @@ import {
   flashMsgUpdate,
   nerdSetupUpdatePhase,
   nerdUpdateCheck,
+  newsfeedIncrSourceCount,
+  newsfeedPostsHaveCombined,
+  newsfeedResetData,
+  newsfeedServiceFormatted,
   profileDataReset,
   profileGetByUserId,
   quizzesGetList,
@@ -105,6 +109,7 @@ const mapStateToProps = (state) => {
     modalReducer: state.modalReducer,
     nerdReducer: state.nerdReducer,
     nerdSetupReducer: state.nerdSetupReducer,
+    newsfeedReducer: state.newsfeedReducer,
     profileReducer: state.profileReducer,
     quizReducer: state.quizReducer,
     schedulerReducer: state.schedulerReducer,
@@ -127,6 +132,10 @@ const mapDispatchToProps = (dispatch) => {
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
     nerdSetupUpdatePhase: (o) => dispatch(nerdSetupUpdatePhase(o)),
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
+    newsfeedIncrSourceCount: (o) => dispatch(newsfeedIncrSourceCount(o)),
+    newsfeedPostsHaveCombined: (o) => dispatch(newsfeedPostsHaveCombined(o)),
+    newsfeedResetData: () => dispatch(newsfeedResetData()),
+    newsfeedServiceFormatted: (o) => dispatch(newsfeedServiceFormatted(o)),
     profileDataReset: () => dispatch(profileDataReset()),
     profileGetByUserId: (o) => dispatch(profileGetByUserId(o)),
     quizAddAnswer: (o) => dispatch(quizAddAnswer(o)),
@@ -220,6 +229,11 @@ class Main extends Component {
       nerdSetupReducer,
       nerdSetupUpdatePhase,
       nerdUpdateCheck,
+      newsfeedIncrSourceCount,
+      newsfeedPostsHaveCombined,
+      newsfeedReducer,
+      newsfeedResetData,
+      newsfeedServiceFormatted,
       profileDataReset,
       profileGetByUserId,
       profileReducer,
@@ -310,6 +324,11 @@ class Main extends Component {
                           dataFormatTweets={dataFormatTweets}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
+                          newsfeedIncrSourceCount={newsfeedIncrSourceCount}
+                          newsfeedPostsHaveCombined={newsfeedPostsHaveCombined}
+                          newsfeedReducer={newsfeedReducer}
+                          newsfeedResetData={newsfeedResetData}
+                          newsfeedServiceFormatted={newsfeedServiceFormatted}
                           quizAddAnswer={quizAddAnswer}
                           quizCalculateScore={quizCalculateScore}
                           quizId="5f58f9790a27010acad1d82e"
@@ -318,6 +337,8 @@ class Main extends Component {
                           quizReset={quizReset}
                           quizUpdateQNumber={quizUpdateQNumber}
                           quizUpdateScreen={quizUpdateScreen}
+                          sourceReducer={sourceReducer}
+                          sourcesGetTwitter={sourcesGetTwitter}
                           usersReducer={usersReducer}
                           {...props}
                         />

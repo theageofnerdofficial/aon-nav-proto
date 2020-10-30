@@ -13,9 +13,9 @@ class Posts extends Component {
       allData.map((d, index) => {
         return (
           <LazyLoad
-            height={300}
+            // height={540}
             key={`ll-post-${index}`}
-            offset={[-100, 100]}
+            // offset={[-100, 500]}
             placeholder={<LoaderCentered />}
           >
             <Post

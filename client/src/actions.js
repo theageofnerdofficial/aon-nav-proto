@@ -12,6 +12,10 @@ import {
   FLASH_MSG_UPDATE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
+  NEWSFEED_DATA_RESET,
+  NEWSFEED_INC_SOURCE_COUNT,
+  NEWSFEED_POSTS_HAVE_COMBINED,
+  NEWSFEED_SERVICE_FORMAT,
   PROFILE_GETBYID_FAILURE,
   PROFILE_GETBYID_PENDING,
   PROFILE_GETBYID_SUCCESS,
@@ -182,6 +186,33 @@ export const nerdSetupUpdatePhase = (o) => ({
 
 export const nerdUpdateCheck = (o) => ({
   type: NERD_UPDATE_CHECK,
+  payload: o,
+});
+
+/* Nerd actions:
+ ******************************************************/
+export const newsfeedResetData = () => ({
+  type: NEWSFEED_DATA_RESET,
+});
+
+export const newsfeedServiceFormatted = (o) => ({
+  type: NEWSFEED_SERVICE_FORMAT,
+  payload: {
+    service: o.service,
+    value: o.value,
+  },
+});
+
+export const newsfeedIncrSourceCount = (o) => ({
+  type: NEWSFEED_INC_SOURCE_COUNT,
+  payload: {
+    service: o.service,
+    value: o.value,
+  },
+});
+
+export const newsfeedPostsHaveCombined = (o) => ({
+  type: NEWSFEED_POSTS_HAVE_COMBINED,
   payload: o,
 });
 
