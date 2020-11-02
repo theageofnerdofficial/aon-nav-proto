@@ -309,7 +309,7 @@ class Main extends Component {
             <main
               className="flex-shrink-0"
               role="main"
-              style={{ marginTop: 110 }}
+              style={{ marginTop: 105 }}
             >
               <div className="container">
                 <div className="content">
@@ -339,6 +339,7 @@ class Main extends Component {
                           quizUpdateScreen={quizUpdateScreen}
                           sourceReducer={sourceReducer}
                           sourcesGetTwitter={sourcesGetTwitter}
+                          sourcesGetReddit={sourcesGetReddit}
                           usersReducer={usersReducer}
                           {...props}
                         />

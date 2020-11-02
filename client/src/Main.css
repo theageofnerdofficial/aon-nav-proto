@@ -24,6 +24,10 @@ body {
   overflow-x: hidden;
 }
 
+main > .container {
+  padding: 60px 0 0;
+}
+
 h2 {
   font-size: 1.8em;
 }
@@ -450,7 +454,6 @@ a.nav-link:active {
   }
   .carousel-item,
   .carousel-item > img {
-    border: 1px solid red;
     height: 150px;
   }
   .user-profile-title {

@@ -100,10 +100,13 @@ export const dataCombine = () => ({
   type: DATA_COMBINE,
 });
 
-export const dataFormatReddit = (o) => ({
-  type: DATA_FORMAT_REDDIT,
-  payload: o,
-});
+export const dataFormatReddit = (o) => (
+  console.log('GGGGGOT'),
+  {
+    type: DATA_FORMAT_REDDIT,
+    payload: o,
+  }
+);
 
 export const dataFormatTweets = (o) => ({
   type: DATA_FORMAT_TWEETS,
@@ -117,7 +120,24 @@ export const dataRequest = (o) => (dispatch) => {
     if (o.src === SOURCE_TWITTER) {
       return `/api/request_data_twitter/${o.endpoint}/${o.user}/${o.q}/${o.count}`;
     } else if (o.src === SOURCE_REDDIT) {
-      return `https://www.reddit.com/r/${o.user}/${o.endpoint}.json`;
+      ////endpoint: "hot", src: "SOURCE_REDDIT", user: "amazonprime", count: 10
+      let redditUrl = `https://www.reddit.com/r/${o.user}/${o.endpoint}.json?`;
+      let params = [];
+      if (o.period) {
+        if (o.period !== 'All time') {
+          o.period = format.reddit.source.filter(o);
+        }
+        params.push(`t=${o.period}`);
+      }
+      //
+      if (o.count) params.push(`limit=${o.count}`);
+
+      params = params.join('&');
+      redditUrl = redditUrl + params;
+
+      console.log(redditUrl);
+
+      return redditUrl;
     } else if (o.src === SOURCE_INSTAGRAM) {
       return `/api/request_data_instagram/${o.user}`;
     } else if (o.src === SOURCE_YOUTUBE) {
@@ -414,9 +434,6 @@ export const sourcesGetYoutube = () => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log('HERE>...');
-
-      console.log(data);
       dispatch({
         type: SOURCES_YOUTUBE_GET_SUCCESS,
         payload: data,
@@ -463,6 +480,7 @@ export const sourcesGetInstagramPosts = (o) => (dispatch) => {
 };
 
 export const sourceGetRedditPosts = (o) => (dispatch) => {
+  console.log('|||||||||||||||||||||');
   let redditUrl = `https://www.reddit.com/r/${o.subreddit}/${o.filter}.json?`;
   let params = [];
   //
@@ -478,6 +496,7 @@ export const sourceGetRedditPosts = (o) => (dispatch) => {
   params = params.join('&');
   redditUrl = redditUrl + params;
 
+  console.log(redditUrl);
   dispatch({ type: SOURCE_GET_REDDITS_PENDING });
 
   fetch(redditUrl, {

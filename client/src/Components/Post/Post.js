@@ -88,8 +88,8 @@ class Post extends Component {
     const { id, source, text, userData } = this.props;
 
     return (
-      <div className="col-12 m-0 mb-2 p-0 py-3 post-wrapper rounded row shadow-sm border">
-        <div className=" col-2 text-center p-0 m-0">
+      <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm border">
+        <div className="col-2 m-0 p-0 text-center">
           {postElem.thumbnail.get({ source, userData }, settings)}
           <br />
           <CreatedCaption />
@@ -158,7 +158,7 @@ class Post extends Component {
           </p>
           {postElem.accordion.get({ id, source, userData }, settings)}
         </div>
-        <div className="col-12 m-0 p-2 row">{getEmbeddedMedia()}</div>
+        <div className="col-12 m-0 p-0 row">{getEmbeddedMedia()}</div>
       </div>
     );
   }

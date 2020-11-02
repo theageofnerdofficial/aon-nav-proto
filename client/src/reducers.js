@@ -133,16 +133,10 @@ export const dataReducer = (state = data, action = {}) => {
     case DATA_REQUEST_SUCCESS:
       // let newState = { dataPending: false };
       stateCp = state;
-      //
-      //
       if (action.source === SOURCE_TWITTER) {
         stateCp.tweetDataRaw.push(action.payload);
       } else if (action.source === SOURCE_REDDIT) {
-        /*
-        newState.redditDataRaw = action.payload.data.children.slice(
-          0,
-          action.count
-        );*/
+        stateCp.redditDataRaw.push(action.payload);
       } else if (action.source === SOURCE_INSTAGRAM) {
         // newState.instagramDataRaw = action.payload;
       }
@@ -150,6 +144,7 @@ export const dataReducer = (state = data, action = {}) => {
       return Object.assign({}, state, stateCp);
 
     case DATA_FORMAT_REDDIT:
+      console.log('FORMATTING reddit');
       return Object.assign({}, state, {
         redditDataFormatted: action.payload,
       });
@@ -559,10 +554,10 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
     case SOURCES_COMBINE:
       return Object.assign({}, state, {
         sourcesCombined: [
-          ...state.sourcesInstagramData,
+          // ...state.sourcesInstagramData,
           ...state.sourcesRedditData,
           ...state.sourcesTwitterData,
-          ...state.sourcesYoutubeData,
+          //  ...state.sourcesYoutubeData,
         ],
       });
 
@@ -797,6 +792,7 @@ const newsfeed = {
     hasCombined: false,
     count: {
       twitter: 0,
+      reddit: 0,
     },
     hasFormatted: {
       reddit: false,
@@ -816,6 +812,7 @@ export const newsfeedReducer = (state = newsfeed, action = {}) => {
       return Object.assign({}, state, stateCp);
     case NEWSFEED_INC_SOURCE_COUNT:
       stateCp = state;
+      console.log(action.payload);
       stateCp.dataPosts.count[action.payload.service] += action.payload.value;
       return Object.assign({}, state, stateCp);
     case NEWSFEED_SERVICE_FORMAT:

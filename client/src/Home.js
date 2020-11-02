@@ -17,29 +17,38 @@ import labels from './config/labels';
 // Variables (to be moved to reducer as state eventually):
 let dataPosts;
 let formattedTweets = false;
+let formattedRedditPosts = false;
 let gotTwitterData = false;
+let gotRedditData = false;
 
 class Home extends Component {
   componentDidMount() {
     this.props.newsfeedResetData();
     this.props.sourcesGetTwitter();
+    this.props.sourcesGetReddit();
     //
     //this.data.request.getRedditRaw();
     //this.data.request.getInstagramRaw();
   }
 
   componentDidUpdate() {
-    const { sourcesTwitterData } = this.props.sourceReducer;
-
-    //
-    this.data.format.setTwitterFormatted();
+    const { sourcesRedditData, sourcesTwitterData } = this.props.sourceReducer;
 
     if (sourcesTwitterData && !gotTwitterData) {
       gotTwitterData = true;
       this.data.request.getTwitterRaw();
     }
+    if (sourcesRedditData && !gotRedditData) {
+      gotRedditData = true;
+      this.data.request.getRedditRaw();
+    }
+
+    this.data.format.setTwitterFormatted();
+    this.data.format.setRedditFormatted();
     //
-    //this.data.format.setRedditFormatted();
+    //
+    //
+
     //this.data.format.setInstagramFormatted();
     this.data.combine();
   }
@@ -56,34 +65,48 @@ class Home extends Component {
       const hasTweetFormatted =
         tweetDataFormatted && tweetDataFormatted.length > 0;
       // Combine formatted post/data:
-      //
-      //
-      //
       if (
         hasTweetFormatted &&
+        hasRedditFormatted &&
         !this.props.newsfeedReducer.dataPosts.hasCombined
       ) {
         this.props.newsfeedPostsHaveCombined(true);
         this.props.dataCombine();
       }
-      //
-      /*
-      if (hasRedditFormatted && hasTweetFormatted && !dataPosts.hasCombined) {
-        dataPosts.hasCombined = true;
-        this.props.dataCombine();
-      }*/
     },
     format: {
       setRedditFormatted: () => {
-        let formattedRedditData = [];
+        const { dataPosts } = this.props.newsfeedReducer;
+        let gotAllRedditPosts;
         const { redditDataRaw } = this.props.dataReducer;
-        const hasRedditRaw = redditDataRaw && redditDataRaw.length > 0;
-        // If we have Reddit raw data but it's not formatted, format it:
-        if (hasRedditRaw && !dataPosts.hasFormatted.reddit) {
-          dataPosts.hasFormatted.reddit = true;
-          redditDataRaw.forEach((r) => {
-            formattedRedditData.push(formatReddit.formatRedditData(r.data));
+        //
+
+        let formattedRedditData = [];
+        let gotAllRedditData;
+        let unformattedRedditData = [];
+
+        redditDataRaw.forEach((r, index) => {
+          r.data.children.forEach((c) => {
+            // Do not push stickied posts (announcements, etc.)
+            if (c.data && !c.data.stickied) {
+              unformattedRedditData.push(c.data);
+            }
           });
+        });
+
+        gotAllRedditPosts =
+          redditDataRaw.length &&
+          unformattedRedditData.length === dataPosts.count.reddit;
+
+        unformattedRedditData.forEach((r) =>
+          formattedRedditData.push(formatReddit.formatRedditData(r))
+        );
+
+        console.log(formattedRedditData);
+        //
+
+        if (gotAllRedditPosts && !formattedRedditPosts) {
+          formattedRedditPosts = true;
           this.props.dataFormatReddit(formattedRedditData);
         }
       },
@@ -142,40 +165,28 @@ class Home extends Component {
         });
       },
       getRedditRaw: () => {
-        this.props.dataRequest({
-          count: 15,
-          endpoint: 'hot',
-          src: SOURCE_REDDIT,
-          user: 'nintendo',
-        });
+        const req = (count, o) => {
+          this.props.newsfeedIncrSourceCount({
+            service: 'reddit',
+            value: count,
+          });
+          o.count = count;
 
-        this.props.dataRequest({
-          count: 15,
-          endpoint: 'hot',
-          src: SOURCE_REDDIT,
-          user: 'xbox',
-        });
+          this.props.dataRequest(o);
+        };
 
-        this.props.dataRequest({
-          count: 15,
-          endpoint: 'hot',
-          src: SOURCE_REDDIT,
-          user: 'playstation',
+        this.props.sourceReducer.sourcesRedditData.map((source) => {
+          if (!source.muted) {
+            req(source.postsNumber, {
+              endpoint: source.filter,
+              src: SOURCE_REDDIT,
+              user: source.subreddit,
+            });
+          }
         });
       },
 
       getTwitterRaw: () => {
-        /* 
-        category: "wrestling"
-        categoryGaming: null
-        filter: "recent"
-        isOfficial: true
-        muted: false
-        postsNumber: 10
-        queryDate: ""
-        queryKeyword: ""
-        twitterUser: "WWEUniverse"
-        */
         const req = (count, o) => {
           this.props.newsfeedIncrSourceCount({
             service: 'twitter',
@@ -204,7 +215,7 @@ class Home extends Component {
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
-        <div className="col-12 m-0 p-0 mb-4 row">
+        <div className="col-12 m-0 p-0 mb-2 row">
           <div style={{ width: '100%' }}>
             <CarouselJumbotron
               usersReducer={this.props.usersReducer}
@@ -222,7 +233,7 @@ class Home extends Component {
             />
           </div>
         </div>
-        <div className="col-md-12 m-0 p-0 pt-4 pb-4 row border rounded">
+        <div className="col-md-12 m-0 p-0 pt-4 pl-1 pb-4 row border rounded">
           <div className="col-lg-7 m-0 p-0 mb-4 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}

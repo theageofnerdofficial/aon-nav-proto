@@ -12,7 +12,7 @@ class CarouselNotLoggedIn extends Component {
           className={`rounded carousel-item ${index === 0 ? 'active' : null}`}
         >
           <div
-            className="bg-white m-0 p-0 rounded shadow-sm vertical-center"
+            className="bg-white m-0 p-0 rounded vertical-center"
             style={{
               height: '100%',
               position: 'absolute',
