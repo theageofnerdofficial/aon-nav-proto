@@ -4,6 +4,7 @@ import {
   DATA_COMBINE,
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
+  DATA_FORMAT_INSTAGRAM,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
@@ -100,16 +101,18 @@ export const dataCombine = () => ({
   type: DATA_COMBINE,
 });
 
-export const dataFormatReddit = (o) => (
-  console.log('GGGGGOT'),
-  {
-    type: DATA_FORMAT_REDDIT,
-    payload: o,
-  }
-);
+export const dataFormatReddit = (o) => ({
+  type: DATA_FORMAT_REDDIT,
+  payload: o,
+});
 
 export const dataFormatTweets = (o) => ({
   type: DATA_FORMAT_TWEETS,
+  payload: o,
+});
+
+export const dataFormatInstagram = (o) => ({
+  type: DATA_FORMAT_INSTAGRAM,
   payload: o,
 });
 
@@ -120,7 +123,7 @@ export const dataRequest = (o) => (dispatch) => {
     if (o.src === SOURCE_TWITTER) {
       return `/api/request_data_twitter/${o.endpoint}/${o.user}/${o.q}/${o.count}`;
     } else if (o.src === SOURCE_REDDIT) {
-      ////endpoint: "hot", src: "SOURCE_REDDIT", user: "amazonprime", count: 10
+      //endpoint: "hot", src: "SOURCE_REDDIT", user: "amazonprime", count: 10
       let redditUrl = `https://www.reddit.com/r/${o.user}/${o.endpoint}.json?`;
       let params = [];
       if (o.period) {
@@ -129,17 +132,12 @@ export const dataRequest = (o) => (dispatch) => {
         }
         params.push(`t=${o.period}`);
       }
-      //
       if (o.count) params.push(`limit=${o.count}`);
-
       params = params.join('&');
       redditUrl = redditUrl + params;
-
-      console.log(redditUrl);
-
       return redditUrl;
     } else if (o.src === SOURCE_INSTAGRAM) {
-      return `/api/request_data_instagram/${o.user}`;
+      return `/api/request_data_instagram/${o.user}/${o.count}`;
     } else if (o.src === SOURCE_YOUTUBE) {
       return `/api/request_data_youtube/${o.userID}`;
     }

@@ -1,5 +1,11 @@
 import React from 'react';
-import { SOURCE_REDDIT, SOURCE_TWITTER } from '../../../constants';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+} from '../../../constants';
+
+import utils from '../../Utils/utils/utils';
 
 const postElem = {
   /*
@@ -70,7 +76,7 @@ const postElem = {
    ****************************************/
   thumbnail: {
     get(o, settings) {
-      const { source, userData } = o;
+      const { source, userData, profile_pic_url } = o;
       let src;
       switch (source) {
         case SOURCE_REDDIT:
@@ -84,6 +90,16 @@ const postElem = {
               : settings.ui.defaultPostThumbs.twitter.gaming;
           } else {
             src = settings.ui.defaultPostThumbs.twitter.gaming;
+          }
+          break;
+        case SOURCE_INSTAGRAM:
+          if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
+            const hasCustomThumb = userData && profile_pic_url;
+            src = hasCustomThumb
+              ? profile_pic_url
+              : settings.ui.defaultPostThumbs.instagram.default;
+          } else {
+            src = settings.ui.defaultPostThumbs.instagram.default;
           }
           break;
         default:
@@ -115,6 +131,11 @@ const postElem = {
           username =
             userData && userData.screen_name ? userData.screen_name : '???';
           username = username + ' - Twitter';
+          break;
+        case SOURCE_INSTAGRAM:
+          username = userData
+            ? utils.str.makeTitleCase(userData) + ' - Instagram'
+            : '???';
           break;
         default:
           username = '???';

@@ -31,6 +31,7 @@ import {
   dataCombine,
   dataFormatReddit,
   dataFormatTweets,
+  dataFormatInstagram,
   dataRequest,
   flashMsgFlash,
   flashMsgUpdate,
@@ -127,6 +128,7 @@ const mapDispatchToProps = (dispatch) => {
     dataCombine: () => dispatch(dataCombine()),
     dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
+    dataFormatInstagram: (o) => dispatch(dataFormatInstagram(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
@@ -219,6 +221,7 @@ class Main extends Component {
       dataCombine,
       dataFormatReddit,
       dataFormatTweets,
+      dataFormatInstagram,
       dataReducer,
       dataRequest,
       flashMsgFlash,
@@ -322,6 +325,7 @@ class Main extends Component {
                           dataCombine={dataCombine}
                           dataFormatReddit={dataFormatReddit}
                           dataFormatTweets={dataFormatTweets}
+                          dataFormatInstagram={dataFormatInstagram}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
                           newsfeedIncrSourceCount={newsfeedIncrSourceCount}
@@ -340,6 +344,7 @@ class Main extends Component {
                           sourceReducer={sourceReducer}
                           sourcesGetTwitter={sourcesGetTwitter}
                           sourcesGetReddit={sourcesGetReddit}
+                          sourcesGetInstagram={sourcesGetInstagram}
                           usersReducer={usersReducer}
                           {...props}
                         />

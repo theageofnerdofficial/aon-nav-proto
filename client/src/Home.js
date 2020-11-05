@@ -9,6 +9,7 @@ import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
 import formatReddit from './Components/Utils/utils/formatReddit';
 import formatTweet from './Components/Utils/utils/formatTweet';
+import formatInstagram from './Components/Utils/utils/formatInstagram';
 import settings from './config/settings';
 import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
 import TrendingList from './Components/Post/Trending/TrendingList';
@@ -18,21 +19,26 @@ import labels from './config/labels';
 let dataPosts;
 let formattedTweets = false;
 let formattedRedditPosts = false;
+let formattedInstagrams = false;
 let gotTwitterData = false;
 let gotRedditData = false;
+let gotInstagramData = false;
 
 class Home extends Component {
   componentDidMount() {
     this.props.newsfeedResetData();
     this.props.sourcesGetTwitter();
     this.props.sourcesGetReddit();
-    //
-    //this.data.request.getRedditRaw();
-    //this.data.request.getInstagramRaw();
+    this.props.sourcesGetInstagram();
+    // this.props.sourcesGetYoutube();
   }
 
   componentDidUpdate() {
-    const { sourcesRedditData, sourcesTwitterData } = this.props.sourceReducer;
+    const {
+      sourcesTwitterData,
+      sourcesRedditData,
+      sourcesInstagramData,
+    } = this.props.sourceReducer;
 
     if (sourcesTwitterData && !gotTwitterData) {
       gotTwitterData = true;
@@ -42,14 +48,18 @@ class Home extends Component {
       gotRedditData = true;
       this.data.request.getRedditRaw();
     }
+    if (sourcesInstagramData && !gotInstagramData) {
+      gotInstagramData = true;
+      this.data.request.getInstagramRaw();
+    }
 
     this.data.format.setTwitterFormatted();
     this.data.format.setRedditFormatted();
+    this.data.format.setInstagramFormatted();
     //
     //
     //
 
-    //this.data.format.setInstagramFormatted();
     this.data.combine();
   }
 
@@ -58,16 +68,20 @@ class Home extends Component {
       const {
         redditDataFormatted,
         tweetDataFormatted,
+        instagramDataFormatted,
       } = this.props.dataReducer;
       // Ensure we've at least one formatted post from each source:
       const hasRedditFormatted =
         redditDataFormatted && redditDataFormatted.length > 0;
       const hasTweetFormatted =
         tweetDataFormatted && tweetDataFormatted.length > 0;
+      const hasInstagramFormatted =
+        instagramDataFormatted && instagramDataFormatted.length > 0;
       // Combine formatted post/data:
       if (
         hasTweetFormatted &&
         hasRedditFormatted &&
+        hasInstagramFormatted &&
         !this.props.newsfeedReducer.dataPosts.hasCombined
       ) {
         this.props.newsfeedPostsHaveCombined(true);
@@ -80,7 +94,6 @@ class Home extends Component {
         let gotAllRedditPosts;
         const { redditDataRaw } = this.props.dataReducer;
         //
-
         let formattedRedditData = [];
         let gotAllRedditData;
         let unformattedRedditData = [];
@@ -102,17 +115,12 @@ class Home extends Component {
           formattedRedditData.push(formatReddit.formatRedditData(r))
         );
 
-        console.log(formattedRedditData);
-        //
-
         if (gotAllRedditPosts && !formattedRedditPosts) {
           formattedRedditPosts = true;
           this.props.dataFormatReddit(formattedRedditData);
         }
       },
-      //
-      //
-      //
+
       setTwitterFormatted: (total) => {
         const { dataPosts } = this.props.newsfeedReducer;
         const { tweetDataRaw } = this.props.dataReducer;
@@ -145,23 +153,58 @@ class Home extends Component {
       },
 
       setInstagramFormatted: () => {
-        let formattedInstagramData = [];
+        const { dataPosts } = this.props.newsfeedReducer;
         const { instagramDataRaw } = this.props.dataReducer;
-        const hasInstagramRaw = instagramDataRaw && instagramDataRaw.statuses;
+        // Arrays to store instagram data temporarily:
+        let formattedInstagramData = [];
+        let gotAllInstagramPosts;
+        let unformattedInstagramData = [];
+
+        //
+        console.log('insta raw:');
+        console.log(instagramDataRaw);
+        instagramDataRaw.forEach((i) => {
+          unformattedInstagramData.push(i);
+        });
+
+        unformattedInstagramData.forEach((i, index) => {
+          if (i && i.edges.length) {
+            i.edges.forEach((edge) => {
+              formattedInstagramData.push(
+                formatInstagram.formatInstagramData(edge.node, i, index)
+              );
+            });
+          }
+        });
+
+        gotAllInstagramPosts =
+          instagramDataRaw.length &&
+          formattedInstagramData.length === dataPosts.count.instagram;
+
+        //
+        if (gotAllInstagramPosts && !formattedInstagrams) {
+          formattedInstagrams = true;
+          this.props.dataFormatInstagram(formattedInstagramData);
+        }
       },
     },
     request: {
       getInstagramRaw: () => {
-        this.props.dataRequest({
-          count: 15,
-          src: SOURCE_INSTAGRAM,
-          user: 'sega',
-        });
-
-        this.props.dataRequest({
-          count: 15,
-          src: SOURCE_INSTAGRAM,
-          user: 'nintendo',
+        const req = (count, o) => {
+          this.props.newsfeedIncrSourceCount({
+            service: 'instagram',
+            value: count,
+          });
+          o.count = count;
+          this.props.dataRequest(o);
+        };
+        this.props.sourceReducer.sourcesInstagramData.map((source) => {
+          if (!source.muted) {
+            req(source.postsNumber, {
+              src: SOURCE_INSTAGRAM,
+              user: source.username,
+            });
+          }
         });
       },
       getRedditRaw: () => {
@@ -171,7 +214,6 @@ class Home extends Component {
             value: count,
           });
           o.count = count;
-
           this.props.dataRequest(o);
         };
 
@@ -197,7 +239,6 @@ class Home extends Component {
         };
 
         this.props.sourceReducer.sourcesTwitterData.map((source) => {
-          //
           if (!source.muted) {
             req(source.postsNumber, {
               endpoint: 'search%2Ftweets',

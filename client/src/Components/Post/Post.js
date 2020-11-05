@@ -7,6 +7,7 @@ import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
 import FontIcon from '../FontIcon/FontIcon';
 import CreatedCaption from './PostUI/CreatedCaption';
+import { SOURCE_INSTAGRAM } from '../../constants';
 
 class Post extends Component {
   render() {
@@ -38,9 +39,26 @@ class Post extends Component {
     };
     /* :
      ***************************************************************/
-    const getEmbeddedImages = () => {
+    const getEmbeddedImages = (source) => {
       if (this.props.entities_media) {
         return this.props.entities_media.map((m, index) => {
+          //entities_media
+          if (source === SOURCE_INSTAGRAM) {
+            return (
+              <div
+                key={`embedded-img-${index}`}
+                style={{ maxHeight: 200, overflow: 'scroll' }}
+              >
+                <img
+                  alt="Embedded media"
+                  className="rounded lazy"
+                  width="100%"
+                  src={m}
+                />
+              </div>
+            );
+          }
+
           if (m.media_url) {
             return (
               <div
@@ -61,7 +79,7 @@ class Post extends Component {
     };
     /* :
      ***************************************************************/
-    const getEmbeddedMedia = () => {
+    const getEmbeddedMedia = (source) => {
       const embeddedVideos = getEmbeddedVideos();
       if (embeddedVideos) {
         return (
@@ -77,7 +95,7 @@ class Post extends Component {
       } else {
         return (
           <div className="col-12 p-0" style={{ alignSelf: 'flex-start' }}>
-            {getEmbeddedImages()}
+            {getEmbeddedImages(source)}
           </div>
         );
       }
@@ -85,12 +103,15 @@ class Post extends Component {
 
     /* :
      ***************************************************************/
-    const { id, source, text, userData } = this.props;
+    const { id, c, source, text, profile_pic_url, userData } = this.props;
 
     return (
       <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm border">
         <div className="col-2 m-0 p-0 text-center">
-          {postElem.thumbnail.get({ source, userData }, settings)}
+          {postElem.thumbnail.get(
+            { source, userData, profile_pic_url },
+            settings
+          )}
           <br />
           <CreatedCaption />
         </div>
@@ -158,7 +179,7 @@ class Post extends Component {
           </p>
           {postElem.accordion.get({ id, source, userData }, settings)}
         </div>
-        <div className="col-12 m-0 p-0 row">{getEmbeddedMedia()}</div>
+        <div className="col-12 m-0 p-0 row">{getEmbeddedMedia(source)}</div>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import {
   DATA_COMBINE,
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
+  DATA_FORMAT_INSTAGRAM,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
@@ -121,6 +122,7 @@ export const dataReducer = (state = data, action = {}) => {
         allData: utils.arr.randomize([
           ...state.redditDataFormatted,
           ...state.tweetDataFormatted,
+          ...state.instagramDataFormatted,
         ]),
       });
 
@@ -138,7 +140,7 @@ export const dataReducer = (state = data, action = {}) => {
       } else if (action.source === SOURCE_REDDIT) {
         stateCp.redditDataRaw.push(action.payload);
       } else if (action.source === SOURCE_INSTAGRAM) {
-        // newState.instagramDataRaw = action.payload;
+        stateCp.instagramDataRaw.push(action.payload);
       }
       stateCp.dataPending = false;
       return Object.assign({}, state, stateCp);
@@ -152,6 +154,10 @@ export const dataReducer = (state = data, action = {}) => {
     case DATA_FORMAT_TWEETS:
       return Object.assign({}, state, {
         tweetDataFormatted: action.payload,
+      });
+    case DATA_FORMAT_INSTAGRAM:
+      return Object.assign({}, state, {
+        instagramDataFormatted: action.payload,
       });
     default:
       return state;
@@ -460,7 +466,7 @@ const sourceAddForm = {
   sourceYoutubeGetPending: false,
   sourcesCombined: null,
   sourcesRedditData: null,
-  sourcesRedditPosts: null,
+  //sourcesRedditPosts: null,
   sourcesTwitterData: null,
   sourcesInstagramData: null,
   sourcesYoutubeData: null,
@@ -477,9 +483,9 @@ const sourceAddForm = {
     addedBy: { sortDirection: 0 },
   },
   serviceShown: {
-    SOURCE_INSTAGRAM: false,
+    SOURCE_INSTAGRAM: true,
     SOURCE_REDDIT: false,
-    SOURCE_TWITTER: true,
+    SOURCE_TWITTER: false,
     SOURCE_YOUTUBE: false,
   },
   sourceGenYoutubeIdPending: false,
@@ -554,10 +560,10 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
     case SOURCES_COMBINE:
       return Object.assign({}, state, {
         sourcesCombined: [
-          // ...state.sourcesInstagramData,
+          ...state.sourcesInstagramData,
           ...state.sourcesRedditData,
           ...state.sourcesTwitterData,
-          //  ...state.sourcesYoutubeData,
+          ...state.sourcesYoutubeData,
         ],
       });
 
@@ -793,10 +799,12 @@ const newsfeed = {
     count: {
       twitter: 0,
       reddit: 0,
+      instagram: 0,
     },
     hasFormatted: {
       reddit: false,
       twitter: false,
+      instagram: false,
     },
   },
 };

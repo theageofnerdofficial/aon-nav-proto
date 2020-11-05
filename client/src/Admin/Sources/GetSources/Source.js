@@ -143,6 +143,7 @@ class Source extends Component {
 
     // Get table cells by service — different services have differently formatted URLs, for example:
     const getTableCellsByService = (src) => {
+      console.log(src.service);
       if (src.service === SOURCE_REDDIT) {
         return (
           <a
