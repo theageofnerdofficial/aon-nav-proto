@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import {
+  SOURCE_INSTAGRAM_LABEL,
+  SOURCE_REDDIT_LABEL,
+  SOURCE_TWITTER_LABEL,
+  SOURCE_YOUTUBE_LABEL,
+} from '../../../../constants';
 
 class ServiceEdit extends Component {
   render() {
+    let { FormatSource, sourceReducer } = this.props;
     return (
       <React.Fragment>
         <select
@@ -10,20 +17,26 @@ class ServiceEdit extends Component {
           name="service"
           required
           value={
-            this.props.sourceReducer
-              ? this.props.FormatSource.form.getServiceByName(
-                  this.props.sourceReducer
-                )
+            sourceReducer
+              ? FormatSource.form.getServiceByName(sourceReducer)
               : null
           }
         >
           <option disabled selected value>
             -- Select service --
           </option>
-          <option value="reddit">Reddit</option>
-          <option value="twitter">Twitter</option>
-          <option value="instagram">Instagram</option>
-          <option value="youtube">Youtube</option>
+          <option value={SOURCE_REDDIT_LABEL.toLowerCase()}>
+            {SOURCE_REDDIT_LABEL}
+          </option>
+          <option value={SOURCE_YOUTUBE_LABEL.toLowerCase()}>
+            {SOURCE_TWITTER_LABEL}
+          </option>
+          <option value={SOURCE_INSTAGRAM_LABEL.toLowerCase()}>
+            {SOURCE_INSTAGRAM_LABEL}
+          </option>
+          <option value={SOURCE_YOUTUBE_LABEL.toLowerCase()}>
+            {SOURCE_YOUTUBE_LABEL}
+          </option>
         </select>
       </React.Fragment>
     );

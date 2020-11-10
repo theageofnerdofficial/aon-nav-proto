@@ -91,17 +91,17 @@ class Home extends Component {
     format: {
       setRedditFormatted: () => {
         const { dataPosts } = this.props.newsfeedReducer;
-        let gotAllRedditPosts;
         const { redditDataRaw } = this.props.dataReducer;
-        //
+        let gotAllRedditPosts;
         let formattedRedditData = [];
-        let gotAllRedditData;
+        // let gotAllRedditData;
         let unformattedRedditData = [];
 
         redditDataRaw.forEach((r, index) => {
           r.data.children.forEach((c) => {
             // Do not push stickied posts (announcements, etc.)
             if (c.data && !c.data.stickied) {
+              c.data.sourceData = r.sourceData;
               unformattedRedditData.push(c.data);
             }
           });
@@ -130,16 +130,17 @@ class Home extends Component {
         let unformattedTweetData = [];
 
         //
-        tweetDataRaw.forEach((t) => {
+        tweetDataRaw.forEach((t, index) => {
+          t.statuses.forEach((s) => {
+            s.sourceData = t.sourceData;
+          });
           if (t.statuses) unformattedTweetData.push(t.statuses);
         });
 
         // Flatten unformatted Tweets (3D arr -> 2D arr to loop & format Tweets)
-        unformattedTweetData
-          .flat(1)
-          .forEach((t) =>
-            formattedTweetData.push(formatTweet.formatTweetData(t))
-          );
+        unformattedTweetData.flat(1).forEach((t, index) => {
+          formattedTweetData.push(formatTweet.formatTweetData(t));
+        });
 
         gotAllTweets =
           tweetDataRaw.length &&
@@ -161,8 +162,6 @@ class Home extends Component {
         let unformattedInstagramData = [];
 
         //
-        console.log('insta raw:');
-        console.log(instagramDataRaw);
         instagramDataRaw.forEach((i) => {
           unformattedInstagramData.push(i);
         });
@@ -201,6 +200,7 @@ class Home extends Component {
         this.props.sourceReducer.sourcesInstagramData.map((source) => {
           if (!source.muted) {
             req(source.postsNumber, {
+              sourceData: source,
               src: SOURCE_INSTAGRAM,
               user: source.username,
             });
@@ -221,6 +221,7 @@ class Home extends Component {
           if (!source.muted) {
             req(source.postsNumber, {
               endpoint: source.filter,
+              sourceData: source,
               src: SOURCE_REDDIT,
               user: source.subreddit,
             });
@@ -242,6 +243,7 @@ class Home extends Component {
           if (!source.muted) {
             req(source.postsNumber, {
               endpoint: 'search%2Ftweets',
+              sourceData: source,
               src: SOURCE_TWITTER,
               user: source.twitterUser,
               // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
@@ -274,7 +276,7 @@ class Home extends Component {
             />
           </div>
         </div>
-        <div className="col-md-12 m-0 p-0 pt-4 pl-1 pb-4 row border rounded">
+        <div className="col-md-12 m-0 p-0 pt-4 pl-1 pb-4 row rounded">
           <div className="col-lg-7 m-0 p-0 mb-4 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}

@@ -1,25 +1,58 @@
 // Imports:
 import moment from 'moment';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_INSTAGRAM_LABEL,
+  SOURCE_REDDIT,
+  SOURCE_REDDIT_LABEL,
+  SOURCE_TWITTER,
+  SOURCE_TWITTER_LABEL,
+  SOURCE_YOUTUBE,
+  SOURCE_YOUTUBE_LABEL,
+} from '../constants';
+import labels from './labels';
 
 const format = {
+  source: {
+    labelFromConstant(constant) {
+      let label;
+      switch (constant) {
+        case SOURCE_INSTAGRAM:
+          label = SOURCE_INSTAGRAM_LABEL;
+          break;
+        case SOURCE_REDDIT:
+          label = SOURCE_REDDIT_LABEL;
+          break;
+        case SOURCE_TWITTER:
+          label = SOURCE_TWITTER_LABEL;
+          break;
+        case SOURCE_YOUTUBE:
+          label = SOURCE_YOUTUBE_LABEL;
+          break;
+        default:
+          label = null;
+      }
+      return label;
+    },
+  },
   user: {
     labelFromAccessLevel(accessLevel) {
       let label;
       switch (accessLevel) {
         case 0:
-          label = 'Banned';
+          label = labels.user.accessLabel.banned;
           break;
         case 1:
-          label = '';
+          label = labels.user.accessLabel.regular;
           break;
         case 2:
-          label = 'Moderator';
+          label = labels.user.accessLabel.moderator;
           break;
         case 3:
-          label = 'Admin';
+          label = labels.user.accessLabel.admin;
           break;
         case 4:
-          label = 'Super Admin';
+          label = labels.user.accessLabel.superAdmin;
           break;
         default:
           label = null;

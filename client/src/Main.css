@@ -140,6 +140,11 @@ a.nav-link:active {
   overflow: scroll;
 }
 
+.post-newspost-dots-menu-ui-btn {
+  cursor: pointer;
+  letter-spacing: -1;
+}
+
 .post-newspost-heading {
   font-size: 10px;
   padding-bottom: 5px;

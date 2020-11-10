@@ -1,13 +1,23 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_INSTAGRAM_LABEL,
+  SOURCE_REDDIT_LABEL,
+  SOURCE_TWITTER_LABEL,
+} from '../../constants';
+import DotsMenu from './PostUI/DotsMenu';
+import DotsMenuButton from './PostUI/DotsMenuButton';
+import CreatedCaption from './PostUI/CreatedCaption';
+import FontIcon from '../FontIcon/FontIcon';
+import PostText from './PostUI/PostText';
+import PostTitle from './PostUI/PostTitle';
 import ReactHtmlParser from 'react-html-parser';
 import postElem from './PostElemBySource/PostElem';
 import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
-import FontIcon from '../FontIcon/FontIcon';
-import CreatedCaption from './PostUI/CreatedCaption';
-import { SOURCE_INSTAGRAM } from '../../constants';
+import format from '../../config/format';
 
 class Post extends Component {
   render() {
@@ -42,7 +52,7 @@ class Post extends Component {
     const getEmbeddedImages = (source) => {
       if (this.props.entities_media) {
         return this.props.entities_media.map((m, index) => {
-          //entities_media
+          // Instagram thumbnail:
           if (source === SOURCE_INSTAGRAM) {
             return (
               <div
@@ -52,13 +62,14 @@ class Post extends Component {
                 <img
                   alt="Embedded media"
                   className="rounded lazy"
-                  width="100%"
                   src={m}
+                  width="100%"
                 />
               </div>
             );
           }
 
+          //
           if (m.media_url) {
             return (
               <div
@@ -68,8 +79,8 @@ class Post extends Component {
                 <img
                   alt="Embedded media"
                   className="rounded lazy"
-                  width="100%"
                   src={m.media_url}
+                  width="100%"
                 />
               </div>
             );
@@ -103,7 +114,36 @@ class Post extends Component {
 
     /* :
      ***************************************************************/
-    const { id, c, source, text, profile_pic_url, userData } = this.props;
+    const formatDate = (created_at, source) => {
+      const sourceLabel = format.source.labelFromConstant(source);
+
+      if (sourceLabel === SOURCE_TWITTER_LABEL) {
+        console.log('twitter...');
+      }
+      if (sourceLabel === SOURCE_INSTAGRAM_LABEL) {
+        let uet = format.time.uetToHumanReadable(created_at).toString();
+        return format.time.from(uet);
+      } else if (sourceLabel === SOURCE_REDDIT_LABEL) {
+        return format.time.from(created_at);
+      } else if (sourceLabel === SOURCE_TWITTER_LABEL) {
+        console.log(created_at);
+        return created_at;
+        return format.time.from(created_at);
+      }
+    };
+
+    /* :
+     ***************************************************************/
+    const {
+      id,
+      c,
+      source,
+      source_data,
+      text,
+      profile_pic_url,
+      userData,
+      created_time_from,
+    } = this.props;
 
     return (
       <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm border">
@@ -113,63 +153,26 @@ class Post extends Component {
             settings
           )}
           <br />
-          <CreatedCaption />
+          <CreatedCaption createdTimeFrom={created_time_from} />
         </div>
-        <div className=" col-10">
-          <p className=" pl-1 rounded mr-3 mb-2 font-weight-normal feed-title">
-            {postElem.user.get({ source, userData })}
-          </p>
-
-          {/* */}
-          <div
-            className="rounded shadow"
-            id={'panel-' + id}
-            style={{
-              background: 'white',
-              display: 'none',
-              height: 120,
-              padding: 5,
-              position: 'absolute',
-              right: 10,
-              top: 15,
-              transform: 'scale(0.92)',
-              width: 150,
-              zIndex: 100,
-            }}
-          >
-            <button
-              className="btn-sm form-control font-weight-light"
-              style={{ letterSpacing: '-1' }}
-            >
-              Option 1
-            </button>
-            <button
-              className="btn-sm form-control font-weight-light"
-              style={{ letterSpacing: '-1' }}
-            >
-              Option 1
-            </button>
-            <button
-              className="btn-sm form-control font-weight-light"
-              style={{ letterSpacing: '-1' }}
-            >
-              Option 1
-            </button>
-          </div>
-          {/* */}
-          <span style={{ position: 'absolute', right: 0, top: '0' }}>
-            <button
-              className="btn btn-sm text-muted"
-              style={{ marginTop: '-15px', opacity: 0.8 }}
-              onClick={() => {
-                const panel = document.getElementById(`panel-${id}`);
-                panel.style.display =
-                  panel.style.display === 'none' ? 'block' : 'none';
-              }}
-            >
-              {FontIcon('faEllipsisV')}
-            </button>
-          </span>
+        <div className="col-10">
+          <PostTitle
+            postElem={postElem}
+            source={source}
+            source_data={source_data}
+            userData={userData}
+          />
+          <DotsMenu id={id} />
+          <DotsMenuButton FontIcon={FontIcon} id={id} />
+          {/*
+          <PostText
+            postElem={postElem}
+            ReactHtmlParser={ReactHtmlParser}
+            source={source}
+            userData={userData}
+            utils={utils}
+          />
+          */}
           <p className="font-weight-light p-0 m-0">
             {postElem.text.get(
               { source, text, userData },

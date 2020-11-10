@@ -1,15 +1,17 @@
-import { SOURCE_TWITTER } from '../../../constants';
+import format from '../../../config/format';
 
 const formatTweet = {
   formatTweetData(tweet) {
     return {
       id: tweet.id,
-      source: SOURCE_TWITTER,
+      created_at: tweet.created_at,
+      created_time_from: format.time.from(tweet.created_at),
+      source: 'Twitter',
+      source_data: tweet.sourceData,
       user: tweet.user,
       text: tweet.retweeted_status
         ? tweet.retweeted_status.full_text
         : tweet.full_text,
-      created_at: tweet.created_at,
       lang: tweet.lang,
       retweet_count: tweet.retweet_count,
       favorite_count: tweet.favorite_count,
@@ -17,6 +19,7 @@ const formatTweet = {
       extended_entities_media: tweet.extended_entities
         ? tweet.extended_entities.media
         : null,
+      permalink: `https://www.twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`,
     };
   },
 

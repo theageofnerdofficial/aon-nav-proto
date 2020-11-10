@@ -12,20 +12,24 @@ class Posts extends Component {
     return dataHasLength() ? (
       allData.map((d, index) => {
         return (
-          <Post
-            id={d.id}
-            created_at={d.created_at}
-            description={d.description ? d.description : null}
-            profile_pic_url={d.profile_pic_url ? d.profile_pic_url : null}
-            entities_media={d.entities_media ? d.entities_media : null}
-            extended_entities_media={
-              d.extended_entities_media ? d.extended_entities_media : null
-            }
-            preview_img_arr={d.preview_img_arr ? d.preview_img_arr : null}
-            source={d.source}
-            text={d.text}
-            userData={d.user}
-          />
+          <React.Fragment>
+            <Post
+              id={d.id}
+              created_at={d.created_at}
+              created_time_from={d.created_time_from}
+              source_data={d.source_data}
+              description={d.description ? d.description : null}
+              profile_pic_url={d.profile_pic_url ? d.profile_pic_url : null}
+              entities_media={d.entities_media ? d.entities_media : null}
+              extended_entities_media={
+                d.extended_entities_media ? d.extended_entities_media : null
+              }
+              preview_img_arr={d.preview_img_arr ? d.preview_img_arr : null}
+              source={d.source}
+              text={d.text}
+              userData={d.user}
+            />
+          </React.Fragment>
         );
       })
     ) : (

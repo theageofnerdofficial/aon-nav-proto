@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 class CreatedCaption extends Component {
   render() {
+    let { createdTimeFrom } = this.props;
     return (
       <div
         className="font-italic pt-2 px-2 text-muted"
@@ -14,7 +15,7 @@ class CreatedCaption extends Component {
           opacity: 0.6,
         }}
       >
-        ~2 hours ago
+        {createdTimeFrom}
       </div>
     );
   }

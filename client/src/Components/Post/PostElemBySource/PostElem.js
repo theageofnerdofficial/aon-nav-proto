@@ -4,12 +4,12 @@ import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
 } from '../../../constants';
-
+import Thumbnail from '../PostUI/Thumbnail';
+import format from '../../../config/format';
 import utils from '../../Utils/utils/utils';
 
 const postElem = {
-  /*
-   * Accordion
+  /* Accordion:
    ****************************************/
   accordion: {
     get(o, settings) {
@@ -24,13 +24,13 @@ const postElem = {
             >
               <button
                 className="btn-link text-left font-weight-light form-control panel-title"
-                style={{ background: 'none', border: '0' }}
                 onClick={(e) => {
                   e.target.innerHTML =
                     e.target.innerHTML === settings.ui.labels.panel.expand
                       ? settings.ui.labels.panel.contract
                       : settings.ui.labels.panel.expand;
                 }}
+                style={{ background: 'none', border: '0' }}
               >
                 {settings.ui.labels.panel.expand}
               </button>
@@ -79,10 +79,10 @@ const postElem = {
       const { source, userData, profile_pic_url } = o;
       let src;
       switch (source) {
-        case SOURCE_REDDIT:
+        case 'Reddit':
           src = settings.ui.defaultPostThumbs.reddit.gaming;
           break;
-        case SOURCE_TWITTER:
+        case 'Twitter':
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && userData.profile_image_url;
             src = hasCustomThumb
@@ -92,7 +92,7 @@ const postElem = {
             src = settings.ui.defaultPostThumbs.twitter.gaming;
           }
           break;
-        case SOURCE_INSTAGRAM:
+        case 'Instagram':
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && profile_pic_url;
             src = hasCustomThumb
@@ -105,40 +105,39 @@ const postElem = {
         default:
           src = settings.ui.defaultPostThumbs.general;
       }
-      return (
-        <img
-          alt={`Thumbnail for ${source} post`}
-          className="mx-1 rounded"
-          src={src}
-          style={{ width: '60px' }}
-        />
-      );
+      return <Thumbnail imgSrc={src} source={source} />;
     },
   },
 
-  /*
-   * User:
+  /* User:
    ****************************************/
   user: {
     get(o) {
-      const { source, userData } = o;
+      let { source, userData } = o;
       let username;
       switch (source) {
         case SOURCE_REDDIT:
-          username = userData ? userData + ' - Reddit' : '???';
+          username = userData
+            ? userData + ' - ' + format.source.labelFromConstant(source)
+            : null;
           break;
         case SOURCE_TWITTER:
           username =
-            userData && userData.screen_name ? userData.screen_name : '???';
-          username = username + ' - Twitter';
+            userData &&
+            userData.screen_name +
+              ' - ' +
+              format.source.labelFromConstant(source)
+              ? userData.screen_name
+              : null;
           break;
         case SOURCE_INSTAGRAM:
           username = userData
-            ? utils.str.makeTitleCase(userData) + ' - Instagram'
-            : '???';
+            ? utils.str.makeTitleCase(userData) +
+              format.source.labelFromConstant(source)
+            : null;
           break;
         default:
-          username = '???';
+          username = null;
       }
       return username;
     },

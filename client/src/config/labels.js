@@ -1,4 +1,8 @@
 const labels = {
+  response: {
+    error: 'Error',
+    success: 'Success',
+  },
   ui: {
     general: {
       notAvailable: 'N/A',
@@ -9,10 +13,14 @@ const labels = {
       welcomeSignedIn: 'Welcome back',
     },
   },
-
-  response: {
-    error: 'Error',
-    success: 'Success',
+  user: {
+    accessLabel: {
+      banned: 'Banned',
+      regular: '',
+      moderator: 'Moderator',
+      admin: 'Admin',
+      superAdmin: 'Super Admin',
+    },
   },
 };
 

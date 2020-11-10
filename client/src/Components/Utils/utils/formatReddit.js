@@ -1,4 +1,4 @@
-import { SOURCE_REDDIT } from '../../../constants';
+import format from '../../../config/format';
 import utils from './utils';
 
 const formatReddit = {
@@ -6,7 +6,9 @@ const formatReddit = {
     return {
       id: data.id,
       created_at: new Date(data.created_utc * 1000),
-      source: SOURCE_REDDIT,
+      created_time_from: format.time.from(new Date(data.created_utc * 1000)),
+      source: 'Reddit',
+      source_data: data.sourceData,
       stickied: data.stickied ? true : false,
       user: `${utils.str.makeTitleCase(data.subreddit)}`,
       preview_img_arr: data.preview ? data.preview.images : [],
@@ -15,6 +17,7 @@ const formatReddit = {
       lang: null,
       media_embed: data.media_embed,
       upvote_ratio: data.upvote_ratio,
+      permalink: `https://reddit.com${data.permalink}`,
     };
   },
 };

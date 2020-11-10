@@ -136,17 +136,19 @@ export const dataReducer = (state = data, action = {}) => {
       // let newState = { dataPending: false };
       stateCp = state;
       if (action.source === SOURCE_TWITTER) {
+        action.payload.sourceData = action.sourceData;
         stateCp.tweetDataRaw.push(action.payload);
       } else if (action.source === SOURCE_REDDIT) {
+        action.payload.sourceData = action.sourceData;
         stateCp.redditDataRaw.push(action.payload);
       } else if (action.source === SOURCE_INSTAGRAM) {
+        action.payload.sourceData = action.sourceData;
         stateCp.instagramDataRaw.push(action.payload);
       }
       stateCp.dataPending = false;
       return Object.assign({}, state, stateCp);
 
     case DATA_FORMAT_REDDIT:
-      console.log('FORMATTING reddit');
       return Object.assign({}, state, {
         redditDataFormatted: action.payload,
       });

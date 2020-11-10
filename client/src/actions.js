@@ -117,7 +117,7 @@ export const dataFormatInstagram = (o) => ({
 });
 
 // replace???
-export const dataRequest = (o) => (dispatch) => {
+export const dataRequest = (o, sourceData) => (dispatch) => {
   dispatch({ type: DATA_REQUEST_PENDING });
   const url = () => {
     if (o.src === SOURCE_TWITTER) {
@@ -151,6 +151,7 @@ export const dataRequest = (o) => (dispatch) => {
         count: o.count,
         payload: data,
         source: o.src,
+        sourceData: o.sourceData,
         type: DATA_REQUEST_SUCCESS,
       });
     })

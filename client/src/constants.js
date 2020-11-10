@@ -96,11 +96,15 @@ export const SOURCE_GET_REDDITS_FAILURE = 'SOURCE_GET_REDDITS_FAILURE';
 export const SOURCE_GET_REDDITS_PENDING = 'SOURCE_GET_REDDITS_PENDING';
 export const SOURCE_GET_REDDITS_SUCCESS = 'SOURCE_GET_REDDITS_SUCCESS';
 export const SOURCE_INSTAGRAM = 'SOURCE_INSTAGRAM';
+export const SOURCE_INSTAGRAM_LABEL = 'Twitter';
 export const SOURCE_REDDIT = 'SOURCE_REDDIT';
+export const SOURCE_REDDIT_LABEL = 'Reddit';
 export const SOURCES_REFINE_BY_SERVICE = 'SOURCES_REFINE_BY_SERVICE';
 export const SOURCE_REMOVE = 'SOURCE_REMOVE';
 export const SOURCE_TWITTER = 'SOURCE_TWITTER';
+export const SOURCE_TWITTER_LABEL = 'Twitter';
 export const SOURCE_YOUTUBE = 'SOURCE_YOUTUBE';
+export const SOURCE_YOUTUBE_LABEL = 'Youtube';
 
 /* UI constants:
  *****************************************************/
