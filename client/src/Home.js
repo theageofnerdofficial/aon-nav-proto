@@ -1,93 +1,124 @@
 // Imports:
 import React, { Component } from 'react';
-import { SOURCE_INSTAGRAM, SOURCE_REDDIT, SOURCE_TWITTER } from './constants';
+import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
 import FontIcon from './Components/FontIcon/FontIcon';
 import Posts from './Components/Post/Posts';
-//import PostsDummy from './Components/Post/PostsDummy';
-import Quiz from './Components/Quiz/Quiz';
 import SectionTitle from './Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
+import TrendingList from './Components/Post/Trending/TrendingList';
 import formatReddit from './Components/Utils/utils/formatReddit';
 import formatTweet from './Components/Utils/utils/formatTweet';
 import formatInstagram from './Components/Utils/utils/formatInstagram';
-import settings from './config/settings';
-import CarouselJumbotron from './Components/Carousel/CarouselJumbotron';
-import TrendingList from './Components/Post/Trending/TrendingList';
 import labels from './config/labels';
+import settings from './config/settings';
+
+import {
+  SOURCE_INSTAGRAM,
+  SOURCE_REDDIT,
+  SOURCE_TWITTER,
+  SOURCE_YOUTUBE,
+} from './constants';
+import newsFeedFilter from './helpers/newsfeedFilter';
+import format from './config/format';
+import formatYoutube from './Components/Utils/utils/formatYoutube';
+import QuizPage from './Components/Quiz/QuizPage';
 
 // Variables (to be moved to reducer as state eventually):
-let dataPosts;
 let formattedTweets = false;
 let formattedRedditPosts = false;
 let formattedInstagrams = false;
+let formattedYoutubes = false;
+//
 let gotTwitterData = false;
 let gotRedditData = false;
 let gotInstagramData = false;
+let gotYoutubeData = false;
 
 class Home extends Component {
   componentDidMount() {
-    this.props.newsfeedResetData();
-    this.props.sourcesGetTwitter();
-    this.props.sourcesGetReddit();
-    this.props.sourcesGetInstagram();
-    // this.props.sourcesGetYoutube();
+    const { sourcesEnabled } = settings.content.newsfeed;
+    const {
+      newsfeedResetData,
+      sourcesGetTwitter,
+      sourcesGetReddit,
+      sourcesGetInstagram,
+      sourcesGetYoutube,
+    } = this.props;
+
+    newsfeedResetData();
+
+    // Get data from enabled sources:
+    if (sourcesEnabled.twitter) sourcesGetTwitter();
+    if (sourcesEnabled.reddit) sourcesGetReddit();
+    if (sourcesEnabled.instagram) sourcesGetInstagram();
+    if (sourcesEnabled.youtube) sourcesGetYoutube();
   }
 
   componentDidUpdate() {
+    const { request } = this.data;
     const {
       sourcesTwitterData,
       sourcesRedditData,
       sourcesInstagramData,
+      sourcesYoutubeData,
     } = this.props.sourceReducer;
 
-    if (sourcesTwitterData && !gotTwitterData) {
-      gotTwitterData = true;
-      this.data.request.getTwitterRaw();
-    }
-    if (sourcesRedditData && !gotRedditData) {
-      gotRedditData = true;
-      this.data.request.getRedditRaw();
-    }
-    if (sourcesInstagramData && !gotInstagramData) {
-      gotInstagramData = true;
-      this.data.request.getInstagramRaw();
-    }
+    // If we've got source data but not post data from sources, get it:
+    if (sourcesTwitterData && !gotTwitterData) request.getTwitterRaw();
+    if (sourcesRedditData && !gotRedditData) request.getRedditRaw();
+    if (sourcesInstagramData && !gotInstagramData) request.getInstagramRaw();
+    if (sourcesYoutubeData && !gotYoutubeData) request.getYoutubeRaw();
 
+    // Format raw post data so it's suitable for newsfeed:
     this.data.format.setTwitterFormatted();
     this.data.format.setRedditFormatted();
     this.data.format.setInstagramFormatted();
-    //
-    //
-    //
-
+    this.data.format.setYoutubeFormatted();
     this.data.combine();
   }
 
   data = {
     combine: () => {
+      //
       const {
         redditDataFormatted,
         tweetDataFormatted,
         instagramDataFormatted,
+        youtubeDataFormatted,
       } = this.props.dataReducer;
+
+      //
+      const {
+        dataCombine,
+        newsfeedReducer,
+        newsfeedPostsHaveCombined,
+      } = this.props;
+
       // Ensure we've at least one formatted post from each source:
-      const hasRedditFormatted =
-        redditDataFormatted && redditDataFormatted.length > 0;
-      const hasTweetFormatted =
-        tweetDataFormatted && tweetDataFormatted.length > 0;
-      const hasInstagramFormatted =
-        instagramDataFormatted && instagramDataFormatted.length > 0;
+      const hasRedditF = redditDataFormatted && redditDataFormatted.length > 0;
+      const hasTweetF = tweetDataFormatted && tweetDataFormatted.length > 0;
+      const hasIF = instagramDataFormatted && instagramDataFormatted.length > 0;
+      const hasYt = youtubeDataFormatted && youtubeDataFormatted.length > 0;
+
+      /*
+      var x = newsFeedFilter(
+        settings.content.newsfeed.sourcesEnabled,
+        hasTweetF,
+        hasRedditF,
+        hasIF
+      );*/
+
+      // do all enabled sources have formatted sources?
+      //
+      const hasAllF = hasTweetF && hasRedditF && hasIF && hasYt;
+
       // Combine formatted post/data:
-      if (
-        hasTweetFormatted &&
-        hasRedditFormatted &&
-        hasInstagramFormatted &&
-        !this.props.newsfeedReducer.dataPosts.hasCombined
-      ) {
-        this.props.newsfeedPostsHaveCombined(true);
-        this.props.dataCombine();
+      if (hasAllF && !newsfeedReducer.dataPosts.hasCombined) {
+        newsfeedPostsHaveCombined(true);
+        dataCombine();
       }
     },
+
     format: {
       setRedditFormatted: () => {
         const { dataPosts } = this.props.newsfeedReducer;
@@ -153,6 +184,36 @@ class Home extends Component {
         }
       },
 
+      setYoutubeFormatted: (total) => {
+        const { dataPosts } = this.props.newsfeedReducer;
+        const { youtubeDataRaw } = this.props.dataReducer;
+
+        // Arrays to store Youtube data temporarily:
+        let formattedYoutubeData = [];
+        let unformattedYoutubeData = [];
+
+        youtubeDataRaw.forEach((y, index) => {
+          if (y) unformattedYoutubeData.push(y);
+        });
+
+        //formatYoutube.formatYoutubeData(unformattedYoutubeData[0]);
+
+        unformattedYoutubeData.forEach((y, index) => {
+          formattedYoutubeData.push(formatYoutube.formatYoutubeData(y));
+        });
+
+        if (
+          formattedYoutubeData.length === youtubeDataRaw.length &&
+          !formattedYoutubes
+        ) {
+          formattedYoutubes = true;
+
+          window.alert('DATA');
+          // THIS IS NOT WORKING... formattedYoutubeData is populated but this method won't push it
+          this.props.dataFormatYoutube(formattedYoutubeData);
+        }
+      },
+
       setInstagramFormatted: () => {
         const { dataPosts } = this.props.newsfeedReducer;
         const { instagramDataRaw } = this.props.dataReducer;
@@ -189,6 +250,8 @@ class Home extends Component {
     },
     request: {
       getInstagramRaw: () => {
+        gotInstagramData = true;
+
         const req = (count, o) => {
           this.props.newsfeedIncrSourceCount({
             service: 'instagram',
@@ -208,6 +271,8 @@ class Home extends Component {
         });
       },
       getRedditRaw: () => {
+        gotRedditData = true;
+
         const req = (count, o) => {
           this.props.newsfeedIncrSourceCount({
             service: 'reddit',
@@ -229,7 +294,31 @@ class Home extends Component {
         });
       },
 
+      getYoutubeRaw: () => {
+        gotYoutubeData = true;
+        //
+        const req = (count, o) => {
+          this.props.newsfeedIncrSourceCount({
+            service: 'youtube',
+            value: count,
+          });
+          o.count = count;
+          this.props.dataRequest(o);
+        };
+        //
+        this.props.sourceReducer.sourcesYoutubeData.map((source) => {
+          if (!source.muted) {
+            req(source.videosNumber, {
+              sourceData: source,
+              src: SOURCE_YOUTUBE,
+              userId: source.youtubeUserId,
+            });
+          }
+        });
+      },
+
       getTwitterRaw: () => {
+        gotTwitterData = true;
         const req = (count, o) => {
           this.props.newsfeedIncrSourceCount({
             service: 'twitter',
@@ -301,7 +390,8 @@ class Home extends Component {
           </div>
         </div>
         <br />
-        {/* row 2
+
+        {/* Row 2
          *********************/}
         <div className="col-md-12 m-0 mt-4 p-0 row">
           <div className="col-md-4 m-0 p-0 section-responsive-pr">
@@ -320,7 +410,7 @@ class Home extends Component {
               tabColour={settings.ui.style.sectionTab.featured}
               title="Today's Quiz"
             />
-            <Quiz
+            <QuizPage
               quizAddAnswer={this.props.quizAddAnswer}
               quizCalculateScore={this.props.quizCalculateScore}
               quizId="5f58f9790a27010acad1d82e"

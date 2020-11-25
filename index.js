@@ -105,7 +105,7 @@ app.get('/api/getreddit', (req, res, next) => {
 
 /* :
  *****************************************************************/
-app.get('/api/request_data_youtube/:user_id/', (req, res, next) => {
+app.get('/api/request_data_youtube/:user_id', (req, res, next) => {
   res.DB_YOUTUBE_SECRET = DB_YOUTUBE_SECRET;
   return youtubeSourceController.getChannelDataByUserId(req, res, next);
 });

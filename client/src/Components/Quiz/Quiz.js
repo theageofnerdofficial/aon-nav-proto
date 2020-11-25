@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FontIcon from '../FontIcon/FontIcon';
 import Question from './Question';
 import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
+
 class Quiz extends Component {
   componentDidMount() {
     if (this.props.quizId) {
@@ -39,7 +40,7 @@ class Quiz extends Component {
 
     return (
       <React.Fragment>
-        <div className="rounded" style={{ height: 300, width: '100%' }}>
+        <div className="rounded border" style={{ height: 300, width: '100%' }}>
           <div className="col-12 p-0 m-0">
             <SectionTitlePostsTitle
               text={

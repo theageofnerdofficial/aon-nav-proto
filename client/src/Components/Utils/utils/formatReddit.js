@@ -1,13 +1,14 @@
+import { SOURCE_REDDIT_LABEL } from '../../../constants';
 import format from '../../../config/format';
 import utils from './utils';
 
 const formatReddit = {
   formatRedditData(data) {
     return {
-      id: data.id,
+      id: data.id.toString(),
       created_at: new Date(data.created_utc * 1000),
       created_time_from: format.time.from(new Date(data.created_utc * 1000)),
-      source: 'Reddit',
+      source: SOURCE_REDDIT_LABEL,
       source_data: data.sourceData,
       stickied: data.stickied ? true : false,
       user: `${utils.str.makeTitleCase(data.subreddit)}`,

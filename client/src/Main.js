@@ -32,6 +32,7 @@ import {
   dataFormatReddit,
   dataFormatTweets,
   dataFormatInstagram,
+  dataFormatYoutube,
   dataRequest,
   flashMsgFlash,
   flashMsgUpdate,
@@ -129,6 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
     dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataFormatInstagram: (o) => dispatch(dataFormatInstagram(o)),
+    dataFormatYoutube: (o) => dispatch(dataFormatYoutube(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
@@ -219,9 +221,10 @@ class Main extends Component {
   render() {
     const {
       dataCombine,
+      dataFormatInstagram,
       dataFormatReddit,
       dataFormatTweets,
-      dataFormatInstagram,
+      dataFormatYoutube,
       dataReducer,
       dataRequest,
       flashMsgFlash,
@@ -258,22 +261,21 @@ class Main extends Component {
       sourceAddService,
       sourceGenerateYoutubeId,
       sourceGetById,
-      sourcesGetInstagram,
       sourceGetRedditPosts,
       sourceReducer,
-      sourcesRefineByService,
       sourceRemove,
       sourcesCombine,
       sourcesCombinedArrangeBy,
       sourcesFilterByCategory,
+      sourcesGetInstagram,
       sourcesGetReddit,
       sourcesGetTwitter,
       sourcesGetYoutube,
+      sourcesRefineByService,
       sourcesReset,
       sourcesToggleSortUI,
       sourcesToggleSourceMute,
       uiReducer,
-      // uiSetBreadcrumbs,
       uiToggleLights,
       userAuthenticate,
       userLogin,
@@ -323,9 +325,10 @@ class Main extends Component {
                       render={(props) => (
                         <Home
                           dataCombine={dataCombine}
+                          dataFormatInstagram={dataFormatInstagram}
                           dataFormatReddit={dataFormatReddit}
                           dataFormatTweets={dataFormatTweets}
-                          dataFormatInstagram={dataFormatInstagram}
+                          dataFormatYoutube={dataFormatYoutube}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
                           newsfeedIncrSourceCount={newsfeedIncrSourceCount}
@@ -342,9 +345,10 @@ class Main extends Component {
                           quizUpdateQNumber={quizUpdateQNumber}
                           quizUpdateScreen={quizUpdateScreen}
                           sourceReducer={sourceReducer}
-                          sourcesGetTwitter={sourcesGetTwitter}
-                          sourcesGetReddit={sourcesGetReddit}
                           sourcesGetInstagram={sourcesGetInstagram}
+                          sourcesGetReddit={sourcesGetReddit}
+                          sourcesGetTwitter={sourcesGetTwitter}
+                          sourcesGetYoutube={sourcesGetYoutube}
                           usersReducer={usersReducer}
                           {...props}
                         />

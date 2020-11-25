@@ -1,5 +1,5 @@
+import { SOURCE_INSTAGRAM_LABEL } from '../../../constants';
 import format from '../../../config/format';
-import { SOURCE_INSTAGRAM } from '../../../constants';
 
 const formatInstagram = {
   formatInstagramData(edge, i, index) {
@@ -7,11 +7,11 @@ const formatInstagram = {
       format.time.uetToHumanReadable(edge.taken_at_timestamp)
     );
     return {
-      id: edge.id,
+      id: edge.id.toString(),
       created_at: edge.taken_at_timestamp,
       created_time_from: format.time.from(isoLongDate),
       entities_media: edge.thumbnail_src ? [edge.thumbnail_src] : null,
-      source: 'Instagram',
+      source: SOURCE_INSTAGRAM_LABEL,
       source_data: i.sourceData,
       user: edge.owner.username,
       profile_pic_url: i.profile_pic_url,

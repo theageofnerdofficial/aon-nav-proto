@@ -1,8 +1,11 @@
 import React from 'react';
 import {
   SOURCE_INSTAGRAM,
+  SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT,
+  SOURCE_REDDIT_LABEL,
   SOURCE_TWITTER,
+  SOURCE_TWITTER_LABEL,
 } from '../../../constants';
 import Thumbnail from '../PostUI/Thumbnail';
 import format from '../../../config/format';
@@ -79,10 +82,10 @@ const postElem = {
       const { source, userData, profile_pic_url } = o;
       let src;
       switch (source) {
-        case 'Reddit':
+        case SOURCE_REDDIT_LABEL:
           src = settings.ui.defaultPostThumbs.reddit.gaming;
           break;
-        case 'Twitter':
+        case SOURCE_TWITTER_LABEL:
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && userData.profile_image_url;
             src = hasCustomThumb
@@ -92,7 +95,7 @@ const postElem = {
             src = settings.ui.defaultPostThumbs.twitter.gaming;
           }
           break;
-        case 'Instagram':
+        case SOURCE_INSTAGRAM_LABEL:
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && profile_pic_url;
             src = hasCustomThumb

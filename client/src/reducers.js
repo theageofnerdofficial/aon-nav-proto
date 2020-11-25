@@ -2,9 +2,10 @@
  *********************************************************/
 import {
   DATA_COMBINE,
+  DATA_FORMAT_INSTAGRAM,
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
-  DATA_FORMAT_INSTAGRAM,
+  DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
@@ -18,10 +19,10 @@ import {
   NEWSFEED_INC_SOURCE_COUNT,
   NEWSFEED_POSTS_HAVE_COMBINED,
   NEWSFEED_SERVICE_FORMAT,
+  PROFILE_DATA_RESET,
   PROFILE_GETBYID_FAILURE,
   PROFILE_GETBYID_PENDING,
   PROFILE_GETBYID_SUCCESS,
-  PROFILE_DATA_RESET,
   QUIZ_ANS_ADD,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
@@ -44,14 +45,15 @@ import {
   SOURCES_REDDIT_GET_FAILURE,
   SOURCES_REDDIT_GET_PENDING,
   SOURCES_REDDIT_GET_SUCCESS,
+  SOURCES_REFINE_BY_SERVICE,
   SOURCES_RESET_FORM,
   SOURCES_TOGGLE_SORT_UI,
   SOURCES_TOGGLE_SOURCE_MUTE,
   SOURCES_TWITTER_GET_FAILURE,
   SOURCES_TWITTER_GET_PENDING,
   SOURCES_TWITTER_GET_SUCCESS,
-  SOURCES_YOUTUBE_GET_PENDING,
   SOURCES_YOUTUBE_GET_FAILURE,
+  SOURCES_YOUTUBE_GET_PENDING,
   SOURCES_YOUTUBE_GET_SUCCESS,
   SOURCE_ADD_FAILURE,
   SOURCE_ADD_FORM_CAT,
@@ -72,11 +74,10 @@ import {
   SOURCE_GET_REDDITS_FAILURE,
   SOURCE_GET_REDDITS_PENDING,
   SOURCE_GET_REDDITS_SUCCESS,
+  SOURCE_INSTAGRAM,
   SOURCE_REDDIT,
-  SOURCES_REFINE_BY_SERVICE,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
-  SOURCE_INSTAGRAM,
   SOURCE_YOUTUBE,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
@@ -113,17 +114,25 @@ const data = {
   tweetDataRaw: [],
   instagramDataRaw: [],
   instagramDataFormatted: [],
+  youtubeDataRaw: [],
+  youtubeDataFormatted: [],
 };
 
 export const dataReducer = (state = data, action = {}) => {
   switch (action.type) {
     case DATA_COMBINE:
+      let { sourcesEnabled } = settings.content.newsfeed;
+      let arr = [];
+
+      //
+      if (sourcesEnabled.reddit) arr.push(...state.redditDataFormatted);
+      if (sourcesEnabled.twitter) arr.push(...state.tweetDataFormatted);
+      if (sourcesEnabled.instagram) arr.push(...state.instagramDataFormatted);
+      if (sourcesEnabled.youtube) arr.push(...state.youtubeDataFormatted);
+
+      //
       return Object.assign({}, state, {
-        allData: utils.arr.randomize([
-          ...state.redditDataFormatted,
-          ...state.tweetDataFormatted,
-          ...state.instagramDataFormatted,
-        ]),
+        allData: utils.arr.randomize(arr),
       });
 
     case DATA_REQUEST_FAILURE:
@@ -144,6 +153,9 @@ export const dataReducer = (state = data, action = {}) => {
       } else if (action.source === SOURCE_INSTAGRAM) {
         action.payload.sourceData = action.sourceData;
         stateCp.instagramDataRaw.push(action.payload);
+      } else if (action.source === SOURCE_YOUTUBE) {
+        action.payload.sourceData = action.sourceData;
+        stateCp.youtubeDataRaw.push(action.payload);
       }
       stateCp.dataPending = false;
       return Object.assign({}, state, stateCp);
@@ -160,6 +172,11 @@ export const dataReducer = (state = data, action = {}) => {
     case DATA_FORMAT_INSTAGRAM:
       return Object.assign({}, state, {
         instagramDataFormatted: action.payload,
+      });
+    case DATA_FORMAT_YOUTUBE:
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        youtubeDataFormatted: action.payload,
       });
     default:
       return state;
@@ -256,7 +273,7 @@ const quiz = {
   quizListData: [],
   quizListPending: false,
   quizRequestPending: false,
-  quizScreen: 1,
+  quizScreen: 0,
 };
 
 export const quizReducer = (state = quiz, action = {}) => {
@@ -793,7 +810,7 @@ export const profileReducer = (state = profile, action = {}) => {
   }
 };
 
-/* Profile:
+/* Newsfeed:
  *********************************************************/
 const newsfeed = {
   dataPosts: {
@@ -802,11 +819,13 @@ const newsfeed = {
       twitter: 0,
       reddit: 0,
       instagram: 0,
+      youtube: 0,
     },
     hasFormatted: {
       reddit: false,
       twitter: false,
       instagram: false,
+      youtube: false,
     },
   },
 };
@@ -826,7 +845,6 @@ export const newsfeedReducer = (state = newsfeed, action = {}) => {
       stateCp.dataPosts.count[action.payload.service] += action.payload.value;
       return Object.assign({}, state, stateCp);
     case NEWSFEED_SERVICE_FORMAT:
-      //
       stateCp = state;
       stateCp.dataPosts.hasFormatted[action.payload.service] =
         action.payload.value;

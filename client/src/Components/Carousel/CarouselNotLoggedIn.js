@@ -33,7 +33,7 @@ class CarouselNotLoggedIn extends Component {
               <SectionTitlePostsTitle
                 text={utils.str.makeTitleCase(item.mediaSubtype)}
               />
-              <button className="btn btn-sm btn-secondary mb-1">
+              <button className="btn btn-sm btn-secondary mb-1 text-uppercase">
                 Sign Up {FontIcon('faArrowRight')}
               </button>
             </div>

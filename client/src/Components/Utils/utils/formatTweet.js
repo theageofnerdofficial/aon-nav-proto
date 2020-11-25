@@ -1,12 +1,13 @@
+import { SOURCE_TWITTER_LABEL } from '../../../constants';
 import format from '../../../config/format';
 
 const formatTweet = {
   formatTweetData(tweet) {
     return {
-      id: tweet.id,
+      id: tweet.id.toString(),
       created_at: tweet.created_at,
       created_time_from: format.time.from(tweet.created_at),
-      source: 'Twitter',
+      source: SOURCE_TWITTER_LABEL,
       source_data: tweet.sourceData,
       user: tweet.user,
       text: tweet.retweeted_status

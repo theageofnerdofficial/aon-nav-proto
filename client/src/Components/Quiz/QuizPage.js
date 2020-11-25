@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import CompletionScreen from './CompletionScreen';
 import Quiz from './Quiz';
 import LoaderCentered from '../Loader/LoaderCentered';
+import QuizTitle from './QuizTitle';
 
 class QuizPage extends Component {
   componentDidMount() {
-    const hasQuizId = window.location.href.split('/')[3] === 'quiz';
-    if (hasQuizId) {
-      this.props.quizRequestData({ id: window.location.href.split('/')[4] });
+    const { quizId, quizRequestData } = this.props;
+    if (window.location.href.split('/')[3] === 'quiz') {
+      quizRequestData({ id: window.location.href.split('/')[4] });
     } else {
-      this.props.quizRequestData({ id: this.props.quizId });
+      quizRequestData({ id: quizId });
     }
   }
   render() {
@@ -26,6 +27,13 @@ class QuizPage extends Component {
     const screen = {
       0: () => {
         // titlescreen??
+        return (
+          <QuizTitle
+            quizAddAnswer={quizAddAnswer}
+            quizReducer={quizReducer}
+            quizUpdateScreen={quizUpdateScreen}
+          />
+        );
       },
       1: () => {
         return quizReducer && quizReducer.questionData.questions ? (

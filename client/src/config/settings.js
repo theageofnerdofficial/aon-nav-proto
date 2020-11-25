@@ -2,6 +2,7 @@ const settings = {
   categories: {
     arr: ['TV/Film', 'Comics', 'Gaming', 'Wrestling', 'Toys'],
   },
+
   localStorage: {
     darkmode: 'aon_darkmode',
     token: 'aon_token',
@@ -10,6 +11,7 @@ const settings = {
       username: 'aon_user_username',
     },
   },
+
   network: {
     headers: {
       'Content-Type': 'application/json',
@@ -18,6 +20,18 @@ const settings = {
         'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     },
   },
+
+  content: {
+    newsfeed: {
+      sourcesEnabled: {
+        reddit: true,
+        instagram: true,
+        twitter: true,
+        youtube: true,
+      },
+    },
+  },
+
   permissions: {
     accessLevel: {
       admin: 3,
@@ -39,6 +53,7 @@ const settings = {
     },
     loggedInRedirects: ['login', 'signup'],
   },
+
   ui: {
     defaultUsername: '???',
     defaultPostThumbs: {

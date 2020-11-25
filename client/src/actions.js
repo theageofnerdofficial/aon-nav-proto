@@ -5,6 +5,7 @@ import {
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
   DATA_FORMAT_INSTAGRAM,
+  DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
@@ -116,8 +117,13 @@ export const dataFormatInstagram = (o) => ({
   payload: o,
 });
 
+export const dataFormatYoutube = (o) => ({
+  type: DATA_FORMAT_YOUTUBE,
+  payload: o,
+});
+
 // replace???
-export const dataRequest = (o, sourceData) => (dispatch) => {
+export const dataRequest = (o) => (dispatch) => {
   dispatch({ type: DATA_REQUEST_PENDING });
   const url = () => {
     if (o.src === SOURCE_TWITTER) {
@@ -139,9 +145,11 @@ export const dataRequest = (o, sourceData) => (dispatch) => {
     } else if (o.src === SOURCE_INSTAGRAM) {
       return `/api/request_data_instagram/${o.user}/${o.count}`;
     } else if (o.src === SOURCE_YOUTUBE) {
-      return `/api/request_data_youtube/${o.userID}`;
+      const userId = o.userId.toString();
+      return `/api/request_data_youtube/${userId}`;
     }
   };
+
   fetch(url(), {
     method: 'GET',
   })
