@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import settings from '../config/settings';
+
 export const GlobalStyles = createGlobalStyle`
   *,
   *::after,
@@ -71,9 +73,8 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navBtnBg};
     color: ${({ theme }) => theme.text};
   }
+  
 
-  /*  Header:
-  *******************************************************/
   a.nav-link {
     font-weight: 600;
     text-transform: uppercase !important;
@@ -229,32 +230,31 @@ export const GlobalStyles = createGlobalStyle`
 
   .nav-btn-home:hover,
   .nav-btn-home-active {
-    border-bottom: ${({ theme }) =>
-      theme['navbar-btn-home:hover']['border-bottom']} !important;
+    border-bottom: 2px solid ${
+      settings.ui.style.sectionTab.featured
+    } !important;
   }
   
   .nav-btn-mynerd:hover,
   .nav-btn-mynerd-active {
-    border-bottom: ${({ theme }) =>
-      theme['navbar-btn-mynerd:hover']['border-bottom']} !important;
+    border-bottom: 2px solid ${settings.ui.style.sectionTab.mynerd} !important;
   }
   
   .nav-btn-tvfilm:hover,
   .nav-btn-tvfilm-active {
-    border-bottom: ${({ theme }) =>
-      theme['navbar-btn-tvfilm:hover']['border-bottom']} !important;
+    border-bottom: 2px solid ${settings.ui.style.sectionTab.tvfilm} !important;
   }
   
   .nav-btn-comics:hover,
   .nav-btn-comics-active {
-    border-bottom: ${({ theme }) =>
-      theme['navbar-btn-comics:hover']['border-bottom']} !important;;
+    border-bottom: 2px solid ${settings.ui.style.sectionTab.comics} !important;
   }
   
   .nav-btn-gaming:hover,
   .nav-btn-gaming-active {
-    border-bottom: ${({ theme }) =>
-      theme['navbar-btn-gaming:hover']['border-bottom']} !important;
+    border-bottom: 2px solid ${
+      settings.ui.style.sectionTab.gaming.modern
+    } !important;
   }
   
   .navbar-logo-wrapper {
