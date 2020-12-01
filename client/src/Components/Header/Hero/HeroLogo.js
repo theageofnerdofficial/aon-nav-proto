@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Header.css';
+import '../../../Main.css';
 
 class HeroLogo extends Component {
   render() {

@@ -5,14 +5,26 @@ class HeroLinksSocial extends Component {
   render() {
     return (
       <div className="hero-links-wrapper hero-links-social-wrapper">
-        <button className="btn btn-nav-link btn-sm form-control text-left">
-          {FontIcon('faFacebook')} Facebook
+        <button className="btn nav-btn-link btn-sm form-control text-left">
+          <span className="nav-btn-link-facebook-ico">
+            {FontIcon('faFacebook')}
+          </span>
+          &nbsp;
+          <span className="nav-btn-link-facebook-txt">Facebook</span>
         </button>
-        <button className="btn btn-nav-link btn-sm form-control text-left">
-          {FontIcon('faTwitter')} Twitter
+        <button className="btn nav-btn-link btn-sm form-control text-left">
+          <span className="nav-btn-link-twitter-ico">
+            {FontIcon('faTwitter')}
+          </span>
+          &nbsp;
+          <span className="nav-btn-link-facebook-txt">Twitter</span>
         </button>
-        <button className="btn btn-nav-link btn-sm form-control text-left">
-          {FontIcon('faInstagramSquare')} Instagram
+        <button className="btn nav-btn-link btn-sm form-control text-left">
+          <span className="nav-btn-link-insta-ico">
+            {FontIcon('faInstagramSquare')}
+          </span>
+          &nbsp;
+          <span className="nav-btn-link-insta-txt">Instagram</span>
         </button>
       </div>
     );

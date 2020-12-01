@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import '../../Header.css';
+import '../../../../Main.css';
 import FontIcon from '../../../FontIcon/FontIcon';
 
 class HeroLinksGeneral extends Component {
   render() {
     return (
       <div className="hero-links-wrapper hero-links-general-wrapper">
-        <button className="btn btn-nav-link btn-sm form-control text-left">
-          {FontIcon('faCog')} Settings
+        <button className="btn nav-btn-link nav-btn-link-light-toggle-ico btn-sm form-control text-left">
+          <span className="nav-btn-link-light-toggle-ico">
+            {FontIcon('faCog')}
+          </span>
+          &nbsp;
+          <span className="nav-btn-link-light-toggle-txt">Settings</span>
         </button>
         <button
-          className="btn btn-nav-link btn-sm form-control text-left"
+          className="btn nav-btn-link btn-sm form-control text-left"
           onClick={(e) => this.props.toggleLights()}
         >
-          {this.props.lightsOff ? FontIcon('faSun') : FontIcon('faMoon')}
+          <span className="nav-btn-link-light-toggle-ico">
+            {this.props.lightsOff ? FontIcon('faSun') : FontIcon('faMoon')}
+          </span>
           &nbsp;
-          {this.props.lightsOff ? 'Lighten' : 'Darken'}
+          <span className="nav-btn-link-light-toggle-txt">
+            {this.props.lightsOff ? 'Lighten' : 'Darken'}
+          </span>
         </button>
-
         <this.props.Link to={`/admin`}>
-          <button className="btn btn-nav-link btn-sm form-control text-left">
+          <button className="btn nav-btn-link btn-sm form-control text-left">
             Admin
           </button>
         </this.props.Link>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Hero from './Hero/Hero';
 import Navbar from './Navbar/Navbar';
-import './Header.css';
+import '../../Main.css';
 
 class Header extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="bg-custom-2 header-sub-wrapper">
+        <div className="hero-bg-2 header-sub-wrapper">
           <Hero
             lightsOff={this.props.lightsOff}
             Link={this.props.Link}
@@ -30,7 +30,6 @@ class Header extends Component {
             navItems={this.state.navItems}
             setActiveItem={this.setActiveItem}
           />
-
           {/* */}
         </div>
       </header>

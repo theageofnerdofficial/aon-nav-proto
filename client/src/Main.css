@@ -1,8 +1,15 @@
+/* 
+ *             AON stylesheet
+ *
+ ***********************************************/
+/* Root variables
+ ************************************************/
 :root {
   --col-blue-brand: #003475;
   --col-blue-brand-light: #006ca1;
   --col-red-brand: #c61327;
   --col-darkest: #0f0f0f;
+  --col-darker: #111;
   --col-lightest: #fff;
   --col-lighter: #f5f5f5;
   --col-greyish: rgb(235, 235, 235);
@@ -10,7 +17,32 @@
   --col-txt: var(--col-darkest);
 }
 
+/* Imports:
+ ************************************************/
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap');
+
+/* Heading:
+ ************************************************/
+
+/* Small Devices, Tablets */
+@media only screen and (max-width: 768px) {
+  .navbar-btn {
+    font-size: 1em;
+    height: 55px;
+  }
+  .navbar-custom {
+    padding: 0 !important;
+  }
+  .navbar-logo-wrapper {
+    width: 160px !important;
+  }
+  .navbar-logo-wrapper > img {
+    width: 165px;
+  }
+}
+
+/* -----:
+ ************************************************/
 
 * {
   font-family: 'Quicksand', sans-serif;
@@ -22,6 +54,10 @@ body {
   color: var(--col-txt);
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.border {
+  border: 1px solid var(--col-darkest) !important;
 }
 
 main > .container {

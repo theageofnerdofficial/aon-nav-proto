@@ -1,56 +1,425 @@
 {
-  "dark": {
-    "navBtn": {
-      "bgGradient": {
-        "old": "rgb(47,47,47)",
-        "ff3to15": "-moz-linear-gradient(top, rgba(47,47,47,1) 0%, rgba(30,30,30,1) 50%, rgba(3,3,3,1) 51%, rgba(20,20,20,1) 100%)",
-        "chromeAndSafari": "-webkit-linear-gradient(top, rgba(47,47,47,1) 0%,rgba(30,30,30,1) 50%,rgba(3,3,3,1) 51%,rgba(20,20,20,1) 100%)",
-        "modern": "linear-gradient(to bottom, rgba(47,47,47,1) 0%,rgba(30,30,30,1) 50%,rgba(3,3,3,1) 51%,rgba(20,20,20,1) 100%);",
-        "ie": "progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f2f2f', endColorstr='#141414',GradientType=0 )"
+  "light": {
+    "body": {
+      "background-color": "var(--col-lightest) !important",
+      "color": "var(--col-darkest) !important"
+    },
+    "header": {
+      "header-sub-wrapper": {
+        "height": "120px",
+        "left": "0",
+        "position": "absolute",
+        "right": "0",
+        "top": "0",
+        "width": "100%",
+        "z-index": "1030"
+      },
+      "hero-bg-2": {
+        "background-color": "var(--col-blue-brand) !important"
+      },
+      "hero-bg-img": {
+        "filter": "blur(2px)",
+        "height": "100px",
+        "opacity": "0.2",
+        "transform": "scaleY(1.2)",
+        "-webkit-filter": "blur(4.5px)",
+        "width": "100%",
+        "z-index": "-10 !important"
+      },
+      "hero-links-general-wrapper": {
+        "height": "110px",
+        "left": "0 !important",
+        "position": "absolute",
+        "width": "100px"
+      },
+      "hero-links-social-wrapper": {
+        "height": "110px",
+        "position": "absolute",
+        "right": "0",
+        "width": "100px"
+      },
+      "hero-links-wrapper": {
+        "margin-top": "3px",
+        "z-index": "10"
+      },
+      "nav-btn-active": {
+        "color": "var(--col-darkest) !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-comics": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-comics:active": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid lime !important"
+      },
+      "nav-btn-comics:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-comics:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid lime !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-gaming": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-gaming:active": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid cyan !important"
+      },
+      "nav-btn-gaming:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-gaming:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid cyan !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-home": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+
+      "nav-btn-home-active": {
+        "border-bottom": "2px solid red !important"
+      },
+      "nav-btn-home:active": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-home:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-home:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid red !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-link": {
+        "background": "none !important",
+        "color": "var(--col-lightest)",
+        "font-weight": "300",
+        "transition": "color 0.8s"
+      },
+      "nav-btn-link-fb-ico": {},
+      "nav-btn-link-fb-txt": {},
+      "nav-btn-link-insta-ico": {},
+      "nav-btn-link-insta-txt": {},
+      "nav-btn-link-light-toggle-ico": {},
+      "nav-btn-link-light-toggle-txt": {},
+      "nav-btn-link-settings-ico": {},
+      "nav-btn-link-settings-txt": {},
+      "nav-btn-link-twitter-ico": {},
+      "nav-btn-link-twitter-txt": {},
+      "nav-btn-link:active": {
+        "color": "var(--cyan)"
+      },
+      "nav-btn-link:hover": {
+        "color": "var(--cyan)"
+      },
+      "nav-btn-mynerd": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-mynerd-active": {
+        "border-bottom": "2px solid orange !important"
+      },
+      "nav-btn-mynerd:active": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-mynerd:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-mynerd:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "text-decoration": "underline"
+      },
+      "nav-btn-mynerd:hover": {
+        "border-bottom": "2px solid orange !important"
+      },
+      "nav-btn-tvfilm": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-tvfilm:active": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid yellow !important"
+      },
+      "nav-btn-tvfilm:focus": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid yellow !important"
+      },
+      "nav-btn-tvfilm:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid yellow !important",
+        "text-decoration": "underline"
+      },
+      "nav-link": {
+        "a": {
+          "font-weight": "600",
+          "text-transform": "uppercase !important"
+        }
+      },
+      "navbar-bg-custom": {
+        "background-color": "var(--col-blue-brand)"
+      },
+      "navbar-brand": {
+        "font-weight": "800",
+        "text-transform": "uppercase !important"
+      },
+      "navbar-btn": {
+        "background-color": "rgb(21, 101, 192) !important",
+        "border": "0 !important",
+        "color": "#fff !important",
+        "font-size": "1.2em",
+        "font-weight": "300 !important",
+        "letter-spacing": "-1.5px !important"
+      },
+      "navbar-btn-active": {
+        "background-color": "#1370da"
+      },
+      "navbar-custom": {
+        "box-shadow": "1px 1px 1px #222"
+      },
+      "navbar-logo-wrapper > img": {
+        "width": "185px"
+      },
+      "navbar-logo-wrapper": {
+        "height": "100px",
+        "left": "0",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "margin-top": "10px",
+        "position": "absolute",
+        "right": "0",
+        "text-align": "center",
+        "width": "300px",
+        "z-index": "10"
+      },
+      "vertical-center": {
+        "align-items": "center",
+        "display": "flex",
+        "justify-content": "center"
       }
-    },
-    "bg": {
-      "primary": "#191a1b",
-      "secondary": "#282829",
-      "accent": "#000"
-    },
-    "text": {
-      "primary": "#FAFAFA"
-    },
-    "hero": {
-      "bgCol": "#000",
-      "opacity": "0.1"
     }
   },
 
-  "light": {
-    "navBtn": {
-      "bgGradient": {
-        "old": "rgb(16,105,182)",
-        "ff3to15": "-moz-linear-gradient(top,  rgba(16,105,182,1) 0%, rgba(16,92,164,1) 50%, rgba(11,80,153,1) 51%, rgba(17,58,125,1) 100%)",
-
-        
-        "chromeAndSafari": "-webkit-linear-gradient(top,  rgba(16,105,182,1) 0%,rgba(16,92,164,1) 50%,rgba(11,80,153,1) 51%,rgba(17,58,125,1) 100%)",
-
-        "modern": "linear-gradient(to bottom,  rgba(16,105,182,1) 0%,rgba(16,92,164,1) 50%,rgba(11,80,153,1) 51%,rgba(17,58,125,1) 100%)",
-
-        "ie": "progid:DXImageTransform.Microsoft.gradient( startColorstr='#1069b6', endColorstr='#113a7d',GradientType=0 )"
+  "dark": {
+    "body": {
+      "background-color": "var(--col-darker) !important",
+      "color": "var(--col-greyish) !important"
+    },
+    "header": {
+      "header-sub-wrapper": {
+        "height": "120px",
+        "left": "0",
+        "position": "absolute",
+        "right": "0",
+        "top": "0",
+        "width": "100%",
+        "z-index": "1030"
       },
-      "borderCol": "#1565c0",
-      "text": "#fff",
-      "textActive": "#FFF"
-    },
-    "bg": {
-      "primary": "#FFF",
-      "secondary": "#f8f9fa",
-      "accent": "#f8f9fa"
-    },
-    "text": {
-      "primary": "#000"
-    },
-    "hero": {
-      "bgCol": "#003475",
-      "opacity": "0.18"
+      "hero-bg-2": {
+        "background-color": "#000 !important"
+      },
+      "hero-bg-img": {
+        "filter": "blur(2px)",
+        "height": "100px",
+        "opacity": "0.15",
+        "transform": "scaleY(1.2)",
+        "-webkit-filter": "blur(4.5px)",
+        "width": "100%",
+        "z-index": "-10 !important"
+      },
+      "hero-links-general-wrapper": {
+        "height": "110px",
+        "left": "0 !important",
+        "position": "absolute",
+        "width": "100px"
+      },
+      "hero-links-social-wrapper": {
+        "height": "110px",
+        "position": "absolute",
+        "right": "0",
+        "width": "100px"
+      },
+      "hero-links-wrapper": {
+        "margin-top": "3px",
+        "z-index": "10"
+      },
+      "nav-btn-active": {
+        "color": "var(--col-darkest) !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-comics": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-comics:active": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid lime !important"
+      },
+      "nav-btn-comics:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-comics:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid lime !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-gaming": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-gaming:active": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid cyan !important"
+      },
+      "nav-btn-gaming:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-gaming:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid cyan !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-home": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+
+      "nav-btn-home-active": {
+        "border-bottom": "2px solid red !important"
+      },
+      "nav-btn-home:active": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-home:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-home:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid red !important",
+        "text-decoration": "underline"
+      },
+      "nav-btn-link": {
+        "background": "none !important",
+        "color": "var(--col-lightest)",
+        "font-weight": "300",
+        "transition": "color 0.8s"
+      },
+      "nav-btn-link-fb-ico": {},
+      "nav-btn-link-fb-txt": {},
+      "nav-btn-link-insta-ico": {},
+      "nav-btn-link-insta-txt": {},
+      "nav-btn-link-light-toggle-ico": {},
+      "nav-btn-link-light-toggle-txt": {},
+      "nav-btn-link-settings-ico": {},
+      "nav-btn-link-settings-txt": {},
+      "nav-btn-link-twitter-ico": {},
+      "nav-btn-link-twitter-txt": {},
+      "nav-btn-link:active": {
+        "color": "var(--cyan)"
+      },
+      "nav-btn-link:hover": {
+        "color": "var(--cyan)"
+      },
+      "nav-btn-mynerd": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-mynerd-active": {
+        "border-bottom": "2px solid orange !important"
+      },
+      "nav-btn-mynerd:active": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-mynerd:focus": {
+        "background-color": "#222 !important"
+      },
+      "nav-btn-mynerd:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "text-decoration": "underline"
+      },
+      "nav-btn-mynerd:hover": {
+        "border-bottom": "2px solid orange !important"
+      },
+      "nav-btn-tvfilm": {
+        "border-bottom": "2px solid #113a7d !important",
+        "transition": "border 0.8s"
+      },
+      "nav-btn-tvfilm:active": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid yellow !important"
+      },
+      "nav-btn-tvfilm:focus": {
+        "background-color": "#222 !important",
+        "border-bottom": "2px solid yellow !important"
+      },
+      "nav-btn-tvfilm:hover": {
+        "background-color": "#111",
+        "border": "1px solid #000",
+        "border-bottom": "2px solid yellow !important",
+        "text-decoration": "underline"
+      },
+      "nav-link": {
+        "a": {
+          "font-weight": "600",
+          "text-transform": "uppercase !important"
+        }
+      },
+      "navbar-bg-custom": {
+        "background-color": "#000"
+      },
+      "navbar-brand": {
+        "font-weight": "800",
+        "text-transform": "uppercase !important"
+      },
+      "navbar-btn": {
+        "background-color": "#000 !important",
+        "border": "0 !important",
+        "color": "#fff !important",
+        "font-size": "1.2em",
+        "font-weight": "300 !important",
+        "letter-spacing": "-1.5px !important"
+      },
+      "navbar-btn-active": {
+        "background-color": "#111"
+      },
+      "navbar-custom": {
+        "box-shadow": "1px 1px 1px #222"
+      },
+      "navbar-logo-wrapper > img": {
+        "width": "185px"
+      },
+      "navbar-logo-wrapper": {
+        "height": "100px",
+        "left": "0",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "margin-top": "10px",
+        "position": "absolute",
+        "right": "0",
+        "text-align": "center",
+        "width": "300px",
+        "z-index": "10"
+      },
+      "vertical-center": {
+        "align-items": "center",
+        "display": "flex",
+        "justify-content": "center"
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Header.css';
+import '../../../Main.css';
 
 class Navbar extends Component {
   render() {
@@ -22,16 +22,15 @@ class Navbar extends Component {
       const dashlessLink = spacelessLink.replace(/[\/\\]/g, '');
       return dashlessLink;
     };
-
     return (
       <div
         id="navbar-custom"
-        className="bg-custom col-12 m-0 navbar-custom row"
+        className="navbar-bg-custom col-12 m-0 navbar-custom row"
       >
         {this.props.navItems.map((page) => {
           return (
             <div
-              className={`bg-light ${resizeByPageName(
+              className={`bg-custom ${resizeByPageName(
                 page
               )} col-md-2 m-0 p-0 rounded-0`}
               key={'nav-' + page}
@@ -40,7 +39,7 @@ class Navbar extends Component {
                 to={`/${page.toLowerCase() === 'home' ? '' : formatLink(page)}`}
               >
                 <button
-                  className={`btn btn-light form-control navbar-btn p-0 rounded-0 text-center text-uppercase ${
+                  className={`btn btn-custom-bg form-control navbar-btn p-0 rounded-0 text-center text-uppercase ${
                     this.props.activeItem === page.toLowerCase()
                       ? `nav-btn-active nav-btn-${formatLink(page)}-active`
                       : ''
