@@ -174,6 +174,7 @@ export const dataReducer = (state = data, action = {}) => {
         instagramDataFormatted: action.payload,
       });
     case DATA_FORMAT_YOUTUBE:
+      window.alert('FORMAT YT');
       console.log(action.payload);
       return Object.assign({}, state, {
         youtubeDataFormatted: action.payload,

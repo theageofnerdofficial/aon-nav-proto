@@ -505,6 +505,8 @@ class Main extends Component {
                           component={UserList}
                           data={{
                             Link,
+                            flashMsgFlash,
+                            flashMsgUpdate,
                             usersGetList,
                             usersReducer,
                           }}

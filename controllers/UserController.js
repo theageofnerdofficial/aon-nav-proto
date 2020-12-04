@@ -20,7 +20,6 @@ exports.authenticate = (req, res) => {
 /* Create user:
  ******************************************************************/
 exports.create = (req, res) => {
-  console.log('controller');
   const reqBodyCp = req.body;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(reqBodyCp.password, salt);

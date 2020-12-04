@@ -202,14 +202,16 @@ class Home extends Component {
           formattedYoutubeData.push(formatYoutube.formatYoutubeData(y));
         });
 
-        if (
-          formattedYoutubeData.length === youtubeDataRaw.length &&
-          !formattedYoutubes
-        ) {
-          formattedYoutubes = true;
+        var formattedAll = false;
 
-          window.alert('DATA');
-          // THIS IS NOT WORKING... formattedYoutubeData is populated but this method won't push it
+        if (this.props.sourceReducer.sourcesYoutubeData) {
+          formattedAll =
+            formattedYoutubeData.length ===
+            this.props.sourceReducer.sourcesYoutubeData.length;
+        }
+
+        if (formattedAll && !formattedYoutubes) {
+          formattedYoutubes = true;
           this.props.dataFormatYoutube(formattedYoutubeData);
         }
       },

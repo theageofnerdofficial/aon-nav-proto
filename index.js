@@ -145,6 +145,19 @@ app.post('/user/login', (req, res, next) =>
   userController.login(req, res, next)
 );
 
+//
+app.put('/user/promote', (req, res, next) =>
+  userController.promote(req, res, next)
+);
+
+app.put('/user/demote', (req, res, next) =>
+  userController.demote(req, res, next)
+);
+
+app.put('/user/toggleBan', (req, res, next) =>
+  userController.toggleBan(req, res, next)
+);
+
 /* Users:
  *****************************************************************/
 app.get('/users/list', (req, res, next) => userController.list(req, res, next));

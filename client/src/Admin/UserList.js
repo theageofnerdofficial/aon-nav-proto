@@ -1,3 +1,4 @@
+// Imports:
 import React, { Component } from 'react';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
@@ -13,18 +14,16 @@ class UserList extends Component {
     }
   }
   getFlag(country) {
-    const flag = countries.map((e) => e.name).indexOf(country);
-    return flag;
+    return countries.map((e) => e.name).indexOf(country);
   }
   render() {
+    const { flashMsgFlash, flashMsgUpdate, usersReducer } = this.props;
     return (
       <div>
         <SectionTitle title="User List" />
         <SectionTitlePostsTitle
           text={`
-           Registered Users (${
-             this.props.usersReducer ? this.props.usersReducer.list.length : 0
-           })`}
+           Registered Users (${usersReducer ? usersReducer.list.length : 0})`}
         />
         <table className="table table-striped">
           <tr>
@@ -34,9 +33,8 @@ class UserList extends Component {
               Modify
             </th>
           </tr>
-
-          {this.props.usersReducer
-            ? this.props.usersReducer.list.map((l) => {
+          {usersReducer
+            ? usersReducer.list.map((l) => {
                 return (
                   <tr>
                     <td>
@@ -64,10 +62,13 @@ class UserList extends Component {
                               .toString()}
                           </small>
                         </li>
+                        <li>
+                          <br />
+                          {l._id}{' '}
+                        </li>
                       </ul>
                       <br />
                     </td>
-
                     <td>
                       {l.accessLevel} (
                       {formatAccess.accessLabel.get(l.accessLevel)})&nbsp;
@@ -76,22 +77,38 @@ class UserList extends Component {
                       </span>
                     </td>
                     <td>
-                      <ModifyBtn
-                        fontIcon="faCaretUp"
-                        color="success"
-                        label="Promote"
-                      />
-                      <ModifyBtn
-                        fontIcon="faCaretDown"
-                        color="danger"
-                        label="Demote"
-                      />
-
-                      <ModifyBtn
-                        fontIcon="faBan"
-                        color="danger"
-                        label="Ban User"
-                      />
+                      {[
+                        {
+                          action: ['promote', 'promoted'],
+                          color: 'success',
+                          fontIcon: 'faCaretUp',
+                          label: 'Promote',
+                        },
+                        {
+                          action: ['demote', 'demoted'],
+                          color: 'danger',
+                          fontIcon: 'faCaretDown',
+                          label: 'Demote',
+                        },
+                        {
+                          action: ['toggleBan', 'toggled on ban status'],
+                          color: 'danger',
+                          fontIcon: 'faBan',
+                          label: 'Ban user',
+                        },
+                      ].map((el, arr, index) => {
+                        return (
+                          <ModifyBtn
+                            action={el.action}
+                            color={el.color}
+                            fontIcon={el.fontIcon}
+                            flashMsgUpdate={flashMsgUpdate}
+                            flashMsgFlash={flashMsgFlash}
+                            label={el.label}
+                            userId={l._id}
+                          />
+                        );
+                      })}
                     </td>
                   </tr>
                 );

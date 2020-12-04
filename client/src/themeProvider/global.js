@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-
 import settings from '../config/settings';
+
+const { ui } = settings;
 
 export const GlobalStyles = createGlobalStyle`
   *,
@@ -33,8 +34,6 @@ export const GlobalStyles = createGlobalStyle`
   .bg-custom {
     background-color: ${({ theme }) => theme['navbar-btn']['background-color']};
   }
-
-
 
   .btn-login {
     border: 0 !important;
@@ -73,7 +72,6 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.navBtnBg};
     color: ${({ theme }) => theme.text};
   }
-  
 
   a.nav-link {
     font-weight: 600;
@@ -190,8 +188,6 @@ export const GlobalStyles = createGlobalStyle`
     letter-spacing: ${({ theme }) => theme['navbar-btn']['letter-spacing']};
   }
   
-
-  
   .nav-btn-home,
   .nav-btn-mynerd,
   .nav-btn-tvfilm,
@@ -227,34 +223,29 @@ export const GlobalStyles = createGlobalStyle`
       theme['navbar-btn-active']['background-color']} !important;
   }
 
-
   .nav-btn-home:hover,
   .nav-btn-home-active {
-    border-bottom: 2px solid ${
-      settings.ui.style.sectionTab.featured
-    } !important;
+    border-bottom: 2px solid ${ui.style.sectionTab.featured} !important;
   }
   
   .nav-btn-mynerd:hover,
   .nav-btn-mynerd-active {
-    border-bottom: 2px solid ${settings.ui.style.sectionTab.mynerd} !important;
+    border-bottom: 2px solid ${ui.style.sectionTab.mynerd} !important;
   }
   
   .nav-btn-tvfilm:hover,
   .nav-btn-tvfilm-active {
-    border-bottom: 2px solid ${settings.ui.style.sectionTab.tvfilm} !important;
+    border-bottom: 2px solid ${ui.style.sectionTab.tvfilm} !important;
   }
   
   .nav-btn-comics:hover,
   .nav-btn-comics-active {
-    border-bottom: 2px solid ${settings.ui.style.sectionTab.comics} !important;
+    border-bottom: 2px solid ${ui.style.sectionTab.comics} !important;
   }
   
   .nav-btn-gaming:hover,
   .nav-btn-gaming-active {
-    border-bottom: 2px solid ${
-      settings.ui.style.sectionTab.gaming.modern
-    } !important;
+    border-bottom: 2px solid ${ui.style.sectionTab.gaming.modern} !important;
   }
   
   .navbar-logo-wrapper {
@@ -301,6 +292,4 @@ export const GlobalStyles = createGlobalStyle`
       width: 165px;
     }
   }
-  
-  
   `;
