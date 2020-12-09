@@ -23,6 +23,9 @@ import {
   PROFILE_GETBYID_SUCCESS,
   PROFILE_DATA_RESET,
   QUIZ_ANS_ADD,
+  QUIZ_EDIT_BY_ID_FAILURE,
+  QUIZ_EDIT_BY_ID_PENDING,
+  QUIZ_EDIT_BY_ID_SUCCESS,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
   QUIZ_LIST_PENDING,
@@ -260,6 +263,24 @@ export const quizFormUpdate = (o) => ({
   payload: o,
 });
 
+export const quizGetById = (o) => (dispatch) => {
+  dispatch({ type: QUIZ_EDIT_BY_ID_PENDING });
+  console.log(o.id);
+  fetch(`/quiz/${o.id}`, {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch({
+        payload: data,
+        type: QUIZ_EDIT_BY_ID_SUCCESS,
+      });
+    })
+    .catch((error) =>
+      dispatch({ type: QUIZ_EDIT_BY_ID_FAILURE, payload: error })
+    );
+};
+
 export const quizRequestData = (o) => (dispatch) => {
   dispatch({ type: QUIZ_REQUEST_PENDING });
   console.log(o.id);
@@ -270,14 +291,16 @@ export const quizRequestData = (o) => (dispatch) => {
     .then((data) => {
       dispatch({
         payload: data,
+        addQuestions: o.addQuestions,
         type: QUIZ_REQUEST_SUCCESS,
       });
     })
     .catch((error) => dispatch({ type: QUIZ_REQUEST_FAILURE, payload: error }));
 };
 
-export const quizReset = () => ({
+export const quizReset = (o) => ({
   type: QUIZ_RESET,
+  payload: o,
 });
 
 export const quizUpdateQNumber = (o) => ({

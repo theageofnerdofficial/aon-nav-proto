@@ -10,6 +10,7 @@ import LoaderCentered from '../../Components/Loader/LoaderCentered';
 import NumberOfInstagramPostsEdit from './EditSource/4/NumberOfInstagramPostsEdit';
 import NumberOfPostsEdit from './EditSource/4/NumberOfPostsEdit';
 import NumberOfTweetsEdit from './EditSource/4/NumberOfTweetsEdit';
+import NumberOfYoutubeVidsEdit from './EditSource/4/NumberOfYoutubeVidsEdit';
 import SectionTitle from '../../Components/SectionTitle/SectionTitle';
 import ServiceEdit from './EditSource/2/ServiceEdit';
 import SubredditEdit from './EditSource/3/SubredditEdit';
@@ -27,9 +28,7 @@ import {
 } from '../../constants';
 import labels from '../../config/labels';
 import settings from '../../config/settings';
-
 import { fetchConstructor } from '../../actions';
-import NumberOfYoutubeVidsEdit from './EditSource/4/NumberOfYoutubeVidsEdit';
 
 // Stop update loop:
 let gotUpdatedSource = false;

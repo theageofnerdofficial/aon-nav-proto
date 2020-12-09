@@ -1,65 +1,59 @@
+// Imports:
 import React, { Component } from 'react';
-import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
-import QuestionCard from './QuestionCard';
 import FontIcon from '../../../Components/FontIcon/FontIcon';
-import settings from '../../../config/settings';
-import labels from '../../../config/labels';
+import QuestionCard from './QuestionCard';
 import QuizCreationTips from './QuizCreationTips';
+import SectionTitle from '../../../Components/SectionTitle/SectionTitle';
+import labels from '../../../config/labels';
+import settings from '../../../config/settings';
 
-class AddQuiz extends Component {
+class EditQuiz extends Component {
   componentDidMount() {
-    // reset quiz
     this.props.quizReset();
-    console.log(this.props.Link);
+    const path = window.location.href.split('editquiz/')[1];
+    this.props.quizRequestData({
+      addQuestions: true,
+      id: path.split('/')[0],
+      service: path.split('/')[1],
+    });
   }
+
   render() {
+    const { quizFormUpdate, quizReducer } = this.props;
+
+    // Submit quiz functionality — tidying up form data:
     const submitQuiz = (e) => {
-      const getAnsIndex = (ans) => {
-        if (!ans) return false;
-        switch (ans.split('.')[0]) {
-          case 'A':
-            return 0;
-          case 'B':
-            return 1;
-          case 'C':
-            return 2;
-          case 'D':
-            return 3;
-          default:
-            return false;
-        }
-      };
-      const questions = this.props.quizReducer.quizFormQuestions.map((q) => {
+      const questions = quizReducer.quizFormQuestions.map((q, index) => {
         return {
           question: q.question,
           answerA: q.answers[0],
           answerB: q.answers[1],
           answerC: q.answers[2],
           answerD: q.answers[3],
-          correctAnswer: getAnsIndex(q.correct),
+          correctAnswer:
+            e.target.elements[`qq-${index}-correct`].selectedIndex - 1,
         };
       });
-
       fetch('/quiz', {
         body: JSON.stringify({
-          title: this.props.quizReducer.title,
+          id: window.location.href.split('editquiz/')[1],
+          title: e.target.elements['qq-title'].value,
           questions,
-          createdBy: localStorage.getItem('aon_user_id'),
         }),
         headers: settings.network.headers,
-        method: 'POST',
+        method: 'PUT',
       })
         .then((response) => {
           const { props } = this;
           if (!response.ok) {
             props.flashMsgUpdate({
-              msg: `${labels.response.error}: quiz could not be added.`,
+              msg: `${labels.response.error}: quiz could not be updated.`,
               style: 'danger',
             });
             throw new Error(`HTTP error! status: ${response.status}`);
           } else {
             props.flashMsgUpdate({
-              msg: `${labels.response.success}: quiz was successfully added.`,
+              msg: `${labels.response.success}: quiz was successfully updated.`,
               style: 'success',
             });
             props.flashMsgFlash();
@@ -78,7 +72,7 @@ class AddQuiz extends Component {
 
     return (
       <div>
-        <SectionTitle title="Add Quiz" />
+        <SectionTitle title="Edit Quiz" />
         <QuizCreationTips />
         <br />
         <form
@@ -90,30 +84,29 @@ class AddQuiz extends Component {
           <div className="col-12 row p-0 m-0">
             <input
               className="form-control"
+              defaultValue={quizReducer.questionData.title}
               name="qq-title"
-              placeholder="Quiz title"
               onChange={(e) => {
                 e.preventDefault();
-                this.props.quizFormUpdate({
+                quizFormUpdate({
                   name: e.target.name,
                   value: e.target.value,
                 });
               }}
+              placeholder="Quiz title"
             />
             <br />
             <br />
-            {this.props.quizReducer
-              ? this.props.quizReducer.quizFormQuestions.map(
-                  (questionData, index) => {
-                    return (
-                      <QuestionCard
-                        index={index}
-                        quizFormUpdate={this.props.quizFormUpdate}
-                        quizReducer={this.props.quizReducer}
-                      />
-                    );
-                  }
-                )
+            {quizReducer
+              ? quizReducer.quizFormQuestions.map((questionData, index) => {
+                  return (
+                    <QuestionCard
+                      index={index}
+                      quizFormUpdate={quizFormUpdate}
+                      quizReducer={quizReducer}
+                    />
+                  );
+                })
               : null}
             <br />
             <button
@@ -121,7 +114,7 @@ class AddQuiz extends Component {
               name="qq-add"
               onClick={(e) => {
                 e.preventDefault();
-                this.props.quizFormUpdate({
+                quizFormUpdate({
                   name: e.target.name,
                 });
               }}
@@ -130,10 +123,9 @@ class AddQuiz extends Component {
             </button>
           </div>
           <br />
-
-          {this.props.quizReducer.quizFormQuestions.length ? (
+          {quizReducer.quizFormQuestions.length ? (
             <button className="form-control btn btn-primary" type="submit">
-              Submit Quiz {FontIcon('faChevronRight')}
+              Update Quiz {FontIcon('faChevronRight')}
             </button>
           ) : null}
         </form>
@@ -142,4 +134,4 @@ class AddQuiz extends Component {
   }
 }
 
-export default AddQuiz;
+export default EditQuiz;

@@ -41,6 +41,9 @@ export const PROFILE_GETBYID_SUCCESS = 'PROFILE_GETBYID_SUCCESS';
 /* Quiz constants:
  *****************************************************/
 export const QUIZ_ANS_ADD = 'QUIZ_ANS_ADD';
+export const QUIZ_EDIT_BY_ID_FAILURE = 'QUIZ_EDIT_BY_ID_FAILURE';
+export const QUIZ_EDIT_BY_ID_PENDING = 'QUIZ_EDIT_BY_ID_PENDING';
+export const QUIZ_EDIT_BY_ID_SUCCESS = 'QUIZ_EDIT_BY_ID_SUCCESS';
 export const QUIZ_FORM_UPDATE = 'QUIZ_FORM_UPDATE';
 export const QUIZ_LIST_FAILURE = 'QUIZ_LIST_FAILURE';
 export const QUIZ_LIST_PENDING = 'QUIZ_LIST_PENDING';

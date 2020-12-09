@@ -24,6 +24,9 @@ import {
   PROFILE_GETBYID_PENDING,
   PROFILE_GETBYID_SUCCESS,
   QUIZ_ANS_ADD,
+  QUIZ_EDIT_BY_ID_FAILURE,
+  QUIZ_EDIT_BY_ID_PENDING,
+  QUIZ_EDIT_BY_ID_SUCCESS,
   QUIZ_FORM_UPDATE,
   QUIZ_LIST_FAILURE,
   QUIZ_LIST_PENDING,
@@ -280,7 +283,17 @@ const quiz = {
 export const quizReducer = (state = quiz, action = {}) => {
   switch (action.type) {
     case QUIZ_RESET:
-      stateCp = quiz;
+      stateCp = state;
+      if (action.payload && action.payload.keepRequestQData) {
+        stateCp.questionNumber = 0;
+        stateCp.quizScreen = 0;
+        stateCp.score = 0;
+        stateCp.questionData.questions.map(
+          (element) => (element.userAnswer = null)
+        );
+      } else {
+        stateCp = quiz;
+      }
       return Object.assign({}, state, stateCp);
 
     case QUIZ_ANS_ADD:
@@ -288,6 +301,19 @@ export const quizReducer = (state = quiz, action = {}) => {
       stateCp.questionData.questions[state.questionNumber].userAnswer =
         action.payload.answerIndex;
       return Object.assign({}, state, stateCp);
+
+    // maybe delete these QUIZ_REQUEST
+    case QUIZ_EDIT_BY_ID_FAILURE:
+      return Object.assign({}, state, { quizRequestPending: false });
+
+    case QUIZ_EDIT_BY_ID_PENDING:
+      return Object.assign({}, state, { quizRequestPending: true });
+
+    case QUIZ_EDIT_BY_ID_SUCCESS:
+      return Object.assign({}, state, {
+        questionData: action.payload,
+        quizRequestPending: false,
+      });
 
     case QUIZ_Q_NUMBER_UPDATE:
       stateCp = state;
@@ -365,7 +391,21 @@ export const quizReducer = (state = quiz, action = {}) => {
       return Object.assign({}, state, { quizRequestPending: true });
 
     case QUIZ_REQUEST_SUCCESS:
+      const addQuesForEditForm = () => {
+        let quesEditForm = [];
+        if (action.addQuestions) {
+          action.payload.questions.forEach((el) => {
+            quesEditForm.push({
+              question: el.question,
+              answers: [el.answerA, el.answerB, el.answerC, el.answerD],
+              correct: el.correctAnswer,
+            });
+          });
+          return quesEditForm;
+        }
+      };
       return Object.assign({}, state, {
+        quizFormQuestions: addQuesForEditForm(),
         questionData: action.payload,
         quizRequestPending: false,
       });

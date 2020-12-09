@@ -96,14 +96,14 @@ class UserList extends Component {
                           fontIcon: 'faBan',
                           label: 'Ban user',
                         },
-                      ].map((el, arr, index) => {
+                      ].map((el) => {
                         return (
                           <ModifyBtn
                             action={el.action}
                             color={el.color}
                             fontIcon={el.fontIcon}
-                            flashMsgUpdate={flashMsgUpdate}
                             flashMsgFlash={flashMsgFlash}
+                            flashMsgUpdate={flashMsgUpdate}
                             label={el.label}
                             userId={l._id}
                           />

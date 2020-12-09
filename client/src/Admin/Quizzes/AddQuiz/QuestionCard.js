@@ -1,34 +1,43 @@
 import React, { Component } from 'react';
+import labels from '../../../config/labels';
 
 class QuestionCard extends Component {
   render() {
+    const { index, quizFormUpdate, quizReducer } = this.props;
+
+    // Get the content each answer from quiz reducer:
     const getAnswer = (answerIndex) => {
-      if (!answerIndex) return false;
-      if (this.props.quizReducer.quizFormQuestions) {
-        if (this.props.quizReducer.quizFormQuestions[this.props.index]) {
-          return this.props.quizReducer.quizFormQuestions[this.props.index]
-            .answers[answerIndex];
+      // if (!answerIndex) return false;
+      if (quizReducer.quizFormQuestions) {
+        if (quizReducer.quizFormQuestions[index]) {
+          return quizReducer.quizFormQuestions[index].answers[answerIndex];
         }
       }
     };
+
+    // Get default answer value for "select":
+    const getDefaultAnsValue = () => {
+      const { correct } = quizReducer.quizFormQuestions[index];
+      return `${labels.ui.quiz.ansLabels[correct]}. ${quizReducer.quizFormQuestions[index].answers[correct]}`;
+    };
+
     return (
-      <div className="p-2 col-12 m-0 my-1 p-0 bg-light text-dark shadow-sm rounded row quiz-question-card">
+      <div className="bg-light col-12 m-0 my-1 p-2 text-dark shadow-sm rounded row quiz-question-card">
         <div className="col-10 m-0 my-2 p-0 row">
           <div
-            className="form-control text-left border-0 text-uppercase"
+            className="border-0 form-control text-left text-uppercase"
             style={{ background: 'none', fontSize: '1.2rem' }}
           >
-            Question {this.props.index + 1} of{' '}
-            {this.props.quizReducer.quizFormQuestions.length}
+            Question {index + 1} of {quizReducer.quizFormQuestions.length}
           </div>
         </div>
         <div className="col-2 m-0 my-2 p-0 row">
           <button
             className="form-control btn btn-sm bg-white shadow-sm text-danger"
-            name={`qq-${this.props.index}-remove`}
+            name={`qq-${index}-remove`}
             onClick={(e) => {
               e.preventDefault();
-              this.props.quizFormUpdate({
+              quizFormUpdate({
                 name: e.target.name,
               });
             }}
@@ -38,92 +47,53 @@ class QuestionCard extends Component {
         </div>
         <div className="col-12 m-0 p-0 row">
           <div className="col-1 m-0 p-0 text-center vertical-center">
-            Q{this.props.index + 1}.
+            Q{index + 1}.
           </div>
           <div className="col-11 m-0 p-0">
             <input
               className="form-control"
-              name={`qq-${this.props.index}-question`}
+              defaultValue={quizReducer.quizFormQuestions[index].question}
+              maxLength="100"
+              minLength="5"
+              name={`qq-${index}-question`}
               onChange={(e) => {
-                this.props.quizFormUpdate({
+                quizFormUpdate({
                   name: e.target.name,
                   value: e.target.value,
                 });
               }}
               placeholder="Your question here?"
-              minLength="5"
-              maxLength="100"
               required
             />
           </div>
         </div>
         <div className="col-12 m-0 p-0 row">
-          <div className="col-1 m-0 p-0 text-center vertical-center">A.</div>
-          <div className="col-11 m-0 p-0">
-            <input
-              className="form-control"
-              name={`qq-${this.props.index}-0-answer`}
-              onChange={(e) => {
-                this.props.quizFormUpdate({
-                  name: e.target.name,
-                  value: e.target.value,
-                });
-              }}
-              placeholder="Answer A"
-              required
-            />
-          </div>
-        </div>
-        <div className="col-12 m-0 p-0 row">
-          <div className="col-1 m-0 p-0 text-center vertical-center">B.</div>
-          <div className="col-11 m-0 p-0">
-            <input
-              className="form-control"
-              name={`qq-${this.props.index}-1-answer`}
-              onChange={(e) => {
-                this.props.quizFormUpdate({
-                  name: e.target.name,
-                  value: e.target.value,
-                });
-              }}
-              placeholder="Answer B"
-              required
-            />
-          </div>
-        </div>
-        <div className="col-12 m-0 p-0 row">
-          <div className="col-1 m-0 p-0 text-center vertical-center">C.</div>
-          <div className="col-11 m-0 p-0">
-            <input
-              className="form-control"
-              name={`qq-${this.props.index}-2-answer`}
-              onChange={(e) => {
-                this.props.quizFormUpdate({
-                  name: e.target.name,
-                  value: e.target.value,
-                });
-              }}
-              placeholder="Answer C"
-              required
-            />
-          </div>
-        </div>
-        <div className="col-12 m-0 p-0 row">
-          <div className="col-1 m-0 p-0 text-center vertical-center">D.</div>
-          <div className="col-11 m-0 p-0">
-            <input
-              className="form-control"
-              name={`qq-${this.props.index}-3-answer`}
-              onChange={(e) => {
-                this.props.quizFormUpdate({
-                  name: e.target.name,
-                  value: e.target.value,
-                });
-              }}
-              placeholder="Answer D"
-              required
-            />
-          </div>
+          {labels.ui.quiz.ansLabels.map((letter, ansIndex) => {
+            return (
+              <React.Fragment>
+                <div className="col-1 m-0 p-0 text-center vertical-center">
+                  {`${letter}.`}
+                </div>
+                <div className="col-11 m-0 p-0">
+                  <input
+                    className="form-control"
+                    defaultValue={
+                      quizReducer.quizFormQuestions[index].answers[ansIndex]
+                    }
+                    name={`qq-${index}-${ansIndex}-answer`}
+                    onChange={(e) => {
+                      quizFormUpdate({
+                        name: e.target.name,
+                        value: e.target.value,
+                      });
+                    }}
+                    placeholder={`Answer ${letter}`}
+                    required
+                  />
+                </div>
+              </React.Fragment>
+            );
+          })}
         </div>
         <div className="col-12 m-0 my-3 p-0 row">
           <div className="col-1 m-0 p-0 text-center vertical-center">
@@ -132,9 +102,10 @@ class QuestionCard extends Component {
           <div className="col-11 m-0 p-0">
             <select
               className="form-control"
-              name={`qq-${this.props.index}-correct`}
+              defaultValue={getDefaultAnsValue()}
+              name={`qq-${index}-correct`}
               onChange={(e) => {
-                this.props.quizFormUpdate({
+                quizFormUpdate({
                   name: e.target.name,
                   value: e.target.value,
                 });
@@ -142,10 +113,11 @@ class QuestionCard extends Component {
               required
             >
               <option selected="true" disabled="disabled"></option>
-              <option>A. {getAnswer(0)}</option>
-              <option>B. {getAnswer(1)}</option>
-              <option>C. {getAnswer(2)}</option>
-              <option>D. {getAnswer(3)}</option>
+              {labels.ui.quiz.ansLabels.map((elem, index) => (
+                <option>
+                  {elem}. {getAnswer(index)}
+                </option>
+              ))}
             </select>
           </div>
         </div>

@@ -24,7 +24,7 @@ class QuizList extends Component {
             <th>Title</th>
             <th className="text-center">Number of Questions</th>
             <th className="text-center">Added By</th>
-            <th>-</th>
+            <th></th>
           </tr>
           <tbody>
             {this.props.quizReducer.quizListData.map((q, index) => {
@@ -39,11 +39,15 @@ class QuizList extends Component {
                     <br />
                     <small className="text-muted">{q._id}</small>
                   </td>
-                  <td>{q.title}</td>
+                  <td>
+                    <this.props.Link to={`/quiz/${q._id}`}>
+                      {q.title}
+                    </this.props.Link>
+                  </td>
                   <td className="text-center">{q.questions.length}</td>
                   <td className="text-center">{q.createdBy}</td>
                   <td style={{ width: 60 }}>
-                    <this.props.Link to="/">
+                    <this.props.Link to={`/admin/editquiz/${q._id}`}>
                       <button className="btn btn-sm btn-secondary form-control mb-1">
                         {FontIcon('faEdit')}
                       </button>

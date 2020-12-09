@@ -21,16 +21,12 @@ exports.create = (req, res) => {
 };
 
 exports.findById = (req, res) => {
-  Quiz.findById(
-    req.params.id,
-
-    (err, quiz) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      res.status(200).json(quiz);
+  Quiz.findById(req.params.id, (err, quiz) => {
+    if (err) {
+      res.status(500).send(err);
     }
-  );
+    res.status(200).json(quiz);
+  });
 };
 
 /* List quizzes:
@@ -50,6 +46,27 @@ exports.schedule = (req, res) => {
     if (err) return res.status(500).send(msg.err.findErr('quiz'));
     if (!quiz) return res.status(404).send(msg.err.noFoundErr('quiz'));
     quiz.schedule.push(quizDate);
+    quiz.save((err, quiz) => {
+      res.status(200).send(quiz);
+    });
+  });
+};
+
+/* Update quiz:
+ ******************************************************************/
+exports.update = (req, res) => {
+  const { id } = req.body;
+  Quiz.findById(id, (err, quiz) => {
+    if (err) return res.status(500).send(msg.err.findErr('quiz'));
+    if (!quiz) return res.status(404).send(msg.err.noFoundErr('quiz'));
+    //
+    console.log(quiz);
+    //
+    quiz.title = req.body.title;
+    quiz.questions = req.body.questions;
+    //
+
+    console.log(quiz);
     quiz.save((err, quiz) => {
       res.status(200).send(quiz);
     });

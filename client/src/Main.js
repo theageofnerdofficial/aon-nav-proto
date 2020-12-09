@@ -69,6 +69,7 @@ import {
   quizAddAnswer,
   quizCalculateScore,
   quizFormUpdate,
+  quizGetById,
   quizRequestData,
   quizReset,
   quizUpdateQNumber,
@@ -97,11 +98,12 @@ import './Main.css';
 import settings from './config/settings';
 import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
 import ContentScheduler from './Admin/ContentScheduler';
+import EditQuiz from './Admin/Quizzes/AddQuiz/EditQuiz';
+import NoMatch from './NoMatch';
 import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
 import Quizzes from './Components/Quiz/Quizzes';
 import UserProfile from './UserProfile';
-import NoMatch from './NoMatch';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -145,8 +147,9 @@ const mapDispatchToProps = (dispatch) => {
     quizAddAnswer: (o) => dispatch(quizAddAnswer(o)),
     quizCalculateScore: (o) => dispatch(quizCalculateScore(o)),
     quizFormUpdate: (o) => dispatch(quizFormUpdate(o)),
+    quizGetById: (o) => dispatch(quizGetById(o)),
     quizRequestData: (o) => dispatch(quizRequestData(o)),
-    quizReset: () => dispatch(quizReset()),
+    quizReset: (o) => dispatch(quizReset(o)),
     quizUpdateQNumber: (o) => dispatch(quizUpdateQNumber(o)),
     quizUpdateScreen: (o) => dispatch(quizUpdateScreen(o)),
     quizzesGetList: (o) => dispatch(quizzesGetList(o)),
@@ -246,6 +249,7 @@ class Main extends Component {
       quizAddAnswer,
       quizCalculateScore,
       quizFormUpdate,
+      quizGetById,
       quizReducer,
       quizRequestData,
       quizReset,
@@ -639,8 +643,32 @@ class Main extends Component {
                             flashMsgUpdate,
                             quizFormUpdate,
                             quizReducer,
+                            quizReset,
                             usersGetList,
                             usersReducer,
+                          }}
+                          login={usersReducer}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/admin/editquiz/:quizid/"
+                      render={(props) => (
+                        <ProtectedRoute
+                          exact
+                          accessLevel={settings.permissions.accessLevel.admin}
+                          component={EditQuiz}
+                          data={{
+                            Link,
+                            flashMsgFlash,
+                            flashMsgUpdate,
+                            quizGetById,
+                            quizFormUpdate,
+                            quizReducer,
+                            quizRequestData,
+                            quizReset,
                           }}
                           login={usersReducer}
                           {...props}

@@ -278,6 +278,8 @@ app.get('/quiz/:id', (req, res, next) =>
 
 app.post('/quiz', (req, res, next) => quizController.create(req, res, next));
 
+app.put('/quiz', (req, res, next) => quizController.update(req, res, next));
+
 app.put('/quiz/schedule', (req, res, next) =>
   quizController.schedule(req, res, next)
 );

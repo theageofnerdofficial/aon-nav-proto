@@ -67,8 +67,8 @@ class CompletionScreen extends Component {
               <button
                 className={`btn btn-light btn-sm form-control`}
                 onClick={(e) => {
-                  quizReset();
-                  quizUpdateScreen(1);
+                  quizUpdateScreen(0);
+                  quizReset({ keepRequestQData: true });
                 }}
               >
                 Retry quiz?
