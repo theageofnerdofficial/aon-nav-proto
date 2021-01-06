@@ -30,6 +30,7 @@ const redditSourceController = require('./controllers/sources/RedditSourceContro
 const twitterSourceController = require('./controllers/sources/TwitterSourceController');
 const userController = require('./controllers/UserController');
 const youtubeSourceController = require('./controllers/sources/YoutubeSourceController');
+const sourceDataController = require('./controllers/SourceDataController');
 
 // For env variables:
 dotenv.config();
@@ -126,6 +127,21 @@ app.get(
     return T.get(endpoint, parameters, (err, data, response) => res.json(data));
   }
 );
+
+/* Source Data:
+ *****************************************************************/
+app.get('/sourcedata/list', (req, res, next) =>
+  sourceDataController.list(req, res, next)
+);
+
+app.post('/sourcedata/create', (req, res, next) => {
+  console.log('3. Create route in index.js:');
+  console.log(req.body);
+  //console.log(req.body);
+  // console.log(res.body);
+  //console.log(res);
+  sourceDataController.create(req, res, next);
+});
 
 /* User:
  *****************************************************************/

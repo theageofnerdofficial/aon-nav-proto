@@ -4,6 +4,7 @@ import utils from './utils';
 
 const formatYoutube = {
   formatYoutubeData(data) {
+    console.log(data);
     if (data) {
       if (data.items) {
         return {

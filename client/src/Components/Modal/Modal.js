@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from '../LoginForm/LoginForm';
-import { MODAL_LOGIN_FORM } from '../../constants';
+import { MODAL_IMAGE_LIGHTBOX, MODAL_LOGIN_FORM } from '../../constants';
 
 class Modal extends Component {
   render() {
@@ -8,11 +8,20 @@ class Modal extends Component {
       title(mode) {
         if (mode === MODAL_LOGIN_FORM) {
           return 'Login';
+        } else if (mode === MODAL_IMAGE_LIGHTBOX) {
+          return 'Image Caption Here';
         }
       },
       body(mode, user) {
         if (mode === MODAL_LOGIN_FORM) {
           return <LoginForm userLogin={user} />;
+        } else if (mode === MODAL_IMAGE_LIGHTBOX) {
+          return (
+            <img
+              src=""
+              style={{ border: '1px solid red', height: 200, width: 200 }}
+            />
+          );
         }
       },
     };

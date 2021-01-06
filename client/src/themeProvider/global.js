@@ -10,23 +10,11 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  .trending-list-wrapper {
-    background: ${({ theme }) => theme.loginBtn};
-  }
-
-  .post-newspost-wrapper {
-    background: ${({ theme }) => 'theme.body'};
-  }
-
-  .post-newspost-content-wrapper {
-    background: ${({ theme }) => theme.loginBtn} !important;
-  }
-
   body, html {
     background: ${({ theme }) => theme['body']['background-color']};
     color: ${({ theme }) => theme['body']['color']};
   }
-  
+
   .btn-modal-close {
     font-weight: 300;
   }
@@ -41,6 +29,18 @@ export const GlobalStyles = createGlobalStyle`
     z-index: 999;
   }
 
+  .trending-list-wrapper {
+    background: ${({ theme }) => theme.loginBtn};
+  }
+
+  .post-newspost-wrapper {
+    background: ${({ theme }) => 'theme.body'};
+  }
+
+  .post-newspost-content-wrapper {
+    background: ${({ theme }) => theme.loginBtn} !important;
+  }
+  
   .navbar-bg-custom-panel {
     background: ${({ theme }) => theme.loginBtn} !important;
   }
@@ -51,6 +51,23 @@ export const GlobalStyles = createGlobalStyle`
 
   .footer {
     background-color: ${({ theme }) => theme.body};
+  }
+
+  // This is a gradient by default. For solid, make start & end values the same:
+  .feed-title {
+    background: -moz-linear-gradient(left, rgba(${({ theme }) =>
+      theme['feed-title']['start-gradient-rgb']},1) 0%, rgba(${({ theme }) =>
+  theme['feed-title']['end-gradient-rgb']},0) 100%);
+    background: -webkit-linear-gradient(left, rgba(${({ theme }) =>
+      theme['feed-title']['start-gradient-rgb']},1) 0%,rgba(${({ theme }) =>
+  theme['feed-title']['end-gradient-rgb']},0) 100%);
+    background: linear-gradient(to right, rgba(${({ theme }) =>
+      theme['feed-title']['start-gradient-rgb']},1) 0%,rgba(${({ theme }) =>
+  theme['feed-title']['end-gradient-rgb']}5,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='${({
+      theme,
+    }) => theme['feed-title']['start-gradient']}', endColorstr='${({ theme }) =>
+  theme['feed-title']['end-gradient']}',GradientType=1 );
   }
  
   .modal-content {

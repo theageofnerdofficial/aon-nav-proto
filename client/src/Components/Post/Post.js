@@ -7,17 +7,17 @@ import {
   SOURCE_REDDIT_LABEL,
   SOURCE_TWITTER_LABEL,
 } from '../../constants';
+
+import Accordion from './PostUI/Accordion/Accordion';
+import CreatedCaption from './PostUI/CreatedCaption';
 import DotsMenu from './PostUI/DotsMenu';
 import DotsMenuButton from './PostUI/DotsMenuButton';
-import CreatedCaption from './PostUI/CreatedCaption';
-import FontIcon from '../FontIcon/FontIcon';
 import PostText from './PostUI/PostText';
 import PostTitle from './PostUI/PostTitle';
 import ReactHtmlParser from 'react-html-parser';
 import postElem from './PostElemBySource/PostElem';
 import settings from '../../config/settings';
-import utils from '../Utils/utils/utils';
-import format from '../../config/format';
+import UIControlPanel from './PostUI/UIControlPanel/UIControlPanel';
 
 class Post extends Component {
   render() {
@@ -114,73 +114,76 @@ class Post extends Component {
 
     /* :
      ***************************************************************/
-    const formatDate = (created_at, source) => {
-      const sourceLabel = format.source.labelFromConstant(source);
-
-      if (sourceLabel === SOURCE_TWITTER_LABEL) {
-        console.log('twitter...');
-      }
-      if (sourceLabel === SOURCE_INSTAGRAM_LABEL) {
-        let uet = format.time.uetToHumanReadable(created_at).toString();
-        return format.time.from(uet);
-      } else if (sourceLabel === SOURCE_REDDIT_LABEL) {
-        return format.time.from(created_at);
-      } else if (sourceLabel === SOURCE_TWITTER_LABEL) {
-        console.log(created_at);
-        return created_at;
-        return format.time.from(created_at);
-      }
-    };
-
-    /* :
-     ***************************************************************/
     const {
+      description,
       id,
-      c,
+      labels,
+      permalink,
       source,
       source_data,
       text,
+      preview_img_arr,
       profile_pic_url,
       userData,
+      upvote_ratio,
       created_time_from,
+      //
+      FontIcon,
+      modalReducer,
+      modalUpdateMode,
+      utils,
     } = this.props;
 
     return (
-      <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm border">
+      <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm">
         <div className="col-2 m-0 p-0 text-center">
+          {/* Thumbnail... */}
           {postElem.thumbnail.get(
-            { source, userData, profile_pic_url },
+            { profile_pic_url, source, userData },
             settings
           )}
           <br />
-          <CreatedCaption createdTimeFrom={created_time_from} />
-        </div>
-        <div className="col-10">
-          <PostTitle
-            postElem={postElem}
-            source={source}
-            source_data={source_data}
-            userData={userData}
+          <CreatedCaption
+            createdTimeFrom={created_time_from}
+            labels={labels}
+            settings={settings}
           />
+        </div>
+        <div className="col-10 p-0">
+          <PostTitle
+            data={{ source, source_data, userData }}
+            FontIcon={FontIcon}
+            postElem={postElem}
+          />
+          {/*
           <DotsMenu id={id} />
           <DotsMenuButton FontIcon={FontIcon} id={id} />
-          {/*
+           */}
           <PostText
-            postElem={postElem}
+            data={{ source, text, userData }}
             ReactHtmlParser={ReactHtmlParser}
-            source={source}
-            userData={userData}
+            postElem={postElem}
             utils={utils}
           />
-          */}
-          <p className="font-weight-light p-0 m-0">
-            {postElem.text.get(
-              { source, text, userData },
-              utils,
-              ReactHtmlParser
-            )}
-          </p>
-          {postElem.accordion.get({ id, source, userData }, settings)}
+          <Accordion
+            data={{
+              description,
+              id,
+              permalink,
+              preview_img_arr,
+              source,
+              source_data,
+              upvote_ratio,
+              userData,
+            }}
+            FontIcon={FontIcon}
+            labels={labels}
+            modalReducer={modalReducer}
+            modalUpdateMode={modalUpdateMode}
+            settings={settings}
+            utils={utils}
+          />
+          <UIControlPanel FontIcon={FontIcon} />
         </div>
         <div className="col-12 m-0 p-0 row">{getEmbeddedMedia(source)}</div>
       </div>

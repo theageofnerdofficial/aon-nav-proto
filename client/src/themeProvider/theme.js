@@ -67,6 +67,7 @@ export const lightTheme = {
   'vertical-center': light.header['vertical-center'],
 
   // -
+  'feed-title': light['feed-title'],
 };
 
 export const darkTheme = {
@@ -125,5 +126,9 @@ export const darkTheme = {
   'navbar-custom': dark.header['navbar-custom'],
   'navbar-logo-wrapper > img': dark.header['navbar-logo-wrapper > img'],
   'navbar-logo-wrapper': dark.header['navbar-logo-wrapper'],
+  'panel-heading': dark.body['panel-heading'],
   'vertical-center': dark.header['vertical-center'],
+
+  //-
+  'feed-title': dark['feed-title'],
 };

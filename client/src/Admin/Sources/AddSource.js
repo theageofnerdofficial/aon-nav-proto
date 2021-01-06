@@ -9,6 +9,7 @@ import IsOfficialCheckAdd from './AddSource/7/IsOfficialCheckAdd';
 import NumberOfInstagramPostsAdd from './AddSource/4/NumberOfInstagramPostsAdd';
 import NumberOfPostsAdd from './AddSource/4/NumberOfPostsAdd';
 import NumberOfTweetsAdd from './AddSource/4/NumberOfTweetsAdd';
+import NumberOfYoutubeVidsAdd from './AddSource/4/NumberOfYoutubeVidsAdd';
 import SectionTitle from '../../Components/SectionTitle/SectionTitle';
 import SelectService from './AddSource/2/ServiceAdd';
 import SubredditAdd from './AddSource/3/SubredditAdd';
@@ -17,6 +18,7 @@ import SubredditPeriodAdd from './AddSource/6/SubredditPeriodAdd';
 import TweetFilterAdd from './AddSource/5/TweetFilterAdd';
 import TweetQueryAdd from './AddSource/6/TweetQueryAdd';
 import TwitterUserAdd from './AddSource/3/TwitterUserAdd';
+import YoutubeUserAdd from './AddSource/3/YoutubeUserAdd';
 import {
   SOURCE_REDDIT,
   SOURCE_TWITTER,
@@ -25,10 +27,7 @@ import {
 } from '../../constants';
 import labels from '../../config/labels';
 import settings from '../../config/settings';
-
 import { fetchConstructor } from '../../actions';
-import YoutubeUserAdd from './AddSource/3/YoutubeUserAdd';
-import NumberOfYoutubeVidsAdd from './AddSource/4/NumberOfYoutubeVidsAdd';
 
 class AddSource extends Component {
   componentDidMount() {
@@ -183,6 +182,8 @@ class AddSource extends Component {
               />
               {sourceReducer.category === 'gaming' ? (
                 <CategoryGamingAdd
+                  labels={labels}
+                  settings={settings}
                   sourceAddFormCategoryGaming={sourceAddFormCategoryGaming}
                 />
               ) : null}

@@ -5,7 +5,7 @@ import Selector from '../../../Selector';
 
 class ToysParent extends Component {
   render() {
-    const { nerdUpdateCheck, nerdReducer } = this.props;
+    const { nerdUpdateCheck, nerdReducer, tabColour } = this.props;
     return (
       <li>
         <Selector
@@ -20,6 +20,7 @@ class ToysParent extends Component {
           level={1}
           nerdUpdateCheck={nerdUpdateCheck}
           reducer={nerdReducer}
+          tabColour={tabColour}
           tooltip={nerdReducer.category[0].level1[3].toys.description}
         />
       </li>

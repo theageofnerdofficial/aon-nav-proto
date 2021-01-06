@@ -5,7 +5,9 @@ import React, { Component } from 'react';
 class DotsMenuButton extends Component {
   render() {
     return (
-      <span style={{ position: 'absolute', right: 0, top: '0' }}>
+      <span className="m-0 p-0">
+        <button className="btn bg-dark btn-sm col-12 p-0 m-0">00</button>
+        {/* 
         <button
           className="btn btn-sm text-muted"
           style={{ marginTop: '-15px', opacity: 0.8 }}
@@ -16,7 +18,7 @@ class DotsMenuButton extends Component {
           }}
         >
           {this.props.FontIcon('faEllipsisV')}
-        </button>
+        </button>*/}
       </span>
     );
   }

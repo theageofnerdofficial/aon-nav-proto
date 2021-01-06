@@ -9,8 +9,8 @@ import TrendingList from './Components/Post/Trending/TrendingList';
 import formatReddit from './Components/Utils/utils/formatReddit';
 import formatTweet from './Components/Utils/utils/formatTweet';
 import formatInstagram from './Components/Utils/utils/formatInstagram';
-import labels from './config/labels';
 import settings from './config/settings';
+import utils from './Components/Utils/utils/utils';
 
 import {
   SOURCE_INSTAGRAM,
@@ -56,6 +56,7 @@ class Home extends Component {
 
   componentDidUpdate() {
     const { request } = this.data;
+    const { sourcesEnabled } = settings.content.newsfeed;
     const {
       sourcesTwitterData,
       sourcesRedditData,
@@ -64,16 +65,20 @@ class Home extends Component {
     } = this.props.sourceReducer;
 
     // If we've got source data but not post data from sources, get it:
-    if (sourcesTwitterData && !gotTwitterData) request.getTwitterRaw();
-    if (sourcesRedditData && !gotRedditData) request.getRedditRaw();
-    if (sourcesInstagramData && !gotInstagramData) request.getInstagramRaw();
-    if (sourcesYoutubeData && !gotYoutubeData) request.getYoutubeRaw();
+    if (sourcesEnabled.twitter && sourcesTwitterData && !gotTwitterData)
+      request.getTwitterRaw();
+    if (sourcesEnabled.reddit && sourcesRedditData && !gotRedditData)
+      request.getRedditRaw();
+    if (sourcesEnabled.instagram && sourcesInstagramData && !gotInstagramData)
+      request.getInstagramRaw();
+    if (sourcesEnabled.youtube && sourcesYoutubeData && !gotYoutubeData)
+      request.getYoutubeRaw();
 
     // Format raw post data so it's suitable for newsfeed:
-    this.data.format.setTwitterFormatted();
-    this.data.format.setRedditFormatted();
-    this.data.format.setInstagramFormatted();
-    this.data.format.setYoutubeFormatted();
+    if (sourcesEnabled.twitter) this.data.format.setTwitterFormatted();
+    if (sourcesEnabled.reddit) this.data.format.setRedditFormatted();
+    if (sourcesEnabled.instagram) this.data.format.setInstagramFormatted();
+    if (sourcesEnabled.youtube) this.data.format.setYoutubeFormatted();
     this.data.combine();
   }
 
@@ -94,11 +99,26 @@ class Home extends Component {
         newsfeedPostsHaveCombined,
       } = this.props;
 
+      const { sourcesEnabled } = settings.content.newsfeed;
+      //
+
       // Ensure we've at least one formatted post from each source:
-      const hasRedditF = redditDataFormatted && redditDataFormatted.length > 0;
-      const hasTweetF = tweetDataFormatted && tweetDataFormatted.length > 0;
-      const hasIF = instagramDataFormatted && instagramDataFormatted.length > 0;
-      const hasYt = youtubeDataFormatted && youtubeDataFormatted.length > 0;
+      // If source is enabled check we have all its data formatted. If it's not enabled return true to skip
+      const hasRedditF = sourcesEnabled.reddit
+        ? redditDataFormatted && redditDataFormatted.length > 0
+        : true;
+
+      const hasTweetF = sourcesEnabled.twitter
+        ? tweetDataFormatted && tweetDataFormatted.length > 0
+        : true;
+
+      const hasIF = sourcesEnabled.instagram
+        ? instagramDataFormatted && instagramDataFormatted.length > 0
+        : true;
+
+      const hasYt = sourcesEnabled.youtube
+        ? youtubeDataFormatted && youtubeDataFormatted.length > 0
+        : true;
 
       /*
       var x = newsFeedFilter(
@@ -107,6 +127,11 @@ class Home extends Component {
         hasRedditF,
         hasIF
       );*/
+
+      //
+      // if enabled source AND has source
+      //
+      //
 
       // do all enabled sources have formatted sources?
       //
@@ -346,6 +371,7 @@ class Home extends Component {
   };
   render() {
     const { allData } = this.props.dataReducer;
+    const { labels, modalReducer, modalUpdateMode } = this.props;
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
@@ -379,7 +405,14 @@ class Home extends Component {
             {/*  <PostsDummy /> */}
 
             <div style={{ height: 540, overflow: 'scroll' }}>
-              <Posts allData={allData} />
+              <Posts
+                allData={allData}
+                FontIcon={FontIcon}
+                labels={labels}
+                modalReducer={modalReducer}
+                modalUpdateMode={modalUpdateMode}
+                utils={utils}
+              />
             </div>
           </div>
           <div className="col-lg-5 m-0 p-0 section-responsive-pr">
@@ -388,7 +421,9 @@ class Home extends Component {
               title="Trending"
             />
             <SectionTitlePostsTitle text="Popular Posts (5)" />
-            <TrendingList />
+            <div style={{ opacity: 0.1 }}>
+              <TrendingList />
+            </div>
           </div>
         </div>
         <br />

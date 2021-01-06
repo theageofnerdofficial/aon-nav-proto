@@ -1,6 +1,7 @@
 const settings = {
   categories: {
     arr: ['TV/Film', 'Comics', 'Gaming', 'Wrestling', 'Toys'],
+    gaming: ['Modern', 'Retro', 'Modern and Retro', 'Board', 'Misc'],
   },
 
   localStorage: {
@@ -25,10 +26,11 @@ const settings = {
     newsfeed: {
       sourcesEnabled: {
         reddit: true,
-        instagram: true,
-        twitter: true,
-        youtube: true,
+        instagram: false,
+        twitter: false,
+        youtube: false,
       },
+      sourcesCached: [], //[SOURCE_YOUTUBE],
     },
   },
 
@@ -72,18 +74,26 @@ const settings = {
         expand: 'More [+]',
       },
     },
+    thumbnails: {
+      path: '/img/thumbnails/',
+    },
+    time: {
+      abbreviateUnits: true,
+    },
     style: {
       sectionTab: {
-        default: '#ccc',
-        featured: 'red',
-        mynerd: 'orange',
-        tvfilm: 'yellow',
+        default: '#CCC', // light grey
+        featured: '#FF0000', // red
+        mynerd: '#FFA500', // orange
+        tvfilm: '#FFFF00', // yellow
         gaming: {
-          retro: 'violet',
-          modern: 'cyan',
-          board: 'indigo',
+          retro: '#EE82EE', // violet
+          modern: '#00FFFF', // cyan
+          board: '#4B0082', // indigo
         },
-        comics: 'lime',
+        comics: '#00FF00', // lime
+        wrestling: '#00755E', // dark green
+        toys: '#FF00FF', // magenta
       },
     },
   },

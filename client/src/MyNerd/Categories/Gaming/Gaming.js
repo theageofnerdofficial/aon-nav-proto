@@ -1,17 +1,19 @@
 /* Imports:
  *********************************************************/
 import React, { Component } from 'react';
+import settings from '../../../config/settings';
 import Selector from '../../Selector';
 import GamingParent from './Subcategories/GamingParent';
 
 class Gaming extends Component {
   render() {
-    const { nerdUpdateCheck, nerdReducer } = this.props;
+    const { nerdUpdateCheck, nerdReducer, tabColour } = this.props;
     return (
       <ul className="p-0" style={{}}>
         <GamingParent
           nerdReducer={nerdReducer}
           nerdUpdateCheck={nerdUpdateCheck}
+          tabColour={tabColour}
           tooltip="Gaming description"
         />
         <ul
@@ -42,6 +44,7 @@ class Gaming extends Component {
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
               reducer={nerdReducer}
+              tabColour={settings.ui.style.sectionTab.gaming.retro}
               tooltip={
                 nerdReducer.category[1].level2[0].retroGaming.description
               }
@@ -148,6 +151,7 @@ class Gaming extends Component {
               label="Modern Gaming"
               level={2}
               nerdUpdateCheck={nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.gaming.modern}
               tooltip={
                 nerdReducer.category[1].level2[1].modernGaming.description
               }
@@ -230,6 +234,7 @@ class Gaming extends Component {
               label="Tabletop Gaming"
               level="2"
               nerdUpdateCheck={nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.gaming.board}
               tooltip={
                 nerdReducer.category[1].level2[2].tabletopGaming.description
               }

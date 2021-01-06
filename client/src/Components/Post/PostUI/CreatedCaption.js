@@ -4,7 +4,14 @@ import React, { Component } from 'react';
 
 class CreatedCaption extends Component {
   render() {
-    let { createdTimeFrom } = this.props;
+    let { createdTimeFrom, labels, settings } = this.props;
+
+    const abbreviateTime = (time) => {
+      console.log(time);
+      return time
+        .toString()
+        .replace(' hours', labels.ui.sources.time.abbreviations.hours);
+    };
     return (
       <div
         className="font-italic pt-2 px-2 text-muted"
@@ -15,7 +22,9 @@ class CreatedCaption extends Component {
           opacity: 0.6,
         }}
       >
-        {createdTimeFrom}
+        {settings.ui.time.abbreviateUnits
+          ? abbreviateTime(createdTimeFrom)
+          : createdTimeFrom}
       </div>
     );
   }

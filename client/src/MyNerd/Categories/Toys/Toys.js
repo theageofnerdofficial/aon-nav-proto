@@ -6,12 +6,13 @@ import ToysParent from './Subcategories/ToysParent';
 
 class Toys extends Component {
   render() {
-    const { nerdUpdateCheck, nerdReducer } = this.props;
+    const { nerdUpdateCheck, nerdReducer, tabColour } = this.props;
     return (
       <ul className="p-0">
         <ToysParent
           nerdReducer={nerdReducer}
           nerdUpdateCheck={nerdUpdateCheck}
+          tabColour={tabColour}
         />
         <ul
           style={{

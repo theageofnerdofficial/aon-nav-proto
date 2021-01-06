@@ -36,6 +36,7 @@ import {
   dataRequest,
   flashMsgFlash,
   flashMsgUpdate,
+  modalUpdateMode,
   nerdSetupUpdatePhase,
   nerdUpdateCheck,
   newsfeedIncrSourceCount,
@@ -95,6 +96,7 @@ import { GlobalStyles } from './themeProvider/global';
 import { lightTheme, darkTheme } from './themeProvider/theme';
 import { ThemeProvider } from 'styled-components';
 import './Main.css';
+import labels from './config/labels';
 import settings from './config/settings';
 import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
 import ContentScheduler from './Admin/ContentScheduler';
@@ -136,6 +138,7 @@ const mapDispatchToProps = (dispatch) => {
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
+    modalUpdateMode: (o) => dispatch(modalUpdateMode(o)),
     nerdSetupUpdatePhase: (o) => dispatch(nerdSetupUpdatePhase(o)),
     nerdUpdateCheck: (o) => dispatch(nerdUpdateCheck(o)),
     newsfeedIncrSourceCount: (o) => dispatch(newsfeedIncrSourceCount(o)),
@@ -234,6 +237,7 @@ class Main extends Component {
       flashMsgReducer,
       flashMsgUpdate,
       modalReducer,
+      modalUpdateMode,
       nerdReducer,
       nerdSetupReducer,
       nerdSetupUpdatePhase,
@@ -305,12 +309,17 @@ class Main extends Component {
 
             <KonamiCode />
 
-            <Modal userLogin={userLogin} modalReducer={modalReducer} />
+            <Modal
+              modalReducer={modalReducer}
+              modalUpdateMode={modalUpdateMode}
+              userLogin={userLogin}
+            />
 
             {/* Login/signup button:
              *****************************************************************/}
             <LoginBtn
               Link={Link}
+              modalUpdateMode={modalUpdateMode}
               userAuthenticate={userAuthenticate}
               userLogout={userLogout}
               usersReducer={usersReducer}
@@ -335,6 +344,9 @@ class Main extends Component {
                           dataFormatYoutube={dataFormatYoutube}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
+                          labels={labels}
+                          modalReducer={modalReducer}
+                          modalUpdateMode={modalUpdateMode}
                           newsfeedIncrSourceCount={newsfeedIncrSourceCount}
                           newsfeedPostsHaveCombined={newsfeedPostsHaveCombined}
                           newsfeedReducer={newsfeedReducer}

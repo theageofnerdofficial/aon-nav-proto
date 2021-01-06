@@ -3,22 +3,30 @@ import FontIcon from '../Components/FontIcon/FontIcon';
 
 class Selector extends Component {
   render() {
-    const { category, level } = this.props;
+    const {
+      category,
+      descendants,
+      enabled,
+      expanded,
+      label,
+      level,
+      nerdUpdateCheck,
+      tabColour,
+      tooltip,
+    } = this.props;
 
     /* Enumerate descendants in order to count or 
        to see which ones are enabled:
      **********************************************/
     const enumDescendants = (actionType) => {
       let enabled = 0;
-      if (this.props.descendants) {
-        this.props.descendants.forEach((descendant) => {
+      if (descendants) {
+        descendants.forEach((descendant) => {
           if (descendant.isEnabled) enabled += 1;
         });
       }
       if (actionType === 'count') {
-        return this.props.descendants
-          ? `(${enabled}/${this.props.descendants.length})`
-          : null;
+        return descendants ? `(${enabled}/${descendants.length})` : null;
       } else if (actionType === 'hasEnabled') {
         if (enabled >= 1) return true;
       }
@@ -28,24 +36,27 @@ class Selector extends Component {
        or a - (depending on descendants):
      **********************************************/
     const getIcon = () => {
-      if (!this.props.descendants || !this.props.descendants.length >= 1) {
+      if (!descendants || !descendants.length >= 1) {
         return '-';
       }
       return (
         <button
           className="form-control mr-1"
           onClick={() => {
-            this.props.nerdUpdateCheck({
+            nerdUpdateCheck({
               actionType: 'expansion',
               category,
               level,
             });
           }}
-          style={{ cursor: 'pointer', height: '100%' }}
+          style={{
+            borderBottomColor: tabColour,
+            borderBottomWidth: '2px',
+            cursor: 'pointer',
+            height: '100%',
+          }}
         >
-          {this.props.expanded
-            ? FontIcon('faChevronDown')
-            : FontIcon('faChevronRight')}
+          {expanded ? FontIcon('faChevronDown') : FontIcon('faChevronRight')}
         </button>
       );
     };
@@ -68,13 +79,17 @@ class Selector extends Component {
               data-toggle="tooltip"
               data-placement="top"
               data-html="true"
+              style={{
+                fontSize: 20,
+                letterSpacing: 0,
+              }}
               title={
-                this.props.tooltip
-                  ? this.props.tooltip
+                tooltip
+                  ? tooltip
                   : 'Sorry, no description is available for this item'
               }
             >
-              {this.props.label}&nbsp;
+              {label}&nbsp;
               {enumDescendants('count')}{' '}
             </span>
           </div>
@@ -83,10 +98,10 @@ class Selector extends Component {
           <div className="col-12 m-0 p-0 row">
             <div className="col-6 m-0 p-0 my-1">
               <input
-                checked={this.props.enabled}
+                checked={enabled}
                 className="form-control mr-1"
                 onChange={() => {
-                  this.props.nerdUpdateCheck({
+                  nerdUpdateCheck({
                     actionType: 'checked',
                     category,
                     level,
@@ -98,7 +113,7 @@ class Selector extends Component {
               />
             </div>
             <div className="col-6 m-0 p-0 my-1">
-              <button className="btn btn-sm form-control btn-light font-weight-light text-uppercase nav-add-btn">
+              <button className="btn btn-light btn-sm form-control font-weight-light nav-add-btn text-uppercase">
                 nav+
               </button>
             </div>

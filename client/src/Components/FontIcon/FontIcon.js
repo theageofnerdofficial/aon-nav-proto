@@ -11,36 +11,41 @@ import {
   faAt,
   faBan,
   faBug,
-  faCircle,
   faCalendar,
   faCaretDown,
   faCaretUp,
-  faCog,
   faCheckCircle,
-  faSortAlphaDown,
-  faSortAlphaUp,
-  faSortNumericDown,
-  faSortNumericUp,
   faChevronDown,
   faChevronLeft,
   faChevronRight,
   faChevronUp,
+  faCircle,
+  faCog,
   faDownload,
-  faVolumeMute,
-  faVolumeUp,
   faEdit,
   faEllipsisV,
   faExclamationTriangle,
+  faExternalLinkAlt,
+  faEyeSlash,
   faFileAlt,
+  faHeart,
   faMoon,
   faPlus,
-  faTrashAlt,
+  faRetweet,
+  faSave,
+  faSortAlphaDown,
+  faSortAlphaUp,
+  faSortNumericDown,
+  faSortNumericUp,
   faSun,
   faTasks,
   faTimes,
-  faWrench,
+  faTrashAlt,
   faUser,
   faUserAlt,
+  faVolumeMute,
+  faVolumeUp,
+  faWrench,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Brand SVG icons:
@@ -117,11 +122,20 @@ const FontIcon = (icon) => {
     case 'faEdit':
       faIcon = faEdit;
       break;
+    case 'faExternalLinkAlt':
+      faIcon = faExternalLinkAlt;
+      break;
+    case 'faEyeSlash':
+      faIcon = faEyeSlash;
+      break;
     case 'faFacebook':
       faIcon = faFacebook;
       break;
     case 'faFileAlt':
       faIcon = faFileAlt;
+      break;
+    case 'faHeart':
+      faIcon = faHeart;
       break;
     case 'faInstagramSquare':
       faIcon = faInstagramSquare;
@@ -134,6 +148,12 @@ const FontIcon = (icon) => {
       break;
     case 'faRedditAlien':
       faIcon = faRedditAlien;
+      break;
+    case 'faRetweet':
+      faIcon = faRetweet;
+      break;
+    case 'faSave':
+      faIcon = faSave;
       break;
     case 'faSortNumericDown':
       faIcon = faSortNumericDown;

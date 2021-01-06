@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 
 class PostText extends Component {
   render() {
-    let { ReactHtmlParser, source, text, userData, utils } = this.props;
+    let { source, text, userData } = this.props.data;
+    let { ReactHtmlParser, utils } = this.props;
     return (
       <p className="font-weight-light p-0 m-0">
         {this.props.postElem.text.get(

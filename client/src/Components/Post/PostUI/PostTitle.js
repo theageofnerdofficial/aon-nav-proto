@@ -1,12 +1,13 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import FontIcon from '../../FontIcon/FontIcon';
 import utils from '../../Utils/utils/utils';
 
 class PostTitle extends Component {
   render() {
-    let { source, source_data, userData } = this.props;
+    const { FontIcon } = this.props;
+    const { source, source_data } = this.props.data;
+
     const getUsername = () => {
       if (source_data) {
         if (source_data.twitterUser) {
@@ -19,7 +20,7 @@ class PostTitle extends Component {
       }
     };
     return (
-      <p className="feed-title font-weight-normal mb-2 mr-3 pl-1 rounded">
+      <p className="feed-title font-weight-normal mb-1 pl-2 py-1 rounded">
         <span style={{ color: source_data.brandColor }}>
           {/* ONLY ADD CHECK IF IS OFFICIAL... ALSO ADD HOVERTIP */}
           {FontIcon('faCheckCircle')}

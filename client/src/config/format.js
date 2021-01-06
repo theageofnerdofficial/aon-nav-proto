@@ -1,4 +1,5 @@
 // Imports:
+import labels from './labels';
 import moment from 'moment';
 import {
   SOURCE_INSTAGRAM,
@@ -10,7 +11,7 @@ import {
   SOURCE_YOUTUBE,
   SOURCE_YOUTUBE_LABEL,
 } from '../constants';
-import labels from './labels';
+import settings from './settings';
 
 const format = {
   source: {
@@ -79,81 +80,81 @@ const format = {
         twitterSrc = twitterSrc.toLowerCase();
         switch (twitterSrc) {
           case 'nintendo':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendouk':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'mynintendonews':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendo_nwr':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendoins':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'sega':
-            imgSrc = '/img/thumbnails/gaming-sega.svg';
+            imgSrc = 'gaming-sega.svg';
             break;
           case 'playstation':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'londonstudiohq':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'playstationuk':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'ps5console':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'askplaystation':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'psudotcom':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'xbox':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'oxm':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxuk':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxp3':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxgamepass':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'marvel':
-            imgSrc = '/img/thumbnails/comics-marvel.svg';
+            imgSrc = 'comics-marvel.svg';
             break;
           case 'dccomics':
-            imgSrc = '/img/thumbnails/comics-dc.svg';
+            imgSrc = 'comics-dc.svg';
             break;
           case 'wwe':
-            imgSrc = '/img/thumbnails/wrestling-wwe.svg';
+            imgSrc = 'wrestling-wwe.svg';
             break;
           case 'impactwrestling':
-            imgSrc = '/img/thumbnails/wrestling-impact.svg';
+            imgSrc = 'wrestling-impact.svg';
             break;
           case 'lego':
-            imgSrc = '/img/thumbnails/toys-lego.svg';
+            imgSrc = 'toys-lego.svg';
             break;
           case 'netflix':
-            imgSrc = '/img/thumbnails/tvfilm-netflix.svg';
+            imgSrc = 'tvfilm-netflix.svg';
             break;
           case 'amazonprime':
-            imgSrc = '/img/thumbnails/tvfilm-prime.svg';
+            imgSrc = 'tvfilm-prime.svg';
             break;
           default:
-            imgSrc = '/img/thumbnails/aon-default.svg';
+            imgSrc = 'aon-default.svg';
         }
-        return imgSrc;
+        return `${settings.ui.thumbnails.path}${imgSrc}`;
       },
     },
   },
@@ -162,83 +163,85 @@ const format = {
       thumbnail: (youtubeSrc) => {
         let imgSrc;
         youtubeSrc = youtubeSrc.toLowerCase();
+
+        // Keep files in thumbnails folder:
         switch (youtubeSrc) {
           case 'nintendo':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendouk':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'mynintendonews':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendo_nwr':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendoins':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'sega':
-            imgSrc = '/img/thumbnails/gaming-sega.svg';
+            imgSrc = 'gaming-sega.svg';
             break;
           case 'playstation':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'londonstudiohq':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'playstationuk':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'ps5console':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'askplaystation':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'psudotcom':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'xbox':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'oxm':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxuk':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxp3':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxgamepass':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'marvel':
-            imgSrc = '/img/thumbnails/comics-marvel.svg';
+            imgSrc = 'comics-marvel.svg';
             break;
           case 'dccomics':
-            imgSrc = '/img/thumbnails/comics-dc.svg';
+            imgSrc = 'comics-dc.svg';
             break;
           case 'wwe':
-            imgSrc = '/img/thumbnails/wrestling-wwe.svg';
+            imgSrc = 'wrestling-wwe.svg';
             break;
           case 'impactwrestling':
-            imgSrc = '/img/thumbnails/wrestling-impact.svg';
+            imgSrc = 'wrestling-impact.svg';
             break;
           case 'lego':
-            imgSrc = '/img/thumbnails/toys-lego.svg';
+            imgSrc = 'toys-lego.svg';
             break;
           case 'netflix':
-            imgSrc = '/img/thumbnails/tvfilm-netflix.svg';
+            imgSrc = 'tvfilm-netflix.svg';
             break;
           case 'amazonprime':
-            imgSrc = '/img/thumbnails/tvfilm-prime.svg';
+            imgSrc = 'tvfilm-prime.svg';
             break;
           default:
-            imgSrc = '/img/thumbnails/aon-default.svg';
+            imgSrc = 'aon-default.svg';
         }
-        return imgSrc;
+        return `${settings.ui.thumbnails.path}${imgSrc}`;
       },
     },
   },
@@ -247,83 +250,85 @@ const format = {
       thumbnail: (twitterSrc) => {
         let imgSrc;
         twitterSrc = twitterSrc.toLowerCase();
+
+        // Keep files in thumbnails folder:
         switch (twitterSrc) {
           case 'nintendo':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendouk':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'mynintendonews':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendo_nwr':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'nintendoins':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'sega':
-            imgSrc = '/img/thumbnails/gaming-sega.svg';
+            imgSrc = 'gaming-sega.svg';
             break;
           case 'playstation':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'londonstudiohq':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'playstationuk':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'ps5console':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'askplaystation':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'psudotcom':
-            imgSrc = '/img/thumbnails/gaming-ps.svg';
+            imgSrc = 'gaming-ps.svg';
             break;
           case 'xbox':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'oxm':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxuk':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxp3':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'xboxgamepass':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'marvel':
-            imgSrc = '/img/thumbnails/comics-marvel.svg';
+            imgSrc = 'comics-marvel.svg';
             break;
           case 'dccomics':
-            imgSrc = '/img/thumbnails/comics-dc.svg';
+            imgSrc = 'comics-dc.svg';
             break;
           case 'wwe':
-            imgSrc = '/img/thumbnails/wrestling-wwe.svg';
+            imgSrc = 'wrestling-wwe.svg';
             break;
           case 'impactwrestling':
-            imgSrc = '/img/thumbnails/wrestling-impact.svg';
+            imgSrc = 'wrestling-impact.svg';
             break;
           case 'lego':
-            imgSrc = '/img/thumbnails/toys-lego.svg';
+            imgSrc = 'toys-lego.svg';
             break;
           case 'netflix':
-            imgSrc = '/img/thumbnails/tvfilm-netflix.svg';
+            imgSrc = 'tvfilm-netflix.svg';
             break;
           case 'amazonprime':
-            imgSrc = '/img/thumbnails/tvfilm-prime.svg';
+            imgSrc = 'tvfilm-prime.svg';
             break;
           default:
-            imgSrc = '/img/thumbnails/aon-default.svg';
+            imgSrc = 'aon-default.svg';
         }
-        return imgSrc;
+        return `${settings.ui.thumbnails.path}${imgSrc}`;
       },
     },
   },
@@ -332,41 +337,43 @@ const format = {
       thumbnail: (subreddit) => {
         let imgSrc;
         subreddit = subreddit.toLowerCase();
+
+        // Keep files in thumbnails folder:
         switch (subreddit) {
           case 'nintendo':
-            imgSrc = '/img/thumbnails/gaming-nintendo.svg';
+            imgSrc = 'gaming-nintendo.svg';
             break;
           case 'sega':
-            imgSrc = '/img/thumbnails/gaming-sega.svg';
+            imgSrc = 'gaming-sega.svg';
             break;
           case 'xbox':
-            imgSrc = '/img/thumbnails/gaming-xbox.svg';
+            imgSrc = 'gaming-xbox.svg';
             break;
           case 'marvel':
-            imgSrc = '/img/thumbnails/comics-marvel.svg';
+            imgSrc = 'comics-marvel.svg';
             break;
           case 'dccomics':
-            imgSrc = '/img/thumbnails/comics-dc.svg';
+            imgSrc = 'comics-dc.svg';
             break;
           case 'wwe':
-            imgSrc = '/img/thumbnails/wrestling-wwe.svg';
+            imgSrc = 'wrestling-wwe.svg';
             break;
           case 'impactwrestling':
-            imgSrc = '/img/thumbnails/wrestling-impact.svg';
+            imgSrc = 'wrestling-impact.svg';
             break;
           case 'lego':
-            imgSrc = '/img/thumbnails/toys-lego.svg';
+            imgSrc = 'toys-lego.svg';
             break;
           case 'netflix':
-            imgSrc = '/img/thumbnails/tvfilm-netflix.svg';
+            imgSrc = 'tvfilm-netflix.svg';
             break;
           case 'amazonprime':
-            imgSrc = '/img/thumbnails/tvfilm-prime.svg';
+            imgSrc = 'tvfilm-prime.svg';
             break;
           default:
-            imgSrc = '/img/thumbnails/aon-default.svg';
+            imgSrc = 'aon-default.svg';
         }
-        return imgSrc;
+        return `${settings.ui.thumbnails.path}${imgSrc}`;
       },
 
       filter: (o) => {

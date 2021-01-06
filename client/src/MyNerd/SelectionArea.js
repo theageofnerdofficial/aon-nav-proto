@@ -1,13 +1,14 @@
+// Imports:
 import React, { Component } from 'react';
 import Gaming from './Categories/Gaming/Gaming';
 import Comics from '../MyNerd/Categories/Comics/Comics';
+import MyNerdNav from './MyNerdNav';
+import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
+import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import TVFilm from './Categories/TVFilm/TVFilm';
 import Toys from './Categories/Toys/Toys';
 import Wrestling from './Categories/Wrestling/Wrestling';
-import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
-import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import settings from '../config/settings';
-import MyNerdNav from './MyNerdNav';
 
 class SelectionArea extends Component {
   render() {
@@ -23,9 +24,9 @@ class SelectionArea extends Component {
           nerdSetupReducer={this.props.nerdSetupReducer}
           nerdSetupUpdatePhase={this.props.nerdSetupUpdatePhase}
         />
-
+        <br />
         <SectionTitlePostsTitle text="Select/check the content you wish to see:" />
-
+        <br />
         <div className="col-lg-8">
           <div className="mynerd-wrapper mt-1">
             <div className="col-12 row m-0 p-0 py-2 font-weight-light text-muted">
@@ -39,22 +40,27 @@ class SelectionArea extends Component {
             <Gaming
               nerdReducer={this.props.nerdReducer}
               nerdUpdateCheck={this.props.nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.gaming.modern}
             />
             <Comics
               nerdReducer={this.props.nerdReducer}
               nerdUpdateCheck={this.props.nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.comics}
             />
             <TVFilm
               nerdReducer={this.props.nerdReducer}
               nerdUpdateCheck={this.props.nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.tvfilm}
             />
             <Toys
               nerdReducer={this.props.nerdReducer}
               nerdUpdateCheck={this.props.nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.toys}
             />
             <Wrestling
               nerdReducer={this.props.nerdReducer}
               nerdUpdateCheck={this.props.nerdUpdateCheck}
+              tabColour={settings.ui.style.sectionTab.wrestling}
             />
           </div>
         </div>

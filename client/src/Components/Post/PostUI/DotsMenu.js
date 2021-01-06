@@ -1,6 +1,7 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
+import FontIcon from '../../FontIcon/FontIcon';
 
 class DotsMenu extends Component {
   render() {
@@ -12,25 +13,30 @@ class DotsMenu extends Component {
         style={{
           background: '#FFF',
           display: 'none',
-          height: 120,
+          height: 123,
           padding: 5,
           position: 'absolute',
           right: 10,
           top: 15,
           transform: 'scale(0.92)',
-          width: 150,
+          width: 125,
           zIndex: 100,
         }}
       >
-        <button className="btn-sm form-control post-newspost-dots-menu-ui-btn">
-          Save post
-        </button>
-        <button className="btn-sm form-control post-newspost-dots-menu-ui-btn">
-          Hide post
-        </button>
-        <button className="btn-sm form-control post-newspost-dots-menu-ui-btn">
-          Visit link
-        </button>
+        {[
+          { label: 'Save post', icon: 'faSave' },
+          { label: 'Hide post', icon: 'faEyeSlash' },
+          { label: 'Visit link', icon: 'faExternalLinkAlt' },
+        ].map((btn) => {
+          return (
+            <button className="btn-sm form-control post-newspost-dots-menu-ui-btn">
+              <span className="float-left text-muted">
+                {FontIcon(btn.icon)}
+              </span>
+              {btn.label}
+            </button>
+          );
+        })}
       </div>
     );
   }

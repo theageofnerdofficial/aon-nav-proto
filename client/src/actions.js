@@ -12,6 +12,7 @@ import {
   FLASH_MSG_HIDE,
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
+  MODAL_UPDATE_MODE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   NEWSFEED_DATA_RESET,
@@ -98,6 +99,7 @@ import {
 // :
 import format from './config/format';
 import settings from './config/settings';
+import sourceDBCache from './helpers/sourceDBCache';
 
 /* Data actions:
  ******************************************************/
@@ -125,48 +127,61 @@ export const dataFormatYoutube = (o) => ({
   payload: o,
 });
 
-// replace???
+//
 export const dataRequest = (o) => (dispatch) => {
   dispatch({ type: DATA_REQUEST_PENDING });
-  const url = () => {
-    if (o.src === SOURCE_TWITTER) {
-      return `/api/request_data_twitter/${o.endpoint}/${o.user}/${o.q}/${o.count}`;
-    } else if (o.src === SOURCE_REDDIT) {
-      //endpoint: "hot", src: "SOURCE_REDDIT", user: "amazonprime", count: 10
-      let redditUrl = `https://www.reddit.com/r/${o.user}/${o.endpoint}.json?`;
-      let params = [];
-      if (o.period) {
-        if (o.period !== 'All time') {
-          o.period = format.reddit.source.filter(o);
+
+  // If data needs to be "fresh" rather than from cache:
+  const getFreshAPIData = (o, shouldCache) => {
+    sourceDBCache.get.apiData
+      .fresh(o)
+      .then((data) => {
+        console.log(shouldCache);
+        console.log(o);
+        console.log(data);
+        if (shouldCache) {
+          sourceDBCache
+
+            .create(o, data)
+            .then((res) => console.log(res))
+            .catch((error) => console.log(error));
         }
-        params.push(`t=${o.period}`);
-      }
-      if (o.count) params.push(`limit=${o.count}`);
-      params = params.join('&');
-      redditUrl = redditUrl + params;
-      return redditUrl;
-    } else if (o.src === SOURCE_INSTAGRAM) {
-      return `/api/request_data_instagram/${o.user}/${o.count}`;
-    } else if (o.src === SOURCE_YOUTUBE) {
-      const userId = o.userId.toString();
-      return `/api/request_data_youtube/${userId}`;
-    }
+        // Don't create DB entry, ONLY dispatch data to store:
+        dispatch({
+          count: o.count,
+          payload: data,
+          source: o.src,
+          sourceData: o.sourceData,
+          type: DATA_REQUEST_SUCCESS,
+        });
+      })
+      .catch((error) =>
+        dispatch({ type: DATA_REQUEST_FAILURE, payload: error })
+      );
   };
 
-  fetch(url(), {
-    method: 'GET',
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({
-        count: o.count,
-        payload: data,
-        source: o.src,
-        sourceData: o.sourceData,
-        type: DATA_REQUEST_SUCCESS,
-      });
-    })
-    .catch((error) => dispatch({ type: DATA_REQUEST_FAILURE, payload: error }));
+  // If source is cacheable to DB rather than fetching fresh data every time:
+  if (sourceDBCache.isCacheable(o.src)) {
+    sourceDBCache.get.apiData
+      .cached(o)
+      .then((cachedSourceData) => {
+        console.log(cachedSourceData);
+        // sourcedatas is the collection (yes, data is plural of datum, s added automatically - fix later)
+        // later add AND to this if to check if there are no sourcedatas in db belonging to this service
+        //
+        //
+        console.log(cachedSourceData.length);
+
+        if (cachedSourceData.length <= 0) {
+          getFreshAPIData(o, true);
+        } else {
+          // getCachedAPIData();
+        }
+      })
+      .catch((error) => console.log(error));
+  } else {
+    getFreshAPIData(o, false);
+  }
 };
 
 /* Flash msg actions:
@@ -206,6 +221,13 @@ export const profileGetByUserId = (id) => (dispatch) => {
       dispatch({ type: PROFILE_GETBYID_FAILURE, payload: error })
     );
 };
+
+/* Modal actions:
+ ******************************************************/
+export const modalUpdateMode = (o) => ({
+  type: MODAL_UPDATE_MODE,
+  payload: o,
+});
 
 /* Nerd actions:
  ******************************************************/
@@ -510,7 +532,6 @@ export const sourcesGetInstagramPosts = (o) => (dispatch) => {
 };
 
 export const sourceGetRedditPosts = (o) => (dispatch) => {
-  console.log('|||||||||||||||||||||');
   let redditUrl = `https://www.reddit.com/r/${o.subreddit}/${o.filter}.json?`;
   let params = [];
   //

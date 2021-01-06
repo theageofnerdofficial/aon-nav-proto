@@ -70,6 +70,7 @@ h2 {
 
 .feed-title {
   background-color: var(--col-greyish);
+  height: 30px;
 }
 
 .h4-welcome-title {

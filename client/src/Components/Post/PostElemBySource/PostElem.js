@@ -12,48 +12,7 @@ import format from '../../../config/format';
 import utils from '../../Utils/utils/utils';
 
 const postElem = {
-  /* Accordion:
-   ****************************************/
-  accordion: {
-    get(o, settings) {
-      const { id } = o;
-      return (
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <a
-              data-toggle="collapse"
-              data-parent="#accordion"
-              href={`#collapse${id}`}
-            >
-              <button
-                className="btn-link text-left font-weight-light form-control panel-title"
-                onClick={(e) => {
-                  e.target.innerHTML =
-                    e.target.innerHTML === settings.ui.labels.panel.expand
-                      ? settings.ui.labels.panel.contract
-                      : settings.ui.labels.panel.expand;
-                }}
-                style={{ background: 'none', border: '0' }}
-              >
-                {settings.ui.labels.panel.expand}
-              </button>
-            </a>
-          </div>
-          <div id={`collapse${id}`} className="collapse in panel-collapse">
-            <div className="pt-1 font-italic font-weight-light panel-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </div>
-          </div>
-        </div>
-      );
-    },
-  },
-
-  /*
-   * Embedded media:
+  /* Embedded media:
    ****************************************/
   embeddedMedia: {
     images: {

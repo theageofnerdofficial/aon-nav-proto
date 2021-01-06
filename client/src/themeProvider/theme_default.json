@@ -4,6 +4,12 @@
       "background-color": "var(--col-lightest) !important",
       "color": "var(--col-darkest) !important"
     },
+    "feed-title": {
+      "start-gradient": "#EBEBEB",
+      "start-gradient-rgb": "235,235,235",
+      "end-gradient": "#EBEBEB",
+      "end-gradient-rgb": "235,235,235"
+    },
     "header": {
       "header-sub-wrapper": {
         "height": "120px",
@@ -215,6 +221,10 @@
     "body": {
       "background-color": "var(--col-darker) !important",
       "color": "var(--col-greyish) !important"
+    },
+    "feed-title": {
+      "start-gradient": "#EBEBEB",
+      "end-gradient": "#EBEBEB"
     },
     "header": {
       "header-sub-wrapper": {

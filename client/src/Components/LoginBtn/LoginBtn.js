@@ -23,6 +23,8 @@ class LoginBtn extends Component {
       }
     };
 
+    const { modalUpdateMode } = this.props;
+
     return (
       <React.Fragment>
         <div id="ui-login-btn-wrapper">
@@ -34,7 +36,7 @@ class LoginBtn extends Component {
                     userLogout={this.props.userLogout}
                   />
                 ),
-                notLoggedIn: <NotLoggedIn />,
+                notLoggedIn: <NotLoggedIn modalUpdateMode={modalUpdateMode} />,
               })
             : null}
         </div>

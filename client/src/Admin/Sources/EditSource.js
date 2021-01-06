@@ -36,8 +36,8 @@ let gotUpdatedSource = false;
 class EditSource extends Component {
   componentDidMount() {
     gotUpdatedSource = false;
-    this.props.sourcesReset();
     const path = window.location.href.split('editsource/')[1];
+    this.props.sourcesReset();
     this.props.sourceGetById({
       id: path.split('/')[0],
       service: path.split('/')[1],
@@ -209,6 +209,8 @@ class EditSource extends Component {
                 />
                 {this.props.sourceReducer.category === 'gaming' ? (
                   <CategoryGamingEdit
+                    labels={labels}
+                    settings={settings}
                     sourceAddFormCategoryGaming={
                       this.props.sourceAddFormCategoryGaming
                     }

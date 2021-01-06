@@ -12,6 +12,11 @@ const labels = {
       welcomeSubtitle: 'Create a profile & personalise',
       welcomeSignedIn: 'Welcome back',
     },
+    posts: {
+      accordionContent: {
+        voteScore: 'Source upvote score',
+      },
+    },
     quiz: {
       ansLabels: ['A', 'B', 'C', 'D'],
       tips: [
@@ -21,6 +26,22 @@ const labels = {
         'If doubts arise, ask for a second opinion from other mods/admins',
         'Test your quiz to see how it plays',
       ],
+    },
+    sources: {
+      form: {
+        category: {
+          gaming: {
+            selectionLabel: '-- Select gaming category --',
+          },
+        },
+      },
+      time: {
+        abbreviations: {
+          seconds: 's',
+          minutes: 'm',
+          hours: 'h',
+        },
+      },
     },
   },
   user: {

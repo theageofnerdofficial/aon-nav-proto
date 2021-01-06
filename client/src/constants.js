@@ -17,7 +17,9 @@ export const FLASH_MSG_UPDATE = 'FLASH_MSG_UPDATE';
 
 /* Modal constants:
  *****************************************************/
+export const MODAL_IMAGE_LIGHTBOX = 'MODAL_IMAGE_LIGHTBOX';
 export const MODAL_LOGIN_FORM = 'MODAL_LOGIN_FORM';
+export const MODAL_UPDATE_MODE = 'MODAL_UPDATE_MODE';
 
 /* Nerd constants:
  *****************************************************/

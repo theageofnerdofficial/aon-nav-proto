@@ -13,6 +13,7 @@ import {
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
   MODAL_LOGIN_FORM,
+  MODAL_UPDATE_MODE,
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   NEWSFEED_DATA_RESET,
@@ -158,6 +159,18 @@ export const dataReducer = (state = data, action = {}) => {
         stateCp.instagramDataRaw.push(action.payload);
       } else if (action.source === SOURCE_YOUTUBE) {
         action.payload.sourceData = action.sourceData;
+        //
+        //
+        let sourcesWithoutError;
+
+        if (action.payload.sourceData && action.payload.sourceData.length) {
+          sourcesWithoutError = action.payload.sourceData.filter((s) => {
+            return !s.error || !s.errors;
+          });
+        }
+
+        action.payload.sourceData = sourcesWithoutError;
+
         stateCp.youtubeDataRaw.push(action.payload);
       }
       stateCp.dataPending = false;
@@ -195,6 +208,8 @@ const modal = {
 
 export const modalReducer = (state = modal, action = {}) => {
   switch (action.type) {
+    case MODAL_UPDATE_MODE:
+      return Object.assign({}, state, { mode: action.payload });
     default:
       return state;
   }

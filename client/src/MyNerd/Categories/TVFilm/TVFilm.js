@@ -6,12 +6,13 @@ import TVFilmParent from './Subcategories/TVFilmParent';
 
 class TVFilm extends Component {
   render() {
-    const { nerdUpdateCheck, nerdReducer } = this.props;
+    const { nerdUpdateCheck, nerdReducer, tabColour } = this.props;
     return (
       <ul className="p-0">
         <TVFilmParent
           nerdReducer={nerdReducer}
           nerdUpdateCheck={nerdUpdateCheck}
+          tabColour={tabColour}
         />
         <ul
           style={{

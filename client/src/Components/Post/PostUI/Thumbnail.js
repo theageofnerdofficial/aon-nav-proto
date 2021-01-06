@@ -11,7 +11,7 @@ class Thumbnail extends Component {
           alt={`Thumbnail for ${source} post`}
           className="mx-1 rounded"
           src={imgSrc}
-          style={{ border: '10px', width: '65px' }}
+          style={{ border: '10px', width: '40px' }}
         />
       </React.Fragment>
     );
