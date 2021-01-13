@@ -27,9 +27,15 @@ class Accordion extends Component {
             style={{ width: '100%' }}
           >
             <AccordionImages
+              data={{
+                preview_img_arr,
+                permalink,
+                source,
+                source_data,
+                upvote_ratio,
+              }}
               modalReducer={modalReducer}
               modalUpdateMode={modalUpdateMode}
-              preview_img_arr={preview_img_arr}
             />
             <br />
             <AccordionMetaText

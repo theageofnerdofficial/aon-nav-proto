@@ -204,12 +204,18 @@ export const dataReducer = (state = data, action = {}) => {
  *********************************************************/
 const modal = {
   mode: MODAL_LOGIN_FORM,
+  data: {},
+  size: String,
 };
 
 export const modalReducer = (state = modal, action = {}) => {
   switch (action.type) {
     case MODAL_UPDATE_MODE:
-      return Object.assign({}, state, { mode: action.payload });
+      return Object.assign({}, state, {
+        mode: action.payload.mode,
+        data: action.payload.data,
+        size: action.payload.size,
+      });
     default:
       return state;
   }

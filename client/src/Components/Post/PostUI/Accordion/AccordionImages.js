@@ -2,15 +2,15 @@
  ***************************************************************/
 import React, { Component } from 'react';
 
-// UPDATE NOTE: DEPENDENCY INJECT THIS...
+// UPDATE NOTE: DEPENDENCY INJECTION ON THIS...
 import { MODAL_IMAGE_LIGHTBOX } from '../../../../constants';
 
 class AccordionImages extends Component {
   render() {
-    const { modalReducer, modalUpdateMode, preview_img_arr } = this.props;
+    const { data, modalReducer, modalUpdateMode } = this.props;
     return (
       <div className="col-12">
-        {preview_img_arr.map((img, index) => {
+        {data.preview_img_arr.map((img, index) => {
           return (
             <img
               alt="Accordion media preview" // UPDATE NOTE: Make more meaningful
@@ -18,8 +18,14 @@ class AccordionImages extends Component {
               data-target="#exampleModalLong"
               data-toggle="modal"
               modalReducer={modalReducer}
-              onClick={() => modalUpdateMode(MODAL_IMAGE_LIGHTBOX)}
-              src={preview_img_arr[index].resolutions[0].url.replaceAll(
+              onClick={() =>
+                modalUpdateMode({
+                  data: data,
+                  mode: MODAL_IMAGE_LIGHTBOX,
+                  size: 'modal-xl',
+                })
+              }
+              src={data.preview_img_arr[index].resolutions[0].url.replaceAll(
                 /&amp;/gi,
                 '&'
               )}

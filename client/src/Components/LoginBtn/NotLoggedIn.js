@@ -7,9 +7,15 @@ class NotLoggedIn extends Component {
     return (
       <div
         className="btn btn-light btn-link btn-login"
-        data-toggle="modal"
         data-target="#exampleModalLong"
-        onClick={() => modalUpdateMode(MODAL_LOGIN_FORM)}
+        data-toggle="modal"
+        onClick={() =>
+          modalUpdateMode({
+            mode: MODAL_LOGIN_FORM,
+            data: {},
+            size: 'modal-sm',
+          })
+        }
         style={{
           border: 0,
           fontWeight: 300,

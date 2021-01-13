@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import ImageLightbox from '../Post/PostUI/ImageLightbox/ImageLightbox';
 import LoginForm from '../LoginForm/LoginForm';
+
 import { MODAL_IMAGE_LIGHTBOX, MODAL_LOGIN_FORM } from '../../constants';
 
 class Modal extends Component {
@@ -12,29 +14,29 @@ class Modal extends Component {
           return 'Image Caption Here';
         }
       },
-      body(mode, user) {
+      body(mode, data, user) {
         if (mode === MODAL_LOGIN_FORM) {
           return <LoginForm userLogin={user} />;
         } else if (mode === MODAL_IMAGE_LIGHTBOX) {
-          return (
-            <img
-              src=""
-              style={{ border: '1px solid red', height: 200, width: 200 }}
-            />
-          );
+          return <ImageLightbox data={data} />;
         }
       },
     };
     return (
       <div
+        aria-hidden="true"
+        aria-labelledby="exampleModalLongTitle"
         className="modal fade"
         id="exampleModalLong"
-        tabIndex="-1"
         role="dialog"
-        aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true"
+        tabIndex="-1"
       >
-        <div className="modal-dialog modal-dialog-centered" role="document">
+        <div
+          className={`modal-dialog modal-dialog-centered ${
+            this.props.modalReducer.size ? this.props.modalReducer.size : null
+          }`}
+          role="document"
+        >
           <div className="modal-content">
             <div className="modal-header">
               <h5
@@ -60,6 +62,7 @@ class Modal extends Component {
             <div className="modal-body">
               {getContent.body(
                 this.props.modalReducer.mode,
+                this.props.modalReducer.data,
                 this.props.userLogin
               )}
             </div>
