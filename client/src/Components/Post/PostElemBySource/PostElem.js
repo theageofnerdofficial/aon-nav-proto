@@ -1,13 +1,9 @@
 import React from 'react';
 import {
   SOURCE_INSTAGRAM,
-  SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT,
-  SOURCE_REDDIT_LABEL,
   SOURCE_TWITTER,
-  SOURCE_TWITTER_LABEL,
 } from '../../../constants';
-import Thumbnail from '../PostUI/Thumbnail';
 import format from '../../../config/format';
 import utils from '../../Utils/utils/utils';
 
@@ -30,44 +26,6 @@ const postElem = {
     get(o, utils, ReactHtmlParser) {
       const { text } = o;
       return ReactHtmlParser(utils.urlify(text));
-    },
-  },
-
-  /*
-   * Thumbnail:
-   ****************************************/
-  thumbnail: {
-    get(o, settings) {
-      const { source, userData, profile_pic_url } = o;
-      let src;
-      switch (source) {
-        case SOURCE_REDDIT_LABEL:
-          src = settings.ui.defaultPostThumbs.reddit.gaming;
-          break;
-        case SOURCE_TWITTER_LABEL:
-          if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
-            const hasCustomThumb = userData && userData.profile_image_url;
-            src = hasCustomThumb
-              ? userData.profile_image_url
-              : settings.ui.defaultPostThumbs.twitter.gaming;
-          } else {
-            src = settings.ui.defaultPostThumbs.twitter.gaming;
-          }
-          break;
-        case SOURCE_INSTAGRAM_LABEL:
-          if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
-            const hasCustomThumb = userData && profile_pic_url;
-            src = hasCustomThumb
-              ? profile_pic_url
-              : settings.ui.defaultPostThumbs.instagram.default;
-          } else {
-            src = settings.ui.defaultPostThumbs.instagram.default;
-          }
-          break;
-        default:
-          src = settings.ui.defaultPostThumbs.general;
-      }
-      return <Thumbnail imgSrc={src} source={source} />;
     },
   },
 

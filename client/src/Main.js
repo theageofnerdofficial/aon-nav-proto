@@ -106,6 +106,7 @@ import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
 import Quizzes from './Components/Quiz/Quizzes';
 import UserProfile from './UserProfile';
+import FontIcon from './Components/FontIcon/FontIcon';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -310,6 +311,7 @@ class Main extends Component {
             <KonamiCode />
 
             <Modal
+              FontIcon={FontIcon}
               modalReducer={modalReducer}
               modalUpdateMode={modalUpdateMode}
               userLogin={userLogin}

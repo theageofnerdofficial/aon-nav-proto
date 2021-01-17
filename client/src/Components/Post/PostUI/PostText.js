@@ -8,6 +8,7 @@ class PostText extends Component {
     let { ReactHtmlParser, utils } = this.props;
     return (
       <p className="font-weight-light p-0 m-0">
+        {/* fix this... */}
         {this.props.postElem.text.get(
           { source, text, userData },
           utils,

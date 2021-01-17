@@ -4,13 +4,55 @@ import React, { Component } from 'react';
 
 class Thumbnail extends Component {
   render() {
-    let { imgSrc, source } = this.props;
+    const { profile_pic_url, settings, source, userData } = this.props;
+
+    // Get source URL for thumbnail:
+    const getThumbnailSrc = () => {
+      const {
+        SOURCE_INSTAGRAM_LABEL,
+        SOURCE_REDDIT_LABEL,
+        SOURCE_TWITTER_LABEL,
+      } = this.props;
+
+      let src;
+      switch (source) {
+        case SOURCE_REDDIT_LABEL:
+          src = settings ? settings.ui.defaultPostThumbs.reddit.gaming : null;
+          break;
+        case SOURCE_TWITTER_LABEL:
+          if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
+            const hasCustomThumb = userData && userData.profile_image_url;
+            src = hasCustomThumb
+              ? userData.profile_image_url
+              : settings.ui.defaultPostThumbs.twitter.gaming;
+          } else {
+            src = settings
+              ? settings.ui.defaultPostThumbs.twitter.gaming
+              : null;
+          }
+          break;
+        case SOURCE_INSTAGRAM_LABEL:
+          if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
+            const hasCustomThumb = userData && profile_pic_url;
+            src = hasCustomThumb
+              ? profile_pic_url
+              : settings.ui.defaultPostThumbs.instagram.default;
+          } else {
+            src = settings.ui.defaultPostThumbs.instagram.default;
+          }
+          break;
+        default:
+          src = settings.ui.defaultPostThumbs.general;
+      }
+      return src;
+    };
+
     return (
       <React.Fragment>
         <img
           alt={`Thumbnail for ${source} post`}
           className="mx-1 rounded"
-          src={imgSrc}
+          src={getThumbnailSrc()}
           style={{ border: '10px', width: '40px' }}
         />
       </React.Fragment>

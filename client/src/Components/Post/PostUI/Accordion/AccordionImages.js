@@ -7,7 +7,15 @@ import { MODAL_IMAGE_LIGHTBOX } from '../../../../constants';
 
 class AccordionImages extends Component {
   render() {
-    const { data, modalReducer, modalUpdateMode } = this.props;
+    const { data, modalReducer, modalUpdateMode, postElem } = this.props;
+
+    // FIX THUMBNAIL
+    /*
+    {postElem.thumbnail.get(
+      { profile_pic_url, source, userData },
+      settings
+    )}*/
+
     return (
       <div className="col-12">
         {data.preview_img_arr.map((img, index) => {
@@ -15,7 +23,7 @@ class AccordionImages extends Component {
             <img
               alt="Accordion media preview" // UPDATE NOTE: Make more meaningful
               className="img-fluid mx-1 rounded"
-              data-target="#exampleModalLong"
+              data-target="#mainModalLong"
               data-toggle="modal"
               modalReducer={modalReducer}
               onClick={() =>

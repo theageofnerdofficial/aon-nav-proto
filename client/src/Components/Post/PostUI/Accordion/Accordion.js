@@ -9,13 +9,22 @@ import utils from '../../../Utils/utils/utils';
 
 class Accordion extends Component {
   render() {
-    const { labels, modalReducer, modalUpdateMode, settings } = this.props;
+    const {
+      labels,
+      modalReducer,
+      modalUpdateMode,
+      postElem,
+      settings,
+    } = this.props;
+
+    //
     const {
       id,
       permalink,
       preview_img_arr,
       source,
       source_data,
+      text,
       upvote_ratio,
     } = this.props.data;
     return (
@@ -32,10 +41,12 @@ class Accordion extends Component {
                 permalink,
                 source,
                 source_data,
+                text,
                 upvote_ratio,
               }}
               modalReducer={modalReducer}
               modalUpdateMode={modalUpdateMode}
+              postElem={postElem}
             />
             <br />
             <AccordionMetaText

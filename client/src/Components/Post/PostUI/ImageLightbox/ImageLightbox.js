@@ -13,10 +13,12 @@ class ImageLightbox extends Component {
       // :
       const imgResArr = preview_img_arr[0].resolutions;
 
+      // :
       const imgRes = {
         h: preview_img_arr[0].resolutions[imgResArr.length - 1].height,
         w: imgResArr[imgResArr.length - 1].width,
       };
+
       return {
         h: imgRes.h,
         w: imgRes.w,
@@ -29,7 +31,7 @@ class ImageLightbox extends Component {
 
     return (
       <React.Fragment>
-        <p>{data ? highResImg.url : null}</p>
+        {/* <p>{data ? highResImg.url : null}</p>*/}
         <img
           className="img-fluid rounded"
           src={data ? highResImg.url : null}

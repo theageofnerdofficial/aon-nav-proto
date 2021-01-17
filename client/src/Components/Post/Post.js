@@ -18,6 +18,7 @@ import ReactHtmlParser from 'react-html-parser';
 import postElem from './PostElemBySource/PostElem';
 import settings from '../../config/settings';
 import UIControlPanel from './PostUI/UIControlPanel/UIControlPanel';
+import Thumbnail from './PostUI/Thumbnail';
 
 class Post extends Component {
   render() {
@@ -137,11 +138,22 @@ class Post extends Component {
     return (
       <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm">
         <div className="col-2 m-0 p-0 text-center">
-          {/* Thumbnail... */}
+          {/* Thumbnail... 
           {postElem.thumbnail.get(
             { profile_pic_url, source, userData },
             settings
-          )}
+          )}*/}
+
+          <Thumbnail
+            profile_pic_url={profile_pic_url}
+            source={source}
+            settings={settings}
+            userData={userData}
+            SOURCE_INSTAGRAM_LABEL={SOURCE_INSTAGRAM_LABEL}
+            SOURCE_REDDIT_LABEL={SOURCE_REDDIT_LABEL}
+            SOURCE_TWITTER_LABEL={SOURCE_TWITTER_LABEL}
+          />
+
           <br />
           <CreatedCaption
             createdTimeFrom={created_time_from}
@@ -173,11 +185,13 @@ class Post extends Component {
               preview_img_arr,
               source,
               source_data,
+              text,
               upvote_ratio,
               userData,
             }}
             FontIcon={FontIcon}
             labels={labels}
+            postElem={postElem}
             modalReducer={modalReducer}
             modalUpdateMode={modalUpdateMode}
             settings={settings}
