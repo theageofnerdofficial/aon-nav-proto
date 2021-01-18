@@ -2,19 +2,14 @@
  ***************************************************************/
 import React, { Component } from 'react';
 
-// UPDATE NOTE: DEPENDENCY INJECTION ON THIS...
-import { MODAL_IMAGE_LIGHTBOX } from '../../../../constants';
-
 class AccordionImages extends Component {
   render() {
-    const { data, modalReducer, modalUpdateMode, postElem } = this.props;
-
-    // FIX THUMBNAIL
-    /*
-    {postElem.thumbnail.get(
-      { profile_pic_url, source, userData },
-      settings
-    )}*/
+    const {
+      data,
+      MODAL_IMAGE_LIGHTBOX,
+      modalReducer,
+      modalUpdateMode,
+    } = this.props;
 
     return (
       <div className="col-12">

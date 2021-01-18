@@ -93,7 +93,7 @@ class EditSource extends Component {
         );
       },
       reddit: () => {
-        const { sourceAddFormFilter, sourceReducer } = this.props;
+        const { sourceAddFormFilter } = this.props;
         return (
           <React.Fragment>
             <SubredditEdit

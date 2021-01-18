@@ -68,10 +68,12 @@ const settings = {
         gaming: './img/thumbnails/gaming-twitter-2.svg',
       },
     },
-    labels: {
-      panel: {
-        contract: 'Less [-]',
-        expand: 'More [+]',
+    labeling: {
+      post: {
+        officialSrc: {
+          brandColourEnabled: true,
+          checkmarkEnabled: true,
+        },
       },
     },
     thumbnails: {

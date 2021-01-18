@@ -1,24 +1,20 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
+import Accordion from './PostUI/Accordion/Accordion';
+import CreatedCaption from './PostUI/CreatedCaption';
+import PostText from './PostUI/PostText';
+import PostTitle from './PostUI/PostTitle';
+import ReactHtmlParser from 'react-html-parser';
+import settings from '../../config/settings';
+import UIControlPanel from './PostUI/UIControlPanel/UIControlPanel';
+import Thumbnail from './PostUI/Thumbnail';
 import {
   SOURCE_INSTAGRAM,
   SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT_LABEL,
   SOURCE_TWITTER_LABEL,
 } from '../../constants';
-
-import Accordion from './PostUI/Accordion/Accordion';
-import CreatedCaption from './PostUI/CreatedCaption';
-import DotsMenu from './PostUI/DotsMenu';
-import DotsMenuButton from './PostUI/DotsMenuButton';
-import PostText from './PostUI/PostText';
-import PostTitle from './PostUI/PostTitle';
-import ReactHtmlParser from 'react-html-parser';
-import postElem from './PostElemBySource/PostElem';
-import settings from '../../config/settings';
-import UIControlPanel from './PostUI/UIControlPanel/UIControlPanel';
-import Thumbnail from './PostUI/Thumbnail';
 
 class Post extends Component {
   render() {
@@ -138,12 +134,6 @@ class Post extends Component {
     return (
       <div className="col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm">
         <div className="col-2 m-0 p-0 text-center">
-          {/* Thumbnail... 
-          {postElem.thumbnail.get(
-            { profile_pic_url, source, userData },
-            settings
-          )}*/}
-
           <Thumbnail
             profile_pic_url={profile_pic_url}
             source={source}
@@ -153,7 +143,6 @@ class Post extends Component {
             SOURCE_REDDIT_LABEL={SOURCE_REDDIT_LABEL}
             SOURCE_TWITTER_LABEL={SOURCE_TWITTER_LABEL}
           />
-
           <br />
           <CreatedCaption
             createdTimeFrom={created_time_from}
@@ -163,18 +152,12 @@ class Post extends Component {
         </div>
         <div className="col-10 p-0">
           <PostTitle
-            data={{ source, source_data, userData }}
+            data={{ settings, source, source_data, userData }}
             FontIcon={FontIcon}
-            postElem={postElem}
           />
-          {/*
-          <DotsMenu id={id} />
-          <DotsMenuButton FontIcon={FontIcon} id={id} />
-           */}
           <PostText
-            data={{ source, text, userData }}
+            data={{ settings, source, text, userData }}
             ReactHtmlParser={ReactHtmlParser}
-            postElem={postElem}
             utils={utils}
           />
           <Accordion
@@ -191,7 +174,6 @@ class Post extends Component {
             }}
             FontIcon={FontIcon}
             labels={labels}
-            postElem={postElem}
             modalReducer={modalReducer}
             modalUpdateMode={modalUpdateMode}
             settings={settings}

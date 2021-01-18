@@ -16,6 +16,10 @@ const labels = {
       accordionContent: {
         voteScore: 'Source upvote score',
       },
+      accordionPanel: {
+        contract: 'Less [-]',
+        expand: 'More [+]',
+      },
     },
     quiz: {
       ansLabels: ['A', 'B', 'C', 'D'],

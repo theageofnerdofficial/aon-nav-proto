@@ -6,6 +6,7 @@ import AccordionMetaText from './AccordionMetaText';
 import AccordionPanelHead from './AccordionPanelHead';
 import FontIcon from '../../../FontIcon/FontIcon';
 import utils from '../../../Utils/utils/utils';
+import { MODAL_IMAGE_LIGHTBOX } from '../../../../constants';
 
 class Accordion extends Component {
   render() {
@@ -29,7 +30,7 @@ class Accordion extends Component {
     } = this.props.data;
     return (
       <div className="panel panel-default mt-2">
-        <AccordionPanelHead id={id} settings={settings} />
+        <AccordionPanelHead labels={labels} id={id} settings={settings} />
         <div id={`collapse${id}`} className="collapse in panel-collapse">
           <div
             className="float-left font-italic font-weight-light panel-body pt-1"
@@ -44,6 +45,7 @@ class Accordion extends Component {
                 text,
                 upvote_ratio,
               }}
+              MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
               modalReducer={modalReducer}
               modalUpdateMode={modalUpdateMode}
               postElem={postElem}

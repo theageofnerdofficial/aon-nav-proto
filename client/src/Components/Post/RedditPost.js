@@ -2,12 +2,14 @@
  ***************************************************************/
 import React, { Component } from 'react';
 import format from '../../config/format';
-import settings from '../../config/settings';
 import utils from '../Utils/utils/utils';
 import FontIcon from '../FontIcon/FontIcon';
 
 class RedditPost extends Component {
   render() {
+    const { labels } = this.props;
+
+    // :
     const getImgs = (data) => {
       if (data.preview) {
         return data.preview.images.map((d) => {
@@ -22,6 +24,8 @@ class RedditPost extends Component {
         });
       }
     };
+
+    // :
     const getMore = (data, index) => {
       return (
         <div className="panel panel-default">
@@ -36,12 +40,12 @@ class RedditPost extends Component {
                 style={{ background: 'none', border: '0' }}
                 onClick={(e) => {
                   e.target.innerHTML =
-                    e.target.innerHTML === settings.ui.labels.panel.expand
-                      ? settings.ui.labels.panel.contract
-                      : settings.ui.labels.panel.expand;
+                    e.target.innerHTML === labels.ui.posts.accordionPanel.expand
+                      ? labels.ui.posts.accordionPanel.contract
+                      : labels.ui.posts.accordionPanel.expand;
                 }}
               >
-                {settings.ui.labels.panel.expand}
+                {labels.ui.posts.accordionPanel.expand}
               </button>
             </a>
           </div>

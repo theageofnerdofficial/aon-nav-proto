@@ -4,16 +4,13 @@ import React, { Component } from 'react';
 
 class PostText extends Component {
   render() {
-    let { source, text, userData } = this.props.data;
-    let { ReactHtmlParser, utils } = this.props;
+    const { ReactHtmlParser, utils } = this.props;
+    const { source, text, userData } = this.props.data;
+    const getParsedText = (o, utils, ReactHtmlParser) =>
+      ReactHtmlParser(utils.urlify(o.text));
     return (
-      <p className="font-weight-light p-0 m-0">
-        {/* fix this... */}
-        {this.props.postElem.text.get(
-          { source, text, userData },
-          utils,
-          ReactHtmlParser
-        )}
+      <p className="font-weight-light m-0 p-0">
+        {getParsedText({ source, text, userData }, utils, ReactHtmlParser)}
       </p>
     );
   }
