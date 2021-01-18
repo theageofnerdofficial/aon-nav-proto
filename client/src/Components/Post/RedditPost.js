@@ -1,9 +1,9 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
+import FontIcon from '../FontIcon/FontIcon';
 import format from '../../config/format';
 import utils from '../Utils/utils/utils';
-import FontIcon from '../FontIcon/FontIcon';
 
 class RedditPost extends Component {
   render() {

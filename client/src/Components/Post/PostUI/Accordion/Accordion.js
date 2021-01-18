@@ -53,8 +53,8 @@ class Accordion extends Component {
             <br />
             <AccordionMetaText
               data={{ permalink, source, source_data, upvote_ratio }}
-              labels={labels}
               FontIcon={FontIcon}
+              labels={labels}
               settings={settings}
               utils={utils}
             />

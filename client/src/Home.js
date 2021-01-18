@@ -22,15 +22,15 @@ import newsFeedFilter from './helpers/newsfeedFilter';
 import format from './config/format';
 import formatYoutube from './Components/Utils/utils/formatYoutube';
 import QuizPage from './Components/Quiz/QuizPage';
+import redditSources from './helpers/redditSources';
 
 // Variables (to be moved to reducer as state eventually):
 let formattedTweets = false;
-let formattedRedditPosts = false;
 let formattedInstagrams = false;
 let formattedYoutubes = false;
 //
 let gotTwitterData = false;
-let gotRedditData = false;
+
 let gotInstagramData = false;
 let gotYoutubeData = false;
 
@@ -55,11 +55,11 @@ class Home extends Component {
   }
 
   componentDidUpdate() {
+    const { dataReducer } = this.props;
     const { request } = this.data;
     const { sourcesEnabled } = settings.content.newsfeed;
     const {
       sourcesTwitterData,
-      sourcesRedditData,
       sourcesInstagramData,
       sourcesYoutubeData,
     } = this.props.sourceReducer;
@@ -67,8 +67,11 @@ class Home extends Component {
     // If we've got source data but not post data from sources, get it:
     if (sourcesEnabled.twitter && sourcesTwitterData && !gotTwitterData)
       request.getTwitterRaw();
-    if (sourcesEnabled.reddit && sourcesRedditData && !gotRedditData)
-      request.getRedditRaw();
+
+    // Reddit
+    if (redditSources.ready(this.props, sourcesEnabled)) request.getRedditRaw();
+
+    //
     if (sourcesEnabled.instagram && sourcesInstagramData && !gotInstagramData)
       request.getInstagramRaw();
     if (sourcesEnabled.youtube && sourcesYoutubeData && !gotYoutubeData)
@@ -119,22 +122,6 @@ class Home extends Component {
       const hasYt = sourcesEnabled.youtube
         ? youtubeDataFormatted && youtubeDataFormatted.length > 0
         : true;
-
-      /*
-      var x = newsFeedFilter(
-        settings.content.newsfeed.sourcesEnabled,
-        hasTweetF,
-        hasRedditF,
-        hasIF
-      );*/
-
-      //
-      // if enabled source AND has source
-      //
-      //
-
-      // do all enabled sources have formatted sources?
-      //
       const hasAllF = hasTweetF && hasRedditF && hasIF && hasYt;
 
       // Combine formatted post/data:
@@ -146,35 +133,13 @@ class Home extends Component {
 
     format: {
       setRedditFormatted: () => {
-        const { dataPosts } = this.props.newsfeedReducer;
-        const { redditDataRaw } = this.props.dataReducer;
-        let gotAllRedditPosts;
-        let formattedRedditData = [];
-        // let gotAllRedditData;
-        let unformattedRedditData = [];
-
-        redditDataRaw.forEach((r, index) => {
-          r.data.children.forEach((c) => {
-            // Do not push stickied posts (announcements, etc.)
-            if (c.data && !c.data.stickied) {
-              c.data.sourceData = r.sourceData;
-              unformattedRedditData.push(c.data);
-            }
-          });
+        redditSources.format({
+          dataFormatReddit: this.props.dataFormatReddit,
+          dataFormatRedditStatus: this.props.dataFormatRedditStatus,
+          dataReducer: this.props.dataReducer,
+          formatReddit: formatReddit,
+          newsfeedReducer: this.props.newsfeedReducer,
         });
-
-        gotAllRedditPosts =
-          redditDataRaw.length &&
-          unformattedRedditData.length === dataPosts.count.reddit;
-
-        unformattedRedditData.forEach((r) =>
-          formattedRedditData.push(formatReddit.formatRedditData(r))
-        );
-
-        if (gotAllRedditPosts && !formattedRedditPosts) {
-          formattedRedditPosts = true;
-          this.props.dataFormatReddit(formattedRedditData);
-        }
       },
 
       setTwitterFormatted: (total) => {
@@ -297,30 +262,19 @@ class Home extends Component {
           }
         });
       },
+
+      //
       getRedditRaw: () => {
-        gotRedditData = true;
-
-        const req = (count, o) => {
-          this.props.newsfeedIncrSourceCount({
-            service: 'reddit',
-            value: count,
-          });
-          o.count = count;
-          this.props.dataRequest(o);
-        };
-
-        this.props.sourceReducer.sourcesRedditData.map((source) => {
-          if (!source.muted) {
-            req(source.postsNumber, {
-              endpoint: source.filter,
-              sourceData: source,
-              src: SOURCE_REDDIT,
-              user: source.subreddit,
-            });
-          }
+        redditSources.getRawData({
+          dataRawRedditStatus: this.props.dataRawRedditStatus,
+          dataRequest: this.props.dataRequest,
+          newsfeedIncrSourceCount: this.props.newsfeedIncrSourceCount,
+          SOURCE_REDDIT,
+          sourceReducer: this.props.sourceReducer,
         });
       },
 
+      //
       getYoutubeRaw: () => {
         gotYoutubeData = true;
         //

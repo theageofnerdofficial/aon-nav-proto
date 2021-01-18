@@ -1,11 +1,15 @@
 // Imports:
 import AddSource from './Admin/Sources/AddSource';
+import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
 import Admin from './Admin/Admin';
 import BoardGames from './BoardGames';
 import Comics from './Comics';
 import Contact from './Contact';
+import ContentScheduler from './Admin/ContentScheduler';
+import EditQuiz from './Admin/Quizzes/AddQuiz/EditQuiz';
 import EditSource from './Admin/Sources/EditSource';
 import FlashMsg from './Components/FlashMsg/FlashMsg';
+import FontIcon from './Components/FontIcon/FontIcon';
 import Footer from './Components/Footer/Footer';
 import Gaming from './Gaming';
 import GetSources from './Admin/Sources/GetSources/GetSources';
@@ -16,14 +20,19 @@ import LoginBtn from './Components/LoginBtn/LoginBtn';
 import LoginFormPage from './Components/LoginForm/LoginFormPage';
 import Modal from './Components/Modal/Modal';
 import ModernGames from './ModernGames';
+import NoMatch from './NoMatch';
 import MyNerd from './MyNerd/MyNerd';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import QuizList from './Admin/QuizList';
+import QuizPage from './Components/Quiz/QuizPage';
+import Quizzes from './Components/Quiz/Quizzes';
 import React, { Component } from 'react';
 import RetroGames from './RetroGames';
 import SignUp from './SignUp';
 import Sources from './Sources';
 import TVFilm from './TVFilm';
 import Unauthorised from './Unauthorised';
+import UserProfile from './UserProfile';
 import UserList from './Admin/UserList';
 
 // Actions:
@@ -77,6 +86,8 @@ import {
   quizUpdateScreen,
   uiSetBreadcrumbs,
   uiToggleLights,
+  dataFormatRedditStatus,
+  dataRawRedditStatus,
   userAuthenticate,
   userLogin,
   userLogout,
@@ -95,18 +106,9 @@ import { connect } from 'react-redux';
 import { GlobalStyles } from './themeProvider/global';
 import { lightTheme, darkTheme } from './themeProvider/theme';
 import { ThemeProvider } from 'styled-components';
-import './Main.css';
 import labels from './config/labels';
 import settings from './config/settings';
-import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
-import ContentScheduler from './Admin/ContentScheduler';
-import EditQuiz from './Admin/Quizzes/AddQuiz/EditQuiz';
-import NoMatch from './NoMatch';
-import QuizList from './Admin/QuizList';
-import QuizPage from './Components/Quiz/QuizPage';
-import Quizzes from './Components/Quiz/Quizzes';
-import UserProfile from './UserProfile';
-import FontIcon from './Components/FontIcon/FontIcon';
+import './Main.css';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -181,6 +183,8 @@ const mapDispatchToProps = (dispatch) => {
     sourcesToggleSourceMute: (o) => dispatch(sourcesToggleSourceMute(o)),
     uiSetBreadcrumbs: (o) => dispatch(uiSetBreadcrumbs(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
+    dataFormatRedditStatus: (o) => dispatch(dataFormatRedditStatus(o)),
+    dataRawRedditStatus: (o) => dispatch(dataRawRedditStatus(o)),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
     userLogout: () => dispatch(userLogout()),
@@ -286,6 +290,8 @@ class Main extends Component {
       sourcesToggleSourceMute,
       uiReducer,
       uiToggleLights,
+      dataFormatRedditStatus,
+      dataRawRedditStatus,
       userAuthenticate,
       userLogin,
       userLogout,
@@ -367,6 +373,8 @@ class Main extends Component {
                           sourcesGetReddit={sourcesGetReddit}
                           sourcesGetTwitter={sourcesGetTwitter}
                           sourcesGetYoutube={sourcesGetYoutube}
+                          dataFormatRedditStatus={dataFormatRedditStatus}
+                          dataRawRedditStatus={dataRawRedditStatus}
                           usersReducer={usersReducer}
                           {...props}
                         />

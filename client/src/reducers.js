@@ -5,6 +5,8 @@ import {
   DATA_FORMAT_INSTAGRAM,
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
+  DATA_FORMAT_UPDATE_REDDIT,
+  DATA_RAW_UPDATE_REDDIT,
   DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
@@ -120,6 +122,13 @@ const data = {
   instagramDataFormatted: [],
   youtubeDataRaw: [],
   youtubeDataFormatted: [],
+  //
+  //
+  hasFormattedRedditData: false,
+  hasRawRedditData: false,
+  hasFormattedTweetData: false,
+  hasFormattedInstagramData: false,
+  hasFormattedYoutubeData: false,
 };
 
 export const dataReducer = (state = data, action = {}) => {
@@ -137,6 +146,16 @@ export const dataReducer = (state = data, action = {}) => {
       //
       return Object.assign({}, state, {
         allData: utils.arr.randomize(arr),
+      });
+
+    case DATA_FORMAT_UPDATE_REDDIT:
+      return Object.assign({}, state, {
+        hasFormattedRedditData: action.payload,
+      });
+
+    case DATA_RAW_UPDATE_REDDIT:
+      return Object.assign({}, state, {
+        hasRawRedditData: action.payload,
       });
 
     case DATA_REQUEST_FAILURE:

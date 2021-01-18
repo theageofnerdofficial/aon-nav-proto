@@ -5,6 +5,8 @@ import {
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
   DATA_FORMAT_INSTAGRAM,
+  DATA_FORMAT_UPDATE_REDDIT,
+  DATA_RAW_UPDATE_REDDIT,
   DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
@@ -109,6 +111,16 @@ export const dataCombine = () => ({
 
 export const dataFormatReddit = (o) => ({
   type: DATA_FORMAT_REDDIT,
+  payload: o,
+});
+
+export const dataFormatRedditStatus = (o) => ({
+  type: DATA_FORMAT_UPDATE_REDDIT,
+  payload: o,
+});
+
+export const dataRawRedditStatus = (o) => ({
+  type: DATA_RAW_UPDATE_REDDIT,
   payload: o,
 });
 
