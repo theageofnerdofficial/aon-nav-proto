@@ -1,7 +1,7 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import AccordionImages from './AccordionImages';
+import AccordionMedia from './AccordionMedia';
 import AccordionMetaText from './AccordionMetaText';
 import AccordionPanelHead from './AccordionPanelHead';
 import FontIcon from '../../../FontIcon/FontIcon';
@@ -9,6 +9,9 @@ import utils from '../../../Utils/utils/utils';
 import { MODAL_IMAGE_LIGHTBOX } from '../../../../constants';
 
 class Accordion extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
   render() {
     const {
       labels,
@@ -20,6 +23,8 @@ class Accordion extends Component {
 
     //
     const {
+      entities_media,
+      extended_entities_media,
       id,
       permalink,
       preview_img_arr,
@@ -36,7 +41,32 @@ class Accordion extends Component {
             className="float-left font-italic font-weight-light panel-body pt-1"
             style={{ width: '100%' }}
           >
-            <AccordionImages
+            <AccordionMedia
+              data={{
+                entities_media,
+                extended_entities_media,
+                preview_img_arr,
+                permalink,
+                source,
+                source_data,
+                text,
+                upvote_ratio,
+              }}
+              MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
+              modalReducer={modalReducer}
+              modalUpdateMode={modalUpdateMode}
+              postElem={postElem}
+            />
+          </div>
+        </div>
+        {/* 
+        <div id={`collapse${id}`} className="collapse in panel-collapse">
+          <div
+            className="float-left font-italic font-weight-light panel-body pt-1"
+            style={{ width: '100%' }}
+          >
+           
+            <AccordionMedia
               data={{
                 preview_img_arr,
                 permalink,
@@ -50,6 +80,7 @@ class Accordion extends Component {
               modalUpdateMode={modalUpdateMode}
               postElem={postElem}
             />
+            
             <br />
             <AccordionMetaText
               data={{ permalink, source, source_data, upvote_ratio }}
@@ -59,7 +90,8 @@ class Accordion extends Component {
               utils={utils}
             />
           </div>
-        </div>
+          
+        </div>*/}
       </div>
     );
   }

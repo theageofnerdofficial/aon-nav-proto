@@ -17,6 +17,15 @@ import {
 } from '../../constants';
 
 class Post extends Component {
+  componentDidMount() {
+    console.log('hello post');
+    console.log(this.props);
+    /*
+    entities_media={d.entities_media ? d.entities_media : null}
+    extended_entities_media={
+      d.extended_entities_media ? d.extended_entities_media : null
+    }*/
+  }
   render() {
     /* :
      ***************************************************************/
@@ -113,6 +122,8 @@ class Post extends Component {
      ***************************************************************/
     const {
       description,
+      entities_media,
+      extended_entities_media,
       id,
       labels,
       permalink,
@@ -163,6 +174,8 @@ class Post extends Component {
           <Accordion
             data={{
               description,
+              entities_media,
+              extended_entities_media,
               id,
               permalink,
               preview_img_arr,
@@ -179,6 +192,11 @@ class Post extends Component {
             settings={settings}
             utils={utils}
           />
+          {/* 
+          
+          
+          */}
+          <br />
           <UIControlPanel FontIcon={FontIcon} />
         </div>
         <div className="col-12 m-0 p-0 row">{getEmbeddedMedia(source)}</div>

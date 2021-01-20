@@ -6,7 +6,7 @@ class AccordionPanelHead extends Component {
   render() {
     const { id, labels } = this.props;
     return (
-      <div className="my-1 panel-heading rounded">
+      <div className="border my-1 panel-heading rounded">
         <a
           data-toggle="collapse"
           data-parent="#accordion"

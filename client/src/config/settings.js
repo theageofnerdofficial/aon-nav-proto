@@ -27,7 +27,7 @@ const settings = {
       sourcesEnabled: {
         reddit: true,
         instagram: false,
-        twitter: false,
+        twitter: true,
         youtube: false,
       },
       sourcesCached: [], //[SOURCE_YOUTUBE],
@@ -73,6 +73,24 @@ const settings = {
         officialSrc: {
           brandColourEnabled: true,
           checkmarkEnabled: true,
+        },
+      },
+    },
+    modal: {
+      embeddedMedia: {
+        reddit: {
+          img: {
+            /*
+            Image available in resolutions 0-5 — 0 being lowest & 5 being highest
+              0 = 108px * 108px
+              1 = 216px * 216px
+              2 = 320px * 320px
+              3 = 640px * 640px
+              4 = 960px * 960px
+              5 = 1080px * 1080px
+            */
+            resolution: 5,
+          },
         },
       },
     },
