@@ -90,6 +90,10 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
   }
 
+  a, .btn-link {
+    cursor: pointer;
+  }
+
   a.nav-link {
     font-weight: 600;
     text-transform: uppercase !important;
@@ -98,6 +102,7 @@ export const GlobalStyles = createGlobalStyle`
   .nav-btn-link {
     background: ${({ theme }) => theme['nav-btn-link']['background']};
     color: ${({ theme }) => theme['nav-btn-link']['color']};
+    cursor: ${({ theme }) => theme['nav-btn-link']['cursor']};
     font-weight: ${({ theme }) => theme['nav-btn-link']['font-weight']};
     transition: ${({ theme }) => theme['nav-btn-link']['transition']};
   }

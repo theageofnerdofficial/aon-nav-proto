@@ -192,14 +192,8 @@ class Post extends Component {
             settings={settings}
             utils={utils}
           />
-          {/* 
-          
-          
-          */}
-          <br />
-          <UIControlPanel FontIcon={FontIcon} />
         </div>
-        <div className="col-12 m-0 p-0 row">{getEmbeddedMedia(source)}</div>
+        {/* <div className="col-12 m-0 p-0 row">{getEmbeddedMedia(source)}</div> */}
       </div>
     );
   }

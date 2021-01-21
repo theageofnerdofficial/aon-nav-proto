@@ -54,6 +54,7 @@ import {
   faInstagramSquare,
   faRedditAlien,
   faTwitter,
+  faYoutubeSquare,
 } from '@fortawesome/free-brands-svg-icons';
 
 const FontIcon = (icon) => {
@@ -196,6 +197,9 @@ const FontIcon = (icon) => {
       break;
     case 'faVolumeUp':
       faIcon = faVolumeUp;
+      break;
+    case 'faYoutubeSquare':
+      faIcon = faYoutubeSquare;
       break;
     default:
       faIcon = faArchway;

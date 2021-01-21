@@ -329,32 +329,13 @@ class Home extends Component {
     // const sectionTitle = `Mix (${allData ? allData.length : 0})`;
     return (
       <div>
-        <div className="col-12 m-0 p-0 mb-2 row">
-          <div style={{ width: '100%' }}>
-            <CarouselJumbotron
-              usersReducer={this.props.usersReducer}
-              items={[
-                {
-                  align: 'center',
-                  category: 'Comics',
-                  mediaSubtype: labels.ui.home.welcomeSubtitle,
-                  mediaType: 'article',
-                  src:
-                    'https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-                  title: labels.ui.home.welcomeTitle,
-                },
-              ]}
-            />
-          </div>
-        </div>
         <div className="col-md-12 m-0 p-0 pt-4 pl-1 pb-4 row rounded">
-          <div className="col-lg-7 m-0 p-0 mb-4 section-responsive-pr">
+          <div className="col-lg-12 m-0 p-0 mb-4 section-responsive-pr">
             <SectionTitle
               tabColour={settings.ui.style.sectionTab.featured}
               title="Newsfeed"
             />
-
-            <SectionTitlePostsTitle text="Mixed Content" />
+            <SectionTitlePostsTitle text="? Content" />
 
             {/*  <PostsDummy /> */}
 
@@ -367,16 +348,6 @@ class Home extends Component {
                 modalUpdateMode={modalUpdateMode}
                 utils={utils}
               />
-            </div>
-          </div>
-          <div className="col-lg-5 m-0 p-0 section-responsive-pr">
-            <SectionTitle
-              tabColour={settings.ui.style.sectionTab.featured}
-              title="Trending"
-            />
-            <SectionTitlePostsTitle text="Popular Posts (5)" />
-            <div style={{ opacity: 0.1 }}>
-              <TrendingList />
             </div>
           </div>
         </div>

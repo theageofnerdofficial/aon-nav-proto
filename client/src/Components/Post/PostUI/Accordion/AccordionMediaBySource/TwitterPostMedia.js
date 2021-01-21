@@ -37,26 +37,7 @@ class TwitterPostMedia extends Component {
             }
           />
         );
-
-        return <h1>hi</h1>;
-
-        {
-          /* 
-        return (
-          <AccordionMediaItem
-            data={data}
-            imgUrl={img}
-            imgEmbeddedUrl={img}
-            vidUrl={img}
-            index={index}
-            MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
-            modalReducer={modalReducer}
-            modalUpdateMode={modalUpdateMode}
-          />
-        );*/
-        }
       });
-      return;
     };
 
     const getExtendedEntitiesMedia = () => {
@@ -68,22 +49,6 @@ class TwitterPostMedia extends Component {
         {data.entities_media && data.entities_media.length >= 1
           ? getEntitiesMedia()
           : null}
-        {/* 
-        {data && data['preview_img_arr']
-          ? data['preview_img_arr'].map((img, index) => {
-              return (
-                <AccordionMediaItem
-                  data={data}
-                  img={img}
-                  index={index}
-                  MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
-                  modalReducer={modalReducer}
-                  modalUpdateMode={modalUpdateMode}
-                />
-              );
-            })
-          : null}
-          */}
       </React.Fragment>
     );
   }

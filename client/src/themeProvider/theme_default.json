@@ -109,6 +109,7 @@
       "nav-btn-link": {
         "background": "none !important",
         "color": "var(--col-lightest)",
+        "cursor": "pointer",
         "font-weight": "300",
         "transition": "color 0.8s"
       },
@@ -325,6 +326,7 @@
       "nav-btn-link": {
         "background": "none !important",
         "color": "var(--col-lightest)",
+        "cursor": "pointer",
         "font-weight": "300",
         "transition": "color 0.8s"
       },

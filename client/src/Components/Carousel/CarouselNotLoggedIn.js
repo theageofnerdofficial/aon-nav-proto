@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import labels from '../../config/labels';
 import FontIcon from '../FontIcon/FontIcon';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
@@ -30,11 +31,10 @@ class CarouselNotLoggedIn extends Component {
                 omitTabline={true}
                 title={item.title}
               />
-              <SectionTitlePostsTitle
-                text={utils.str.makeTitleCase(item.mediaSubtype)}
-              />
-              <button className="btn btn-sm btn-secondary mb-1 text-uppercase">
-                Sign Up {FontIcon('faArrowRight')}
+              {/* 
+              <SectionTitlePostsTitle text={utils.str.makeTitleCase(item.mediaSubtype)}/>*/}
+              <button className="btn btn-sm btn-light mb-1 text-uppercase">
+                {labels.ui.home.welcomeSignUpPrompt} {FontIcon('faArrowRight')}
               </button>
             </div>
           </div>

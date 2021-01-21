@@ -10,6 +10,7 @@ const labels = {
     home: {
       welcomeTitle: 'Welcome to AON',
       welcomeSubtitle: 'Create a profile & personalise',
+      welcomeSignUpPrompt: 'Personalise your experience',
       welcomeSignedIn: 'Welcome back',
     },
     posts: {

@@ -9,7 +9,7 @@ class PostText extends Component {
     const getParsedText = (o, utils, ReactHtmlParser) =>
       ReactHtmlParser(utils.urlify(o.text));
     return (
-      <p className="font-weight-light m-0 p-0">
+      <p className="font-weight-light m-0 mt-2 p-0">
         {getParsedText({ source, text, userData }, utils, ReactHtmlParser)}
       </p>
     );
