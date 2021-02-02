@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import labels from '../../config/labels';
 import FontIcon from '../FontIcon/FontIcon';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
-import utils from '../Utils/utils/utils';
 
 class CarouselNotLoggedIn extends Component {
   render() {
-    return this.props.items.map((item, index) => {
+    const { items } = this.props;
+    return items.map((item, index) => {
       return (
         <div
           className={`rounded carousel-item ${index === 0 ? 'active' : null}`}

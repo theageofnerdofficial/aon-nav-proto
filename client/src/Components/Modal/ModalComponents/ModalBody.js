@@ -11,9 +11,9 @@ class ModalBody extends Component {
       userLogin,
     } = this.props;
 
-    const getBodyByMode = (mode, data, user) => {
+    const getBodyByMode = (mode, data, userLogin) => {
       if (mode === MODAL_LOGIN_FORM) {
-        return <LoginForm userLogin={user} />;
+        return <LoginForm userLogin={userLogin} />;
       } else if (mode === MODAL_IMAGE_LIGHTBOX) {
         return <ImageLightbox data={data} />;
       }

@@ -19,8 +19,6 @@ const sourceDBCache = {
 
       let formattedYoutubeData = [];
       let unformattedYoutubeData = [];
-
-      console.log('got to format');
       data.forEach((y, index) => {
         if (y) unformattedYoutubeData.push(y);
       });
@@ -63,10 +61,16 @@ const sourceDBCache = {
 
   get: {
     apiData: {
-      fresh: (o) =>
-        fetch(sourceDBCache.format.url.byRequest(o), {
+      fresh: (o) => {
+        console.log(o.src);
+        console.log(sourceDBCache.format.url.byRequest(o));
+        return fetch(sourceDBCache.format.url.byRequest(o), {
           method: 'GET',
-        }).then((res) => res.json()),
+        }).then((res) => {
+          console.log(res);
+          return res.json();
+        });
+      },
       cached: (o) =>
         // make so you can list by service!:
         fetch('/sourcedata/list', { method: 'GET' }).then((res) => res.json()),
@@ -95,6 +99,7 @@ const sourceDBCache = {
 
         //
         else if (src === SOURCE_INSTAGRAM) {
+          console.log(user);
           return `/api/request_data_instagram/${user}/${count}`;
         }
 

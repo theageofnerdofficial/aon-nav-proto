@@ -28,7 +28,7 @@ const settings = {
         reddit: true,
         instagram: false,
         twitter: true,
-        youtube: false,
+        youtube: true,
       },
       sourcesCached: [], //[SOURCE_YOUTUBE],
     },
@@ -66,6 +66,21 @@ const settings = {
       },
       twitter: {
         gaming: './img/thumbnails/gaming-twitter-2.svg',
+      },
+      youtube: {
+        default: './img/thumbnails/gaming-youtube.svg',
+        gaming: './img/thumbnails/gaming-youtube.svg',
+      },
+      defaultYoutubeThumbnail: {
+        res: {
+          /* 
+            Image available in 3 resolutions:
+            0 = default = 120px * 90px
+            1 = high = 480px * 360px
+            2 = medium = 320px * 180px
+          */
+          thumbnailRes: 0,
+        },
       },
     },
     labeling: {

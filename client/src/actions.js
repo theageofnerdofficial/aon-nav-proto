@@ -6,7 +6,13 @@ import {
   DATA_FORMAT_TWEETS,
   DATA_FORMAT_INSTAGRAM,
   DATA_FORMAT_UPDATE_REDDIT,
+  DATA_FORMAT_UPDATE_TWITTER,
+  DATA_FORMAT_UPDATE_YOUTUBE,
+  DATA_RAW_UPDATE_YOUTUBE,
+  DATA_FORMAT_UPDATE_INSTAGRAM,
   DATA_RAW_UPDATE_REDDIT,
+  DATA_RAW_UPDATE_TWITTER,
+  DATA_RAW_UPDATE_INSTAGRAM,
   DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
@@ -119,8 +125,38 @@ export const dataFormatRedditStatus = (o) => ({
   payload: o,
 });
 
+export const dataFormatYoutubeStatus = (o) => ({
+  type: DATA_FORMAT_UPDATE_YOUTUBE,
+  payload: o,
+});
+
+export const dataFormatInstagramStatus = (o) => ({
+  type: DATA_FORMAT_UPDATE_INSTAGRAM,
+  payload: o,
+});
+
+export const dataFormatTwitterStatus = (o) => ({
+  type: DATA_FORMAT_UPDATE_TWITTER,
+  payload: o,
+});
+
 export const dataRawRedditStatus = (o) => ({
   type: DATA_RAW_UPDATE_REDDIT,
+  payload: o,
+});
+
+export const dataRawTwitterStatus = (o) => ({
+  type: DATA_RAW_UPDATE_TWITTER,
+  payload: o,
+});
+
+export const dataRawYoutubeStatus = (o) => ({
+  type: DATA_RAW_UPDATE_YOUTUBE,
+  payload: o,
+});
+
+export const dataRawInstagramStatus = (o) => ({
+  type: DATA_RAW_UPDATE_INSTAGRAM,
   payload: o,
 });
 
@@ -141,23 +177,23 @@ export const dataFormatYoutube = (o) => ({
 
 //
 export const dataRequest = (o) => (dispatch) => {
+  console.log(o.src);
   dispatch({ type: DATA_REQUEST_PENDING });
 
   // If data needs to be "fresh" rather than from cache:
   const getFreshAPIData = (o, shouldCache) => {
+    console.log(o);
     sourceDBCache.get.apiData
       .fresh(o)
       .then((data) => {
-        console.log(shouldCache);
-        console.log(o);
-        console.log(data);
         if (shouldCache) {
+          alert('SHOULD NOT SEE');
           sourceDBCache
-
             .create(o, data)
             .then((res) => console.log(res))
-            .catch((error) => console.log(error));
+            .catch((error) => window.alert(error));
         }
+        console.log(o);
         // Don't create DB entry, ONLY dispatch data to store:
         dispatch({
           count: o.count,
@@ -192,6 +228,7 @@ export const dataRequest = (o) => (dispatch) => {
       })
       .catch((error) => console.log(error));
   } else {
+    console.log(o);
     getFreshAPIData(o, false);
   }
 };
@@ -680,6 +717,7 @@ export const userAuthenticate = (o) => (dispatch) => {
 };
 
 export const userLogin = (o) => (dispatch) => {
+  window.alert('login');
   dispatch({ type: USER_LOGIN_PENDING });
   fetch('/user/login', {
     body: JSON.stringify(o),

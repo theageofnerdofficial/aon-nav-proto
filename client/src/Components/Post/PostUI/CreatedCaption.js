@@ -6,8 +6,8 @@ class CreatedCaption extends Component {
   render() {
     let { createdTimeFrom, labels, settings } = this.props;
 
+    // :
     const abbreviateTime = (time) => {
-      console.log(time);
       return time
         .toString()
         .replace(' hours', labels.ui.sources.time.abbreviations.hours);

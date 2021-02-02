@@ -3,10 +3,6 @@
 import React, { Component } from 'react';
 
 class TwitterPostMedia extends Component {
-  componentDidMount() {
-    //entities_media,
-    console.log(this.props.data.entities_media);
-  }
   render() {
     const {
       data,
@@ -17,6 +13,7 @@ class TwitterPostMedia extends Component {
 
     data.imgUrls = [];
 
+    // :
     const getEntitiesMedia = () => {
       return this.props.data.entities_media.map((img, index) => {
         data.imgUrls.push(img.media_url);
@@ -40,10 +37,12 @@ class TwitterPostMedia extends Component {
       });
     };
 
+    // :
     const getExtendedEntitiesMedia = () => {
       //
       return;
     };
+
     return (
       <React.Fragment>
         {data.entities_media && data.entities_media.length >= 1

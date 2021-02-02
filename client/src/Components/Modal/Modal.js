@@ -18,7 +18,7 @@ import {
 
 class Modal extends Component {
   render() {
-    const { modalReducer } = this.props;
+    const { modalReducer, userLogin } = this.props;
 
     // Get size modal should be depending on mode:
     const getModalSize = () => (modalReducer.size ? modalReducer.size : null);
@@ -55,6 +55,7 @@ class Modal extends Component {
               MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
               MODAL_LOGIN_FORM={MODAL_LOGIN_FORM}
               modalReducer={modalReducer}
+              userLogin={userLogin}
             />
             <ModalFooter />
           </div>

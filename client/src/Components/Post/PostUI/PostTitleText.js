@@ -22,6 +22,8 @@ class PostTitleText extends Component {
           return source_data.twitterUser;
         } else if (source_data.subreddit) {
           return source_data.subreddit;
+        } else if (source_data.youtubeUser) {
+          return source_data.youtubeUser;
         } else {
           return source_data.username;
         }
@@ -37,13 +39,13 @@ class PostTitleText extends Component {
       } else if (source === SOURCE_INSTAGRAM_LABEL) {
         return 'faInstagramSquare';
       } else if (source === SOURCE_YOUTUBE_LABEL) {
-        return 'faYoutube';
+        return 'faYoutubeSquare';
       }
     };
 
     return (
       <React.Fragment>
-        <div className=" col-12 p-0 m-0 row">
+        <div className="col-12 p-0 m-0 row">
           <div className=" col-1 m-0 p-0 row">
             <PostTitleIcons
               FontIcon={FontIcon}

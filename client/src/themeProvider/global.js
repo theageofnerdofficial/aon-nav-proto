@@ -291,6 +291,10 @@ export const GlobalStyles = createGlobalStyle`
   .navbar-logo-wrapper > img {
     width: ${({ theme }) => theme['navbar-logo-wrapper > img']['width']};
   }
+
+  .post-thumbnail {
+    width: 60px;
+  }
   
   .vertical-center {
     align-items: ${({ theme }) => theme['vertical-center']['align-items']};
@@ -312,6 +316,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     .navbar-logo-wrapper > img {
       width: 165px;
+    }
+    .post-thumbnail {
+      width: 30px;
     }
   }
   `;

@@ -1,12 +1,6 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import {
-  SOURCE_INSTAGRAM_LABEL,
-  SOURCE_REDDIT_LABEL,
-  SOURCE_TWITTER_LABEL,
-  SOURCE_YOUTUBE_LABEL,
-} from '../../../constants';
 
 class PostTitleIcons extends Component {
   render() {
@@ -14,6 +8,7 @@ class PostTitleIcons extends Component {
 
     // :
     const getOfficialSrcCheckmark = () => {
+      if (!source_data) return false;
       return settings.ui.labeling.post.officialSrc.checkmarkEnabled &&
         source_data.isOfficial ? (
         <span
@@ -26,7 +21,7 @@ class PostTitleIcons extends Component {
           {FontIcon('faCheckCircle')}
         </span>
       ) : (
-        '-' // <-------------------------- move to settings
+        '-' // <-------------------------- move to
       );
     };
 

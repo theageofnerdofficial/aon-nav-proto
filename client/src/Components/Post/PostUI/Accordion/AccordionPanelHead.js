@@ -2,14 +2,32 @@
  ***************************************************************/
 import React, { Component } from 'react';
 
+// note: inject
+import {
+  SOURCE_REDDIT_LABEL,
+  SOURCE_TWITTER_LABEL,
+} from '../../../../constants';
+
 class AccordionPanelHead extends Component {
   render() {
-    const { id, labels } = this.props;
+    const { data, id, labels } = this.props;
 
+    // :
     const hasEmbeddedMedia = () => {
+      switch (data.source) {
+        case SOURCE_REDDIT_LABEL:
+          if (data.preview_img_arr && data.preview_img_arr.length >= 1) {
+            return true;
+          }
+        case SOURCE_TWITTER_LABEL:
+          if (data.entities_media && data.entities_media.length >= 1) {
+            return true;
+          }
+      }
       return false;
     };
 
+    // :
     const getAccordionPanelHead = () => {
       return (
         <div className="my-1 panel-heading rounded">
@@ -34,7 +52,6 @@ class AccordionPanelHead extends Component {
         </div>
       );
     };
-
     return hasEmbeddedMedia() ? getAccordionPanelHead() : null;
   }
 }

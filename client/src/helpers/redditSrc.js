@@ -1,8 +1,8 @@
-const redditSources = {
+const redditSrc = {
   /* Format raw Reddit source data from API & assign to state:
    ************************************************************/
   format(o) {
-    const { shouldPushData } = redditSources;
+    const { shouldPushData } = redditSrc;
     let unformattedRedditData = [];
     let formattedRedditData = [];
 
@@ -38,6 +38,7 @@ const redditSources = {
         value: count,
       });
       obj.count = count;
+      console.log(obj);
       o.dataRequest(obj);
     };
     o.sourceReducer.sourcesRedditData.map((source) => {
@@ -63,6 +64,14 @@ const redditSources = {
 
   /* :
    ************************************************************/
+  hasAllF(redditDataFormatted, sourcesEnabled) {
+    return sourcesEnabled.reddit
+      ? redditDataFormatted && redditDataFormatted.length > 0
+      : true;
+  },
+
+  /* :
+   ************************************************************/
   ready(props, sourcesEnabled) {
     return (
       sourcesEnabled.reddit &&
@@ -75,10 +84,10 @@ const redditSources = {
    ************************************************************/
   shouldPushData(o, unformattedRedditData) {
     return (
-      redditSources.hasAllPostData(o, unformattedRedditData) &&
+      redditSrc.hasAllPostData(o, unformattedRedditData) &&
       !o.dataReducer.hasFormattedRedditData
     );
   },
 };
 
-export default redditSources;
+export default redditSrc;

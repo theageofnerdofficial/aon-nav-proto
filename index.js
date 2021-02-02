@@ -7,9 +7,8 @@ const path = require('path');
 const dotenv = require('dotenv');
 const db = require('./config/db');
 const cors = require('cors');
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
-const Instagram = require('instagram-web-api');
 const snoowrap = require('snoowrap');
 const Twit = require('twit');
 const TwitchAPI = require('twitch-api-v5');
@@ -47,36 +46,83 @@ const {
   DB_YOUTUBE_SECRET,
 } = process.env;
 
-// Initialise the Instagram web API with username & password:
-const client = new Instagram({ DB_INSTAGRAM_USER, DB_INSTAGRAM_PASS });
-
 // Add client ID to Twitch API:
 TwitchAPI.clientID = DB_TWITCH_CLIENT_ID;
 
 /* :
  ***************************************************/
-app.get('/accesstoken', (req, res, next) => {
+app.get('/accesstoken/twitch', (req, res, next) => {
   res.DB_TWITCH_CLIENT_ID = DB_TWITCH_CLIENT_ID;
   res.DB_TWITCH_SECRET = DB_TWITCH_SECRET;
-  accessTokenController.list(req, res, next);
+  accessTokenController.twitchTokenslist(req, res, next);
 });
+
+const Insta = require('scraper-instagram');
+const InstaClient = new Insta();
+
+const instamancer = require('instamancer');
+
+var ig = require('instagram-node').instagram();
+
+/*
+
+create a long-lived access token...
+
+*/
+ig.use({ access_token: 'YOUR_ACCESS_TOKEN' });
+ig.use({ client_id: 'YOUR_CLIENT_ID', client_secret: 'YOUR_CLIENT_SECRET' });
 
 /* :
  ***************************************************/
-app.get('/api/request_data_instagram/:username/:count', (req, res, next) => {
-  return client
-    .getUserByUsername({ username: req.params.username })
-    .then((data) => {
-      const { id, username, profile_pic_url } = data;
-      const edges = data.edge_owner_to_timeline_media.edges;
-      res.json({
-        id,
-        username,
-        profile_pic_url,
-        edges: edges.slice(0, req.params.count),
-      });
-    });
+app.get('/accesstoken/fbinstagram', (req, res, next) => {
+  //
 });
+
+const Instagram = require('node-instagram').default;
+
+// Create a new instance.
+const instagram = new Instagram({
+  clientId: '165215838428900',
+  clientSecret: '3d18e7ef034e7aa11d530aa9f7db4818',
+});
+
+const redirectUri = 'http://localhost:5000/auth/instagram/callback';
+
+app.get('/auth/x', (req, res) => {
+  instagram.get('users/13213170/media/recent').then((data) => {
+    console.log(data);
+  });
+});
+
+// Redirect user to instagram oauth
+app.get('/auth/instagram', (req, res) => {
+  res.redirect(
+    instagram.getAuthorizationUrl(redirectUri, { scope: ['basic'] })
+  );
+});
+
+// Handle auth code and get access_token for user
+app.get('/auth/instagram/callback', async (req, res) => {
+  try {
+    const data = await instagram.authorizeUser(req.query.code, redirectUri);
+    // access_token in data.access_token
+    res.json(data);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+/*
+https://graph.facebook.com/{graph-api-version}/oauth/access_token?  
+    grant_type=fb_exchange_token&          
+    client_id={app-id}&
+    client_secret={app-secret}&
+    fb_exchange_token={your-access-token
+*/
+
+/* :
+ ***************************************************/
+app.get('/api/request_data_instagram/:username/:count', (req, res, next) => {});
 
 /* Snoowrap (Reddit API package) — oAuth credentials:
  ***************************************************/
@@ -86,6 +132,7 @@ const r = new snoowrap({
   clientSecret: 'P168jsB6Kx5ZaZ7zT7jjxY2ikqM',
   refreshToken: '572960930002-AvFDeoFnSEN05wbyZzFLq2gQT3I', // expires in hour
 });
+// ^ NOTE: on roll out, change these and import as environmental variables
 
 /* Twit (Twitter API package) — oAuth credentials:
  ***************************************************/

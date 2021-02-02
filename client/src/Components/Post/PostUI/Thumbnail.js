@@ -1,6 +1,7 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
+import { SOURCE_YOUTUBE_LABEL } from '../../../constants';
 
 class Thumbnail extends Component {
   render() {
@@ -31,6 +32,9 @@ class Thumbnail extends Component {
               : null;
           }
           break;
+        case SOURCE_YOUTUBE_LABEL:
+          src = settings ? settings.ui.defaultPostThumbs.youtube.default : null;
+          break;
         case SOURCE_INSTAGRAM_LABEL:
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && profile_pic_url;
@@ -51,9 +55,9 @@ class Thumbnail extends Component {
       <React.Fragment>
         <img
           alt={`Thumbnail for ${source} post`}
-          className="mx-1 rounded"
+          className="mx-1 rounded post-thumbnail"
           src={getThumbnailSrc()}
-          style={{ border: '10px', width: '40px' }}
+         // style={{ border: '10px', width: '60px' }}
         />
       </React.Fragment>
     );

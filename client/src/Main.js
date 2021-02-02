@@ -87,7 +87,13 @@ import {
   uiSetBreadcrumbs,
   uiToggleLights,
   dataFormatRedditStatus,
+  dataFormatTwitterStatus,
+  dataFormatYoutubeStatus,
+  dataFormatInstagramStatus,
   dataRawRedditStatus,
+  dataRawTwitterStatus,
+  dataRawYoutubeStatus,
+  dataRawInstagramStatus,
   userAuthenticate,
   userLogin,
   userLogout,
@@ -184,7 +190,13 @@ const mapDispatchToProps = (dispatch) => {
     uiSetBreadcrumbs: (o) => dispatch(uiSetBreadcrumbs(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
     dataFormatRedditStatus: (o) => dispatch(dataFormatRedditStatus(o)),
+    dataFormatTwitterStatus: (o) => dispatch(dataFormatTwitterStatus(o)),
+    dataFormatYoutubeStatus: (o) => dispatch(dataFormatYoutubeStatus(o)),
+    dataFormatInstagramStatus: (o) => dispatch(dataFormatInstagramStatus(o)),
     dataRawRedditStatus: (o) => dispatch(dataRawRedditStatus(o)),
+    dataRawTwitterStatus: (o) => dispatch(dataRawTwitterStatus(o)),
+    dataRawYoutubeStatus: (o) => dispatch(dataRawYoutubeStatus(o)),
+    dataRawInstagramStatus: (o) => dispatch(dataRawInstagramStatus(o)),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
     userLogout: () => dispatch(userLogout()),
@@ -291,7 +303,13 @@ class Main extends Component {
       uiReducer,
       uiToggleLights,
       dataFormatRedditStatus,
+      dataFormatTwitterStatus,
+      dataFormatYoutubeStatus,
+      dataFormatInstagramStatus,
       dataRawRedditStatus,
+      dataRawTwitterStatus,
+      dataRawYoutubeStatus,
+      dataRawInstagramStatus,
       userAuthenticate,
       userLogin,
       userLogout,
@@ -374,7 +392,13 @@ class Main extends Component {
                           sourcesGetTwitter={sourcesGetTwitter}
                           sourcesGetYoutube={sourcesGetYoutube}
                           dataFormatRedditStatus={dataFormatRedditStatus}
+                          dataFormatTwitterStatus={dataFormatTwitterStatus}
+                          dataFormatYoutubeStatus={dataFormatYoutubeStatus}
+                          dataFormatInstagramStatus={dataFormatInstagramStatus}
                           dataRawRedditStatus={dataRawRedditStatus}
+                          dataRawTwitterStatus={dataRawTwitterStatus}
+                          dataRawYoutubeStatus={dataRawYoutubeStatus}
+                          dataRawInstagramStatus={dataRawInstagramStatus}
                           usersReducer={usersReducer}
                           {...props}
                         />

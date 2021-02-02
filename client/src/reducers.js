@@ -7,6 +7,11 @@ import {
   DATA_FORMAT_TWEETS,
   DATA_FORMAT_UPDATE_REDDIT,
   DATA_RAW_UPDATE_REDDIT,
+  DATA_RAW_UPDATE_TWITTER,
+  DATA_RAW_UPDATE_INSTAGRAM,
+  DATA_RAW_UPDATE_YOUTUBE,
+  DATA_FORMAT_UPDATE_YOUTUBE,
+  DATA_FORMAT_UPDATE_TWITTER,
   DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
@@ -123,12 +128,16 @@ const data = {
   youtubeDataRaw: [],
   youtubeDataFormatted: [],
   //
+  hasRawRedditData: false,
+  hasRawTwitterData: false,
+  hasRawYoutubeData: false,
+  hasRawInstagramData: false,
+
   //
   hasFormattedRedditData: false,
-  hasRawRedditData: false,
-  hasFormattedTweetData: false,
-  hasFormattedInstagramData: false,
+  hasFormattedTwitterData: false,
   hasFormattedYoutubeData: false,
+  hasFormattedInstagramData: false,
 };
 
 export const dataReducer = (state = data, action = {}) => {
@@ -153,9 +162,34 @@ export const dataReducer = (state = data, action = {}) => {
         hasFormattedRedditData: action.payload,
       });
 
+    case DATA_FORMAT_UPDATE_YOUTUBE:
+      return Object.assign({}, state, {
+        hasFormattedYoutubeData: action.payload,
+      });
+
+    case DATA_FORMAT_UPDATE_TWITTER:
+      return Object.assign({}, state, {
+        hasFormattedTwitterData: action.payload,
+      });
+
     case DATA_RAW_UPDATE_REDDIT:
       return Object.assign({}, state, {
         hasRawRedditData: action.payload,
+      });
+
+    case DATA_RAW_UPDATE_TWITTER:
+      return Object.assign({}, state, {
+        hasRawTwitterData: action.payload,
+      });
+
+    case DATA_RAW_UPDATE_INSTAGRAM:
+      return Object.assign({}, state, {
+        hasRawInstagramData: action.payload,
+      });
+
+    case DATA_RAW_UPDATE_YOUTUBE:
+      return Object.assign({}, state, {
+        hasRawYoutubeData: action.payload,
       });
 
     case DATA_REQUEST_FAILURE:
@@ -177,19 +211,16 @@ export const dataReducer = (state = data, action = {}) => {
         action.payload.sourceData = action.sourceData;
         stateCp.instagramDataRaw.push(action.payload);
       } else if (action.source === SOURCE_YOUTUBE) {
-        action.payload.sourceData = action.sourceData;
-        //
-        //
+        var { sourceData } = action;
+        /*
         let sourcesWithoutError;
 
-        if (action.payload.sourceData && action.payload.sourceData.length) {
-          sourcesWithoutError = action.payload.sourceData.filter((s) => {
+        if (sourceData && sourceData.length) {
+          sourcesWithoutError = sourceData.filter((s) => {
             return !s.error || !s.errors;
           });
-        }
-
-        action.payload.sourceData = sourcesWithoutError;
-
+        }*/
+        action.payload.sourceData = sourceData;
         stateCp.youtubeDataRaw.push(action.payload);
       }
       stateCp.dataPending = false;
@@ -209,7 +240,6 @@ export const dataReducer = (state = data, action = {}) => {
         instagramDataFormatted: action.payload,
       });
     case DATA_FORMAT_YOUTUBE:
-      window.alert('FORMAT YT');
       console.log(action.payload);
       return Object.assign({}, state, {
         youtubeDataFormatted: action.payload,
