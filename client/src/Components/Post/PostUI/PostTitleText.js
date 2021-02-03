@@ -3,17 +3,16 @@
 import React, { Component } from 'react';
 import PostTitleIcons from './PostTitleIcons';
 
-// Note: Inject these!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-import {
-  SOURCE_INSTAGRAM_LABEL,
-  SOURCE_REDDIT_LABEL,
-  SOURCE_TWITTER_LABEL,
-  SOURCE_YOUTUBE_LABEL,
-} from '../../../constants';
-
 class PostTitleText extends Component {
   render() {
-    const { FontIcon, settings, source, source_data, utils } = this.props;
+    const {
+      FontIcon,
+      labelsBySource,
+      settings,
+      source,
+      source_data,
+      utils,
+    } = this.props;
 
     // :
     const getUsername = () => {
@@ -32,21 +31,21 @@ class PostTitleText extends Component {
 
     // :
     const getSourceIcon = (source) => {
-      if (source === SOURCE_TWITTER_LABEL) {
+      if (source === labelsBySource.SOURCE_TWITTER_LABEL) {
         return 'faTwitter';
-      } else if (source === SOURCE_REDDIT_LABEL) {
+      } else if (source === labelsBySource.SOURCE_REDDIT_LABEL) {
         return 'faRedditAlien';
-      } else if (source === SOURCE_INSTAGRAM_LABEL) {
+      } else if (source === labelsBySource.SOURCE_INSTAGRAM_LABEL) {
         return 'faInstagramSquare';
-      } else if (source === SOURCE_YOUTUBE_LABEL) {
+      } else if (source === labelsBySource.SOURCE_YOUTUBE_LABEL) {
         return 'faYoutubeSquare';
       }
     };
 
     return (
-      <React.Fragment>
+      <div className="col-8 m-0 p-0">
         <div className="col-12 p-0 m-0 row">
-          <div className=" col-1 m-0 p-0 row">
+          <div className="col-1 m-0 p-0 row">
             <PostTitleIcons
               FontIcon={FontIcon}
               settings={settings}
@@ -56,13 +55,12 @@ class PostTitleText extends Component {
           </div>
           <div className=" col-11 m-0 p-0">
             <button className="btn m-0 p-0" style={{ fontSize: '1.15rem' }}>
-              {FontIcon(`${getSourceIcon(source)}`)}
-              {` `}
+              {/*{FontIcon(`${getSourceIcon(source)}`)}*/}
               {source_data ? `${utils.str.makeTitleCase(getUsername())}` : null}
             </button>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

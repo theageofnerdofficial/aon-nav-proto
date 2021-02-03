@@ -116,6 +116,14 @@ import labels from './config/labels';
 import settings from './config/settings';
 import './Main.css';
 
+// Note: Inject these!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+import {
+  SOURCE_INSTAGRAM_LABEL,
+  SOURCE_REDDIT_LABEL,
+  SOURCE_TWITTER_LABEL,
+  SOURCE_YOUTUBE_LABEL,
+} from './constants';
+
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
   return {
@@ -245,9 +253,17 @@ class Main extends Component {
     const {
       dataCombine,
       dataFormatInstagram,
+      dataFormatInstagramStatus,
       dataFormatReddit,
+      dataFormatRedditStatus,
       dataFormatTweets,
+      dataFormatTwitterStatus,
       dataFormatYoutube,
+      dataFormatYoutubeStatus,
+      dataRawInstagramStatus,
+      dataRawRedditStatus,
+      dataRawTwitterStatus,
+      dataRawYoutubeStatus,
       dataReducer,
       dataRequest,
       flashMsgFlash,
@@ -302,14 +318,6 @@ class Main extends Component {
       sourcesToggleSourceMute,
       uiReducer,
       uiToggleLights,
-      dataFormatRedditStatus,
-      dataFormatTwitterStatus,
-      dataFormatYoutubeStatus,
-      dataFormatInstagramStatus,
-      dataRawRedditStatus,
-      dataRawTwitterStatus,
-      dataRawYoutubeStatus,
-      dataRawInstagramStatus,
       userAuthenticate,
       userLogin,
       userLogout,
@@ -371,6 +379,12 @@ class Main extends Component {
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
                           labels={labels}
+                          labelsBySource={
+                            (SOURCE_INSTAGRAM_LABEL,
+                            SOURCE_REDDIT_LABEL,
+                            SOURCE_TWITTER_LABEL,
+                            SOURCE_YOUTUBE_LABEL)
+                          }
                           modalReducer={modalReducer}
                           modalUpdateMode={modalUpdateMode}
                           newsfeedIncrSourceCount={newsfeedIncrSourceCount}
@@ -752,7 +766,7 @@ class Main extends Component {
                 </div>
               </div>
             </main>
-            <Footer />
+            <Footer FontIcon={FontIcon} />
           </div>
         </ThemeProvider>
       </Router>

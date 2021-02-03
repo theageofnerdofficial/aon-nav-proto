@@ -1,8 +1,10 @@
+import { SOURCE_TWITTER } from '../constants';
+
 const twitterSrc = {
-  shouldPushData(o, formattedTweetData) {
+  shouldPushData(props, formattedTweetData) {
     return (
-      twitterSrc.hasAllPostData(o, formattedTweetData) &&
-      !o.dataReducer.hasFormattedTwitterData
+      twitterSrc.hasAllPostData(props, formattedTweetData) &&
+      !props.dataReducer.hasFormattedTwitterData
     );
   },
 
@@ -16,22 +18,23 @@ const twitterSrc = {
 
   /* :
    ************************************************************/
-  hasAllPostData(o, formattedTweetData) {
+  hasAllPostData(props, formattedTweetData) {
     return (
-      o.dataReducer.tweetDataRaw.length &&
-      formattedTweetData.length === o.newsfeedReducer.dataPosts.count.twitter
+      props.dataReducer.tweetDataRaw.length &&
+      formattedTweetData.length ===
+        props.newsfeedReducer.dataPosts.count.twitter
     );
   },
 
   /* Format raw Twitter source data from API & assign to state:
    ************************************************************/
-  format(o) {
+  format(props, formatTweet) {
     const { shouldPushData } = twitterSrc;
     let formattedTweetData = [];
     let unformattedTweetData = [];
 
     // 1.
-    o.dataReducer.tweetDataRaw.forEach((t, index) => {
+    props.dataReducer.tweetDataRaw.forEach((t, index) => {
       t.statuses.forEach((s) => {
         s.sourceData = t.sourceData;
       });
@@ -40,34 +43,34 @@ const twitterSrc = {
 
     // 2. Flatten unformatted Tweets (3D arr -> 2D arr to loop & format Tweets)
     unformattedTweetData.flat(1).forEach((t, index) => {
-      formattedTweetData.push(o.formatTweet.formatTweetData(t));
+      formattedTweetData.push(formatTweet.formatTweetData(t));
     });
 
     //
-    if (shouldPushData(o, formattedTweetData)) {
-      o.dataFormatTweets(formattedTweetData);
-      o.dataFormatTwitterStatus(true);
+    if (shouldPushData(props, formattedTweetData)) {
+      props.dataFormatTweets(formattedTweetData);
+      props.dataFormatTwitterStatus(true);
     }
   },
 
   /* Get raw Twitter source data from API:
    ************************************************************/
-  getRawData(o) {
-    o.dataRawTwitterStatus(true);
+  getRawData(props) {
+    props.dataRawTwitterStatus(true);
     const req = (count, obj) => {
-      o.newsfeedIncrSourceCount({
+      props.newsfeedIncrSourceCount({
         service: 'twitter',
         value: count,
       });
       obj.count = count;
-      o.dataRequest(obj);
+      props.dataRequest(obj);
     };
-    o.sourceReducer.sourcesTwitterData.map((source) => {
+    props.sourceReducer.sourcesTwitterData.map((source) => {
       if (!source.muted) {
         req(source.postsNumber, {
           endpoint: 'search%2Ftweets',
           sourceData: source,
-          src: o.SOURCE_TWITTER,
+          src: SOURCE_TWITTER,
           user: source.twitterUser,
           // Refinements/queries if necessary: q: 'zelda since:2019-07-11',
         });

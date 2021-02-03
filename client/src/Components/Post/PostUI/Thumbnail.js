@@ -15,26 +15,30 @@ class Thumbnail extends Component {
         SOURCE_TWITTER_LABEL,
       } = this.props;
 
+      // :
       let src;
       switch (source) {
         case SOURCE_REDDIT_LABEL:
-          src = settings ? settings.ui.defaultPostThumbs.reddit.gaming : null;
+          src = settings ? settings.ui.defaultPostThumbs.reddit.default : null;
           break;
+
         case SOURCE_TWITTER_LABEL:
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && userData.profile_image_url;
             src = hasCustomThumb
               ? userData.profile_image_url
-              : settings.ui.defaultPostThumbs.twitter.gaming;
+              : settings.ui.defaultPostThumbs.twitter.default;
           } else {
             src = settings
-              ? settings.ui.defaultPostThumbs.twitter.gaming
+              ? settings.ui.defaultPostThumbs.twitter.default
               : null;
           }
           break;
+
         case SOURCE_YOUTUBE_LABEL:
           src = settings ? settings.ui.defaultPostThumbs.youtube.default : null;
           break;
+
         case SOURCE_INSTAGRAM_LABEL:
           if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && profile_pic_url;
@@ -45,19 +49,18 @@ class Thumbnail extends Component {
             src = settings.ui.defaultPostThumbs.instagram.default;
           }
           break;
+
         default:
           src = settings.ui.defaultPostThumbs.general;
       }
       return src;
     };
-
     return (
       <React.Fragment>
         <img
           alt={`Thumbnail for ${source} post`}
           className="mx-1 rounded post-thumbnail"
           src={getThumbnailSrc()}
-         // style={{ border: '10px', width: '60px' }}
         />
       </React.Fragment>
     );

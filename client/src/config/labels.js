@@ -21,6 +21,11 @@ const labels = {
         contract: 'Less [-]',
         expand: 'More [+]',
       },
+      contextDotsMenu: {
+        save: 'Save post',
+        hide: 'Hide post',
+        visit: 'Visit link',
+      },
     },
     quiz: {
       ansLabels: ['A', 'B', 'C', 'D'],

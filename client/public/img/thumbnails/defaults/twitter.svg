@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="40mm"
+   height="40mm"
+   viewBox="0 0 40 40"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="twitter.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.9685688"
+     inkscape:cx="95.318311"
+     inkscape:cy="90.767373"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1440"
+     inkscape:window-height="799"
+     inkscape:window-x="0"
+     inkscape:window-y="23"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="31.725554,4.9452205"
+       orientation="0,-1"
+       id="guide16" />
+    <sodipodi:guide
+       position="32.900574,34.51657"
+       orientation="0,-1"
+       id="guide18" />
+    <sodipodi:guide
+       position="5.2875923,18.84963"
+       orientation="1,0"
+       id="guide20" />
+    <sodipodi:guide
+       position="35.250615,30.012325"
+       orientation="1,0"
+       id="guide22" />
+    <sodipodi:guide
+       id="guide891"
+       orientation="0,-1"
+       position="14.91881,-0.34860156" />
+    <sodipodi:guide
+       id="guide893"
+       orientation="0,-1"
+       position="13.562555,40.678127" />
+    <sodipodi:guide
+       id="guide895"
+       orientation="1,0"
+       position="-0.5085958,34.51657" />
+    <sodipodi:guide
+       id="guide899"
+       orientation="1,0"
+       position="40.3486,27.454636" />
+    <sodipodi:guide
+       position="14.749279,24.233529"
+       orientation="0,-1"
+       id="guide1116" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-53.672619,-41.577381)">
+    <rect
+       y="40.899254"
+       x="53.164024"
+       height="40.968327"
+       width="40.857197"
+       id="rect856"
+       style="fill:#00acee;fill-opacity:1;stroke-width:0.264942" />
+    <g
+       style="fill:#ffffff"
+       transform="matrix(1.1825511,0,0,1.1887078,-13.501429,-10.946279)"
+       id="g862">
+      <g
+         style="font-style:normal;font-weight:normal;font-size:12.8261px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.320654"
+         id="text32"
+         transform="matrix(1.7786005,0,0,2.020235,-49.90543,-43.100266)"
+         aria-label="x" />
+    </g>
+    <path
+       style="fill:#0097ee;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:1"
+       d="M 53.164023,81.396816 94.02122,41.42842 v 39.968396 z"
+       id="path1162" />
+    <g
+       aria-label="q"
+       transform="scale(1.0208176,0.97960693)"
+       id="text1588"
+       style="font-style:normal;font-weight:normal;font-size:41.7513px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.04379">
+      <path
+         d="m 77.8303,52.838793 h 0.305796 q 1.080478,0 2.30366,0.509659 0.448501,0.22425 0.998933,0.591205 0.366955,0.265023 0.795068,0.693137 l 0.08155,0.08155 q 1.080478,-0.224251 1.814388,-0.50966 0.958159,-0.366955 1.936705,-0.917387 v 0 q -0.305795,1.039705 -1.162023,2.059024 -0.550432,0.570819 -0.693137,0.672751 -0.346568,0.285409 -0.733909,0.509659 v 0.02039 h 0.02039 q 0.917387,-0.122319 1.549365,-0.28541 0.611591,-0.163091 1.325114,-0.428114 l 0.489273,-0.203863 q -0.428114,0.652364 -1.243569,1.549364 -0.856228,0.856228 -1.202796,1.100865 -0.08155,0.08154 -0.50966,0.387341 h 0.02039 v 0.550432 0.346568 q 0,3.180275 -1.386274,6.544028 -0.550432,1.284341 -1.386274,2.609456 -0.468886,0.733909 -1.100864,1.549365 -0.4485,0.570818 -1.345501,1.467819 l -0.774682,0.713523 q -1.223183,0.998932 -1.91632,1.386274 -0.733909,0.468886 -1.692069,0.917387 -0.73391,0.346568 -2.038638,0.795068 -2.548297,0.73391 -4.953889,0.73391 h -0.224251 q -4.362684,0 -8.21571,-2.14057 -0.387341,-0.22425 -0.835841,-0.509659 v 0 q 0.713523,0.06116 1.243569,0.06116 h 0.163091 q 3.282207,0 6.177072,-1.732842 0.713524,-0.4485 1.141637,-0.795069 h -0.02039 q -1.162023,0 -2.425979,-0.570818 Q 63.784093,70.330313 63.07057,69.77988 62.377433,69.127516 62.234728,68.903266 61.969705,68.577084 61.66391,68.047038 61.419273,67.537379 61.256182,67.068492 h 0.02039 v 0 q 0.591205,0.101932 0.958159,0.101932 h 0.08155 q 0.835841,0 1.610524,-0.203864 v 0 Q 63.417131,66.844234 63.02979,66.701529 60.95038,65.906461 59.890288,63.969755 59.176765,62.64464 59.176765,61.095276 v 0 q 0.570818,0.285409 1.100864,0.4485 0.897001,0.285409 1.569751,0.285409 -0.387341,-0.265023 -0.897,-0.754296 -0.611592,-0.652364 -0.917387,-1.202796 -0.795069,-1.386274 -0.795069,-2.976411 0,-1.569751 0.774682,-2.956025 v 0 h 0.02039 q 0.4485,0.530046 1.080478,1.18241 1.080478,1.039705 1.651296,1.467819 0.795069,0.611592 1.40666,0.978546 1.488206,0.937774 2.996798,1.488206 0.876614,0.366955 2.507524,0.73391 0.631978,0.142704 1.91632,0.265022 l 0.631977,0.04077 q -0.142704,-0.693137 -0.142704,-1.284342 v -0.203863 q 0,-0.917387 0.407727,-2.038638 0.937773,-2.242502 3.200661,-3.26182 1.162024,-0.468887 2.14057,-0.468887 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Social Logos';-inkscape-font-specification:'Social Logos';fill:#ffffff;stroke-width:1.04379"
+         id="path1590" />
+    </g>
+  </g>
+</svg>

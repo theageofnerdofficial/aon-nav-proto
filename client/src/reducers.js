@@ -6,13 +6,13 @@ import {
   DATA_FORMAT_REDDIT,
   DATA_FORMAT_TWEETS,
   DATA_FORMAT_UPDATE_REDDIT,
+  DATA_FORMAT_UPDATE_TWITTER,
+  DATA_FORMAT_UPDATE_YOUTUBE,
+  DATA_FORMAT_YOUTUBE,
+  DATA_RAW_UPDATE_INSTAGRAM,
   DATA_RAW_UPDATE_REDDIT,
   DATA_RAW_UPDATE_TWITTER,
-  DATA_RAW_UPDATE_INSTAGRAM,
   DATA_RAW_UPDATE_YOUTUBE,
-  DATA_FORMAT_UPDATE_YOUTUBE,
-  DATA_FORMAT_UPDATE_TWITTER,
-  DATA_FORMAT_YOUTUBE,
   DATA_REQUEST_FAILURE,
   DATA_REQUEST_PENDING,
   DATA_REQUEST_SUCCESS,
@@ -211,7 +211,7 @@ export const dataReducer = (state = data, action = {}) => {
         action.payload.sourceData = action.sourceData;
         stateCp.instagramDataRaw.push(action.payload);
       } else if (action.source === SOURCE_YOUTUBE) {
-        var { sourceData } = action;
+        let { sourceData } = action;
         /*
         let sourcesWithoutError;
 

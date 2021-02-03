@@ -4,22 +4,22 @@ import React, { Component } from 'react';
 
 class DotsMenuButton extends Component {
   render() {
+    const { FontIcon } = this.props;
+
+    // :
+    const toggleMenu = () => {
+      window.alert('menu');
+    };
+
     return (
-      <span className="m-0 p-0">
-        <button className="btn bg-dark btn-sm col-12 p-0 m-0">00</button>
-        {/* 
+      <div className="col-1 m-0 p-0 text-right">
         <button
-          className="btn btn-sm text-muted"
-          style={{ marginTop: '-15px', opacity: 0.8 }}
-          onClick={() => {
-            const panel = document.getElementById(`panel-${this.props.id}`);
-            panel.style.display =
-              panel.style.display === 'none' ? 'block' : 'none';
-          }}
+          className="btn btn-sm col-12 text-muted"
+          onClick={() => toggleMenu()}
         >
-          {this.props.FontIcon('faEllipsisV')}
-        </button>*/}
-      </span>
+          {FontIcon('faEllipsisV')}
+        </button>
+      </div>
     );
   }
 }

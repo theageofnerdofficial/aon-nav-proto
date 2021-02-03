@@ -1,47 +1,49 @@
+import { SOURCE_YOUTUBE } from '../constants';
+
 const youtubeSrc = {
   /* Format raw Youtube source data from API & assign to state:
    ************************************************************/
-  format(o) {
+  format(props, formatYoutube) {
     const { shouldPushData } = youtubeSrc;
     let formattedYoutubeData = [];
 
     // :
-    o.dataReducer.youtubeDataRaw.forEach((y, index) => {
-      return o.dataReducer.youtubeDataRaw[index].items
-        ? o.dataReducer.youtubeDataRaw[index].items.forEach((item, idx) => {
-            item.sourceData = o.dataReducer.youtubeDataRaw[index].sourceData;
-            formattedYoutubeData.push(o.formatYoutube.formatYoutubeData(item));
+    props.dataReducer.youtubeDataRaw.forEach((y, index) => {
+      return props.dataReducer.youtubeDataRaw[index].items
+        ? props.dataReducer.youtubeDataRaw[index].items.forEach((item, idx) => {
+            item.sourceData =
+              props.dataReducer.youtubeDataRaw[index].sourceData;
+            formattedYoutubeData.push(formatYoutube.formatYoutubeData(item));
           })
         : null;
     });
 
     // :
-    if (o.sourceReducer.sourcesYoutubeData) {
-      if (shouldPushData(o, formattedYoutubeData)) {
-        o.dataFormatYoutube(formattedYoutubeData);
-        o.dataFormatYoutubeStatus(true);
+    if (props.sourceReducer.sourcesYoutubeData) {
+      if (shouldPushData(props, formattedYoutubeData)) {
+        props.dataFormatYoutube(formattedYoutubeData);
+        props.dataFormatYoutubeStatus(true);
       }
     }
   },
 
   /* Get raw Youtube source data from API:
    ************************************************************/
-  getRawData(o) {
-    o.dataRawYoutubeStatus(true);
+  getRawData(props) {
+    props.dataRawYoutubeStatus(true);
     const req = (count, obj) => {
-      o.newsfeedIncrSourceCount({
+      props.newsfeedIncrSourceCount({
         service: 'youtube',
         value: count,
       });
       obj.count = count;
-      o.dataRequest(obj);
+      props.dataRequest(obj);
     };
-    o.sourceReducer.sourcesYoutubeData.map((source) => {
-      console.log(source);
+    props.sourceReducer.sourcesYoutubeData.map((source) => {
       if (!source.muted) {
         req(source.videosNumber, {
           sourceData: source,
-          src: o.SOURCE_YOUTUBE,
+          src: SOURCE_YOUTUBE,
           userId: source.youtubeUserId,
         });
       }
@@ -50,11 +52,20 @@ const youtubeSrc = {
 
   /* :
    ************************************************************/
-  hasAllPostData(o, formattedYoutubeData) {
+  hasAllF(youtubeDataFormatted, sourcesEnabled) {
+    return sourcesEnabled.youtube
+      ? youtubeDataFormatted && youtubeDataFormatted.length > 0
+      : true;
+  },
+
+  /* :
+   ************************************************************/
+  hasAllPostData(props, formattedYoutubeData) {
     // count is 10
     return (
-      o.dataReducer.youtubeDataRaw.length &&
-      formattedYoutubeData.length === o.newsfeedReducer.dataPosts.count.youtube
+      props.dataReducer.youtubeDataRaw.length &&
+      formattedYoutubeData.length ===
+        props.newsfeedReducer.dataPosts.count.youtube
     );
   },
 
@@ -70,10 +81,10 @@ const youtubeSrc = {
 
   /* :
    ************************************************************/
-  shouldPushData(o, formattedYoutubeData) {
+  shouldPushData(props, formattedYoutubeData) {
     return (
-      youtubeSrc.hasAllPostData(o, formattedYoutubeData) &&
-      !o.dataReducer.hasFormattedYoutubeData
+      youtubeSrc.hasAllPostData(props, formattedYoutubeData) &&
+      !props.dataReducer.hasFormattedYoutubeData
     );
   },
 };

@@ -28,7 +28,7 @@ const settings = {
         reddit: true,
         instagram: false,
         twitter: true,
-        youtube: true,
+        youtube: false,
       },
       sourcesCached: [], //[SOURCE_YOUTUBE],
     },
@@ -57,19 +57,24 @@ const settings = {
   },
 
   ui: {
-    defaultUsername: '???',
+    defaultUsername: 'Unknown_User',
     defaultPostThumbs: {
       useDefaultPostThumbs: true,
       general: './img/thumbnails/aon-default.svg',
       reddit: {
-        gaming: './img/thumbnails/gaming-reddit-2.svg',
+        default: './img/thumbnails/defaults/reddit.svg',
+        //gaming: './img/thumbnails/gaming-reddit-2.svg',
       },
       twitter: {
-        gaming: './img/thumbnails/gaming-twitter-2.svg',
+        default: './img/thumbnails/defaults/twitter.svg',
+        //gaming: './img/thumbnails/gaming-twitter-2.svg',
       },
       youtube: {
         default: './img/thumbnails/gaming-youtube.svg',
-        gaming: './img/thumbnails/gaming-youtube.svg',
+        // gaming: './img/thumbnails/gaming-youtube.svg',
+      },
+      instagram: {
+        default: './img/thumbnails/defaults/instagram.svg',
       },
       defaultYoutubeThumbnail: {
         res: {

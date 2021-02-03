@@ -1,30 +1,40 @@
+import { SOURCE_INSTAGRAM } from '../constants';
+
 const instagSrc = {
-  shouldPushData(o, formattedTweetData) {
+  shouldPushData(props, formattedTweetData) {
     return (
-      instagSrc.hasAllPostData(o, formattedTweetData) &&
-      !o.dataReducer.hasFormattedTwitterData
+      instagSrc.hasAllPostData(props, formattedTweetData) &&
+      !props.dataReducer.hasFormattedTwitterData
     );
   },
 
   /* :
    ************************************************************/
-  hasAllPostData(o, formattedInstagramData) {
+  hasAllF(instagramDataFormatted, sourcesEnabled) {
+    return sourcesEnabled.instagram
+      ? instagramDataFormatted && instagramDataFormatted.length > 0
+      : true;
+  },
+
+  /* :
+   ************************************************************/
+  hasAllPostData(props, formattedInstagramData) {
     return (
-      o.dataReducer.instagramDataRaw.length &&
+      props.dataReducer.instagramDataRaw.length &&
       formattedInstagramData.length ===
-        o.newsfeedReducer.dataPosts.count.instagram
+        props.newsfeedReducer.dataPosts.count.instagram
     );
   },
 
   /* Format raw Twitter source data from API & assign to state:
    ************************************************************/
-  format(o) {
+  format(props, formatInstagram) {
     const { shouldPushData } = instagSrc;
     let formattedInstagramData = [];
     let unformattedInstagramData = [];
 
     // 1.
-    o.dataReducer.instagramDataRaw.forEach((i) => {
+    props.dataReducer.instagramDataRaw.forEach((i) => {
       unformattedInstagramData.push(i);
     });
 
@@ -33,42 +43,38 @@ const instagSrc = {
       if (i && i.edges.length) {
         i.edges.forEach((edge) => {
           formattedInstagramData.push(
-            o.formatInstagram.formatInstagramData(edge.node, i, index)
+            formatInstagram.formatInstagramData(edge.node, i, index)
           );
         });
       }
     });
 
     // 3.
-    if (shouldPushData(o, formattedInstagramData)) {
-      o.dataFormatInstagram(formattedInstagramData);
-      o.dataFormatInstagramStatus(true);
+    if (shouldPushData(props, formattedInstagramData)) {
+      props.dataFormatInstagram(formattedInstagramData);
+      props.dataFormatInstagramStatus(true);
     }
   },
 
   /* Get raw Twitter source data from API:
    ************************************************************/
-  getRawData(o) {
-    //
-    console.log('RAW INSTA');
-    o.dataRawInstagramStatus(true);
+  getRawData(props) {
+    props.dataRawInstagramStatus(true);
     const req = (count, obj) => {
-      o.newsfeedIncrSourceCount({
+      props.newsfeedIncrSourceCount({
         service: 'instagram',
         value: count,
       });
       obj.count = count;
-
-      console.log(obj);
-      o.dataRequest(obj);
+      props.dataRequest(obj);
 
       // ^ THIS IS NOT WORKING
     };
-    o.sourceReducer.sourcesInstagramData.map((source) => {
+    props.sourceReducer.sourcesInstagramData.map((source) => {
       if (!source.muted) {
         req(source.postsNumber, {
           sourceData: source,
-          src: o.SOURCE_INSTAGRAM,
+          src: SOURCE_INSTAGRAM,
           user: source.username,
         });
       }

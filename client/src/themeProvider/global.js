@@ -292,9 +292,24 @@ export const GlobalStyles = createGlobalStyle`
     width: ${({ theme }) => theme['navbar-logo-wrapper > img']['width']};
   }
 
+  .post-newspost-dots-menu-container {
+    background: #FFF;
+    display: block;
+    height: 123px;
+    padding: 5px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    transform: scale(0.92);
+    width: 125px;
+    z-index: 100;
+  }
+
   .post-thumbnail {
     width: 60px;
   }
+
+  .post-menu-i
   
   .vertical-center {
     align-items: ${({ theme }) => theme['vertical-center']['align-items']};

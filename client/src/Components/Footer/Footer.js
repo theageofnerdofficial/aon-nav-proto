@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import FontIcon from '../FontIcon/FontIcon';
 import TwitchStatus from './TwitchStatus';
 
 class Footer extends Component {
   render() {
+    const { FontIcon } = this.props;
     return (
       <footer className="footer" style={{ zIndex: '999' }}>
         <div className="m-0 p-0 col-12 row">

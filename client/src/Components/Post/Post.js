@@ -6,14 +6,8 @@ import CreatedCaption from './PostUI/CreatedCaption';
 import PostText from './PostUI/PostText';
 import PostTitle from './PostUI/PostTitle';
 import ReactHtmlParser from 'react-html-parser';
-import settings from '../../config/settings';
 import Thumbnail from './PostUI/Thumbnail';
-import {
-  SOURCE_INSTAGRAM,
-  SOURCE_INSTAGRAM_LABEL,
-  SOURCE_REDDIT_LABEL,
-  SOURCE_TWITTER_LABEL,
-} from '../../constants';
+import settings from '../../config/settings';
 
 class Post extends Component {
   render() {
@@ -25,6 +19,7 @@ class Post extends Component {
       FontIcon,
       id,
       labels,
+      labelsBySource,
       modalReducer,
       modalUpdateMode,
       permalink,
@@ -42,12 +37,10 @@ class Post extends Component {
       <div className=" col-12 m-0 mb-2 p-0 pl-1 py-3 post-wrapper rounded row shadow-sm">
         <div className="col-2 m-0 p-0 text-center">
           <Thumbnail
+            labelsBySource={labelsBySource}
             profile_pic_url={profile_pic_url}
             settings={settings}
             source={source}
-            SOURCE_INSTAGRAM_LABEL={SOURCE_INSTAGRAM_LABEL}
-            SOURCE_REDDIT_LABEL={SOURCE_REDDIT_LABEL}
-            SOURCE_TWITTER_LABEL={SOURCE_TWITTER_LABEL}
             userData={userData}
           />
           <br />
@@ -59,8 +52,10 @@ class Post extends Component {
         </div>
         <div className="col-10 p-0">
           <PostTitle
-            data={{ settings, source, source_data, userData }}
+            data={{ id, settings, source, source_data, userData }}
             FontIcon={FontIcon}
+            labels={labels}
+            labelsBySource={labelsBySource}
           />
           <PostText
             data={{ settings, source, text, userData }}

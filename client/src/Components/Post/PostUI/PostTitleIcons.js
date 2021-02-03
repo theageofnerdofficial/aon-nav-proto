@@ -21,7 +21,7 @@ class PostTitleIcons extends Component {
           {FontIcon('faCheckCircle')}
         </span>
       ) : (
-        '-' // <-------------------------- move to
+        '~' // <-------------------------- move to
       );
     };
 

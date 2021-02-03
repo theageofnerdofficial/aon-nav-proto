@@ -11,11 +11,14 @@ class Posts extends Component {
       allData,
       FontIcon,
       labels,
+      labelsBySource,
       modalReducer,
       modalUpdateMode,
       utils,
     } = this.props;
+
     const dataHasLength = () => allData && allData.length > 0;
+
     return dataHasLength() ? (
       allData.map((d) => {
         if (d) {
@@ -43,6 +46,7 @@ class Posts extends Component {
                 modalReducer={modalReducer}
                 modalUpdateMode={modalUpdateMode}
                 labels={labels}
+                labelsBySource={labelsBySource}
                 utils={utils}
               />
             </React.Fragment>
