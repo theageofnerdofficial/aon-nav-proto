@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Avatar from './Components/Avatar/Avatar';
-import SectionTitle from './Components/SectionTitle/SectionTitle';
-import SectionTitlePostsTitleSm from './Components/SectionTitle/SectionTitlePostsTitleSm';
-import format from './config/format';
-import labels from './config/labels';
-import utils from './Components/Utils/utils/utils';
+import Avatar from '../../Components/Avatar/Avatar';
+import SectionTitle from '../../Components/SectionTitle/SectionTitle';
+import SectionTitlePostsTitleSm from '../../Components/SectionTitle/SectionTitlePostsTitleSm';
+import format from '../../config/format';
+import labels from '../../config/labels';
+import utils from '../../config/utils';
 
 let check = false;
 let url;

@@ -6,6 +6,11 @@ const labels = {
   ui: {
     general: {
       notAvailable: 'N/A',
+      pageNotFound: {
+        title: 'Page Not Found',
+        message: 'We are sorry but the page you requested could not be found.',
+        instruction: 'Try again or click below to go back to the homepage.',
+      },
     },
     home: {
       welcomeTitle: 'Welcome to AON',

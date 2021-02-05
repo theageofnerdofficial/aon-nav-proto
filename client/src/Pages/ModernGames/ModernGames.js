@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SectionTitle from './Components/SectionTitle/SectionTitle';
-import settings from './config/settings';
+import SectionTitle from '../../Components/SectionTitle/SectionTitle';
+import settings from '../../config/settings';
 
 class ModernGames extends Component {
   render() {

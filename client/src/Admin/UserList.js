@@ -1,11 +1,11 @@
 // Imports:
 import React, { Component } from 'react';
+import FontIcon from '../Components/FontIcon/FontIcon';
+import ModifyBtn from '../Components/Button/ModifyBtn';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
 import countries from '../config/countries';
-import formatAccess from '../Components/Utils/utils/formatAccess';
-import FontIcon from '../Components/FontIcon/FontIcon';
-import ModifyBtn from '../Components/Button/ModifyBtn';
+import formatAccess from '../config/formatAccess';
 
 class UserList extends Component {
   componentDidMount() {

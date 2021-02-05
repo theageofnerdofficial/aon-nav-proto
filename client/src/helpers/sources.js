@@ -1,16 +1,10 @@
 // Imports:
-import formatReddit from '../Components/Utils/utils/formatReddit';
-import formatTweet from '../Components/Utils/utils/formatTweet';
-import formatYoutube from '../Components/Utils/utils/formatYoutube';
-import formatInstagram from '../Components/Utils/utils/formatInstagram';
 import redditSrc from './redditSrc';
 import twitterSrc from './twitterSrc';
 import youtubeSrc from './youtubeSrc';
 import instagSrc from './instagSrc';
 
 const sources = {
-  /* :
-   ************************************************************/
   data: {
     combine(props, settings) {
       if (
@@ -25,10 +19,10 @@ const sources = {
     },
 
     format(props, sourcesEnabled) {
-      if (sourcesEnabled.twitter) twitterSrc.format(props, formatTweet);
-      if (sourcesEnabled.reddit) redditSrc.format(props, formatReddit);
-      if (sourcesEnabled.youtube) youtubeSrc.format(props, formatYoutube);
-      if (sourcesEnabled.instagram) instagSrc.format(props, formatInstagram);
+      if (sourcesEnabled.reddit) redditSrc.format(props);
+      if (sourcesEnabled.twitter) twitterSrc.format(props);
+      if (sourcesEnabled.instagram) instagSrc.format(props);
+      if (sourcesEnabled.youtube) youtubeSrc.format(props);
     },
 
     getFresh(props, newsfeed) {

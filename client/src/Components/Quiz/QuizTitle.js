@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FontIcon from '../FontIcon/FontIcon';
-import Question from './Question';
-import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
+// import Question from './Question';
+// import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
 
 class QuizTitle extends Component {
   componentDidMount() {
@@ -11,10 +11,10 @@ class QuizTitle extends Component {
   }
   render() {
     const {
-      quizAddAnswer,
+      // quizAddAnswer,
       quizReducer,
       // quizReset,
-      quizUpdateQNumber,
+      // quizUpdateQNumber,
       quizUpdateScreen,
     } = this.props;
 

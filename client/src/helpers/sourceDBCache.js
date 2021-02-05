@@ -7,45 +7,25 @@ import {
   SOURCE_TWITTER,
   SOURCE_YOUTUBE,
 } from '../constants';
-import formatYoutube from '../Components/Utils/utils/formatYoutube';
 
 /*
  ***************************************************************/
 const sourceDBCache = {
   //
-  formatAPIData: {
-    youtube: (data) => {
-      console.log(data);
-
-      let formattedYoutubeData = [];
-      let unformattedYoutubeData = [];
-      data.forEach((y, index) => {
-        if (y) unformattedYoutubeData.push(y);
-      });
-
-      unformattedYoutubeData.forEach((y, index) => {
-        formattedYoutubeData.push(formatYoutube.formatYoutubeData(y));
-      });
-
-      console.log(formattedYoutubeData);
-
-      return formattedYoutubeData;
-    },
-  },
 
   create: (o, data) => {
     console.log('1. Create method in sourceDBCache:');
     console.log(data);
     console.log('2. Stringify in sourceDBCache:');
     console.log(data);
-    console.log(formatYoutube.formatYoutubeData(data));
+    // console.log(formatYoutube.formatYoutubeData(data));
     // console.log(this.format.youtube(data));
 
     return fetch('/sourcedata/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: {
-        data: JSON.stringify(formatYoutube.formatYoutubeData(data)), // replace with formatted yt
+        // data: JSON.stringify(formatYoutube.formatYoutubeData(data)), // replace with formatted yt
       },
     }).then((res) => res.json());
   },

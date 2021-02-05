@@ -23,7 +23,7 @@ class SignupForm extends Component {
           }
         })
         .then((res) => {
-          res.map((r) => {
+          res.forEach((r) => {
             usernames.push(r.username.toLowerCase());
             emails.push(r.email.toLowerCase());
           });

@@ -2,37 +2,37 @@
 import AddSource from './Admin/Sources/AddSource';
 import AddQuiz from './Admin/Quizzes/AddQuiz/AddQuiz';
 import Admin from './Admin/Admin';
-import BoardGames from './BoardGames';
-import Comics from './Comics';
-import Contact from './Contact';
+import BoardGames from './Pages/BoardGames/BoardGames';
+import Comics from './Pages/Comics/Comics';
+import Contact from './Pages/Other/Contact';
 import ContentScheduler from './Admin/ContentScheduler';
 import EditQuiz from './Admin/Quizzes/AddQuiz/EditQuiz';
 import EditSource from './Admin/Sources/EditSource';
 import FlashMsg from './Components/FlashMsg/FlashMsg';
 import FontIcon from './Components/FontIcon/FontIcon';
 import Footer from './Components/Footer/Footer';
-import Gaming from './Gaming';
+import Gaming from './Pages/Gaming/Gaming';
 import GetSources from './Admin/Sources/GetSources/GetSources';
 import Header from './Components/Header/Header';
-import Home from './Home';
+import Home from './Pages/Home/Home';
 import KonamiCode from './Components/KonamiCode/KonamiCode';
 import LoginBtn from './Components/LoginBtn/LoginBtn';
 import LoginFormPage from './Components/LoginForm/LoginFormPage';
 import Modal from './Components/Modal/Modal';
-import ModernGames from './ModernGames';
-import NoMatch from './NoMatch';
+import ModernGames from './Pages/ModernGames/ModernGames';
+import NoMatch from './Pages/Other/NoMatch';
 import MyNerd from './MyNerd/MyNerd';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import QuizList from './Admin/QuizList';
 import QuizPage from './Components/Quiz/QuizPage';
 import Quizzes from './Components/Quiz/Quizzes';
 import React, { Component } from 'react';
-import RetroGames from './RetroGames';
-import SignUp from './SignUp';
+import RetroGames from './Pages/RetroGames/RetroGames';
+import SignUp from './Pages/Other/SignUp';
 import Sources from './Sources';
-import TVFilm from './TVFilm';
-import Unauthorised from './Unauthorised';
-import UserProfile from './UserProfile';
+import TVFilm from './Pages/TVFilm/TVFilm';
+import Unauthorised from './Pages/Other/Unauthorised';
+import UserProfile from './Pages/Other/UserProfile';
 import UserList from './Admin/UserList';
 
 // Actions:
@@ -114,15 +114,13 @@ import { lightTheme, darkTheme } from './themeProvider/theme';
 import { ThemeProvider } from 'styled-components';
 import labels from './config/labels';
 import settings from './config/settings';
-import './Main.css';
-
-// Note: Inject these!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 import {
   SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT_LABEL,
   SOURCE_TWITTER_LABEL,
   SOURCE_YOUTUBE_LABEL,
 } from './constants';
+import './Main.css';
 
 // Parameter state comes from index.js provider store state (rootReducers).
 const mapStateToProps = (state) => {
@@ -148,10 +146,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     dataCombine: () => dispatch(dataCombine()),
-    dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
-    dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
     dataFormatInstagram: (o) => dispatch(dataFormatInstagram(o)),
+    dataFormatInstagramStatus: (o) => dispatch(dataFormatInstagramStatus(o)),
+    dataFormatReddit: (o) => dispatch(dataFormatReddit(o)),
+    dataFormatRedditStatus: (o) => dispatch(dataFormatRedditStatus(o)),
+    dataFormatTweets: (o) => dispatch(dataFormatTweets(o)),
+    dataFormatTwitterStatus: (o) => dispatch(dataFormatTwitterStatus(o)),
     dataFormatYoutube: (o) => dispatch(dataFormatYoutube(o)),
+    dataFormatYoutubeStatus: (o) => dispatch(dataFormatYoutubeStatus(o)),
+    dataRawInstagramStatus: (o) => dispatch(dataRawInstagramStatus(o)),
+    dataRawRedditStatus: (o) => dispatch(dataRawRedditStatus(o)),
+    dataRawTwitterStatus: (o) => dispatch(dataRawTwitterStatus(o)),
+    dataRawYoutubeStatus: (o) => dispatch(dataRawYoutubeStatus(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
@@ -183,28 +189,20 @@ const mapDispatchToProps = (dispatch) => {
     sourceGenerateYoutubeId: (o) => dispatch(sourceGenerateYoutubeId(o)),
     sourceGetById: (o) => dispatch(sourceGetById(o)),
     sourceGetRedditPosts: (o) => dispatch(sourceGetRedditPosts(o)),
-    sourcesRefineByService: (o) => dispatch(sourcesRefineByService(o)),
     sourceRemove: (source) => dispatch(sourceRemove(source)),
     sourcesCombine: () => dispatch(sourcesCombine()),
     sourcesCombinedArrangeBy: (o) => dispatch(sourcesCombinedArrangeBy(o)),
     sourcesFilterByCategory: (o) => dispatch(sourcesFilterByCategory(o)),
-    sourcesGetReddit: (cat) => dispatch(sourcesGetReddit(cat)),
     sourcesGetInstagram: (o) => dispatch(sourcesGetInstagram(o)),
+    sourcesGetReddit: (cat) => dispatch(sourcesGetReddit(cat)),
     sourcesGetTwitter: () => dispatch(sourcesGetTwitter()),
     sourcesGetYoutube: () => dispatch(sourcesGetYoutube()),
+    sourcesRefineByService: (o) => dispatch(sourcesRefineByService(o)),
     sourcesReset: () => dispatch(sourcesReset()),
     sourcesToggleSortUI: (o) => dispatch(sourcesToggleSortUI(o)),
     sourcesToggleSourceMute: (o) => dispatch(sourcesToggleSourceMute(o)),
     uiSetBreadcrumbs: (o) => dispatch(uiSetBreadcrumbs(o)),
     uiToggleLights: () => dispatch(uiToggleLights()),
-    dataFormatRedditStatus: (o) => dispatch(dataFormatRedditStatus(o)),
-    dataFormatTwitterStatus: (o) => dispatch(dataFormatTwitterStatus(o)),
-    dataFormatYoutubeStatus: (o) => dispatch(dataFormatYoutubeStatus(o)),
-    dataFormatInstagramStatus: (o) => dispatch(dataFormatInstagramStatus(o)),
-    dataRawRedditStatus: (o) => dispatch(dataRawRedditStatus(o)),
-    dataRawTwitterStatus: (o) => dispatch(dataRawTwitterStatus(o)),
-    dataRawYoutubeStatus: (o) => dispatch(dataRawYoutubeStatus(o)),
-    dataRawInstagramStatus: (o) => dispatch(dataRawInstagramStatus(o)),
     userAuthenticate: () => dispatch(userAuthenticate()),
     userLogin: (o) => dispatch(userLogin(o)),
     userLogout: () => dispatch(userLogout()),

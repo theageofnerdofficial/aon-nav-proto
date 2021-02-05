@@ -5,7 +5,7 @@ import DotsMenu from './DotsMenu';
 import DotsMenuButton from './DotsMenuButton';
 import PostTitleText from './PostTitleText';
 import PostUpvoteBtn from './PostUpvoteBtn';
-import utils from '../../Utils/utils/utils';
+import utils from '../../../config/utils';
 
 class PostTitle extends Component {
   render() {

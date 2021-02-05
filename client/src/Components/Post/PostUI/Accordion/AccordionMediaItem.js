@@ -35,19 +35,21 @@ class AccordionMediaItem extends Component {
       );
     };
 
+    /*
     const getMediaVideo = () => {
       return (
         <video>
           <source></source>
         </video>
       );
-    };
+    };*/
 
+    /*
     const getMediaItem = () => {
       if (true) {
         return getMediaImg();
       }
-    };
+    };*/
 
     return <React.Fragment>{getMediaImg()}</React.Fragment>;
   }

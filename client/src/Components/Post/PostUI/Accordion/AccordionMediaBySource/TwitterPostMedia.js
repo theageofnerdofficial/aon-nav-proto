@@ -37,11 +37,11 @@ class TwitterPostMedia extends Component {
       });
     };
 
-    // :
+    /*
     const getExtendedEntitiesMedia = () => {
       //
       return;
-    };
+    };*/
 
     return (
       <React.Fragment>

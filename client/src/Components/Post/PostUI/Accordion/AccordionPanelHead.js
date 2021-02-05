@@ -19,10 +19,14 @@ class AccordionPanelHead extends Component {
           if (data.preview_img_arr && data.preview_img_arr.length >= 1) {
             return true;
           }
+          break;
         case SOURCE_TWITTER_LABEL:
           if (data.entities_media && data.entities_media.length >= 1) {
             return true;
           }
+          break;
+        default:
+          return false;
       }
       return false;
     };

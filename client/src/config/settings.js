@@ -70,7 +70,7 @@ const settings = {
         //gaming: './img/thumbnails/gaming-twitter-2.svg',
       },
       youtube: {
-        default: './img/thumbnails/gaming-youtube.svg',
+        default: './img/thumbnails/defaults/youtube.svg',
         // gaming: './img/thumbnails/gaming-youtube.svg',
       },
       instagram: {

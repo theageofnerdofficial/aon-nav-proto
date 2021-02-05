@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LoggedIn from './LoggedIn';
 import NotLoggedIn from './NotLoggedIn';
-import loginCreds from '../../config/loginCreds';
+import localData from '../../config/localData';
 
 class LoginBtn extends Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class LoginBtn extends Component {
     const checkLoggedIn = (o) => {
       if (!this.props.usersReducer.authenticationPending) {
         if (this.props.usersReducer.id) {
-          loginCreds.storageItem.set({
+          localData.loginItems.credentials.set({
             id: this.props.usersReducer.id,
             username: this.props.usersReducer.username,
           });

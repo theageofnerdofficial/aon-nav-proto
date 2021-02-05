@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import CarouselLoggedIn from './CarouselLoggedIn';
 import CarouselNotLoggedIn from './CarouselNotLoggedIn';
-import loginCreds from '../../config/loginCreds';
+import localData from '../../config/localData';
 
 class CarouselJumbotron extends Component {
   render() {
     const checkLoggedIn = (o) => {
       if (!this.props.usersReducer.authenticationPending) {
         if (this.props.usersReducer.id) {
-          loginCreds.storageItem.set({
+          localData.loginItems.credentials.set({
             id: this.props.usersReducer.id,
             username: this.props.usersReducer.username,
           });

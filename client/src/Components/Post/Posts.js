@@ -1,7 +1,7 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import LazyLoad from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
 import LoaderCentered from '../Loader/LoaderCentered';
 import Post from './Post';
 

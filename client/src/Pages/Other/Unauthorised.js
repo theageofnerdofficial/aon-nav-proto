@@ -1,7 +1,7 @@
 // Imports:
 import React, { Component } from 'react';
-import SectionNotice from './Components/SectionTitle/SectionNotice';
-import SectionTitlePostsNotice from './Components/SectionTitle/SectionTitlePostsNotice';
+import SectionNotice from '../../Components/SectionTitle/SectionNotice';
+import SectionTitlePostsNotice from '../../Components/SectionTitle/SectionTitlePostsNotice';
 
 class Unauthorised extends Component {
   render() {

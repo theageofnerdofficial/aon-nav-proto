@@ -7,7 +7,7 @@ class PostTitleText extends Component {
   render() {
     const {
       FontIcon,
-      labelsBySource,
+      // labelsBySource,
       settings,
       source,
       source_data,
@@ -29,7 +29,7 @@ class PostTitleText extends Component {
       }
     };
 
-    // :
+    /*
     const getSourceIcon = (source) => {
       if (source === labelsBySource.SOURCE_TWITTER_LABEL) {
         return 'faTwitter';
@@ -40,7 +40,7 @@ class PostTitleText extends Component {
       } else if (source === labelsBySource.SOURCE_YOUTUBE_LABEL) {
         return 'faYoutubeSquare';
       }
-    };
+    };*/
 
     return (
       <div className="col-8 m-0 p-0">

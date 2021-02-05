@@ -86,10 +86,14 @@ import {
   SOURCE_GET_REDDITS_PENDING,
   SOURCE_GET_REDDITS_SUCCESS,
   SOURCE_INSTAGRAM,
+  SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT,
+  SOURCE_REDDIT_LABEL,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  SOURCE_TWITTER_LABEL,
   SOURCE_YOUTUBE,
+  SOURCE_YOUTUBE_LABEL,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -104,14 +108,14 @@ import {
   USER_LOGOUT,
 } from './constants';
 
-//
+// :
 import levels from './MyNerd/levels/levels';
-import loginCreds from './config/loginCreds';
+import localData from './config/localData';
 import mynerd from './helpers/myNerd';
 import settings from './config/settings';
-import utils from './Components/Utils/utils/utils';
+import utils from './config/utils';
 
-//
+// :
 let stateCp;
 
 /* Data — setting the state for info obtained from APIs:
@@ -146,13 +150,11 @@ export const dataReducer = (state = data, action = {}) => {
       let { sourcesEnabled } = settings.content.newsfeed;
       let arr = [];
 
-      //
       if (sourcesEnabled.reddit) arr.push(...state.redditDataFormatted);
       if (sourcesEnabled.twitter) arr.push(...state.tweetDataFormatted);
       if (sourcesEnabled.instagram) arr.push(...state.instagramDataFormatted);
       if (sourcesEnabled.youtube) arr.push(...state.youtubeDataFormatted);
 
-      //
       return Object.assign({}, state, {
         allData: utils.arr.randomize(arr),
       });
@@ -639,16 +641,16 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
     case SOURCES_REFINE_BY_SERVICE:
       let serviceByName;
       switch (action.payload.service) {
-        case 'reddit':
+        case SOURCE_REDDIT_LABEL.toLowerCase():
           serviceByName = SOURCE_REDDIT;
           break;
-        case 'twitter':
+        case SOURCE_TWITTER_LABEL.toLowerCase():
           serviceByName = SOURCE_TWITTER;
           break;
-        case 'instagram':
+        case SOURCE_INSTAGRAM_LABEL.toLowerCase():
           serviceByName = SOURCE_INSTAGRAM;
           break;
-        case 'youtube':
+        case SOURCE_YOUTUBE_LABEL.toLowerCase():
           serviceByName = SOURCE_YOUTUBE;
           break;
         default:
@@ -872,8 +874,8 @@ export const sourceReducer = (state = sourceAddForm, action = {}) => {
  *********************************************************/
 const ui = {
   lightsOff:
-    loginCreds.storageItem.getDarkmode() !== null
-      ? loginCreds.storageItem.getDarkmode() === 'false'
+    localData.darkMode.get() !== null
+      ? localData.darkMode.get() === 'false'
         ? false
         : true
       : false,

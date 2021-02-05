@@ -5,12 +5,17 @@ import LabelBtn from '../../../Components/UI/LabelBtn';
 import format from '../../../config/format';
 import isDarkColor from 'is-dark-color';
 import labels from '../../../config/labels';
-import utils from '../../../Components/Utils/utils/utils';
+import utils from '../../../config/utils';
+
 import {
   SOURCE_INSTAGRAM,
+  SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT,
+  SOURCE_REDDIT_LABEL,
   SOURCE_TWITTER,
+  SOURCE_TWITTER_LABEL,
   SOURCE_YOUTUBE,
+  SOURCE_YOUTUBE_LABEL,
 } from '../../../constants';
 
 import { fetchConstructor } from '../../../actions';
@@ -119,13 +124,13 @@ class Source extends Component {
     // Get source gets a more readible version of services, i.e. 'Reddit' from 'SOURCE_REDDIT'
     const getSource = (src) => {
       if (src.service === SOURCE_REDDIT) {
-        return 'Reddit';
+        return SOURCE_REDDIT_LABEL;
       } else if (src.service === SOURCE_TWITTER) {
-        return 'Twitter';
+        return SOURCE_TWITTER_LABEL;
       } else if (src.service === SOURCE_INSTAGRAM) {
-        return 'Instagram';
+        return SOURCE_INSTAGRAM_LABEL;
       } else if (src.service === SOURCE_YOUTUBE) {
-        return 'Youtube';
+        return SOURCE_YOUTUBE_LABEL;
       }
     };
 

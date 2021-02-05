@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import countries from '../../../config/countries';
+import countries from './countries';
 
 const utils = {
   arr: {
@@ -35,16 +35,6 @@ const utils = {
         },
       },
     },
-  },
-
-  removeLinkSuffix(link, urlBeginning = 'https://t.co', charactersToRemove) {
-    if (
-      link.substring(link.length - charactersToRemove).indexOf(urlBeginning) >=
-      0
-    ) {
-      return link.substring(0, link.length - charactersToRemove);
-    }
-    return link;
   },
 
   num: {

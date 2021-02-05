@@ -1,29 +1,29 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import { SOURCE_YOUTUBE_LABEL } from '../../../constants';
+import {
+  SOURCE_INSTAGRAM_LABEL,
+  SOURCE_REDDIT_LABEL,
+  SOURCE_TWITTER_LABEL,
+  SOURCE_YOUTUBE_LABEL,
+} from '../../../constants';
 
 class Thumbnail extends Component {
   render() {
     const { profile_pic_url, settings, source, userData } = this.props;
 
     // Get source URL for thumbnail:
-    const getThumbnailSrc = () => {
-      const {
-        SOURCE_INSTAGRAM_LABEL,
-        SOURCE_REDDIT_LABEL,
-        SOURCE_TWITTER_LABEL,
-      } = this.props;
-
+    const getThumbnailSrc = (source) => {
       // :
       let src;
       switch (source) {
         case SOURCE_REDDIT_LABEL:
+          console.log(settings.ui.defaultPostThumbs.reddit.default);
           src = settings ? settings.ui.defaultPostThumbs.reddit.default : null;
           break;
 
         case SOURCE_TWITTER_LABEL:
-          if (settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
+          if (!settings.ui.defaultPostThumbs.useDefaultPostThumbs) {
             const hasCustomThumb = userData && userData.profile_image_url;
             src = hasCustomThumb
               ? userData.profile_image_url
@@ -60,7 +60,7 @@ class Thumbnail extends Component {
         <img
           alt={`Thumbnail for ${source} post`}
           className="mx-1 rounded post-thumbnail"
-          src={getThumbnailSrc()}
+          src={getThumbnailSrc(source)}
         />
       </React.Fragment>
     );

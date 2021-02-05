@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import settings from './config/settings';
-import utils from './Components/Utils/utils/utils';
-import FilterBtn from './Components/UI/FilterBtn';
-import RedditPost from './Components/Post/RedditPost';
-import SectionTitle from './Components/SectionTitle/SectionTitle';
-import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
+import FilterBtn from '../../Components/UI/FilterBtn';
+import RedditPost from '../../Components/Post/RedditPost';
+import SectionTitle from '../../Components/SectionTitle/SectionTitle';
+import SectionTitlePostsTitle from '../../Components/SectionTitle/SectionTitlePostsTitle';
+import settings from '../../config/settings';
+import utils from '../../config/utils';
 
 let gotRedditSources = false;
 class Gaming extends Component {

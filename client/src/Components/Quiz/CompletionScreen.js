@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
-import utils from '../Utils/utils/utils';
+import utils from '../../config/utils';
 
 class CompletionScreen extends Component {
   componentDidMount() {
@@ -33,7 +33,6 @@ class CompletionScreen extends Component {
             <div className="col-12 row">
               {/* Score — You got x out of x correct!:
                *********************************************/}
-
               <h4 className="col-12 font-weight-light text-center">
                 You got{' '}
                 {quizReducer && quizReducer.questionData

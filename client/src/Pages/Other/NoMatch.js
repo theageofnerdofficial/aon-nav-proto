@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import FontIcon from './Components/FontIcon/FontIcon';
-import './Main.css';
+import FontIcon from '../../Components/FontIcon/FontIcon';
+import labels from '../../config/labels';
+import '../../Main.css';
 
 class NoMatch extends Component {
   render() {
@@ -23,14 +24,14 @@ class NoMatch extends Component {
               className="horizontal-center font-weight-light"
               style={{ width: '100%' }}
             >
-              Page Not Found
+              {labels.ui.general.pageNotFound.title}
             </h4>
           </div>
           <div className="col-12 m-0 p-0 text-center text-muted">
             <p>
-              We are sorry but the page you requested could not be found.
+              {labels.ui.general.pageNotFound.message}
               <br />
-              Try again or click below to go back to the homepage.
+              {labels.ui.general.pageNotFound.instruction}
             </p>
             <br />
             <button

@@ -6,7 +6,7 @@ import FontIcon from '../Components/FontIcon/FontIcon';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
 import labels from '../config/labels';
-import utils from '../Components/Utils/utils/utils';
+import utils from '../config/utils';
 import { fetchConstructor } from '../actions';
 
 class ContentScheduler extends Component {

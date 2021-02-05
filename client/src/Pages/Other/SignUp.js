@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SignupForm from './Components/SignupForm/SignupForm';
-import SectionTitle from './Components/SectionTitle/SectionTitle';
-import SectionTitlePostsTitle from './Components/SectionTitle/SectionTitlePostsTitle';
+import SignupForm from '../../Components/SignupForm/SignupForm';
+import SectionTitle from '../../Components/SectionTitle/SectionTitle';
+import SectionTitlePostsTitle from '../../Components/SectionTitle/SectionTitlePostsTitle';
 
 class SignUp extends Component {
   render() {

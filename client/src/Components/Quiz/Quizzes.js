@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SectionTitlePostsTitle from '../SectionTitle/SectionTitlePostsTitle';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import utils from '../Utils/utils/utils';
+import utils from '../../config/utils';
 
 class Quizzes extends Component {
   componentDidMount() {

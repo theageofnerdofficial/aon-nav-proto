@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import FontIcon from '../FontIcon/FontIcon';
 import format from '../../config/format';
-import utils from '../Utils/utils/utils';
+import utils from '../../config/utils';
 
 class RedditPost extends Component {
   render() {

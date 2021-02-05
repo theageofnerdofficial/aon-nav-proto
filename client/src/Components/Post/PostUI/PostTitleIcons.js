@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 class PostTitleIcons extends Component {
   render() {
-    const { FontIcon, settings, source, source_data } = this.props;
+    const { FontIcon, settings, source_data } = this.props;
 
     // :
     const getOfficialSrcCheckmark = () => {

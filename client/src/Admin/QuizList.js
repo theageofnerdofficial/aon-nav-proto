@@ -3,7 +3,7 @@ import FontIcon from '../Components/FontIcon/FontIcon';
 //import ModifyBtn from '../Components/Button/ModifyBtn';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import SectionTitlePostsTitle from '../Components/SectionTitle/SectionTitlePostsTitle';
-import utils from '../Components/Utils/utils/utils';
+import utils from '../config/utils';
 
 class QuizList extends Component {
   componentDidMount() {

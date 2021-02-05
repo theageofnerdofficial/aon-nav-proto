@@ -38,12 +38,6 @@ class AccordionMedia extends Component {
               modalUpdateMode={modalUpdateMode}
             />
           );
-
-          /*
-           entities_media,
-              extended_entities_media,
-          */
-          return 0;
         default:
           return true;
       }
