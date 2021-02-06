@@ -24,6 +24,7 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   NEWSFEED_DATA_RESET,
+  NEWSFEED_DOTSMENU_TOGGLE,
   NEWSFEED_INC_SOURCE_COUNT,
   NEWSFEED_POSTS_HAVE_COMBINED,
   NEWSFEED_SERVICE_FORMAT,
@@ -83,10 +84,14 @@ import {
   SOURCE_GET_REDDITS_PENDING,
   SOURCE_GET_REDDITS_SUCCESS,
   SOURCE_INSTAGRAM,
+  SOURCE_INSTAGRAM_LABEL,
   SOURCE_REDDIT,
+  SOURCE_REDDIT_LABEL,
   SOURCE_REMOVE,
   SOURCE_TWITTER,
+  SOURCE_TWITTER_LABEL,
   SOURCE_YOUTUBE,
+  SOURCE_YOUTUBE_LABEL,
   UI_BREADCRUMBS_SET_PATH,
   UI_TOGGLE_LIGHTS,
   USERS_GET_FAILURE,
@@ -292,6 +297,11 @@ export const nerdUpdateCheck = (o) => ({
 
 /* Nerd actions:
  ******************************************************/
+export const dotsMenuToggle = (o) => ({
+  type: NEWSFEED_DOTSMENU_TOGGLE,
+  payload: o,
+});
+
 export const newsfeedResetData = () => ({
   type: NEWSFEED_DATA_RESET,
 });
@@ -481,14 +491,9 @@ export const sourceGenerateYoutubeId = (o) => (dispatch) => {
     method: 'GET',
   })
     .then((res) => {
-      console.log('action');
-      console.log(res);
-
       return res.json();
     })
     .then((data) => {
-      console.log('DATA');
-      console.log(data);
       dispatch({
         payload: data,
         type: SOURCE_GEN_YT_ID_SUCCESS,
@@ -501,13 +506,13 @@ export const sourceGenerateYoutubeId = (o) => (dispatch) => {
 
 export const sourceGetById = (o) => (dispatch) => {
   const url = () => {
-    if (o.service === 'reddit') {
+    if (o.service === SOURCE_REDDIT_LABEL.toLowerCase()) {
       return `/source/getRedditSourceById/${o.id}`;
-    } else if (o.service === 'twitter') {
+    } else if (o.service === SOURCE_TWITTER_LABEL.toLowerCase()) {
       return `/source/getTwitterSourceById/${o.id}`;
-    } else if (o.service === 'instagram') {
+    } else if (o.service === SOURCE_INSTAGRAM_LABEL.toLowerCase()) {
       return `/source/getInstagramSourceById/${o.id}`;
-    } else if (o.service === 'youtube') {
+    } else if (o.service === SOURCE_YOUTUBE_LABEL.toLowerCase()) {
       return `/source/getYoutubeSourceById/${o.id}`;
     }
   };
@@ -717,7 +722,6 @@ export const userAuthenticate = (o) => (dispatch) => {
 };
 
 export const userLogin = (o) => (dispatch) => {
-  window.alert('login');
   dispatch({ type: USER_LOGIN_PENDING });
   fetch('/user/login', {
     body: JSON.stringify(o),

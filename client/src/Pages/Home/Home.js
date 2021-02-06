@@ -25,11 +25,13 @@ class Home extends Component {
       <div>
         <Newsfeed
           allData={allData}
+          dotsMenuToggle={this.props.dotsMenuToggle}
           FontIcon={FontIcon}
           labels={this.props.labels}
           labelsBySource={this.props.labelsBySource}
           modalReducer={this.props.modalReducer}
           modalUpdateMode={this.props.modalUpdateMode}
+          newsfeedReducer={this.props.newsfeedReducer}
           settings={settings}
           utils={utils}
         />

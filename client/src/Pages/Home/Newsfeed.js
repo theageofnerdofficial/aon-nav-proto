@@ -21,11 +21,13 @@ class Newsfeed extends Component {
           <div style={{ height: 540, overflow: 'scroll' }}>
             <Posts
               allData={this.props.allData}
+              dotsMenuToggle={this.props.dotsMenuToggle}
               FontIcon={this.props.FontIcon}
               labels={this.props.labels}
               labelsBySource={this.props.labelsBySource}
               modalReducer={this.props.modalReducer}
               modalUpdateMode={this.props.modalUpdateMode}
+              newsfeedReducer={this.props.newsfeedReducer}
               utils={this.props.utils}
             />
           </div>

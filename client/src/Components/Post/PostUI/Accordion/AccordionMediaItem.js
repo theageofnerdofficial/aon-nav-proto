@@ -13,26 +13,31 @@ class AccordionMediaItem extends Component {
     } = this.props;
 
     const getMediaImg = () => {
-      return (
-        <img
-          alt="Accordion media preview" // UPDATE NOTE: Make more meaningful
-          className="img-fluid mx-1 rounded"
-          data-target="#mainModalLong"
-          data-toggle="modal"
-          modalReducer={modalReducer}
-          onClick={() =>
-            modalUpdateMode({
-              data: data,
-              mode: MODAL_IMAGE_LIGHTBOX,
-              size: 'modal-xl',
-            })
-          }
-          src={data.preview_img_arr[index].resolutions[0].url.replaceAll(
-            /&amp;/gi,
-            '&'
-          )}
-        />
-      );
+      if (
+        data.preview_img_arr.length > 0 &&
+        data.preview_img_arr[index].resolutions[0]
+      ) {
+        return (
+          <img
+            alt="Accordion media preview" // UPDATE NOTE: Make more meaningful
+            className="img-fluid mx-1 rounded"
+            data-target="#mainModalLong"
+            data-toggle="modal"
+            modalReducer={modalReducer}
+            onClick={() =>
+              modalUpdateMode({
+                data: data,
+                mode: MODAL_IMAGE_LIGHTBOX,
+                size: 'modal-xl',
+              })
+            }
+            src={data.preview_img_arr[index].resolutions[0].url.replaceAll(
+              /&amp;/gi,
+              '&'
+            )}
+          />
+        );
+      }
     };
 
     /*

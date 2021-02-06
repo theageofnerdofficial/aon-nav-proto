@@ -29,9 +29,7 @@ const instagSrc = {
     unformattedInstagramData.forEach((i, index) => {
       if (i && i.edges.length) {
         i.edges.forEach((edge) => {
-          formattedInstagramData.push(
-            instagSrc.schemify(edge.node, i, index)
-          );
+          formattedInstagramData.push(instagSrc.schemify(edge.node, i, index));
         });
       }
     });
@@ -42,11 +40,11 @@ const instagSrc = {
     }
   },
 
-  getRawData(props) {
+  getRaw(props) {
     props.dataRawInstagramStatus(true);
     const req = (count, obj) => {
       props.newsfeedIncrSourceCount({
-        service: 'instagram',
+        service: SOURCE_INSTAGRAM_LABEL.toLowerCase(),
         value: count,
       });
       obj.count = count;

@@ -9,11 +9,13 @@ class Posts extends Component {
   render() {
     const {
       allData,
+      dotsMenuToggle,
       FontIcon,
       labels,
       labelsBySource,
       modalReducer,
       modalUpdateMode,
+      newsfeedReducer,
       utils,
     } = this.props;
 
@@ -42,9 +44,11 @@ class Posts extends Component {
                 userData={d.user}
                 upvote_ratio={d.upvote_ratio ? d.upvote_ratio : null}
                 // Dependency injections:
+                dotsMenuToggle={dotsMenuToggle}
                 FontIcon={FontIcon}
                 modalReducer={modalReducer}
                 modalUpdateMode={modalUpdateMode}
+                newsfeedReducer={newsfeedReducer}
                 labels={labels}
                 labelsBySource={labelsBySource}
                 utils={utils}
@@ -52,6 +56,7 @@ class Posts extends Component {
             </React.Fragment>
           );
         }
+        return null;
       })
     ) : (
       <LoaderCentered />

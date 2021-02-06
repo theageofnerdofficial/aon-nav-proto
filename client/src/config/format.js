@@ -1,6 +1,7 @@
 // Imports:
 import labels from './labels';
 import moment from 'moment';
+import settings from './settings';
 import {
   SOURCE_INSTAGRAM,
   SOURCE_INSTAGRAM_LABEL,
@@ -11,7 +12,6 @@ import {
   SOURCE_YOUTUBE,
   SOURCE_YOUTUBE_LABEL,
 } from '../constants';
-import settings from './settings';
 
 const format = {
   source: {

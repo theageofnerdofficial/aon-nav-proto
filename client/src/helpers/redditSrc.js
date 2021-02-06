@@ -28,11 +28,11 @@ const redditSrc = {
     }
   },
 
-  getRawData(props) {
+  getRaw(props) {
     props.dataRawRedditStatus(true);
     const req = (count, obj) => {
       props.newsfeedIncrSourceCount({
-        service: 'reddit',
+        service: SOURCE_REDDIT_LABEL.toLowerCase(),
         value: count,
       });
       obj.count = count;

@@ -15,7 +15,7 @@ export default class Calendar extends React.Component {
 
   hasQuiz = (day, month) => {
     if (this.props.quizReducer.quizListData) {
-      this.props.quizReducer.quizListData.map((s) => {
+      this.props.quizReducer.quizListData.forEach((s) => {
         if (s.schedule) {
           s.schedule.forEach((dateElem) => {
             if (parseInt(day) == parseInt(dateElem.split('-')[2])) {
@@ -78,7 +78,7 @@ export default class Calendar extends React.Component {
   };
   MonthList = (props) => {
     let months = [];
-    props.data.map((data) => {
+    props.data.forEach((data) => {
       months.push(
         <td
           key={data}
@@ -175,7 +175,7 @@ export default class Calendar extends React.Component {
     let months = [];
     let nextten = moment().set('year', props).add('year', 12).format('Y');
     let tenyear = this.getDates(props, nextten);
-    tenyear.map((data) => {
+    tenyear.forEach((data) => {
       months.push(
         <td
           key={data}

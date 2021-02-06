@@ -14,6 +14,7 @@ class Post extends Component {
     const {
       created_time_from,
       description,
+      dotsMenuToggle,
       entities_media,
       extended_entities_media,
       FontIcon,
@@ -22,6 +23,7 @@ class Post extends Component {
       labelsBySource,
       modalReducer,
       modalUpdateMode,
+      newsfeedReducer,
       permalink,
       preview_img_arr,
       profile_pic_url,
@@ -53,9 +55,11 @@ class Post extends Component {
         <div className="col-10 p-0">
           <PostTitle
             data={{ id, settings, source, source_data, userData }}
+            dotsMenuToggle={dotsMenuToggle}
             FontIcon={FontIcon}
             labels={labels}
             labelsBySource={labelsBySource}
+            newsfeedReducer={newsfeedReducer}
           />
           <PostText
             data={{ settings, source, text, userData }}

@@ -25,11 +25,11 @@ const twitterSrc = {
     }
   },
 
-  getRawData(props) {
+  getRaw(props) {
     props.dataRawTwitterStatus(true);
     const req = (count, obj) => {
       props.newsfeedIncrSourceCount({
-        service: 'twitter',
+        service: SOURCE_TWITTER_LABEL.toLowerCase(),
         value: count,
       });
       obj.count = count;

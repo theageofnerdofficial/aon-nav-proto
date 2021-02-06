@@ -8,7 +8,7 @@ class PostUpvoteBtn extends Component {
 
     // :
     const upvotePost = () => {
-      alert('upvote');
+      alert('upvote post');
     };
 
     return (

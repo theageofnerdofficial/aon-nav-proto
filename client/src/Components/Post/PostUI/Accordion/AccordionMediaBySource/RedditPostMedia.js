@@ -18,9 +18,11 @@ class RedditPostMedia extends Component {
       const { preview_img_arr } = data;
       const imgResArr = preview_img_arr[0].resolutions;
       const res = settings.ui.modal.embeddedMedia.reddit.img.resolution;
-      return imgResArr[res]
-        ? imgResArr[res].url.replaceAll(/&amp;/gi, '&')
-        : imgResArr[imgResArr.length - 1].url.replaceAll(/&amp;/gi, '&');
+      if (imgResArr.length > 0) {
+        return imgResArr[res]
+          ? imgResArr[res].url.replaceAll(/&amp;/gi, '&')
+          : imgResArr[imgResArr.length - 1].url.replaceAll(/&amp;/gi, '&');
+      }
     };
 
     // :

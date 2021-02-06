@@ -94,6 +94,7 @@ import {
   dataRawTwitterStatus,
   dataRawYoutubeStatus,
   dataRawInstagramStatus,
+  dotsMenuToggle,
   userAuthenticate,
   userLogin,
   userLogout,
@@ -159,6 +160,7 @@ const mapDispatchToProps = (dispatch) => {
     dataRawTwitterStatus: (o) => dispatch(dataRawTwitterStatus(o)),
     dataRawYoutubeStatus: (o) => dispatch(dataRawYoutubeStatus(o)),
     dataRequest: (o) => dispatch(dataRequest(o)),
+    dotsMenuToggle: (o) => dispatch(dotsMenuToggle(o)),
     flashMsgFlash: (o) => dispatch(flashMsgFlash(o)),
     flashMsgUpdate: (o) => dispatch(flashMsgUpdate(o)),
     modalUpdateMode: (o) => dispatch(modalUpdateMode(o)),
@@ -264,6 +266,7 @@ class Main extends Component {
       dataRawYoutubeStatus,
       dataReducer,
       dataRequest,
+      dotsMenuToggle,
       flashMsgFlash,
       flashMsgReducer,
       flashMsgUpdate,
@@ -376,6 +379,7 @@ class Main extends Component {
                           dataFormatYoutube={dataFormatYoutube}
                           dataReducer={dataReducer}
                           dataRequest={dataRequest}
+                          dotsMenuToggle={dotsMenuToggle}
                           labels={labels}
                           labelsBySource={
                             (SOURCE_INSTAGRAM_LABEL,

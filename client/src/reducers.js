@@ -24,6 +24,7 @@ import {
   NERD_SETUP_UPDATE_PHASE,
   NERD_UPDATE_CHECK,
   NEWSFEED_DATA_RESET,
+  NEWSFEED_DOTSMENU_TOGGLE,
   NEWSFEED_INC_SOURCE_COUNT,
   NEWSFEED_POSTS_HAVE_COMBINED,
   NEWSFEED_SERVICE_FORMAT,
@@ -941,10 +942,24 @@ const newsfeed = {
       youtube: false,
     },
   },
+  dotsMenu: {
+    visibleMenusById: [],
+  },
 };
 
 export const newsfeedReducer = (state = newsfeed, action = {}) => {
   switch (action.type) {
+    case NEWSFEED_DOTSMENU_TOGGLE:
+      stateCp = state;
+      const id = action.payload.id.split('dotsmenu-')[1];
+      if (stateCp.dotsMenu.visibleMenusById.includes(id)) {
+        var index = stateCp.dotsMenu.visibleMenusById.indexOf(id);
+        stateCp.dotsMenu.visibleMenusById.splice(index, 1);
+      } else {
+        stateCp.dotsMenu.visibleMenusById.push(id);
+      }
+      return Object.assign({}, state, stateCp);
+
     case NEWSFEED_POSTS_HAVE_COMBINED:
       stateCp = state;
       stateCp.dataPosts.hasCombined = action.payload;

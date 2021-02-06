@@ -21,8 +21,8 @@ const sources = {
     format(props, sourcesEnabled) {
       if (sourcesEnabled.reddit) redditSrc.format(props);
       if (sourcesEnabled.twitter) twitterSrc.format(props);
-      if (sourcesEnabled.instagram) instagSrc.format(props);
       if (sourcesEnabled.youtube) youtubeSrc.format(props);
+      if (sourcesEnabled.instagram) instagSrc.format(props);
     },
 
     getFresh(props, newsfeed) {
@@ -31,10 +31,10 @@ const sources = {
     },
 
     getRaw(props, sourcesEnabled) {
-      if (twitterSrc.ready(props, sourcesEnabled)) twitterSrc.getRawData(props);
-      if (redditSrc.ready(props, sourcesEnabled)) redditSrc.getRawData(props);
-      if (youtubeSrc.ready(props, sourcesEnabled)) youtubeSrc.getYtRaw(props);
-      if (instagSrc.ready(props, sourcesEnabled)) instagSrc.getInstagRaw(props);
+      if (twitterSrc.ready(props, sourcesEnabled)) twitterSrc.getRaw(props);
+      if (redditSrc.ready(props, sourcesEnabled)) redditSrc.getRaw(props);
+      if (youtubeSrc.ready(props, sourcesEnabled)) youtubeSrc.getRaw(props);
+      if (instagSrc.ready(props, sourcesEnabled)) instagSrc.getRaw(props);
     },
 
     hasAllFormatted(props, sourcesEnabled) {

@@ -298,9 +298,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 123px;
     padding: 5px;
     position: absolute;
-    right: 10px;
     top: 20px;
-    transform: scale(0.92);
     width: 125px;
     z-index: 100;
   }

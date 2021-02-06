@@ -5,7 +5,7 @@ import settings from '../config/settings';
 import utils from '../config/utils';
 
 const youtubeSrc = {
-  format(props, formatYoutube) {
+  format(props) {
     const { shouldPushData } = youtubeSrc;
     let formattedYoutubeData = [];
     // 1. Format raw data and push to arr:
@@ -14,7 +14,7 @@ const youtubeSrc = {
         ? props.dataReducer.youtubeDataRaw[index].items.forEach((item, idx) => {
             item.sourceData =
               props.dataReducer.youtubeDataRaw[index].sourceData;
-            formattedYoutubeData.push(formatYoutube.formatYoutubeData(item));
+            formattedYoutubeData.push(youtubeSrc.schemify(item));
           })
         : null;
     });
@@ -27,11 +27,11 @@ const youtubeSrc = {
     }
   },
 
-  getRawData(props) {
+  getRaw(props) {
     props.dataRawYoutubeStatus(true);
     const req = (count, obj) => {
       props.newsfeedIncrSourceCount({
-        service: 'youtube',
+        service: SOURCE_YOUTUBE_LABEL.toLowerCase(),
         value: count,
       });
       obj.count = count;

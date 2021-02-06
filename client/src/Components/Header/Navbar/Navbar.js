@@ -19,6 +19,7 @@ class Navbar extends Component {
       const lowerCaseLink = link.toLowerCase();
       const slashlessLink = lowerCaseLink.replace(/\//g, '');
       const spacelessLink = slashlessLink.replace(/\s/g, '');
+      // eslint-disable-next-line
       const dashlessLink = spacelessLink.replace(/[\/\\]/g, '');
       return dashlessLink;
     };
