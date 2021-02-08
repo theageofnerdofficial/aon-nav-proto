@@ -80,7 +80,7 @@ const redditSrc = {
       source: SOURCE_REDDIT_LABEL,
       source_data: data.sourceData,
       stickied: data.stickied ? true : false,
-      user: `${utils.str.makeTitleCase(data.subreddit)}`,
+      user: utils.str.makeTitleCase(data.subreddit),
       preview_img_arr: data.preview ? data.preview.images : [],
       text: data.title,
       description: data.selftext,

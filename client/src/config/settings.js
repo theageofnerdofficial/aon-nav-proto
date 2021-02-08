@@ -31,6 +31,15 @@ const settings = {
         youtube: false,
       },
       sourcesCached: [], //[SOURCE_YOUTUBE],
+      sourcesPrefix: {
+        reddit: 'r/',
+        twitter: '@',
+      },
+      sourcesPrefixEnabled: true,
+      forbiddenCharacters: {
+        enabled: false,
+        arr: ['🪶'],
+      },
     },
   },
 

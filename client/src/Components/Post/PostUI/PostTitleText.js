@@ -14,13 +14,17 @@ class PostTitleText extends Component {
       utils,
     } = this.props;
 
+    const { sourcesPrefix, sourcesPrefixEnabled } = settings.content.newsfeed;
+
     // :
     const getUsername = () => {
       if (source_data) {
         if (source_data.twitterUser) {
-          return source_data.twitterUser;
+          const prefix = sourcesPrefixEnabled ? sourcesPrefix.twitter : '';
+          return `${prefix}${utils.str.makeTitleCase(source_data.twitterUser)}`;
         } else if (source_data.subreddit) {
-          return source_data.subreddit;
+          const prefix = sourcesPrefixEnabled ? sourcesPrefix.reddit : '';
+          return `${prefix}${utils.str.makeTitleCase(source_data.subreddit)}`;
         } else if (source_data.youtubeUser) {
           return source_data.youtubeUser;
         } else {
@@ -56,7 +60,7 @@ class PostTitleText extends Component {
           <div className=" col-11 m-0 p-0">
             <button className="btn m-0 p-0" style={{ fontSize: '1.15rem' }}>
               {/*{FontIcon(`${getSourceIcon(source)}`)}*/}
-              {source_data ? `${utils.str.makeTitleCase(getUsername())}` : null}
+              {source_data ? `${getUsername()}` : null}
             </button>
           </div>
         </div>
