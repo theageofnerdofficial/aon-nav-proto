@@ -61,6 +61,7 @@ import {
   sourceAddFormCategoryGaming,
   sourceAddFormFilter,
   sourceAddService,
+  sourceDataCount,
   sourceGenerateYoutubeId,
   sourceGetById,
   sourceGetRedditPosts,
@@ -188,6 +189,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(sourceAddFormCategoryGaming(cat)),
     sourceAddFormFilter: (filter) => dispatch(sourceAddFormFilter(filter)),
     sourceAddService: (source) => dispatch(sourceAddService(source)),
+    sourceDataCount: (o) => dispatch(sourceDataCount(o)),
     sourceGenerateYoutubeId: (o) => dispatch(sourceGenerateYoutubeId(o)),
     sourceGetById: (o) => dispatch(sourceGetById(o)),
     sourceGetRedditPosts: (o) => dispatch(sourceGetRedditPosts(o)),
@@ -301,6 +303,7 @@ class Main extends Component {
       sourceAddFormCategoryGaming,
       sourceAddFormFilter,
       sourceAddService,
+      sourceDataCount,
       sourceGenerateYoutubeId,
       sourceGetById,
       sourceGetRedditPosts,
@@ -415,6 +418,7 @@ class Main extends Component {
                           dataRawTwitterStatus={dataRawTwitterStatus}
                           dataRawYoutubeStatus={dataRawYoutubeStatus}
                           dataRawInstagramStatus={dataRawInstagramStatus}
+                          sourceDataCount={sourceDataCount}
                           usersReducer={usersReducer}
                           {...props}
                         />

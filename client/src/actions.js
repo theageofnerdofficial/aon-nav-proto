@@ -74,6 +74,7 @@ import {
   SOURCE_ADD_FORM_SELECT,
   SOURCE_ADD_PENDING,
   SOURCE_ADD_SUCCESS,
+  SOURCE_DATA_COUNT,
   SOURCE_GEN_YT_ID_FAILURE,
   SOURCE_GEN_YT_ID_PENDING,
   SOURCE_GEN_YT_ID_SUCCESS,
@@ -182,9 +183,7 @@ export const dataFormatYoutube = (o) => ({
 
 //
 export const dataRequest = (o) => (dispatch) => {
-  console.log(o.src);
   dispatch({ type: DATA_REQUEST_PENDING });
-
   // If data needs to be "fresh" rather than from cache:
   const getFreshAPIData = (o, shouldCache) => {
     console.log(o);
@@ -192,13 +191,12 @@ export const dataRequest = (o) => (dispatch) => {
       .fresh(o)
       .then((data) => {
         if (shouldCache) {
-          alert('SHOULD NOT SEE');
+          alert('SHOULD NOT SEE... yet');
           sourceDBCache
             .create(o, data)
             .then((res) => console.log(res))
             .catch((error) => window.alert(error));
         }
-        console.log(o);
         // Don't create DB entry, ONLY dispatch data to store:
         dispatch({
           count: o.count,
@@ -453,6 +451,11 @@ export const sourceAdd = (source) => (dispatch, getState) => {
       dispatch({ type: SOURCE_ADD_FAILURE, payload: error });
     });
 };
+
+export const sourceDataCount = (o) => ({
+  type: SOURCE_DATA_COUNT,
+  payload: o,
+});
 
 export const sourceRemove = (o) => ({
   type: SOURCE_REMOVE,

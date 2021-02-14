@@ -18,7 +18,6 @@ class Thumbnail extends Component {
       let src;
       switch (source) {
         case SOURCE_REDDIT_LABEL:
-          console.log(settings.ui.defaultPostThumbs.reddit.default);
           src = settings ? settings.ui.defaultPostThumbs.reddit.default : null;
           break;
 

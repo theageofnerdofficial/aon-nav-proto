@@ -24,10 +24,11 @@ class PostText extends Component {
         ReactHtmlParser(utils.urlify(o.text)),
 
       removeForbiddenChars(forbiddenCharacters, post) {
+        /*
         forbiddenCharacters.arr.forEach((char) => {
           let reg = new RegExp(char, 'g');
           post[0] = post[0].replaceAll(reg, '');
-        });
+        });*/
         return post;
       },
     };

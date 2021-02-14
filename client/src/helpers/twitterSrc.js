@@ -1,25 +1,34 @@
 // Imports:
 import { SOURCE_TWITTER, SOURCE_TWITTER_LABEL } from '../constants';
 import format from '../config/format';
+import settings from '../config/settings';
 
 const twitterSrc = {
   format(props) {
-    const { shouldPushData } = twitterSrc;
     let formattedTweetData = [];
     let unformattedTweetData = [];
+
     // 1. Format raw data and push to arr:
     props.dataReducer.tweetDataRaw.forEach((t, index) => {
-      t.statuses.forEach((s) => {
-        s.sourceData = t.sourceData;
-      });
-      if (t.statuses) unformattedTweetData.push(t.statuses);
+      t.statuses.forEach((s) => (s.sourceData = t.sourceData));
+      if (t.statuses) {
+        unformattedTweetData.push(t.statuses);
+        if (twitterSrc.shouldCountSources(index, props, unformattedTweetData)) {
+          props.sourceDataCount({
+            source: SOURCE_TWITTER,
+            count: unformattedTweetData.length,
+          });
+        }
+      }
     });
+
     // 2. Flatten unformatted Tweets (3D arr -> 2D arr to loop & format Tweets)
-    unformattedTweetData.flat(1).forEach((t, index) => {
+    unformattedTweetData.flat(1).forEach((t) => {
       formattedTweetData.push(twitterSrc.schemify(t));
     });
+
     // 3. If data is now formatted such that it should be assigned to state, do so:
-    if (shouldPushData(props, formattedTweetData)) {
+    if (twitterSrc.shouldPushData(props, formattedTweetData)) {
       props.dataFormatTweets(formattedTweetData);
       props.dataFormatTwitterStatus(true);
     }
@@ -48,40 +57,34 @@ const twitterSrc = {
     });
   },
 
-  hasAllF(tweetDataFormatted, sourcesEnabled) {
-    return sourcesEnabled.twitter
+  hasAllF: (tweetDataFormatted, sourcesEnabled) =>
+    sourcesEnabled.twitter
       ? tweetDataFormatted && tweetDataFormatted.length > 0
-      : true;
-  },
+      : true,
 
-  hasAllPostData(props, formattedTweetData) {
-    return (
-      props.dataReducer.tweetDataRaw.length &&
-      formattedTweetData.length ===
-        props.newsfeedReducer.dataPosts.count.twitter
-    );
-  },
+  hasAllPostData: (props, formattedTweetData) =>
+    settings.content.newsfeed.srcStrictNumbersEnabled
+      ? twitterSrc.hasAllPostDataStrict(props, formattedTweetData)
+      : twitterSrc.hasAllPostDataNonStrict(props),
 
-  ready(props, sourcesEnabled) {
-    return (
-      sourcesEnabled.twitter &&
-      props.sourceReducer.sourcesTwitterData &&
-      !props.dataReducer.hasRawTwitterData
-    );
-  },
+  /* As explained in comments in settings.js, strict vs. non-strict counting 
+     refers to whether we have the exact number of posts requested. Sometimes
+     the API only return some posts because it values reliability of source data 
+     over quantity. My advice is to keep it non-strict by default because 
+     and to tolerate some shortfalls in post data — otherwise no formatted data.
+   */
+  hasAllPostDataNonStrict: (props) =>
+    props.dataReducer.activeSources.twitter ===
+    props.sourceReducer.countedSources.twitter,
 
-  removeLinkSuffix(status) {
-    const statusStr = status.retweeted_status
-      ? status.retweeted_status.full_text
-      : status.full_text;
-    // :
-    if (
-      statusStr.substring(statusStr.length - 23).indexOf('https://t.co') >= 0
-    ) {
-      return statusStr.substring(0, statusStr.length - 23);
-    }
-    return statusStr;
-  },
+  hasAllPostDataStrict: (props, formattedTweetData) =>
+    props.dataReducer.tweetDataRaw.length &&
+    props.newsfeedReducer.dataPosts.count.twitter === formattedTweetData.length,
+
+  ready: (props, sourcesEnabled) =>
+    sourcesEnabled.twitter &&
+    props.sourceReducer.sourcesTwitterData &&
+    !props.dataReducer.hasRawTwitterData,
 
   schemify(tweet) {
     return {
@@ -105,11 +108,29 @@ const twitterSrc = {
     };
   },
 
-  shouldPushData(props, formattedTweetData) {
-    return (
-      twitterSrc.hasAllPostData(props, formattedTweetData) &&
-      !props.dataReducer.hasFormattedTwitterData
-    );
+  // Should count sources? Not if we're done needing to — otherwise endless loops!
+  shouldCountSources: (index, props, unformattedTweetData) =>
+    index === props.dataReducer.tweetDataRaw.length - 1 &&
+    unformattedTweetData.length !== props.sourceReducer.countedSources.twitter,
+
+  // Should push data? Not if we're done with that — otherwise endless loops!
+  shouldPushData: (props, formattedTweetData) =>
+    twitterSrc.hasAllPostData(props, formattedTweetData) &&
+    !props.dataReducer.hasFormattedTwitterData,
+
+  tweetStr: {
+    hasLink: (statusStr) =>
+      statusStr.substring(statusStr.length - 23).indexOf('https://t.co') >= 0,
+
+    removeLinkSuffix: (status) => {
+      const statusStr = status.retweeted_status
+        ? status.retweeted_status.full_text
+        : status.full_text;
+      // :
+      if (twitterSrc.twitterLink.hasLink(statusStr))
+        statusStr.substring(0, statusStr.length - 23);
+      return statusStr;
+    },
   },
 };
 

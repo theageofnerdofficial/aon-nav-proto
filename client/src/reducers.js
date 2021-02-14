@@ -48,6 +48,7 @@ import {
   QUIZ_SCORE_CALCULATE,
   QUIZ_SCREEN_UPDATE,
   SCHEDULER_SELECT_DATE,
+  SOURCE_DATA_COUNT,
   SOURCES_COMBINE,
   SOURCES_COMBINED_ARRANGE_BY,
   SOURCES_FILTER_BY_CATEGORY,
@@ -122,6 +123,9 @@ let stateCp;
 /* Data — setting the state for info obtained from APIs:
  *********************************************************/
 const data = {
+  activeSources: {
+    twitter: 0,
+  },
   allData: [],
   dataPending: false,
   redditDataFormatted: [],
@@ -137,7 +141,6 @@ const data = {
   hasRawTwitterData: false,
   hasRawYoutubeData: false,
   hasRawInstagramData: false,
-
   //
   hasFormattedRedditData: false,
   hasFormattedTwitterData: false,
@@ -202,16 +205,16 @@ export const dataReducer = (state = data, action = {}) => {
       return Object.assign({}, state, { dataPending: true });
 
     case DATA_REQUEST_SUCCESS:
-      // let newState = { dataPending: false };
       stateCp = state;
       if (action.source === SOURCE_TWITTER) {
-        action.payload.sourceData = action.sourceData;
+        if (action.payload) action.payload.sourceData = action.sourceData;
+        stateCp.activeSources.twitter += 1;
         stateCp.tweetDataRaw.push(action.payload);
       } else if (action.source === SOURCE_REDDIT) {
-        action.payload.sourceData = action.sourceData;
+        if (action.payload) action.payload.sourceData = action.sourceData;
         stateCp.redditDataRaw.push(action.payload);
       } else if (action.source === SOURCE_INSTAGRAM) {
-        action.payload.sourceData = action.sourceData;
+        if (action.payload) action.payload.sourceData = action.sourceData;
         stateCp.instagramDataRaw.push(action.payload);
       } else if (action.source === SOURCE_YOUTUBE) {
         let { sourceData } = action;
@@ -585,6 +588,9 @@ export const usersReducer = (state = users, action = {}) => {
 /* Source form:
  *********************************************************/
 const sourceAddForm = {
+  countedSources: {
+    twitter: 0,
+  },
   category: null,
   categoryGaming: null,
   service: String,
@@ -627,6 +633,13 @@ const sourceAddForm = {
 
 export const sourceReducer = (state = sourceAddForm, action = {}) => {
   switch (action.type) {
+    case SOURCE_DATA_COUNT:
+      stateCp = state;
+      if (action.payload.source === SOURCE_TWITTER) {
+        stateCp.countedSources.twitter = action.payload.count;
+      }
+      return Object.assign({}, state, stateCp);
+
     case SOURCES_YOUTUBE_GET_PENDING:
       return Object.assign({}, state, { sourceYoutubeGetPending: true });
 

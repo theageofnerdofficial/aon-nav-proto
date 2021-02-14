@@ -24,12 +24,22 @@ const settings = {
 
   content: {
     newsfeed: {
+      sourcesDebugEnabled: true,
       sourcesEnabled: {
         reddit: true,
         instagram: false,
         twitter: true,
         youtube: false,
       },
+      /* What does the following mean? Strict numbers not enabled? 
+         Well, when you ask for 10 posts from a source, for example "@NintendoUK", "strict numbers" makes it so that the API —MUST— return exactly 10 posts or the process will terminate. However, I have this disabled by default in order to tolerate fewers posts than specified to be returned. Here's why: the likes of the Twitter APi favours
+         relevance of post content over a precise post count. So if you ask for the data of 10 posts to be returned, it might only return 8. Let's tolerate a shortfall like this
+         rather than terminating.
+      */
+      srcStrictNumbersEnabled: {
+        twitter: false,
+      },
+
       sourcesCached: [], //[SOURCE_YOUTUBE],
       sourcesPrefix: {
         reddit: 'r/',
