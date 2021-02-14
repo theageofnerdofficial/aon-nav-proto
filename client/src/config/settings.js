@@ -29,7 +29,7 @@ const settings = {
         reddit: true,
         instagram: false,
         twitter: true,
-        youtube: false,
+        youtube: true,
       },
       /* What does the following mean? Strict numbers not enabled? 
          Well, when you ask for 10 posts from a source, for example "@NintendoUK", "strict numbers" makes it so that the API —MUST— return exactly 10 posts or the process will terminate. However, I have this disabled by default in order to tolerate fewers posts than specified to be returned. Here's why: the likes of the Twitter APi favours
