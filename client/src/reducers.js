@@ -2,27 +2,11 @@
  *********************************************************/
 import {
   DATA_COMBINE,
-  DATA_FORMAT_INSTAGRAM,
-  DATA_FORMAT_REDDIT,
-  DATA_FORMAT_TWEETS,
-  DATA_FORMAT_UPDATE_REDDIT,
-  DATA_FORMAT_UPDATE_TWITTER,
-  DATA_FORMAT_UPDATE_YOUTUBE,
-  DATA_FORMAT_YOUTUBE,
-  DATA_RAW_UPDATE_INSTAGRAM,
-  DATA_RAW_UPDATE_REDDIT,
-  DATA_RAW_UPDATE_TWITTER,
-  DATA_RAW_UPDATE_YOUTUBE,
-  DATA_REQUEST_FAILURE,
-  DATA_REQUEST_PENDING,
-  DATA_REQUEST_SUCCESS,
   FLASH_MSG_HIDE,
   FLASH_MSG_SHOW,
   FLASH_MSG_UPDATE,
   MODAL_LOGIN_FORM,
   MODAL_UPDATE_MODE,
-  NERD_SETUP_UPDATE_PHASE,
-  NERD_UPDATE_CHECK,
   NEWSFEED_DATA_RESET,
   NEWSFEED_DOTSMENU_TOGGLE,
   NEWSFEED_INC_SOURCE_COUNT,
@@ -120,136 +104,14 @@ import utils from './config/utils';
 // :
 let stateCp;
 
-/* Data — setting the state for info obtained from APIs:
+/* Datas:
  *********************************************************/
-const data = {
-  activeSources: {
-    twitter: 0,
-  },
-  allData: [],
-  dataPending: false,
-  redditDataFormatted: [],
-  redditDataRaw: [],
-  tweetDataFormatted: [],
-  tweetDataRaw: [],
-  instagramDataRaw: [],
-  instagramDataFormatted: [],
-  youtubeDataRaw: [],
-  youtubeDataFormatted: [],
-  //
-  hasRawRedditData: false,
-  hasRawTwitterData: false,
-  hasRawYoutubeData: false,
-  hasRawInstagramData: false,
-  //
-  hasFormattedRedditData: false,
-  hasFormattedTwitterData: false,
-  hasFormattedYoutubeData: false,
-  hasFormattedInstagramData: false,
-};
+const data = {};
 
 export const dataReducer = (state = data, action = {}) => {
   switch (action.type) {
     case DATA_COMBINE:
-      let { sourcesEnabled } = settings.content.newsfeed;
-      let arr = [];
-
-      if (sourcesEnabled.reddit) arr.push(...state.redditDataFormatted);
-      if (sourcesEnabled.twitter) arr.push(...state.tweetDataFormatted);
-      if (sourcesEnabled.instagram) arr.push(...state.instagramDataFormatted);
-      if (sourcesEnabled.youtube) arr.push(...state.youtubeDataFormatted);
-
-      return Object.assign({}, state, {
-        allData: utils.arr.randomize(arr),
-      });
-
-    case DATA_FORMAT_UPDATE_REDDIT:
-      return Object.assign({}, state, {
-        hasFormattedRedditData: action.payload,
-      });
-
-    case DATA_FORMAT_UPDATE_YOUTUBE:
-      return Object.assign({}, state, {
-        hasFormattedYoutubeData: action.payload,
-      });
-
-    case DATA_FORMAT_UPDATE_TWITTER:
-      return Object.assign({}, state, {
-        hasFormattedTwitterData: action.payload,
-      });
-
-    case DATA_RAW_UPDATE_REDDIT:
-      return Object.assign({}, state, {
-        hasRawRedditData: action.payload,
-      });
-
-    case DATA_RAW_UPDATE_TWITTER:
-      return Object.assign({}, state, {
-        hasRawTwitterData: action.payload,
-      });
-
-    case DATA_RAW_UPDATE_INSTAGRAM:
-      return Object.assign({}, state, {
-        hasRawInstagramData: action.payload,
-      });
-
-    case DATA_RAW_UPDATE_YOUTUBE:
-      return Object.assign({}, state, {
-        hasRawYoutubeData: action.payload,
-      });
-
-    case DATA_REQUEST_FAILURE:
-      return Object.assign({}, state, { dataPending: false });
-
-    case DATA_REQUEST_PENDING:
-      return Object.assign({}, state, { dataPending: true });
-
-    case DATA_REQUEST_SUCCESS:
-      stateCp = state;
-      if (action.source === SOURCE_TWITTER) {
-        if (action.payload) action.payload.sourceData = action.sourceData;
-        stateCp.activeSources.twitter += 1;
-        stateCp.tweetDataRaw.push(action.payload);
-      } else if (action.source === SOURCE_REDDIT) {
-        if (action.payload) action.payload.sourceData = action.sourceData;
-        stateCp.redditDataRaw.push(action.payload);
-      } else if (action.source === SOURCE_INSTAGRAM) {
-        if (action.payload) action.payload.sourceData = action.sourceData;
-        stateCp.instagramDataRaw.push(action.payload);
-      } else if (action.source === SOURCE_YOUTUBE) {
-        let { sourceData } = action;
-        /*
-        let sourcesWithoutError;
-
-        if (sourceData && sourceData.length) {
-          sourcesWithoutError = sourceData.filter((s) => {
-            return !s.error || !s.errors;
-          });
-        }*/
-        action.payload.sourceData = sourceData;
-        stateCp.youtubeDataRaw.push(action.payload);
-      }
-      stateCp.dataPending = false;
-      return Object.assign({}, state, stateCp);
-
-    case DATA_FORMAT_REDDIT:
-      return Object.assign({}, state, {
-        redditDataFormatted: action.payload,
-      });
-
-    case DATA_FORMAT_TWEETS:
-      return Object.assign({}, state, {
-        tweetDataFormatted: action.payload,
-      });
-    case DATA_FORMAT_INSTAGRAM:
-      return Object.assign({}, state, {
-        instagramDataFormatted: action.payload,
-      });
-    case DATA_FORMAT_YOUTUBE:
-      console.log(action.payload);
-      return Object.assign({}, state, {
-        youtubeDataFormatted: action.payload,
-      });
+      return Object.assign({}, state, {});
     default:
       return state;
   }
@@ -279,7 +141,7 @@ export const modalReducer = (state = modal, action = {}) => {
 /* Scheduler:
  *********************************************************/
 const scheduler = {
-  dateSelected: 'hello',
+  dateSelected: '',
 };
 
 export const schedulerReducer = (state = scheduler, action = {}) => {
@@ -288,31 +150,6 @@ export const schedulerReducer = (state = scheduler, action = {}) => {
       return Object.assign({}, state, { dateSelected: action.payload });
     default:
       return state;
-  }
-};
-
-/* Nerd:
- *********************************************************/
-export const nerdReducer = (state = levels, action = {}) => {
-  switch (action.type) {
-    case NERD_UPDATE_CHECK:
-      const nerdCatCp = mynerd.checkSystem.update(state, action);
-      return Object.assign({}, state, { category: nerdCatCp });
-    default:
-      return Object.assign({}, state);
-  }
-};
-
-const nerdSetup = {
-  phase: 0,
-};
-
-export const nerdSetupReducer = (state = nerdSetup, action = {}) => {
-  switch (action.type) {
-    case NERD_SETUP_UPDATE_PHASE:
-      return Object.assign({}, state, { phase: action.payload.phase });
-    default:
-      return Object.assign({}, state);
   }
 };
 
@@ -328,10 +165,8 @@ export const flashMsgReducer = (state = flashMsg, action = {}) => {
   switch (action.type) {
     case FLASH_MSG_SHOW:
       return Object.assign({}, state, { showFlashMsg: true });
-
     case FLASH_MSG_HIDE:
       return Object.assign({}, state, { showFlashMsg: false });
-
     case FLASH_MSG_UPDATE:
       return Object.assign({}, state, {
         msg: action.payload.msg,
@@ -377,19 +212,6 @@ export const quizReducer = (state = quiz, action = {}) => {
       stateCp.questionData.questions[state.questionNumber].userAnswer =
         action.payload.answerIndex;
       return Object.assign({}, state, stateCp);
-
-    // maybe delete these QUIZ_REQUEST
-    case QUIZ_EDIT_BY_ID_FAILURE:
-      return Object.assign({}, state, { quizRequestPending: false });
-
-    case QUIZ_EDIT_BY_ID_PENDING:
-      return Object.assign({}, state, { quizRequestPending: true });
-
-    case QUIZ_EDIT_BY_ID_SUCCESS:
-      return Object.assign({}, state, {
-        questionData: action.payload,
-        quizRequestPending: false,
-      });
 
     case QUIZ_Q_NUMBER_UPDATE:
       stateCp = state;
@@ -579,303 +401,6 @@ export const usersReducer = (state = users, action = {}) => {
       return Object.assign({}, state, {
         list: action.payload,
         usersPending: false,
-      });
-    default:
-      return state;
-  }
-};
-
-/* Source form:
- *********************************************************/
-const sourceAddForm = {
-  countedSources: {
-    twitter: 0,
-  },
-  category: null,
-  categoryGaming: null,
-  service: String,
-  filter: String,
-  sourceCategoryFilter: 'all',
-  sourceAddPending: false,
-  sourceInstagramGetPending: false,
-  sourceInstagramPostsPending: false,
-  sourceRedditGetPending: false,
-  sourceRedditPostsPending: false,
-  sourceTwitterGetPending: false,
-  sourceYoutubeGetPending: false,
-  sourcesCombined: null,
-  sourcesRedditData: null,
-  //sourcesRedditPosts: null,
-  sourcesTwitterData: null,
-  sourcesInstagramData: null,
-  sourcesYoutubeData: null,
-  showRedditPeriod: true,
-  sourceByIdPending: false,
-  sourceById: {},
-  sortUI: {
-    source: { sortDirection: 0 },
-    category: { sortDirection: 0 },
-    service: { sortDirection: 0 },
-    posts: { sortDirection: 0 },
-    filter: { sortDirection: 0 },
-    period: { sortDirection: 0 },
-    addedBy: { sortDirection: 0 },
-  },
-  serviceShown: {
-    SOURCE_INSTAGRAM: true,
-    SOURCE_REDDIT: false,
-    SOURCE_TWITTER: false,
-    SOURCE_YOUTUBE: false,
-  },
-  sourceGenYoutubeIdPending: false,
-  youtubeChannelId: null,
-};
-
-export const sourceReducer = (state = sourceAddForm, action = {}) => {
-  switch (action.type) {
-    case SOURCE_DATA_COUNT:
-      stateCp = state;
-      if (action.payload.source === SOURCE_TWITTER) {
-        stateCp.countedSources.twitter = action.payload.count;
-      }
-      return Object.assign({}, state, stateCp);
-
-    case SOURCES_YOUTUBE_GET_PENDING:
-      return Object.assign({}, state, { sourceYoutubeGetPending: true });
-
-    case SOURCES_YOUTUBE_GET_FAILURE:
-      return Object.assign({}, state, { sourceYoutubeGetPending: false });
-
-    case SOURCES_YOUTUBE_GET_SUCCESS:
-      return Object.assign({}, state, {
-        sourcesYoutubeData: action.payload,
-        sourceYoutubeGetPending: false,
-      });
-
-    case SOURCES_REFINE_BY_SERVICE:
-      let serviceByName;
-      switch (action.payload.service) {
-        case SOURCE_REDDIT_LABEL.toLowerCase():
-          serviceByName = SOURCE_REDDIT;
-          break;
-        case SOURCE_TWITTER_LABEL.toLowerCase():
-          serviceByName = SOURCE_TWITTER;
-          break;
-        case SOURCE_INSTAGRAM_LABEL.toLowerCase():
-          serviceByName = SOURCE_INSTAGRAM;
-          break;
-        case SOURCE_YOUTUBE_LABEL.toLowerCase():
-          serviceByName = SOURCE_YOUTUBE;
-          break;
-        default:
-          serviceByName = null;
-      }
-      stateCp = state;
-      stateCp.serviceShown[serviceByName] = action.payload.value ? true : false;
-      return Object.assign({}, state, stateCp);
-
-    case SOURCE_GET_REDDITS_PENDING:
-      return Object.assign({}, state, { sourceRedditPostsPending: true });
-
-    case SOURCE_GET_INSTAGRAM_PENDING:
-      return Object.assign({}, state, { sourceInstagramPostsPending: true });
-
-    case SOURCE_GET_INSTAGRAM_FAILURE:
-      return Object.assign({}, state, { sourceInstagramPostsPending: false });
-
-    case SOURCE_GET_INSTAGRAM_SUCCESS:
-      return Object.assign({}, state, { sourceInstagramPostsPending: false });
-
-    case SOURCE_GET_REDDITS_FAILURE:
-      return Object.assign({}, state, { sourceRedditPostsPending: false });
-
-    case SOURCE_GET_REDDITS_SUCCESS:
-      let sourcesRedditPostsCp = state.sourcesRedditPosts;
-      if (sourcesRedditPostsCp && sourcesRedditPostsCp.length >= 1) {
-        action.payload.data.children.forEach((d) => {
-          sourcesRedditPostsCp.push(d);
-        });
-      } else {
-        sourcesRedditPostsCp = action.payload.data.children;
-      }
-      return Object.assign({}, state, {
-        sourceRedditPostsPending: false,
-        sourcesRedditPosts: sourcesRedditPostsCp,
-      });
-
-    case SOURCES_COMBINE:
-      return Object.assign({}, state, {
-        sourcesCombined: [
-          ...state.sourcesInstagramData,
-          ...state.sourcesRedditData,
-          ...state.sourcesTwitterData,
-          ...state.sourcesYoutubeData,
-        ],
-      });
-
-    case SOURCES_FILTER_BY_CATEGORY:
-      return Object.assign({}, state, { sourceCategoryFilter: action.payload });
-
-    case SOURCES_TOGGLE_SORT_UI:
-      stateCp = state;
-      stateCp.sortUI[action.payload.name].sortDirection = !stateCp.sortUI[
-        action.payload.name
-      ].sortDirection;
-      return Object.assign({}, state, stateCp);
-
-    case SOURCES_TOGGLE_SOURCE_MUTE:
-      stateCp = state;
-      stateCp.sourcesCombined = state.sourcesCombined.map((s) => {
-        if (s._id === action.payload.id) {
-          s.muted = !s.muted;
-        }
-        return s;
-      });
-      return Object.assign({}, state, stateCp);
-
-    case SOURCES_COMBINED_ARRANGE_BY:
-      const name = action.payload.name;
-      const nameSubtype = action.payload.nameSubtype;
-      stateCp = state;
-      if (stateCp.sortUI[name].sortDirection) {
-        utils.arr.sort.byProperty.ascending(
-          stateCp.sourcesCombined,
-          nameSubtype ? nameSubtype : name
-        );
-      } else {
-        utils.arr.sort.byProperty.descending(
-          stateCp.sourcesCombined,
-          nameSubtype ? nameSubtype : name
-        );
-      }
-      return Object.assign({}, state, stateCp);
-
-    case SOURCES_RESET_FORM:
-      return Object.assign({}, state, sourceAddForm);
-
-    case SOURCES_TWITTER_GET_FAILURE:
-      return Object.assign({}, state, {
-        sourceTwitterGetPending: false,
-      });
-
-    case SOURCES_TWITTER_GET_PENDING:
-      return Object.assign({}, state, {
-        sourceTwitterGetPending: true,
-      });
-
-    case SOURCES_TWITTER_GET_SUCCESS:
-      return Object.assign({}, state, {
-        sourcesTwitterData: action.payload,
-        sourceTwitterGetPending: false,
-      });
-
-    case SOURCES_INSTAGRAM_GET_FAILURE:
-      return Object.assign({}, state, {
-        sourceInstagramGetPending: false,
-      });
-
-    case SOURCES_INSTAGRAM_GET_PENDING:
-      return Object.assign({}, state, {
-        sourceInstagramGetPending: true,
-      });
-
-    case SOURCES_INSTAGRAM_GET_SUCCESS:
-      return Object.assign({}, state, {
-        sourcesInstagramData: action.payload,
-        sourceInstagramGetPending: false,
-      });
-
-    case SOURCES_REDDIT_GET_FAILURE:
-      return Object.assign({}, state, {
-        sourceRedditGetPending: false,
-      });
-
-    case SOURCES_REDDIT_GET_PENDING:
-      return Object.assign({}, state, {
-        sourceRedditGetPending: true,
-      });
-
-    case SOURCES_REDDIT_GET_SUCCESS:
-      return Object.assign({}, state, {
-        sourcesRedditData: action.payload,
-        sourceRedditGetPending: false,
-      });
-
-    case SOURCE_ADD_FAILURE:
-      return Object.assign({}, state, {
-        sourceAddPending: false,
-      });
-
-    case SOURCE_ADD_PENDING:
-      return Object.assign({}, state, {
-        sourceAddPending: true,
-      });
-
-    case SOURCE_ADD_SUCCESS:
-      return Object.assign({}, state, {
-        sourceAddPending: false,
-      });
-
-    case SOURCE_ADD_FORM_CAT:
-      return Object.assign({}, state, {
-        category: action.payload,
-      });
-
-    case SOURCE_ADD_FORM_CAT_GM:
-      return Object.assign({}, state, {
-        categoryGaming: action.payload,
-      });
-
-    case SOURCE_ADD_FORM_FILTER:
-      return Object.assign({}, state, {
-        filter: action.payload,
-      });
-
-    case SOURCE_ADD_FORM_SELECT:
-      return Object.assign({}, state, {
-        service: action.payload,
-      });
-
-    case SOURCE_REMOVE:
-      const { sourceId } = action.payload;
-      const sourcesCombinedCp = state.sourcesCombined.filter((source) => {
-        return source._id !== sourceId;
-      });
-      return Object.assign({}, state, {
-        sourcesCombined: sourcesCombinedCp,
-      });
-
-    case SOURCE_GETBYID_FAILURE:
-      return Object.assign({}, state, {
-        sourceByIdPending: false,
-      });
-
-    case SOURCE_GETBYID_PENDING:
-      return Object.assign({}, state, {
-        sourceByIdPending: true,
-      });
-
-    case SOURCE_GETBYID_SUCCESS:
-      return Object.assign({}, state, {
-        sourceById: action.payload,
-        sourceByIdPending: false,
-      });
-
-    case SOURCE_GEN_YT_ID_FAILURE:
-      return Object.assign({}, state, {
-        sourceGenYoutubeIdPending: false,
-      });
-
-    case SOURCE_GEN_YT_ID_PENDING:
-      return Object.assign({}, state, {
-        sourceGenYoutubeIdPending: true,
-        youtubeChannelId: 'Pending...',
-      });
-
-    case SOURCE_GEN_YT_ID_SUCCESS:
-      return Object.assign({}, state, {
-        youtubeChannelId: action.payload.items[0].id,
-        sourceGenYoutubeIdPending: false,
       });
     default:
       return state;

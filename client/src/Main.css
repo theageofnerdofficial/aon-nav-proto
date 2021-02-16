@@ -1,15 +1,25 @@
 /* 
- *             AON stylesheet
+ *           Quizslice stylesheet
  *
  ***********************************************/
 /* Root variables
  ************************************************/
 :root {
+  --paradise-pink: #ef476fff;
+  --orange-yellow-crayola: #ffd166ff;
+  --caribbean-green: #06d6a0ff;
+  --blue-ncs: #118ab2ff;
+  --midnight-green-eagle-green: #073b4cff;
+
+  /* https://coolors.co/ef476f-ffd166-06d6a0-118ab2-073b4c
+  */
+
   --col-blue-brand: #003475;
   --col-blue-brand-light: #006ca1;
   --col-red-brand: #c61327;
   --col-darkest: #0f0f0f;
-  --col-darker: #111;
+  --col-darker: #121212;
+  --col-darkgrey: #f8f8f8;
   --col-lightest: #fff;
   --col-lighter: #f5f5f5;
   --col-greyish: rgb(235, 235, 235);
@@ -17,35 +27,31 @@
   --col-txt: var(--col-darkest);
 }
 
+.question-card {
+  background-color: var(--orange-yellow-crayola);
+}
+
+.bg-custom {
+  background-color: var(--orange-yellow-crayola);
+}
+
+.btn-answer {
+  background-color: var(--caribbean-green);
+  color: #fff;
+}
+
 /* Imports:
  ************************************************/
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap');
 
-/* Heading:
- ************************************************/
-
-/* Small Devices, Tablets */
-@media only screen and (max-width: 768px) {
-  .navbar-btn {
-    font-size: 1em;
-    height: 55px;
-  }
-  .navbar-custom {
-    padding: 0 !important;
-  }
-  .navbar-logo-wrapper {
-    width: 160px !important;
-  }
-  .navbar-logo-wrapper > img {
-    width: 165px;
-  }
-}
-
-/* -----:
- ************************************************/
-
 * {
   font-family: 'Quicksand', sans-serif;
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  font-weight: 500;
 }
 
 html,
@@ -61,66 +67,13 @@ body {
 }
 
 main > .container {
-  padding: 60px 10px 0 10px;
+  padding: 0 10px 0 10px;
+  height: 87vh;
+  min-height: 575px;
 }
 
-h2 {
-  font-size: 1.8em;
-}
-
-.feed-title {
-  background-color: var(--col-greyish);
-  height: 30px;
-}
-
-.h4-welcome-title {
-  font-size: 1.45rem;
-  letter-spacing: -1px;
-  text-shadow: 1px 1px 1px var(--col-lightest);
-}
-
-a,
-.btn-link {
-  color: var(--col-blue-brand);
-}
-
-a:hover,
-.btn-link:hover {
-  color: var(--col-blue-brand);
-}
-
-a.nav-link:hover {
-  text-decoration: underline;
-}
-a.nav-link:active {
-  text-decoration: none;
-}
-
-.carousel {
-}
-
-.carousel-item,
-.carousel-item > img {
-  height: 120px;
-}
-
-.carousel-indicators li {
-  border-bottom: 5px solid transparent;
-}
-
-.div-loggedin-wrapper {
-  font-weight: 300;
-  letter-spacing: -1px;
-  position: absolute;
-  right: 15px;
-  top: 185px;
-  width: 220px;
-}
-
-.div-loggedin-subwrapper {
-  border: 0;
-  font-weight: 300;
-  letter-spacing: -1px;
+.guidelines {
+  border: 1px dotted red;
 }
 
 .dropdown-item.active,
@@ -153,57 +106,13 @@ a.nav-link:active {
 }
 
 .footer {
-  background-color: var(--col-lighter);
+  position: fixed !important;
   bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
   height: 35px;
-  line-height: 35px;
-  position: fixed;
-  width: 100%;
-}
-
-.mynerd-wrapper {
-  border: 0px solid red;
-}
-
-/*
-*
-*
-*
-*/
-
-.post-newspost-content-wrapper {
-  height: 85px;
-  line-height: 1.2;
-  overflow: scroll;
-}
-
-.post-newspost-dots-menu-ui-btn {
-  cursor: pointer;
-  letter-spacing: -1;
-}
-
-.post-newspost-heading {
-  font-size: 10px;
-  padding-bottom: 5px;
-  text-align: right;
-  text-decoration: underline;
-  text-transform: uppercase;
-  width: 100%;
-}
-
-.post-newspost-wrapper {
-  background-color: #fff;
-  border-radius: 0 10px 0 10px;
-  height: 25px;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 25px;
-}
-
-.quiz-user-answer {
-  color: red;
-  border: 1px solid red;
+  line-height: 35px; /* Vertically center the text there */
+  background-color: #f5f5f5;
 }
 
 .tooltip-main {
@@ -245,24 +154,6 @@ a.nav-link:active {
   border-bottom-color: #f00;
 }
 
-.nerd-label {
-  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 1s; /* Firefox < 16 */
-  -ms-animation: fadein 1s; /* Internet Explorer */
-  -o-animation: fadein 1s; /* Opera < 12.1 */
-  animation: fadein 1s;
-  letter-spacing: -1px !important;
-}
-
-.mynerd-wrapper > ul li {
-  color: #000;
-  font-size: 1.35em;
-  font-weight: 200 !important;
-  letter-spacing: -1 !important;
-  list-style-type: none;
-  text-transform: uppercase;
-}
-
 .konami-window {
   align-items: center;
   display: flex;
@@ -281,10 +172,6 @@ a.nav-link:active {
 .konami-window img {
   width: 200px;
   z-index: 100000 !important;
-}
-
-.section-responsive-pr {
-  padding-right: 45px !important;
 }
 
 .section-title {
@@ -309,22 +196,6 @@ a.nav-link:active {
   width: 25px;
 }
 
-.table td {
-  font-weight: 300;
-}
-.table th {
-  font-weight: 400 !important;
-}
-
-.thumbnail-select {
-  border: 2px solid black;
-  filter: opacity(30%);
-}
-
-.thumbnail-unselect {
-  border: 2px solid lime;
-}
-
 .ul-tips-list {
   list-style: none;
 }
@@ -332,22 +203,6 @@ a.nav-link:active {
 .ul-tips-list li:before {
   content: '✓';
   padding-right: 10px;
-}
-
-.quiz-question-card {
-  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 1s; /* Firefox < 16 */
-  -ms-animation: fadein 1s; /* Internet Explorer */
-  -o-animation: fadein 1s; /* Opera < 12.1 */
-  animation: fadein 1s;
-}
-
-.quiz-qa-wrapper {
-  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 1s; /* Firefox < 16 */
-  -ms-animation: fadein 1s; /* Internet Explorer */
-  -o-animation: fadein 1s; /* Opera < 12.1 */
-  animation: fadein 1s;
 }
 
 .vertical-center {
@@ -480,35 +335,6 @@ a.nav-link:active {
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 992px) {
-}
-
-/* Small Devices, Tablets */
-@media only screen and (max-width: 768px) {
-  .carousel-item,
-  .carousel-item > img {
-    height: 150px;
-  }
-  .section-responsive-pr {
-    padding-right: 0 !important;
-  }
-  .carousel-wrapper {
-    height: 150px;
-  }
-  .carousel-item,
-  .carousel-item > img {
-    height: 150px;
-  }
-  .user-profile-title {
-    font-size: 0.8em;
-  }
-}
-
-/* Extra Small Devices, Phones */
-@media only screen and (max-width: 480px) {
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (max-width: 320px) {
 }
 
 .vertical-bottom {

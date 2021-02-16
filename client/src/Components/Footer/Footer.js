@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import TwitchStatus from './TwitchStatus';
+import labels from '../../config/labels';
 
 class Footer extends Component {
   render() {
-    const { FontIcon } = this.props;
+    const { FontIcon, uiReducer } = this.props;
     return (
-      <footer className="footer" style={{ zIndex: '999' }}>
-        <div className="m-0 p-0 col-12 row">
-          <TwitchStatus FontIcon={FontIcon} />
-          <div className="bg-white m-0 p-0 col-6">
-            <div className="pr-4 text-muted text-right font-weight-light">
-              &copy; The Age of Nerd {new Date().getFullYear()}
-            </div>
-          </div>
+      <footer
+        className={`footer ${
+          uiReducer.lightsOff
+            ? 'navbar-dark navbar-inverse'
+            : 'navbar-light bg-light'
+        }`}
+        style={{ zIndex: '999' }}
+      >
+        <div className="shadow-sm col-12 m-0 p-0 text-center">
+          &copy; {labels.ui.siteInfo.name} {new Date().getFullYear()}
         </div>
       </footer>
     );

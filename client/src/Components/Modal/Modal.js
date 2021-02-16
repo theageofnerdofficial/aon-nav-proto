@@ -1,20 +1,6 @@
 /* Imports:
  ***************************************************************/
 import React, { Component } from 'react';
-import ImageLightbox from '../Post/PostUI/ImageLightbox/ImageLightbox';
-import LoginForm from '../LoginForm/LoginForm';
-import ModalBody from './ModalComponents/ModalBody';
-import ModalFooter from './ModalComponents/ModalFooter';
-import ModalHeader from './ModalComponents/ModalHeader';
-import Thumbnail from '../Post/PostUI/Thumbnail';
-import settings from '../../config/settings';
-import {
-  MODAL_IMAGE_LIGHTBOX,
-  MODAL_LOGIN_FORM,
-  SOURCE_INSTAGRAM_LABEL,
-  SOURCE_REDDIT_LABEL,
-  SOURCE_TWITTER_LABEL,
-} from '../../constants';
 
 class Modal extends Component {
   render() {
@@ -37,27 +23,7 @@ class Modal extends Component {
           role="document"
         >
           <div className="modal-content">
-            <ModalHeader
-              ImageLightbox={ImageLightbox}
-              MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
-              MODAL_LOGIN_FORM={MODAL_LOGIN_FORM}
-              modalReducer={modalReducer}
-              LoginForm={LoginForm}
-              settings={settings}
-              SOURCE_INSTAGRAM_LABEL={SOURCE_INSTAGRAM_LABEL}
-              SOURCE_REDDIT_LABEL={SOURCE_REDDIT_LABEL}
-              SOURCE_TWITTER_LABEL={SOURCE_TWITTER_LABEL}
-              Thumbnail={Thumbnail}
-            />
-            <ModalBody
-              ImageLightbox={ImageLightbox}
-              LoginForm={LoginForm}
-              MODAL_IMAGE_LIGHTBOX={MODAL_IMAGE_LIGHTBOX}
-              MODAL_LOGIN_FORM={MODAL_LOGIN_FORM}
-              modalReducer={modalReducer}
-              userLogin={userLogin}
-            />
-            <ModalFooter />
+            {/* put modal header, body, and footer here */}
           </div>
         </div>
       </div>

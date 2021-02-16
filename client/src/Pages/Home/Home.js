@@ -1,56 +1,32 @@
 // Imports:
 import React, { Component } from 'react';
-import Ad from './Ad';
-import Exclusives from './Exclusives';
-import FontIcon from '../../Components/FontIcon/FontIcon';
-import Newsfeed from './Newsfeed';
-import Quiz from './Quiz';
+import QuestionCard from './QuestionCard/QuestionCard';
+import Answers from './Answers';
+import HUD from './HUD/HUD';
 import settings from '../../config/settings';
-import sources from '../../helpers/sources';
-import utils from '../../config/utils';
 
 class Home extends Component {
-  componentDidMount() {
-    sources.data.getFresh(this.props, settings.content.newsfeed);
-  }
-
-  componentDidUpdate() {
-    sources.data.schemify(this.props, settings);
-  }
-
   render() {
-    const { allData } = this.props.dataReducer;
-
     return (
-      <div>
-        <Newsfeed
-          allData={allData}
-          dotsMenuToggle={this.props.dotsMenuToggle}
-          FontIcon={FontIcon}
-          labels={this.props.labels}
-          labelsBySource={this.props.labelsBySource}
-          modalReducer={this.props.modalReducer}
-          modalUpdateMode={this.props.modalUpdateMode}
-          newsfeedReducer={this.props.newsfeedReducer}
-          settings={settings}
-          utils={utils}
-        />
-
-        <div className="col-md-12 m-0 mt-4 p-0 row">
-          <Exclusives settings={settings} />
-
-          <Quiz
-            quizAddAnswer={this.props.quizAddAnswer}
-            quizCalculateScore={this.props.quizCalculateScore}
-            quizReducer={this.props.quizReducer}
-            quizRequestData={this.props.quizRequestData}
-            quizReset={this.props.quizReset}
-            quizUpdateQNumber={this.props.quizUpdateQNumber}
-            quizUpdateScreen={this.props.quizUpdateScreen}
-            settings={settings}
-          />
-
-          <Ad FontIcon={FontIcon} />
+      <div className={`${settings.debug.guidelines ? 'guidelines' : null}`}>
+        <HUD />
+        <br />
+        <QuestionCard />
+        <br />
+        <Answers />
+        <div className="row col-12 m-0 my-1 p-0 text-center">
+          <div className="progress col-12 p-0 m-0">
+            <div
+              className="progress-bar"
+              role="progressbar"
+              aria-valuenow={70}
+              aria-valuemin={0}
+              aria-valuemax={10}
+              style={{ width: '70%' }}
+            >
+              <span className="sr-only">70% Complete</span>
+            </div>
+          </div>
         </div>
       </div>
     );

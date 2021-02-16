@@ -1,15 +1,14 @@
 const settings = {
-  categories: {
-    arr: ['TV/Film', 'Comics', 'Gaming', 'Wrestling', 'Toys'],
-    gaming: ['Modern', 'Retro', 'Modern and Retro', 'Board', 'Misc'],
+  debug: {
+    guidelines: false,
   },
 
   localStorage: {
-    darkmode: 'aon_darkmode',
-    token: 'aon_token',
+    darkmode: 'quizslice_darkmode',
+    token: 'quizslice_token',
     login: {
-      id: 'aon_user_id',
-      username: 'aon_user_username',
+      id: 'quizslice_user_id',
+      username: 'quizslice_user_username',
     },
   },
 
@@ -19,37 +18,6 @@ const settings = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers':
         'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    },
-  },
-
-  content: {
-    newsfeed: {
-      sourcesDebugEnabled: true,
-      sourcesEnabled: {
-        reddit: true,
-        instagram: false,
-        twitter: true,
-        youtube: true,
-      },
-      /* What does the following mean? Strict numbers not enabled? 
-         Well, when you ask for 10 posts from a source, for example "@NintendoUK", "strict numbers" makes it so that the API —MUST— return exactly 10 posts or the process will terminate. However, I have this disabled by default in order to tolerate fewers posts than specified to be returned. Here's why: the likes of the Twitter APi favours
-         relevance of post content over a precise post count. So if you ask for the data of 10 posts to be returned, it might only return 8. Let's tolerate a shortfall like this
-         rather than terminating.
-      */
-      srcStrictNumbersEnabled: {
-        twitter: false,
-      },
-
-      sourcesCached: [], //[SOURCE_YOUTUBE],
-      sourcesPrefix: {
-        reddit: 'r/',
-        twitter: '@',
-      },
-      sourcesPrefixEnabled: true,
-      forbiddenCharacters: {
-        enabled: false,
-        arr: ['🪶'],
-      },
     },
   },
 
@@ -77,44 +45,6 @@ const settings = {
 
   ui: {
     defaultUsername: 'Unknown_User',
-    defaultPostThumbs: {
-      useDefaultPostThumbs: true,
-      general: './img/thumbnails/aon-default.svg',
-      reddit: {
-        default: './img/thumbnails/defaults/reddit.svg',
-        //gaming: './img/thumbnails/gaming-reddit-2.svg',
-      },
-      twitter: {
-        default: './img/thumbnails/defaults/twitter.svg',
-        //gaming: './img/thumbnails/gaming-twitter-2.svg',
-      },
-      youtube: {
-        default: './img/thumbnails/defaults/youtube.svg',
-        // gaming: './img/thumbnails/gaming-youtube.svg',
-      },
-      instagram: {
-        default: './img/thumbnails/defaults/instagram.svg',
-      },
-      defaultYoutubeThumbnail: {
-        res: {
-          /* 
-            Image available in 3 resolutions:
-            0 = default = 120px * 90px
-            1 = high = 480px * 360px
-            2 = medium = 320px * 180px
-          */
-          thumbnailRes: 0,
-        },
-      },
-    },
-    labeling: {
-      post: {
-        officialSrc: {
-          brandColourEnabled: true,
-          checkmarkEnabled: true,
-        },
-      },
-    },
     modal: {
       embeddedMedia: {
         reddit: {
@@ -138,22 +68,6 @@ const settings = {
     },
     time: {
       abbreviateUnits: true,
-    },
-    style: {
-      sectionTab: {
-        default: '#CCC', // light grey
-        featured: '#FF0000', // red
-        mynerd: '#FFA500', // orange
-        tvfilm: '#FFFF00', // yellow
-        gaming: {
-          retro: '#EE82EE', // violet
-          modern: '#00FFFF', // cyan
-          board: '#4B0082', // indigo
-        },
-        comics: '#00FF00', // lime
-        wrestling: '#00755E', // dark green
-        toys: '#FF00FF', // magenta
-      },
     },
   },
 };

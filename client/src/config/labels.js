@@ -4,6 +4,9 @@ const labels = {
     success: 'Success',
   },
   ui: {
+    siteInfo: {
+      name: 'Quizslice',
+    },
     general: {
       notAvailable: 'N/A',
       pageNotFound: {
@@ -11,12 +14,6 @@ const labels = {
         message: 'We are sorry but the page you requested could not be found.',
         instruction: 'Try again or click below to go back to the homepage.',
       },
-    },
-    home: {
-      welcomeTitle: 'Welcome to AON',
-      welcomeSubtitle: 'Create a profile & personalise',
-      welcomeSignUpPrompt: 'Personalise your experience',
-      welcomeSignedIn: 'Welcome back',
     },
     posts: {
       accordionContent: {
