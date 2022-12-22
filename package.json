@@ -23,7 +23,7 @@
     "express": "^4.16.3",
     "instagram-node": "^0.5.8",
     "instamancer": "^3.3.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.9.19",
     "node-fetch": "^2.6.1",
     "node-instagram": "^4.3.0",
